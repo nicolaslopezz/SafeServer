@@ -317,3 +317,8 @@ cores
     border-radius: 40px;
     align-items: center;
 }
+@media (max-width:920px) {
+    .background .blueCircle {
+        display: none;
+    }
+}
