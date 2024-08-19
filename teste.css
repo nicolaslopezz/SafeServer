@@ -206,20 +206,21 @@ cores
     width: 430px;
     height: 450px;
     background: #7c9cff;
-    border: 4px solid #7c9cff;
-    border-radius: 40px;
+    border: 4px double #4d6bc4;
+    border-radius: 20px;
     left: 70px;
-    padding-right: 100px;
+    padding-right: 70px;
 }
 .formBlue-login { /* formatação do conteudo */
     display: flex;
     flex-direction: column;
+
 }
 .formBlue-login h1 {
-    font-size: 40px;
+    font-size: 30px;
     font-family: 'SFUIText-Regular.ttf';
     color: #fff;
-    padding-top: 100px;
+    padding-top: 5vh;
     margin: 0;
 }
 .formBlue-login .text-login {
@@ -234,10 +235,10 @@ cores
 }
 .formBlue-login .cadBtn-login {
     padding: 11px;
-    border: 3px solid #fff;
-    border-radius: 50px;
+    border: 2px groove #fff;
+    border-radius: 10px;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none;
     font-family: 'SFUIText-Bold.ttf';
     cursor: pointer;
@@ -249,11 +250,11 @@ cores
 
 .formLoginWhite { /* estilo */
     position: relative;
-    width: 430px;
+    width: 380px;
     height: 450px;
     background: #fff;
-    border: 4px solid #b3b3b3;
-    border-radius: 40px;
+    border: 4px groove #202020;
+    border-radius: 20px;
     right: 70px;
 }
 .formLoginWhite { /* formatação conteudo */
@@ -263,11 +264,11 @@ cores
     align-items: center;
 }
 .formLoginWhite input {
-    font-size: 25px;
+    font-size: 20px;
     background: #d6d6d6;
     border: none;
     width: 250px;
-    border-radius: 25px;
+    border-radius: 20px;
     font-family: 'SFUIText-Regular.ttf';
     padding: 10px;
     margin-top: 20px;
@@ -280,14 +281,15 @@ cores
 .formLoginWhite button {
     color: #fff;
     background: #e1316c;
-    font-size: 25px;
+    font-size: 20px;
     width: 140px;
     font-family: 'SFUIText-Bold.ttf';
     padding: 10px;
-    border-radius: 25px;
+    border-radius: 15px;
     border: none;
-    margin-top: 30px;
+    margin-top: 60px;
     margin-bottom: 50px;
+    border: 2px groove #e1316c;
 }
 .formLoginWhite button:hover {
     transform: scale(1.05);
@@ -316,7 +318,14 @@ cores
     height: 100%;
     border-radius: 40px;
     align-items: center;
+
 }
+
+.modulo img {
+    width: 20vh;
+    margin-top: 40px;
+}
+
 @media (max-width:920px) {
     .background .blueCircle {
         display: none;
