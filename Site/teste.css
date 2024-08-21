@@ -4,7 +4,6 @@ body {
 }
 body::-webkit-scrollbar{
     width: 10px;
-    pa
 }
 body::-webkit-scrollbar-thumb {
     background: #091836;
@@ -77,9 +76,10 @@ cores
 /* background */
 .background {
     background: url('imagens/bg.png');
+    background-position: center;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    height: 99vh;
     justify-content: center;
     z-index: -1;
 }
@@ -113,8 +113,10 @@ cores
     justify-content: space-between;
     width: 500px;
     height: fit-content;
-    padding: 30px;
-    margin-right: 230px;
+    margin-right: 260px;
+}
+.navbar .navBurguer {
+    display: none;
 }
 .navbar .navBtn a {
     color: black;
@@ -659,10 +661,60 @@ cores
     width: 100px;
 }
 
+/* Responsivo landing page */
 
-/* @media (max-width:920px) {
-    .topo .navbar {
+@media (max-width:1550px) {
+    .topo .navBtn {
         display: none;
     }
-}  
-*/
+    .topo .navBurguer {
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        height: fit-content;
+        margin-right: 50px;
+    }
+    .topo .navBurguer i {
+        color: #000;
+        font-size: 65px;
+    }
+    .topo .background {
+        background: url('imagens/bg1.png');
+    }
+} 
+
+@media (max-width:1230px) {
+    .topo .navBurguer i {
+        color: #fff;
+        font-size: 65px;
+    }
+    .topo .logoImg {
+        margin-left: 30px;
+    }
+    .topo .container-sobre {
+        display: flex;
+        flex-direction: column;
+        height: 1100px;
+    }
+    
+} 
+
+@media (max-width:700px) {
+    .topo .servico-inicio h1 {
+        width: 100px;
+        padding-top: 0;
+        margin-top: 0;
+    }
+    .topo .servico-inicio p {
+        width: 400px;
+    }
+    .topo .container-sobre .texto-sobre p {
+        width: 350px;
+    }
+} 
+
+@media (max-width:530px) {
+    .topo .servico-inicio p {
+        width: 250px;
+    }
+} 
