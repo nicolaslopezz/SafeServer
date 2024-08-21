@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teste.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <section class="topo">
+        <div class="background">
+            <div class="navbar">
+                <div class="logoImg">
+                    <a href="index.html"><img src="imagens/logow.png" alt="Logo"></a>
+                </div>
+                <div class="navBtn">
+                    <a href="#">Inicio</a>
+                    <a href="#">Sobre</a>
+                    <a href="login.html">Acessar</a>
+                </div>
+            </div>
+            <div class="container-inicio" id="inicio">
+                <div class="servico-inicio">
+                    <h1>Monitorando Servidores</h1>
+                    <p>
+                        Trabalharemos monitorando sua 
+                        infraestrutura de servidor, para
+                        prevenir e prever as falhas, assim,
+                        reduzindo as suas perdas.
+                    </p>
+                    <button onclick="scrollSobre()">Saiba Mais</button>
+                </div>
+                <div class="imagem-inicio">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container-sobre" id="divSobre">
+            <div class="atributos-sobre">
+                <div class="container-box">
+                    <div class="box-sobre">
+                        <i class='bx bx-shield-quarter'></i>
+                        <p>Segurança</p>
+                    </div>
+                    <div class="box-sobre">
+                        <i class='bx bxs-server' ></i>
+                        <p>Maior Uptime</p>
+                    </div>
+                    <div class="box-sobre">
+                        <i class='bx bx-show'></i>
+                        <p>Monitoramento 24/7</p>
+                    </div>
+                    <div class="box-sobre">
+                        <i class='bx bx-bell' ></i>
+                        <p>Notificações </p>
+                    </div>
+                </div>
+            </div>
+            <div class="texto-sobre">
+                <h1>O QUE SOMOS?</h1>
+                <p>
+                    Trabalharemos monitorando sua infraestrutura de servidor, 
+                    para prevenir e prever as falhas, assim, reduzindo as suas perdas.
+                    Trabalharemos monitorando sua infraestrutura de servidor,
+                    para prevenir e prever as falhas, assim, reduzindo as suas perdas.
+                    prevenir e prever as falhas, assim,reduzindo as suas perdas.
+                </p>
+                <a href="#">Cadastre-se Já!</a>
+            </div>
+        </div>
+        <div class="container-valores">
+            <div class="titulo-valores">
+                <h1>NOSSOS VALORES</h1>
+            </div>
+            <div class="flex-valores">
+                <div class="card-valores">
+                    <img src="imagens/cps.png" alt="Compromisso" class="compromisso">
+                    <p>Compromisso</p>
+                </div>
+                <div class="card-valores">
+                    <img src="imagens/blc.png" alt="Compromisso" class="integridade">
+                    <p>Integridade</p>
+                </div>
+                <div class="card-valores">
+                    <i class='bx bxs-universal-access' ></i>
+                    <p>Acessibilidade</p>
+                </div>
+                <div class="card-valores">
+                    <i class='bx bx-bulb' ></i>
+                    <p>Inovação</p>
+                </div>
+                <div class="card-valores">
+                    <i class='bx bx-donate-heart'></i>
+                    <p>Respeito</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="btn-footer">
+                <a href="#">Inicio</a>
+                <a href="#">Sobre</a>
+                <a href="#">Login</a>
+                <a href="#">Cadastro</a>
+            </div>
+            <div class="direitos-footer">
+                <p><u>© 2024 Logo reservados</u></p>
+                <p><u>Abra um Chamado</u></p>
+                <p><u>suporte.logo@gmail.com</u></p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+    function scrollSobre() {
+        const div = document.getElementById("divSobre");
+        div.scrollIntoView({ behavior: 'smooth'});
+    }
+</script>

@@ -1,0 +1,668 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+body::-webkit-scrollbar{
+    width: 10px;
+    pa
+}
+body::-webkit-scrollbar-thumb {
+    background: #091836;
+    border-radius: 10px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* fonte normal */
+@font-face {
+    font-family: 'SFUIText-Regular.ttf';
+    font-style: normal;
+    font-weight: bold;
+    src: local('fonte/SFUIText-Regular.ttf'), url('fonte/SFUIText-Regular.woff') format('woff');
+}
+
+/* fonte normal italica */
+@font-face {
+    font-family: 'SFUIText-Italic.ttf';
+    font-style: normal;
+    font-weight: bold;
+    src: local('fonte/SFUIText-Italic.ttf'), url('fonte/SFUIText-Italic.woff') format('woff');
+}
+
+/* fonte negrito  */
+@font-face {
+    font-family: 'SFUIText-Bold.ttf';
+    font-style: normal;
+    font-weight: bold;
+    src: local('fonte/SFUIText-Bold.ttf'), url('fonte/SFUIText-Bold.woff') format('woff');
+}
+
+/* fonte negrito italica */
+@font-face {
+    font-family: 'SFUIText-BoldItalicG1.ttf';
+    font-style: normal;
+    font-weight: bold;
+    src: local('fonte/SFUIText-BoldItalicG1.ttf'), url('fonte/SFUIText-BoldItalicG1.woff') format('woff');
+}
+
+/* fonte negrito italica */
+@font-face {
+    font-family: 'SFUIText-Heavy.ttf';
+    font-style: normal;
+    font-weight: bold;
+    src: local('fonte/SFUIText-Heavy.ttf'), url('fonte/SFUIText-Heavy.woff') format('woff');
+}
+
+/* 
+cores 
+#e1316c
+#fc9e19
+#405de4
+*/
+
+/* section com Bg Fixo */
+.topo {
+    width: 100%;
+    height: 100vh;
+}
+.footer {
+    width: 100%;
+    height: 30vh;
+    background: #b3b2b270;
+    border-radius: 50px 50px 0px 0px;
+}
+
+/* background */
+.background {
+    background: url('imagens/bg.png');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    z-index: -1;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+.navbar .logoImg {
+    width: fit-content;
+    height: fit-content;
+    padding: 30px 0px 30px 0px;
+    margin-left: 100px;
+}
+.navbar .logoImg img {
+    color: #fff;
+    width: 60px;
+}
+.navbar .logoImg a {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'SFUIText-Regular.ttf';
+    font-size: 2.5vw;
+}
+.navbar .navBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    height: fit-content;
+    padding: 30px;
+    margin-right: 230px;
+}
+.navbar .navBtn a {
+    color: black;
+    text-decoration: none;
+    font-family: 'SFUIText-Heavy.ttf';
+    font-size: 25px;
+}
+.navbar .navBtn a:hover {
+    transform: scale(1.1);
+    transition: 1.5s ease;
+    cursor: pointer;
+}
+
+/* footer */
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    background: #b3b2b270;
+    border-radius: 50px 50px 0px 0px;
+}
+
+.btn-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    height: 100px;
+}
+.btn-footer a {
+    font-size: 28px;
+    height: fit-content;
+    color: black;
+    font-family: 'SFUIText-Bold.ttf';
+    text-decoration: none;
+}
+.btn-footer a:hover {
+    transform: scale(1.05);
+    transition: 1s ease;
+}
+
+.direitos-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 100px;
+}
+.direitos-footer p {
+    font-size: 18px;
+    color: black;
+    font-family: 'SFUIText-Regular.ttf';
+}
+.direitos-footer u {
+    text-decoration: none;
+}
+.direitos-footer u:hover {
+    border-bottom: 1px solid black;
+}
+.direitos-footer p:hover {
+    transform: scale(1.02);
+    transition: 1.5s ease;
+    cursor: pointer;
+}
+
+/* Formulario de Cadastro */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+
+.input-cadastro {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas de igual largura */
+    gap: 10px;
+}
+.input-format {
+    display: flex; 
+    justify-content: center;
+    align-items: center
+}
+
+.formBlue-Cadastro {  /* estilo */
+    position: relative;
+    width: 430px;
+    height: 500px;
+    background: #091836;
+    border: 4px solid #091836;
+    border-radius: 40px;
+    left: 70px;
+    padding-right: 100px;
+}
+.formBlue-Cadastro { /* formatação do conteudo */
+    display: flex;
+    flex-direction: column;
+}
+.formBlue-Cadastro h1 {
+    font-size: 40px;
+    width: 250px;
+    font-family: 'SFUIText-Regular.ttf';
+    color: #fff;
+    padding-top: 100px;
+    margin: 0;
+    text-align: center;
+}
+.formBlue-Cadastro .text-Cadastro {
+    width: 241px;
+    text-align: center;
+}
+.formBlue-Cadastro p {
+    font-size: 25px;
+    font-family: 'SFUIText-Regular.ttf';
+    color: #fff;
+    padding-bottom: 10px;
+}
+.formBlue-Cadastro .cadBtn-Cadastro {
+    padding: 11px;
+    border: 3px solid #fff;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 25px;
+    text-decoration: none;
+    font-family: 'SFUIText-Bold.ttf';
+    cursor: pointer;
+}
+.formBlue-Cadastro .cadBtn-Cadastro:hover {
+    transform: scale(1.05);
+    transition: 0.4s ease;
+}
+
+.formCadastroWhite { /* estilo */
+    position: relative;
+    width: 650px;
+    height: 500px;
+    background: #fff;
+    border: 4px solid #091836;
+    border-radius: 40px;
+    right: 70px;
+}
+.formCadastroWhite { /* formatação conteudo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formCadastroWhite input {
+    font-size: 20px;
+    background: #d6d6d6;
+    border: none;
+    width: 205px;
+    border-radius: 25px;
+    font-family: 'SFUIText-Regular.ttf';
+    padding: 10px;
+    padding-left: 50px;
+    margin-top: 20px;
+    outline: 2px solid #545454;
+}
+.formCadastroWhite input::placeholder {
+    font-size: 20px;
+    position: relative;
+    color: #545454;
+}
+.formCadastroWhite button {
+    color: #fff;
+    background: #e1316c;
+    font-size: 25px;
+    width: 140px;
+    font-family: 'SFUIText-Bold.ttf';
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.formCadastroWhite button:hover {
+    transform: scale(1.05);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+#input-Cadastro {
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    color: #545454;
+}
+#input-lock {
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    color: #545454;
+}
+#input-cell {
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    color: #545454;
+}
+#input-key {
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    color: #545454;
+}
+
+.modulo {
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+    height: 100%;
+    border-radius: 40px;
+    align-items: center;
+}
+
+/* Formulario de Login */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+
+.formBlue-login {  /* estilo */
+    position: relative;
+    width: 430px;
+    height: 450px;
+    background: #091836;
+    border: 4px solid #091836;
+    border-radius: 40px;
+    left: 70px;
+    padding-right: 100px;
+}
+.formBlue-login { /* formatação do conteudo */
+    display: flex;
+    flex-direction: column;
+}
+.formBlue-login h1 {
+    font-size: 40px;
+    font-family: 'SFUIText-Regular.ttf';
+    color: #fff;
+    padding-top: 100px;
+    margin: 0;
+}
+.formBlue-login .text-login {
+    width: 241px;
+    text-align: center;
+}
+.formBlue-login p {
+    font-size: 25px;
+    font-family: 'SFUIText-Regular.ttf';
+    color: #fff;
+    padding-bottom: 10px;
+}
+.formBlue-login .cadBtn-login {
+    padding: 11px;
+    border: 3px solid #fff;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 25px;
+    text-decoration: none;
+    font-family: 'SFUIText-Bold.ttf';
+    cursor: pointer;
+}
+.formBlue-login .cadBtn-login:hover {
+    transform: scale(1.05);
+    transition: 0.4s ease;
+}
+
+.formLoginWhite { /* estilo */
+    position: relative;
+    width: 430px;
+    height: 450px;
+    background: #fff;
+    border: 4px solid #091836;
+    border-radius: 40px;
+    right: 70px;
+}
+.formLoginWhite { /* formatação conteudo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formLoginWhite input {
+    font-size: 20px;
+    background: #d6d6d6;
+    border: none;
+    width: 205px;
+    border-radius: 25px;
+    font-family: 'SFUIText-Regular.ttf';
+    padding: 10px;
+    padding-left: 50px;
+    margin-top: 20px;
+    outline: 2px solid #545454;
+}
+.formLoginWhite input::placeholder {
+    font-size: 20px;
+    position: relative;
+    color: #545454;
+}
+.formLoginWhite button {
+    color: #fff;
+    background: #e1316c;
+    font-size: 25px;
+    width: 140px;
+    font-family: 'SFUIText-Bold.ttf';
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.formLoginWhite button:hover {
+    transform: scale(1.05);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+#user-login {
+    font-size: 30px;
+    position: relative;
+    top: 60px;
+    right: 100px;
+    color: #545454;
+}
+#user-lock {
+    font-size: 30px;
+    position: relative;
+    top: 60px;
+    right: 100px;
+    color: #545454;
+}
+
+.modulo {
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+    height: 100%;
+    border-radius: 40px;
+    align-items: center;
+}
+
+    
+
+/* Container Inicio */
+
+.container-inicio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+.servico-inicio {
+    height: 60vh;
+    padding-right: 200px;
+    margin-left: 100px;
+}
+.servico-inicio h1{
+    color: #fff;
+    font-size: 40px;
+    font-family: 'SFUIText-Bold.ttf';
+
+}
+.servico-inicio p{
+    color: #fff;
+    font-size: 30px;
+    font-family: 'SFUIText-Regular.ttf';
+    width: 500px;
+    text-align: justify;
+    height: fit-content;
+    padding-bottom: 30px;
+
+}
+.servico-inicio button{
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+    background: #e1316c;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-family: 'SFUIText-Bold.ttf';
+}
+.servico-inicio button:hover {
+    transform: scale(1.05);
+    transition: 0.5s ease;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.imagem-inicio {
+    padding: 10px;
+}
+.imagem-inicio img{
+    width: 650px;
+    height: auto;
+}
+
+.container-sobre {
+    width: 100%;
+    height: 80vh;
+    background: 
+    linear-gradient(rgba(0, 0, 0, 0.850), rgba(0, 0, 0, 0.850)), 
+    url('imagens/data.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto-sobre {
+    padding: 10px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+}
+.texto-sobre h1{
+    color: #fff;
+    font-family: 'SFUIText-Bold.ttf';
+    font-size: 40px;
+    text-align: left;
+}
+.texto-sobre p{
+    color: #fff;
+    font-family: 'SFUIText-Regular.ttf';
+    font-size: 30px;
+    text-align: left;
+    width: 702px;
+    height: fit-content;
+}
+.texto-sobre a{
+    font-family: 'SFUIText-Bold.ttf';
+    font-size: 30px;
+    text-decoration: none;
+    color: #fff;
+    background: #e1316c;
+    border-radius: 10px;
+    padding: 10px;
+    width: 250px;
+}
+.texto-sobre a:hover{
+    transform: scale(1.05);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.atributos-sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 600px;
+}
+.atributos-sobre i {
+    font-size: 100px;
+    color: #fff;
+}
+
+.container-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Define 2 colunas de tamanho igual */
+    grid-template-rows: repeat(2, 1fr); /* Define 2 linhas de tamanho igual */
+    gap: 30px;
+}
+
+.box-sobre {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #7c7c7c85;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.box-sobre p {
+    color: #fff;
+    font-size: 15px;
+    font-family: 'SFUIText-Bold.ttf';
+}
+
+.container-valores {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.titulo-valores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.titulo-valores h1 {
+    font-family: 'SFUIText-Bold.ttf';
+    padding: 0;
+    margin: 0;
+    font-size: 40px;
+    color: #000;
+}
+
+.flex-valores {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.card-valores {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.card-valores p {
+    color: #000;
+    font-size: 20px;
+    font-family: 'SFUIText-Bold.ttf';
+}
+.card-valores i {
+    color: #000;
+    font-size: 100px;
+}
+.card-valores .compromisso {
+    width: 135px;
+}
+.card-valores .integridade {
+    width: 100px;
+}
+
+
+/* @media (max-width:920px) {
+    .topo .navbar {
+        display: none;
+    }
+}  
+*/
