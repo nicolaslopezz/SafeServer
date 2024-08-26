@@ -680,6 +680,19 @@ cores
     }
     .topo .background {
         background: url('imagens/bg1.png');
+    } 
+    .topo .card-valores {
+        width: 200px;
+        height: 200px;
+    } 
+    .topo .card-valores i {
+        font-size: 60px;
+    }
+    .topo .card-valores img {
+        width: 60px;
+    }
+    .topo .card-valores p {
+        font-size: 18px;
     }
 } 
 
@@ -696,10 +709,23 @@ cores
         flex-direction: column;
         height: 1100px;
     }
-    
+    .topo .container-valores {
+        height: 60vh;
+    }
+    .topo .card-valores {
+        width: 140px;
+        height: 140px;
+    } 
+    .topo .flex-valores {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Define 2 colunas de tamanho igual */
+        grid-template-rows: repeat(1, 1fr); /* Define 2 linhas de tamanho igual */
+        gap: 30px;
+        width: fit-content;
+    }
 } 
 
-@media (max-width:700px) {
+@media (max-width:710px) {
     .topo .servico-inicio h1 {
         width: 100px;
         padding-top: 0;
@@ -709,7 +735,35 @@ cores
         width: 400px;
     }
     .topo .container-sobre .texto-sobre p {
-        width: 350px;
+        width: 500px;
+    }
+    .topo .container-sobre {
+        height: 1300px;
+    }
+    .topo .card-valores {
+        display: flex;
+        width: 130px;
+        height: 130px;
+        align-self: center;
+        justify-self: center;
+    } 
+    .topo .card-valores i {
+        font-size: 50px;
+    }
+    .topo .card-valores img {
+        width: 50px;
+    }
+    .topo .card-valores p {
+        font-size: 15px;
+    }
+    .topo .btn-footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Define 2 colunas de tamanho igual */
+        grid-template-rows: repeat(2, 1fr); /* Define 2 linhas de tamanho igual */
+        gap: 30px;
+        column-gap: 180px;
+        margin-bottom: 20px;
+        width: fit-content;
     }
 } 
 
@@ -717,4 +771,104 @@ cores
     .topo .servico-inicio p {
         width: 250px;
     }
+    .topo .container-sobre .texto-sobre p {
+        width: 350px;
+    }
+    .topo .container-sobre {
+        height: 1750px;
+    }
+    .topo .btn-footer {
+        column-gap: 0;
+    }
+    .topo .direitos-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    .topo .direitos-footer p {
+        width: fit-content;
+    }
+    .topo .footer {
+        height: 40vh;
+        padding-top: 50px;
+        justify-content: flex-start;
+    }
+} 
+
+@media (max-width:530px) {
+    .topo .container-inicio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .topo .imagem-inicio{
+        display: none;
+    }
+    .topo .servico-inicio p {
+        width: 250px;
+    }
+    .topo .servico-inicio{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        width: fit-content;
+        margin: 0;
+        padding: 0;
+    }
+    .topo .container-sobre .texto-sobre p {
+        width: 350px;
+    }
+    .topo .navBurguer {
+        margin-right: 10px;
+    }
+
+    .topo .container-sobre {
+        display: flex;
+        flex-direction: column;
+        height: 1300px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .topo .box-sobre {
+        width: 165px;
+        height: 165px;
+    }
+    .topo .texto-sobre {
+        margin: 0;
+        padding: 0;
+        width: fit-content;
+        align-items: center;
+    }
+    .topo .texto-sobre p {
+        font-size: 25px;
+        text-align: justify;
+    }
+    .topo .flex-valores {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Define 2 colunas de tamanho igual */
+        grid-template-rows: repeat(3, 1fr); /* Define 2 linhas de tamanho igual */
+        gap: 30px;
+        width: fit-content;
+    }
+    .topo .container-valores {
+        height: 80vh;
+    }
+    .topo .titulo-valores h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+    }
+    .topo .box-sobre {
+        width: 160px;
+        height: 160px;
+    }
+    .topo .box-sobre i {
+        font-size: 60px;
+    }
+    .topo .box-sobre p {
+        font-size: 15px;
+    }
+    
 } 
