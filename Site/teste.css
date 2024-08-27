@@ -56,7 +56,7 @@ html {
 
 /* 
 cores 
-#e1316c
+#091836
 #fc9e19
 #405de4
 */
@@ -65,12 +65,6 @@ cores
 .topo {
     width: 100%;
     height: 100vh;
-}
-.footer {
-    width: 100%;
-    height: 30vh;
-    background: #b3b2b270;
-    border-radius: 50px 50px 0px 0px;
 }
 
 /* background */
@@ -133,54 +127,87 @@ cores
 /* footer */
 .footer {
     display: flex;
-    flex-direction: column;
-    justify-content: end;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 30vh;
-    background: #b3b2b270;
-    border-radius: 50px 50px 0px 0px;
+    height: 45vh;
+    background: #091836;
 }
 
 .btn-footer {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    width: 75%;
+    width: 40%;
     height: 100px;
+    margin-left: 200px;
+    margin-bottom: 100px;
+
 }
-.btn-footer a {
-    font-size: 28px;
-    height: fit-content;
-    color: black;
+.btn-footer h1{
     font-family: 'SFUIText-Bold.ttf';
-    text-decoration: none;
+    font-size: 35px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
 }
-.btn-footer a:hover {
-    transform: scale(1.05);
-    transition: 1s ease;
+.btn-footer p{
+    font-family: 'SFUIText-regular.ttf';
+    font-size: 20px;
+    color: #fff;
+
+}
+.social-footer {
+    display: flex;
+    align-items: left;
+    width: fit-content;
+    height: fit-content;
+}
+.social-footer i {
+    color: #fff;
+    font-size: 40px;
 }
 
 .direitos-footer {
     display: flex;
-    justify-content: space-between;
-    width: 80%;
-    height: 100px;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 40%;
+    height: 100%;
 }
-.direitos-footer p {
-    font-size: 18px;
-    color: black;
+
+.cardSombra-footer {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-size: 40px;
     font-family: 'SFUIText-Regular.ttf';
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
 }
-.direitos-footer u {
-    text-decoration: none;
+.card-footer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    color: #fff;
+    background-color: #0e224b;
+    font-size: 40px;
+    font-family: 'SFUIText-Regular.ttf';
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
 }
-.direitos-footer u:hover {
-    border-bottom: 1px solid black;
-}
-.direitos-footer p:hover {
-    transform: scale(1.02);
-    transition: 1.5s ease;
-    cursor: pointer;
+.card-footer p {
+    font-size: 15px;
 }
 
 /* Formulario de Cadastro */
@@ -204,30 +231,27 @@ cores
 }
 
 .formBlue-Cadastro {  /* estilo */
-    position: relative;
-    width: 430px;
-    height: 500px;
+    width: 50%;
+    height: 100%;
     background: #091836;
     border: 4px solid #091836;
-    border-radius: 40px;
-    left: 70px;
-    padding-right: 100px;
 }
 .formBlue-Cadastro { /* formatação do conteudo */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .formBlue-Cadastro h1 {
     font-size: 40px;
-    width: 250px;
+    width: 300px;
     font-family: 'SFUIText-Regular.ttf';
     color: #fff;
-    padding-top: 100px;
     margin: 0;
     text-align: center;
 }
 .formBlue-Cadastro .text-Cadastro {
-    width: 241px;
+    width: 300px;
     text-align: center;
 }
 .formBlue-Cadastro p {
@@ -252,13 +276,14 @@ cores
 }
 
 .formCadastroWhite { /* estilo */
-    position: relative;
-    width: 650px;
-    height: 500px;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border: 4px solid #091836;
-    border-radius: 40px;
-    right: 70px;
+}
+.formCadastroWhite h1 {
+    font-family: 'SFUIText-Regular.ttf';
+    font-size: 40px;
 }
 .formCadastroWhite { /* formatação conteudo */
     display: flex;
@@ -348,28 +373,26 @@ cores
 }
 
 .formBlue-login {  /* estilo */
-    position: relative;
-    width: 430px;
-    height: 450px;
+    width: 50%;
+    height: 100%;
     background: #091836;
     border: 4px solid #091836;
-    border-radius: 40px;
-    left: 70px;
-    padding-right: 100px;
 }
 .formBlue-login { /* formatação do conteudo */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .formBlue-login h1 {
-    font-size: 40px;
+    font-size: 50px;
     font-family: 'SFUIText-Regular.ttf';
     color: #fff;
     padding-top: 100px;
     margin: 0;
 }
 .formBlue-login .text-login {
-    width: 241px;
+    width: 300px;
     text-align: center;
 }
 .formBlue-login p {
@@ -394,13 +417,10 @@ cores
 }
 
 .formLoginWhite { /* estilo */
-    position: relative;
-    width: 430px;
-    height: 450px;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border: 4px solid #091836;
-    border-radius: 40px;
-    right: 70px;
 }
 .formLoginWhite { /* formatação conteudo */
     display: flex;
@@ -442,6 +462,11 @@ cores
     transition: 0.5s ease;
     cursor: pointer;
 }
+.formLoginWhite h1 {
+    font-family: 'SFUIText-Bold.ttf';
+    font-size: 50px;
+}
+
 #user-login {
     font-size: 30px;
     position: relative;
@@ -461,12 +486,17 @@ cores
     display: flex;
     flex-direction: column;
     width: 93%;
-    height: 100%;
+    height: fit-content;
     border-radius: 40px;
     align-items: center;
 }
 
-    
+.conter {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: fit-content;
+}   
 
 /* Container Inicio */
 
@@ -694,6 +724,9 @@ cores
     .topo .card-valores p {
         font-size: 18px;
     }
+    .topo .input-format input::placeholder {
+        font-size: 15px;
+    }
 } 
 
 @media (max-width:1230px) {
@@ -716,6 +749,17 @@ cores
         width: 140px;
         height: 140px;
     } 
+    .topo .input-format input {
+        width: 113px;
+    }
+    .topo .input-format #input-lock {
+        font-size: 25px;
+    }
+    .topo .formCadastroWhite {
+        margin: 20px;
+        border: none;
+    }
+    
     .topo .flex-valores {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Define 2 colunas de tamanho igual */
@@ -726,6 +770,9 @@ cores
 } 
 
 @media (max-width:710px) {
+    .topo .navbar {
+        margin-bottom: 230px;
+    }
     .topo .servico-inicio h1 {
         width: 100px;
         padding-top: 0;
@@ -750,22 +797,41 @@ cores
     .topo .card-valores i {
         font-size: 50px;
     }
+    .topo .form-container {
+        flex-direction: column;
+    }
     .topo .card-valores img {
         width: 50px;
     }
     .topo .card-valores p {
         font-size: 15px;
     }
-    .topo .btn-footer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Define 2 colunas de tamanho igual */
-        grid-template-rows: repeat(2, 1fr); /* Define 2 linhas de tamanho igual */
-        gap: 30px;
-        column-gap: 180px;
-        margin-bottom: 20px;
-        width: fit-content;
+    .topo .formBlue-login {
+        width: 100%;
+        padding: 100px;
+    }
+    .topo .formLoginWhite {
+        width: 100%;
+        padding: 100px;
+    }
+    .topo .formBlue-Cadastro {
+        width: 100%;
+        margin: 50px;
+        padding: 100px;
+        height: auto;
+    }
+    .topo .formCadastroWhite {
+        width: 100%;
+        height: auto;
+    }
+    .topo .modulo h1 {
+        padding-top: 5px;
+    }
+    .topo .input-cadastro {
+        grid-template-columns: 1fr;
     }
 } 
+
 
 @media (max-width:530px) {
     .topo .servico-inicio p {
@@ -776,22 +842,6 @@ cores
     }
     .topo .container-sobre {
         height: 1750px;
-    }
-    .topo .btn-footer {
-        column-gap: 0;
-    }
-    .topo .direitos-footer {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-    }
-    .topo .direitos-footer p {
-        width: fit-content;
-    }
-    .topo .footer {
-        height: 40vh;
-        padding-top: 50px;
-        justify-content: flex-start;
     }
 } 
 
