@@ -38,6 +38,7 @@ total_ram_gb float,
 uso_disco_gb float,
 livre_disco_gb float,
 total_disco_gb float,
+toltal_nucleos_cpu int,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidores (idServidor));
 
