@@ -1,51 +1,48 @@
 import psutil
-import mysql.connector
 import time
+import mysql.connector
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="??", ## Senha do seu banco 
-    database="registros"
+# Criação da conexão com o banco de dados
+meusql = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='e21s20@1',
+    database='SafeServer'
 )
 
-mycursor = mydb.cursor()
+meucursor = meusql.cursor()
 
 while True:
-    cpuPercentual = psutil.cpu_percent(interval=3)
-    quantidadeCPU = psutil.cpu_count()
-    nucleosCPU = psutil(logical=False)
-    contextoCPU = psutil.cpu_times()
+    memoria = psutil.virtual_memory()
+    cpu = psutil.cpu_percent(interval=1)
+    disco = psutil.disk_usage('/')
+
+    # Cálculo das variáveis com formatação para uma casa decimal
+    total_memoriagb = round(memoria.total / (1024 ** 3), 1)
+    used_memoriagb = round(memoria.used / (1024 ** 3), 1)
+    total_discogb = round(disco.total / (1024 ** 3), 1)
+    used_discogb = round(disco.used / (1024 ** 3), 1)
+    livre_memoriagb = round(total_memoriagb - used_memoriagb, 1)
+    livre_discogb = round(total_discogb - used_discogb, 1)
+
+    # Consulta SQL para inserir os dados no banco de dados
+    query = '''
+    INSERT INTO registros (percent_use_cpu, uso_ram_gb, livre_ram_gb, total_ram_gb, uso_disco_gb, livre_disco_gb, total_disco_gb)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    '''
     
-    usoMemoria = psutil.virtual_memory().used
-    memoriaLivre = psutil.virtual_memory().available * 100 / psutil.virtual_memory().total
-    totalMemoria = psutil.virtual_memory().free
+    values = (cpu, used_memoriagb, livre_memoriagb, total_memoriagb, used_discogb, livre_discogb, total_discogb)
+
+    meucursor.execute(query, values)
+    meusql.commit()
     
-    discoLivre = psutil.disk_usage('/').free
-    usoDisco = psutil.disk_usage('/').used
-    tamanhoDisco = psutil.disk_usage('/').total
-
-    print(cpuPercentual)
-    
-    sql = "INSERT INTO cpu_UsageData (comp_id, cpu_usage_percent) VALUES (%s, %s)"
-    val = (1, cpuPercentual)
-
-    sql2 = "INSERT INTO mem_usage_info (comp_id, used_mem, freeMemory) VALUES (%s, %s, %s)"  
-    val2 = (1,usoMemoria,memoriaLivre)
-
-    sql3 = "INSERT INTO diskUsage (comp_id, free_disk) values (%s, %s)"
-    val3 = (1, usoDisco)
-
-
-
-
-
-    
-
-    mycursor.execute(sql, val)
-    mycursor.execute(sql2, val2)
-    mycursor.execute(sql3, val3)
-
-    mydb.commit()
-
-    print(cpuPercentual,"%")
+    # Impressão dos resultados formatados
+    print('Percentual de uso da CPU =', cpu, '%')
+    print('Memoria em uso = {:.1f}'.format(used_memoriagb), 'GB')
+    print('Memoria livre = {:.1f}'.format(livre_memoriagb), 'GB')
+    print('Total memoria = {:.1f}'.format(total_memoriagb), 'GB') 
+    print('Disco em uso = {:.1f}'.format(used_discogb), 'GB')
+    print('Disco livre = {:.1f}'.format(livre_discogb), 'GB')
+    print('Total Disco = {:.1f}'.format(total_discogb), 'GB')
+    print('=' * 55) 
+    time.sleep(2)
