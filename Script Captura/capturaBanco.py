@@ -15,7 +15,7 @@ meucursor = meusql.cursor()
 while True:
     memoria = psutil.virtual_memory()
     cpu = psutil.cpu_percent(interval=1)
-    nucleosCPU = psutil(logical=False)
+    nucleosCPU = psutil.cpu_count(logical=False)
     disco = psutil.disk_usage('/')
 
     # Cálculo das variáveis com formatação para uma casa decimal
