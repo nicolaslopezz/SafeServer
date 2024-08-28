@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="teste.css">
+    <link rel="stylesheet" href="css/teste.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Document</title>
 </head>
-<body>
-    <section class="topo">
+<body onload="listar()">
+  <section class="topo">
         <div class="conter">
             <div class="navbar">
                 <div class="logoImg">
-                    <a href="index.html"><img src="imagens/logob.png" alt="Logo"></a>
+                    <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
                 </div>
                 <div class="navBtn">
                     <a href="index.html">Inicio</a>
@@ -39,30 +39,36 @@
                 <div class="input-cadastro">
                     <div class="input-format">
                         <i class='bx bxs-user' id="input-Cadastro"></i>
-                        <input type="text" placeholder="Nome">
+                        <input type="text" placeholder="Nome" id="input_nome">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-envelope' id="input-lock"></i>
-                        <input type="email" placeholder="Email">
+                        <input type="email" placeholder="Email" id="input_email">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-phone' id="input-cell"></i>
-                        <input type="text" placeholder="Telefone">
+                        <input type="text" placeholder="Telefone" id="input_telefone">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-key' id="input-key"></i>
-                        <input type="senha" placeholder="Chave Acesso">
+                        <input type="senha" placeholder="Chave Acesso" id="input_chaveAcesso">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="senha" placeholder="Senha">
+                        <input type="senha" placeholder="Senha" id="input_senha">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="senha" placeholder="Confirma Senha">
+                        <input type="senha" placeholder="Confirma Senha" id="input_confirmar_senha">
                     </div>
                 </div>
-                <button>Entrar</button>
+                <button onclick="cadastrar()">Entrar</button>
+                <!-- <div class="card_erro" id="cardErro">
+                  <span id="mensagem_erro"></span>
+                </div>
+                <div id="div_aguardar" class="loading-div">
+                  <img src="./assets/circle-loading.gif" id="loading-gif" />
+                </div> -->
             </div>
         </div>
     </section>
@@ -70,23 +76,28 @@
 </html>
 
 <script>
+
+  let listaEmpresasCadastradas = [];
     function cadastrar() {
-    aguardar();
+    //aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = input_nome.value;
     var emailVar = input_email.value;
     var telefoneVar = input_telefone.value;
+    var chaveAcessoVar = input_chaveAcesso.value;
     var senhaVar = input_senha.value;
     var confirmacaoSenhaVar = input_confirmar_senha.value;
+    var idEmpresaVincular
 
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      telefoneVar == ""
+      telefoneVar == "" ||
+      chaveAcessoVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -96,6 +107,19 @@
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].chaveAcesso == chaveAcessoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
     }
 
     // Enviando o valor da nova input
@@ -110,7 +134,8 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        telefoneServer: telefoneVar
+        telefoneServer: telefoneVar,
+        idEmpresaVincularServer: idEmpresaVincular
       }),
     })
       .then(function (resposta) {
@@ -138,6 +163,29 @@
       });
 
     return false;
+  }
+
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].chaveAcesso)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
   }
 
 </script>

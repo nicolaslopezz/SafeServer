@@ -19,7 +19,7 @@ html {
     font-family: 'SFUIText-Regular.ttf';
     font-style: normal;
     font-weight: bold;
-    src: local('fonte/SFUIText-Regular.ttf'), url('fonte/SFUIText-Regular.woff') format('woff');
+    src: local('fonte/SFUIText-Regular.ttf'), url('../assets/fonte/SFUIText-Regular.ttf') format('woff');
 }
 
 /* fonte normal italica */
@@ -27,7 +27,7 @@ html {
     font-family: 'SFUIText-Italic.ttf';
     font-style: normal;
     font-weight: bold;
-    src: local('fonte/SFUIText-Italic.ttf'), url('fonte/SFUIText-Italic.woff') format('woff');
+    src: local('fonte/SFUIText-Italic.ttf'), url('../assets/fonte/SFUIText-Italic.woff') format('woff');
 }
 
 /* fonte negrito  */
@@ -35,7 +35,7 @@ html {
     font-family: 'SFUIText-Bold.ttf';
     font-style: normal;
     font-weight: bold;
-    src: local('fonte/SFUIText-Bold.ttf'), url('fonte/SFUIText-Bold.woff') format('woff');
+    src: local('fonte/SFUIText-Bold.ttf'), url('../assets/fonte/SFUIText-Bold.woff') format('woff');
 }
 
 /* fonte negrito italica */
@@ -43,7 +43,7 @@ html {
     font-family: 'SFUIText-BoldItalicG1.ttf';
     font-style: normal;
     font-weight: bold;
-    src: local('fonte/SFUIText-BoldItalicG1.ttf'), url('fonte/SFUIText-BoldItalicG1.woff') format('woff');
+    src: local('fonte/SFUIText-BoldItalicG1.ttf'), url('../assets/fonte/SFUIText-BoldItalicG1.woff') format('woff');
 }
 
 /* fonte negrito italica */
@@ -51,7 +51,7 @@ html {
     font-family: 'SFUIText-Heavy.ttf';
     font-style: normal;
     font-weight: bold;
-    src: local('fonte/SFUIText-Heavy.ttf'), url('fonte/SFUIText-Heavy.woff') format('woff');
+    src: local('fonte/SFUIText-Heavy.ttf'), url('../assets/fonte/SFUIText-Heavy.woff') format('woff');
 }
 
 /* 
@@ -69,7 +69,7 @@ cores
 
 /* background */
 .background {
-    background: url('imagens/bg.png');
+    background: url('../assets/imgs/bg.png');
     background-position: center;
     background-size: cover;
     width: 100%;
@@ -558,7 +558,7 @@ cores
     height: 80vh;
     background: 
     linear-gradient(rgba(0, 0, 0, 0.850), rgba(0, 0, 0, 0.850)), 
-    url('imagens/data.jpg');
+    url('../assets/imgs/data.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -709,7 +709,7 @@ cores
         font-size: 65px;
     }
     .topo .background {
-        background: url('imagens/bg1.png');
+        background: url('../assets/imgs/bg1.png');
     } 
     .topo .card-valores {
         width: 200px;
