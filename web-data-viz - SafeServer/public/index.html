@@ -9,10 +9,20 @@
 </head>
 <body>
     <section class="topo">
+        <div class="menuBugu" id="bugu">
+            <div class="close-burguer">
+                <i class='bx bx-x' onclick="burgerClose()"></i>
+            </div>
+            <div class="pages-burguer">
+                <a href="#">Inicio</a>
+                <a href="#">Sobre</a>
+                <a href="login.html">Acessar</a>
+            </div>
+        </div>
         <div class="background">
             <div class="navbar">
                 <div class="logoImg">
-                    <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
+                    <a href="index.html"><img src="assets/imgs/logow.png" alt="Logo"></a>
                 </div>
                 <div class="navBtn">
                     <a href="#">Inicio</a>
@@ -138,8 +148,14 @@
 </html>
 
 <script>
-    function scrollSobre() {
-        const div = document.getElementById("divSobre");
-        div.scrollIntoView({ behavior: 'smooth'});
+    function burguer() {
+        var bugu = document.getElementById('bugu');
+        
+        bugu.style.right = 0;
+    }
+    function burgerClose() {
+        var bugu = document.getElementById('bugu');
+        bugu.style.right = '-300px';
+
     }
 </script>

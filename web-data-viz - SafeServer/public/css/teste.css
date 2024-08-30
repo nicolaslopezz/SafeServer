@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 body::-webkit-scrollbar{
     width: 10px;
@@ -520,12 +521,12 @@ cores
 }
 .servico-inicio p{
     color: #fff;
-    font-size: 30px;
+    font-size: 28px;
     font-family: 'SFUIText-Regular.ttf';
-    width: 500px;
+    width: 450px;
     text-align: justify;
     height: fit-content;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 
 }
 .servico-inicio button{
@@ -670,8 +671,8 @@ cores
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -691,6 +692,39 @@ cores
     width: 100px;
 }
 
+/* menu bugu */
+
+.menuBugu {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    right: -300px; /* por enquanto*/
+    background: #091836;
+    transition: right 0.5s;
+}
+.menuBugu i {
+    color: #fff;
+    font-size: 40px;
+}
+
+.close-burguer {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: flex-start;
+}
+.pages-burguer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: fit-content;
+    padding: 20px;
+}
+
+
+
 /* Responsivo landing page */
 
 @media (max-width:1550px) {
@@ -709,7 +743,7 @@ cores
         font-size: 65px;
     }
     .topo .background {
-        background: url('../assets/imgs/bg1.png');
+        background: url('../assets/imgs/bgResp.jpg');
     } 
     .topo .card-valores {
         width: 200px;
