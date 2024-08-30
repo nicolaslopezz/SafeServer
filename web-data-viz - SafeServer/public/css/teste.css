@@ -581,7 +581,7 @@ cores
 .texto-sobre p{
     color: #fff;
     font-family: 'SFUIText-Regular.ttf';
-    font-size: 30px;
+    font-size: 25px;
     text-align: left;
     width: 702px;
     height: fit-content;
@@ -804,9 +804,6 @@ cores
 } 
 
 @media (max-width:710px) {
-    .topo .navbar {
-        margin-bottom: 230px;
-    }
     .topo .servico-inicio h1 {
         width: 100px;
         padding-top: 0;
