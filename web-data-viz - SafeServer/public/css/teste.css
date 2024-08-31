@@ -173,9 +173,9 @@ cores
 .direitos-footer {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: space-evenly;
     align-items: center;
-    width: 40%;
+    width: 50%;
     height: 100%;
 }
 
@@ -183,6 +183,7 @@ cores
     display: flex;
     flex-direction: column;
     color: #fff;
+    background-color: #fc9d1949;
     font-size: 40px;
     font-family: 'SFUIText-Regular.ttf';
     width: 180px;
@@ -190,7 +191,6 @@ cores
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 50px;
 }
 .card-footer {
     display: flex;
@@ -205,7 +205,8 @@ cores
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 50px;
+    top: 10px;
+    right: 10px;
 }
 .card-footer p {
     font-size: 15px;
@@ -777,7 +778,7 @@ cores
         height: 1100px;
     }
     .topo .container-valores {
-        height: 60vh;
+        height: 80vh;
     }
     .topo .card-valores {
         width: 140px;
@@ -802,6 +803,27 @@ cores
         width: fit-content;
     }
 } 
+
+@media (max-width: 990px) {
+    .topo .cardSombra-footer{
+        width: 125px;
+        height: 125px;
+    }
+    .topo .card-footer{
+        width: 125px;
+        height: 125px;
+    }
+    .topo .btn-footer {
+        margin-left: 150px;
+    }
+    .topo .btn-footer h1 {
+        font-size: 30px;
+    }
+    .topo .btn-footer p {
+        font-size: 18px;
+        width: 200px;
+    }
+}
 
 @media (max-width:710px) {
     .topo .servico-inicio h1 {
@@ -861,6 +883,27 @@ cores
     .topo .input-cadastro {
         grid-template-columns: 1fr;
     }
+    .topo .cardSombra-footer{
+        width: 100px;
+        height: 100px;
+    }
+    .topo .card-footer{
+        width: 100px;
+        height: 100px;
+    }
+    .topo .card-footer i{
+        font-size: 30px;
+    }
+    .topo .btn-footer {
+        margin-left: 25px;
+    }
+    .topo .btn-footer h1 {
+        font-size: 30px;
+    }
+    .topo .btn-footer p {
+        font-size: 18px;
+        width: 200px;
+    }
 } 
 
 
@@ -887,6 +930,10 @@ cores
     }
     .topo .servico-inicio p {
         width: 250px;
+        font-size: 20px;
+    }
+    .topo .servico-inicio button {
+        font-size: 25px;
     }
     .topo .servico-inicio{
         display: flex;
@@ -899,6 +946,7 @@ cores
     }
     .topo .container-sobre .texto-sobre p {
         width: 350px;
+        font-size: 20px;
     }
     .topo .navBurguer {
         margin-right: 10px;
@@ -933,7 +981,7 @@ cores
         width: fit-content;
     }
     .topo .container-valores {
-        height: 80vh;
+        height: 120vh;
     }
     .topo .titulo-valores h1 {
         display: flex;
@@ -951,5 +999,29 @@ cores
     .topo .box-sobre p {
         font-size: 15px;
     }
-    
+    .topo .direitos-footer {
+        flex-direction: column;
+        width: 30%;
+    }
+    .topo .cardSombra-footer{
+        width: 80px;
+        height: 80px;
+    }
+    .topo .card-footer{
+        width: 80px;
+        height: 80px;
+    }
+    .topo .card-footer i{
+        font-size: 25px;
+    }
+    .topo .btn-footer {
+        margin-left: 25px;
+    }
+    .topo .btn-footer h1 {
+        font-size: 25px;
+    }
+    .topo .btn-footer p {
+        font-size: 15px;
+        width: 150px;
+    }
 } 
