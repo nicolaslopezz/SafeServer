@@ -12,7 +12,6 @@ db_config = {
 
 # Função para monitorar e enviar dados para o banco de dados
 def monitorar_e_enviar_dados(servidor_id):
-    servidor_id = 2
     meusql = mysql.connector.connect(**db_config)
     meucursor = meusql.cursor()
 
@@ -38,8 +37,15 @@ def monitorar_e_enviar_dados(servidor_id):
 
         meucursor.execute(query, values)
         meusql.commit()
+
+        # Impressão dos dados inseridos
+        print(f"Dados inseridos: CPU: {cpu:.1f}%, RAM Usada: {used_memoriagb:.1f} GB, RAM Livre: {livre_memoriagb:.1f} GB, "
+              f"Total RAM: {total_memoriagb:.1f} GB, Disco Usado: {used_discogb:.1f} GB, Disco Livre: {livre_discogb:.1f} GB, "
+              f"Total Disco: {total_discogb:.1f} GB")
+
         time.sleep(2)
 
+# Chamada da função para monitorar e enviar dados
 monitorar_e_enviar_dados(2)
 
 # SCRIPT DO BANCO
@@ -89,14 +95,13 @@ toltal_nucleos_cpu int,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
-
 insert into empresa values 
 (default, "Instagram", "Instagram Meta Platforms INC Facebook Serviços Online do Brasil LTDA", "12345678912345","ABCD1234");
 
 insert into servidor(identificacao, fkEmpresa) values
 ('m1', 1),
 ('m2', 1),
-('m3, 1);
+('m3', 1);  -- Corrigido a vírgula aqui
 
 select * from registro;
 
@@ -106,5 +111,3 @@ select * from funcionario;
 
 truncate registro;
 '''
-
-
