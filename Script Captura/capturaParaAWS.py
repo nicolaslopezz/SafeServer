@@ -12,7 +12,7 @@ def exibir_menu():
     maquina = input("Máquina escolhida: ").lower()
 
     print("\nQual componente você deseja monitorar?")
-    print("Opções: cpu, memoria, disco")
+    print("Opções: cpu, memoria, disco, processos")  # Adicionado "processos"
     componente = input("Componente escolhido: ").lower()
 
     if componente == "cpu":
@@ -23,11 +23,16 @@ def exibir_menu():
         print("A) Bytes (Digite: B)")
         print("B) MegaBytes (Digite: MB)")
         print("C) GigaBytes (Digite: GB)")
+    elif componente == "processos":
+        print("\nMonitoramento de processos não requer métrica específica.")
     else:
         print("Componente inválido.")
         return
 
-    metrica = input("Métrica escolhida: ").upper()
+    if componente != "processos":
+        metrica = input("Métrica escolhida: ").upper()
+    else:
+        metrica = None
 
     print("\nEscolha o tipo de dado:")
     print("Opções: Dado Normal (Digite DN), Média da máquina escolhida (Digite MM), Média de todas as máquinas (Digite MT)")
@@ -50,7 +55,7 @@ def exibir_menu():
     alerta_memoria = None
     alerta_disco = None
 
-    if configurar_alerta == 's':
+    if configurar_alerta == 's' and componente != "processos":
         if componente == "cpu":
             alerta_cpu = float(input(f"Digite o valor de alerta para uso de CPU (%): "))
         elif componente == "memoria":
@@ -65,7 +70,11 @@ def exibir_menu():
         while True:
             valor = monitorar_componente(componente, metrica, tipo_dado, servidor_id)
 
-            if valor is not None:
+            if componente == "processos":
+                for process in psutil.process_iter():
+                    name = process.name()
+                    print(f"Processo: {name}")
+            elif valor is not None:
                 if componente == "cpu":
                     if tipo_dado in ["DN", "MM", "MT"]:
                         if alerta_cpu is not None and valor > alerta_cpu:
