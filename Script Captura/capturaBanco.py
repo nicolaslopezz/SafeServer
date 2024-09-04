@@ -22,6 +22,8 @@ def monitorar_e_enviar_dados(servidor_id):
         cpu = psutil.cpu_percent(interval=1)
         disco = psutil.disk_usage('/')
 
+        servidor_id = '(ALTERAR PARA QUAL O ID DO SERVIDOR DA SUA MAQUINA(1 OU 2)'
+
         total_memoriagb = round(memoria.total / (1024 ** 3), 1)
         used_memoriagb = round(memoria.used / (1024 ** 3), 1)
         total_discogb = round(disco.total / (1024 ** 3), 1)
@@ -46,7 +48,7 @@ def monitorar_e_enviar_dados(servidor_id):
         time.sleep(2)
 
 # Chamada da função para monitorar e enviar dados
-monitorar_e_enviar_dados(2)
+monitorar_e_enviar_dados(1)
 
 # SCRIPT DO BANCO
 
