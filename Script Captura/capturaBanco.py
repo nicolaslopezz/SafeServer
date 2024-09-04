@@ -48,7 +48,7 @@ def monitorar_e_enviar_dados(servidor_id):
         time.sleep(2)
 
 # Chamada da função para monitorar e enviar dados
-monitorar_e_enviar_dados(1)
+monitorar_e_enviar_dados('MUDAR PARA O ID DO SERVIDOR DA SUA MAQUINA(1 OU 2)')
 
 # SCRIPT DO BANCO
 
