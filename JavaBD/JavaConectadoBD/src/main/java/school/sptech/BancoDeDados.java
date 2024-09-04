@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 public class BancoDeDados {
     public static void main(String[] args) {
-        String urlBD = "jdbc:mysql://localhost:3306/registrar"; /* fazendo conexão local (possivel tbm remoto)
+        String urlBD = "jdbc:mysql://localhost:3306/SafeServer"; /* fazendo conexão local (possivel tbm remoto)
                                                                    depois de "3306/ coloque o nome do banco de dados (no meu caso, registrar)
                                                                 */
         String nomeUsuario = "root";
@@ -23,12 +23,12 @@ public class BancoDeDados {
 
             comando = conexao.createStatement();
 
-            String mySql = "select * from registroCPU"; // selecione de alguma tabela do seu BD
+            String mySql = "select * from registros"; // selecione de alguma tabela do seu BD
             ResultSet resultado = comando.executeQuery(mySql);
 
             while (resultado.next()){
-                System.out.println("coluna1: " + resultado.getString("CpuID"));
-                System.out.println("coluna2: " + resultado.getString("cpuPercent"));
+                System.out.println("coluna1: " + resultado.getString("percent_use_cpu"));
+                System.out.println("coluna2: " + resultado.getString("dataHora"));
             }
             resultado.close();
         } catch (SQLException e) {
