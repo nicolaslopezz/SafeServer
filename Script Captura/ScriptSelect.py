@@ -3,22 +3,21 @@ import time
 
 # Função para monitorar o componente e obter os dados
 def monitorar_componente(componente, tipo_dado):
-    # Mapeamento do componente para os dados do psutil
+   
     if componente == "cpu":
-        # Retorna a porcentagem de uso da CPU
         return psutil.cpu_percent(interval=1)
     elif componente == "memoria":
         memoria = psutil.virtual_memory()
-        if tipo_dado == "UD":  # Último dado
-            return memoria.used / (1024 ** 3)  # Retorna uso em GB
-        elif tipo_dado in ["MM", "MT"]:  # Média ou total
-            return memoria.total / (1024 ** 3), memoria.used / (1024 ** 3)  # Total e usado em GB
+        if tipo_dado == "UD":  
+            return memoria.used / (1024 ** 3)  
+        elif tipo_dado in ["MM", "MT"]:  
+            return memoria.total / (1024 ** 3), memoria.used / (1024 ** 3) 
     elif componente == "disco":
         disco = psutil.disk_usage('/')
-        if tipo_dado == "UD":  # Último dado
-            return disco.used / (1024 ** 3)  # Retorna uso em GB
-        elif tipo_dado in ["MM", "MT"]:  # Média ou total
-            return disco.total / (1024 ** 3), disco.used / (1024 ** 3)  # Total e usado em GB
+        if tipo_dado == "UD": 
+            return disco.used / (1024 ** 3)  
+        elif tipo_dado in ["MM", "MT"]:  
+            return disco.total / (1024 ** 3), disco.used / (1024 ** 3) 
     else:
         print("Componente inválido.")
         return None
@@ -77,7 +76,6 @@ def exibir_menu():
                     else:
                         print(f"{componente.capitalize()} (GB): {valor:.1f} GB")
             else:
-                # Aqui você pode implementar a lógica para Média (MM) ou Média de todas (MT)
                 print("A lógica para calcular a média ainda não foi implementada.")
         else:
             print(f"Nenhum dado encontrado para o componente {componente}.")
