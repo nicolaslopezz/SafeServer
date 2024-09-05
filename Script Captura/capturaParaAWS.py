@@ -134,7 +134,6 @@ def exibir_menu():
 # Chama a função para exibir o menu
 exibir_menu()
 
-
 # SCRIPT DO BANCO
 
 '''
