@@ -31,7 +31,6 @@ def monitorar_componente(componente, metrica, tipo_dado, servidor_id):
     try:
         cursor = conexao.cursor()
 
-        # Mapeamento do componente para o nome da coluna
         if componente == "cpu":
             coluna = "percent_use_cpu"
         elif componente == "memoria":
@@ -42,13 +41,13 @@ def monitorar_componente(componente, metrica, tipo_dado, servidor_id):
             print("Componente inválido.")
             return None
         
-        if tipo_dado == "UD":  # Último dado
+        if tipo_dado == "UD":  
             query = f"SELECT {coluna} FROM registro WHERE fkServidor = %s ORDER BY dataHora DESC LIMIT 1"
             cursor.execute(query, (servidor_id,))
-        elif tipo_dado == "MM":  # Média da máquina escolhida
+        elif tipo_dado == "MM":  
             query = f"SELECT AVG({coluna}) FROM registro WHERE fkServidor = %s"
             cursor.execute(query, (servidor_id,))
-        elif tipo_dado == "MT":  # Média de todas as máquinas
+        elif tipo_dado == "MT":  
             query = f"SELECT AVG({coluna}) FROM registro"
             cursor.execute(query)
         
