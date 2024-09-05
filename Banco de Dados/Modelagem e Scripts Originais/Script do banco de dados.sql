@@ -32,19 +32,22 @@ create table registro (
 idRegistro int primary key auto_increment,
 dataHora datetime default current_timestamp,
 percent_use_cpu float, 
-uso_ram_gb Bigint,
-livre_ram_gb bigint,
-total_ram_gb bigint,
-uso_disco_gb bigint,
-livre_disco_gb bigint,
-total_disco_gb bigint,
+uso_ram_gb float,
+livre_ram_gb float,
+total_ram_gb float,
+uso_disco_gb float,
+livre_disco_gb float,
+total_disco_gb float,
 toltal_nucleos_cpu int,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
-
 insert into empresa values 
 (default, "Instagram", "Instagram Meta Platforms INC Facebook Serviços Online do Brasil LTDA", "12345678912345","ABCD1234");
+
+insert into servidor(identificacao, fkEmpresa) values
+('m1', 1),
+('m2', 1);
 
 select * from registro;
 
@@ -52,6 +55,4 @@ select * from empresa;
 
 select * from funcionario;
 
-
-
-truncate registros;
+truncate registro;
