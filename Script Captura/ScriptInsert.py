@@ -24,12 +24,12 @@ def monitorar_e_enviar_dados(servidor_id):
 
         servidor_id = '(ALTERAR PARA QUAL O ID DO SERVIDOR DA SUA MAQUINA(1 OU 2)'
 
-        total_memoriagb = round(memoria.total / (1024 ** 3), 1)
-        used_memoriagb = round(memoria.used / (1024 ** 3), 1)
-        total_discogb = round(disco.total / (1024 ** 3), 1)
-        used_discogb = round(disco.used / (1024 ** 3), 1)
-        livre_memoriagb = round(total_memoriagb - used_memoriagb, 1)
-        livre_discogb = round(total_discogb - used_discogb, 1)
+        total_memoriagb = memoria.total / (1024 ** 3)
+        used_memoriagb = memoria.used / (1024 ** 3)
+        total_discogb = disco.total / (1024 ** 3)
+        used_discogb = disco.used / (1024 ** 3)
+        livre_memoriagb = total_memoriagb - used_memoriagb
+        livre_discogb = total_discogb - used_discogb
 
         query = '''
         INSERT INTO registro (percent_use_cpu, uso_ram_gb, livre_ram_gb, total_ram_gb, uso_disco_gb, livre_disco_gb, total_disco_gb, fkServidor)
