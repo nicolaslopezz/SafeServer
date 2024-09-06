@@ -10,7 +10,6 @@ body::-webkit-scrollbar-thumb {
     background: #091836;
     border-radius: 10px;
 }
-
 html {
     scroll-behavior: smooth;
 }
@@ -31,7 +30,7 @@ html {
     src: local('fonte/SFUIText-Italic.ttf'), url('../assets/fonte/SFUIText-Italic.woff') format('woff');
 }
 
-/* fonte negrito  */
+/* fonte negrito */
 @font-face {
     font-family: 'SFUIText-Bold.ttf';
     font-style: normal;
@@ -169,7 +168,6 @@ cores
     color: #fff;
     font-size: 40px;
 }
-
 .direitos-footer {
     display: flex;
     flex-direction: row;
@@ -178,7 +176,6 @@ cores
     width: 50%;
     height: 100%;
 }
-
 .cardSombra-footer {
     display: flex;
     flex-direction: column;
@@ -699,13 +696,19 @@ cores
     width: 300px;
     height: 100%;
     position: absolute;
-    right: -300px; /* por enquanto*/
+    right: -325px; /* por enquanto*/
     background: #091836;
     transition: right 0.5s;
+    padding: 10px;
 }
 .menuBugu i {
     color: #fff;
-    font-size: 40px;
+    font-size: 70px;
+}
+.menuBugu i:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.5s ease;
 }
 
 .close-burguer {
@@ -717,13 +720,22 @@ cores
 .pages-burguer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: 280px;
-    height: fit-content;
+    height: 400px;
     padding: 20px;
 }
-
+.pages-burguer a {
+    color: #fff;
+    font-family: 'SFUIText-Bold.ttf';
+    font-size: 30px;
+    text-decoration: none;
+}
+.pages-burguer a:hover {
+    transform: scale(1.1);
+    transition: 0.5s ease;
+}
 
 
 /* Responsivo landing page */
@@ -769,6 +781,10 @@ cores
         color: #fff;
         font-size: 65px;
     }
+    .topo #cadastro i {
+        color: #000;
+        font-size: 65px;
+    }
     .topo .logoImg {
         margin-left: 30px;
     }
@@ -783,7 +799,7 @@ cores
     .topo .card-valores {
         width: 140px;
         height: 140px;
-    } 
+    }
     .topo .input-format input {
         width: 113px;
     }
@@ -794,7 +810,6 @@ cores
         margin: 20px;
         border: none;
     }
-    
     .topo .flex-valores {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Define 2 colunas de tamanho igual */
@@ -862,6 +877,7 @@ cores
     .topo .formBlue-login {
         width: 100%;
         padding: 100px;
+        margin-top: 500px;
     }
     .topo .formLoginWhite {
         width: 100%;
@@ -871,6 +887,7 @@ cores
         width: 100%;
         margin: 50px;
         padding: 100px;
+        margin-top: 650px;
         height: auto;
     }
     .topo .formCadastroWhite {
@@ -904,8 +921,7 @@ cores
         font-size: 18px;
         width: 200px;
     }
-} 
-
+}
 
 @media (max-width:530px) {
     .topo .servico-inicio p {
@@ -945,7 +961,7 @@ cores
         padding: 0;
     }
     .topo .container-sobre .texto-sobre p {
-        width: 350px;
+        width: 300px;
         font-size: 20px;
     }
     .topo .navBurguer {
@@ -990,14 +1006,14 @@ cores
         width: 100px;
     }
     .topo .box-sobre {
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 130px;
     }
     .topo .box-sobre i {
-        font-size: 60px;
+        font-size: 50px;
     }
     .topo .box-sobre p {
-        font-size: 15px;
+        font-size: 13px;
     }
     .topo .direitos-footer {
         flex-direction: column;

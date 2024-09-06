@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/teste.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/teste.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Document</title>
 </head>
 <body onload="listar()">
   <section class="topo">
         <div class="conter">
-            <div class="navbar">
-                <div class="logoImg">
-                    <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
-                </div>
-                <div class="navBtn">
-                    <a href="index.html">Inicio</a>
-                    <a href="index.html">Sobre</a>
-                    <a href="login.html">Acessar</a>
-                </div>
-                <div class="navBurguer">
-                    <i class='bx bx-menu'></i>
-                </div>
+          <div class="menuBugu" id="bugu">
+            <div class="close-burguer">
+                <i class='bx bx-x' onclick="burgerClose()"></i>
             </div>
+            <div class="pages-burguer">
+                <a href="index.html">Inicio</a>
+                <a href="login.html">Acessar</a>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="logoImg">
+                <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
+            </div>
+            <div class="navBtn">
+                <a href="index.html">Inicio</a>
+                <a href="login.html">Acessar</a>
+            </div>
+            <div class="navBurguer" id="cadastro">
+                <i class='bx bx-menu' onclick="burguer()"></i>
+            </div>
+        </div>
         <div class="form-container">
             <div class="formBlue-Cadastro">
                 <div class="modulo">
@@ -74,8 +82,17 @@
     </section>
 </body>
 </html>
-
 <script>
+  function burguer() {
+      var bugu = document.getElementById('bugu');
+      
+      bugu.style.right = 0;
+  }
+  function burgerClose() {
+      var bugu = document.getElementById('bugu');
+      bugu.style.right = '-325px';
+
+  }
 
   let listaEmpresasCadastradas = [];
     function cadastrar() {

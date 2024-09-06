@@ -9,14 +9,25 @@
 </head>
 <body>
     <section class="topo">
+        <div class="menuBugu" id="bugu">
+            <div class="close-burguer">
+                <i class='bx bx-x' onclick="burgerClose()"></i>
+            </div>
+            <div class="pages-burguer">
+                <a href="index.html">Inicio</a>
+                <a href="cadastro.html">Cadastrar</a>
+            </div>
+        </div>
         <div class="navbar">
             <div class="logoImg">
                 <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
             </div>
             <div class="navBtn">
                 <a href="index.html">Inicio</a>
-                <a href="index.html">Sobre</a>
-                <a href="login.html">Acessar</a>
+                <a href="cadastro.html">Cadastrar</a>
+            </div>
+            <div class="navBurguer" id="cadastro">
+                <i class='bx bx-menu' onclick="burguer()"></i>
             </div>
         </div>
         <div class="form-container">
@@ -41,7 +52,18 @@
     </section>
 </body>
 </html>
+<script>
+    function burguer() {
+        var bugu = document.getElementById('bugu');
+        
+        bugu.style.right = 0;
+    }
+    function burgerClose() {
+        var bugu = document.getElementById('bugu');
+        bugu.style.right = '-325px';
 
+    }
+</script>
 
 <!-- <script>
 
