@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/teste.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <title>Document</title>
+  <title>Cadastro - SafeServer</title>
 </head>
 <body onload="listar()">
   <section class="topo">
@@ -15,7 +15,7 @@
                 <i class='bx bx-x' onclick="burgerClose()"></i>
             </div>
             <div class="pages-burguer">
-                <a href="index.html">Inicio</a>
+                <a href="index.html">Início</a>
                 <a href="login.html">Acessar</a>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <a href="index.html"><img src="assets/imgs/logob.png" alt="Logo"></a>
             </div>
             <div class="navBtn">
-                <a href="index.html">Inicio</a>
+                <a href="index.html">Início</a>
                 <a href="login.html">Acessar</a>
             </div>
             <div class="navBurguer" id="cadastro">
@@ -32,13 +32,13 @@
             </div>
         </div>
         <div class="form-container">
-            <div class="formBlue-Cadastro">
+            <div class="formBlue-login">
                 <div class="modulo">
-                    <h1>Bem Vindo de Volta!</h1>
+                    <h1>Bem Vindo!</h1>
                     <div class="text-Cadastro">
-                        <p>Possui uma conta? faça o login.</p>
+                        <p>Já possui uma conta? Faça o login.</p>
                     </div>
-                    <a href="login.html" class="cadBtn-Cadastro">Acessar</a>
+                    <a href="login.html" class="cadBtn-login">Acessar</a>
                 </div>
             </div>
             <div class="formCadastroWhite">
@@ -70,13 +70,13 @@
                         <input type="senha" placeholder="Confirma Senha" id="input_confirmar_senha">
                     </div>
                 </div>
-                <button onclick="cadastrar()">Entrar</button>
-                <!-- <div class="card_erro" id="cardErro">
+                <button onclick="cadastrar()">Cadastrar</button>
+                <div class="card_erro" id="cardErro">
                   <span id="mensagem_erro"></span>
                 </div>
                 <div id="div_aguardar" class="loading-div">
                   <img src="./assets/circle-loading.gif" id="loading-gif" />
-                </div> -->
+                </div>
             </div>
         </div>
     </section>
@@ -118,7 +118,7 @@
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        "Preencha todos os campos para prosseguir!";
 
       finalizarAguardar();
       return false;
@@ -162,7 +162,7 @@
           cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+            " Cadastro feito com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";
