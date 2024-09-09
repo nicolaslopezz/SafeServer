@@ -756,7 +756,7 @@ cores
         margin-right: 50px;
     }
     .topo .navBurguer i {
-        color: #000;
+        color: #fff;
         font-size: 65px;
     }
     .topo .background {
@@ -786,7 +786,7 @@ cores
         font-size: 65px;
     }
     .topo #cadastro i {
-        color: #000;
+        color: #fff;
         font-size: 65px;
     }
     .topo .logoImg {
@@ -811,7 +811,8 @@ cores
         font-size: 25px;
     }
     .topo .formCadastroWhite {
-        margin: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .topo .flex-valores {
         display: grid;
@@ -896,7 +897,6 @@ cores
     .topo .formCadastroWhite {
         width: 100%;
         height: auto;
-        margin-top: 40px;
     }
     .topo .modulo h1 {
         padding-top: 5px;
@@ -942,6 +942,9 @@ cores
     }
     .topo .formBlue-Cadastro {
         display: none;
+    }
+    .topo .formCadastroWhite {
+        margin-top: 200px;
     }
 } 
 
