@@ -69,7 +69,7 @@ cores
 
 /* background */
 .background {
-    background: url('../assets/imgs/bgResp.jpg');
+    background: url('../assets/imgs/bg.png');
     background-position: center;
     background-size: cover;
     width: 100%;
