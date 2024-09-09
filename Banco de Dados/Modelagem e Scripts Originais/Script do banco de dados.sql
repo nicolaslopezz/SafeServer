@@ -30,7 +30,8 @@ constraint fkEmpresaServidores foreign key (fkEmpresa) references empresa (idEmp
 
 create table registro (
 idRegistro int primary key auto_increment,
-dataHora datetime default current_timestamp,
+dtHora datetime default current_timestamp,
+dtDia datetime default current_timestamp,
 percent_use_cpu float, 
 uso_ram_gb float,
 livre_ram_gb float,
@@ -38,7 +39,6 @@ total_ram_gb float,
 uso_disco_gb float,
 livre_disco_gb float,
 total_disco_gb float,
-toltal_nucleos_cpu int,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
