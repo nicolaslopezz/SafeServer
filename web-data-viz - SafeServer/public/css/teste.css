@@ -69,7 +69,7 @@ cores
 
 /* background */
 .background {
-    background: url('../assets/imgs/bg.png');
+    background: url('../assets/imgs/bgResp.jpg');
     background-position: center;
     background-size: cover;
     width: 100%;
@@ -80,11 +80,13 @@ cores
 
 /* Navbar */
 .navbar {
+    background: #091836;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: auto;
+    height: 100px;
+    position: fixed;
 }
 .navbar .logoImg {
     width: fit-content;
@@ -107,13 +109,13 @@ cores
     justify-content: space-between;
     width: 500px;
     height: fit-content;
-    margin-right: 260px;
+    margin-right: 100px;
 }
 .navbar .navBurguer {
     display: none;
 }
 .navbar .navBtn a {
-    color: black;
+    color: #fff;
     text-decoration: none;
     font-family: 'SFUIText-Heavy.ttf';
     font-size: 25px;
@@ -701,6 +703,7 @@ cores
     background: #091836;
     transition: right 0.5s;
     padding: 10px;
+    z-index: 1;
 }
 .menuBugu i {
     color: #fff;
@@ -809,7 +812,6 @@ cores
     }
     .topo .formCadastroWhite {
         margin: 20px;
-        border: none;
     }
     .topo .flex-valores {
         display: grid;
@@ -894,6 +896,7 @@ cores
     .topo .formCadastroWhite {
         width: 100%;
         height: auto;
+        margin-top: 40px;
     }
     .topo .modulo h1 {
         padding-top: 5px;
@@ -933,6 +936,12 @@ cores
     }
     .topo .container-sobre {
         height: 1750px;
+    }
+    .topo .formBlue-login {
+        display: none;
+    }
+    .topo .formBlue-Cadastro {
+        display: none;
     }
 } 
 
