@@ -10,11 +10,11 @@ import os
 
 
 #carregando o ambiente onde estão as credenciais
-load_dotenv('ambiente.env')
+load_dotenv('configuracoes.env')
 
 #pegando as credenciais definidas no arquivo "ambiente.env"
 email_jira = os.getenv('JIRA_EMAIL')
-token_jira = os.getenv('JIRA_TOKEN')
+chave_jira = os.getenv('CHAVE_DO_JIRA')
 
 
 # Limites dos componentes para usar como parametro de chamado
@@ -36,7 +36,7 @@ db_config = {
 
 def abrir_chamado_jira(categoria, tipo, limite_atual):
     url = "https://safeserver.atlassian.net/rest/api/2/issue"
-    auth = (email_jira, token_jira)
+    auth = (email_jira, chave_jira)
     headers = {"Content-Type": "application/json"}
     descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%."
 
