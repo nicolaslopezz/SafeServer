@@ -19,9 +19,11 @@ db_config = {
 
 
 # Em 'Auth", não esqueça de colocar o email que você usa na equipe do Jira
+# Ainda em 'Auth', coloque o Token do Projeto que enviei por EMAIL
+
 def abrir_chamado_jira(categoria, tipo, limite_atual):
     url = "https://safeserver.atlassian.net/rest/api/2/issue"
-    auth = ('#EmailDoJIRA', 'ATATT3xFfGF0UZVvTr8yCnayygx1gIKptU6pA7lOhL2Yvs8oCle6_wqktM1qyG8zX72-fQUsNaqwaIUePivmuJO29rMNJH_PCN1LVWwVaUD5MOnbtrh0geDeVus4nmwQqVzxnPQHRX4Oo3gE3EyxyVUYLo9WwPg2B6RitqQcIG0HMu5IDvQq-T0=8DEA6D3F')
+    auth = ('#EmailDoJIRA', '#TokenDoProjeto')
     headers = {"Content-Type": "application/json"}
     descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%."
 
