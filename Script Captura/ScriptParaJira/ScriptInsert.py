@@ -18,15 +18,15 @@ chave_jira = os.getenv('CHAVE_DO_JIRA')
 
 
 # Limites dos componentes para usar como parametro de chamado
-limiteCPU = 90.0
+limiteCPU = 10.0
 limiteMEM = 85.0
 limiteDSK = 85.0
 
 # Configurações do banco de dados
 db_config = {
-    'host': 'localhost',
+    'host': '10.18.33.38',
     'user': 'root',
-    'password': 'Numero2005',
+    'password': 'Afro@0703',
     'database': 'SafeServer'
 }
 
@@ -58,16 +58,22 @@ def abrir_chamado_jira(categoria, tipo, limite_atual):
 
 
 
-def monitorar_e_enviar_dados():
+def monitorar_e_enviar_dados(servidor_id):
     meusql = mysql.connector.connect(**db_config)
     meucursor = meusql.cursor()
 
     print("Conexão com o banco de dados bem-sucedida.")
 
+    print(f"Conexão com o banco de dados bem-sucedida para o servidor {servidor_id}.")
+
+
     while True:
         memoria = psutil.virtual_memory()
         cpu = psutil.cpu_percent(interval=1)
         disco = psutil.disk_usage('/')
+
+        servidor_id = 2
+
 
         total_memoriagb = memoria.total / (1024 ** 3)
         used_memoriagb = memoria.used / (1024 ** 3)
@@ -80,7 +86,7 @@ def monitorar_e_enviar_dados():
         INSERT INTO registro (percent_use_cpu, uso_ram_gb, livre_ram_gb, total_ram_gb, uso_disco_gb, livre_disco_gb, total_disco_gb, fkServidor)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         '''
-        values = (cpu, used_memoriagb, livre_memoriagb, total_memoriagb, used_discogb, livre_discogb, total_discogb, 2)
+        values = (cpu, used_memoriagb, livre_memoriagb, total_memoriagb, used_discogb, livre_discogb, total_discogb, servidor_id)
 
         meucursor.execute(query, values)
         meusql.commit()
@@ -101,4 +107,4 @@ def monitorar_e_enviar_dados():
         time.sleep(2)
 
 # Chamada da função para monitorar e enviar dados
-monitorar_e_enviar_dados()
+monitorar_e_enviar_dados(2)
