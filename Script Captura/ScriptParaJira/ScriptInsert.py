@@ -1,8 +1,21 @@
 import psutil
 import time
 import mysql.connector
+
+# Não esqueça de dar pip install em todas as bibliotecas utilizadas abaixo.
 import requests
 import json
+from dotenv import load_dotenv
+import os
+
+
+#carregando o ambiente onde estão as credenciais
+load_dotenv('ambiente.env')
+
+#pegando as credenciais definidas no arquivo "ambiente.env"
+email_jira = os.getenv('JIRA_EMAIL')
+token_jira = os.getenv('JIRA_TOKEN')
+
 
 # Limites dos componentes para usar como parametro de chamado
 limiteCPU = 90.0
@@ -11,9 +24,9 @@ limiteDSK = 85.0
 
 # Configurações do banco de dados
 db_config = {
-    'host': '10.18.33.38',
+    'host': 'localhost',
     'user': 'root',
-    'password': 'Afro@0703',
+    'password': 'Numero2005',
     'database': 'SafeServer'
 }
 
@@ -23,7 +36,7 @@ db_config = {
 
 def abrir_chamado_jira(categoria, tipo, limite_atual):
     url = "https://safeserver.atlassian.net/rest/api/2/issue"
-    auth = ('#EmailDoJIRA', '#TokenDoProjeto')
+    auth = (email_jira, token_jira)
     headers = {"Content-Type": "application/json"}
     descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%."
 
