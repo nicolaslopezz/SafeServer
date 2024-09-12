@@ -2,25 +2,25 @@ import psutil
 import time
 
 # Função para monitorar o componente e obter os dados
-def monitorar_componente(componente, tipo_dado):
-   
-    if componente == "cpu":
-        return psutil.cpu_percent(interval=1)
-    elif componente == "memoria":
-        memoria = psutil.virtual_memory()
-        if tipo_dado == "UD":  
-            return memoria.used / (1024 ** 3)  
-        elif tipo_dado in ["MM", "MT"]:  
-            return memoria.total / (1024 ** 3), memoria.used / (1024 ** 3) 
-    elif componente == "disco":
-        disco = psutil.disk_usage('/')
-        if tipo_dado == "UD": 
-            return disco.used / (1024 ** 3)  
-        elif tipo_dado in ["MM", "MT"]:  
-            return disco.total / (1024 ** 3), disco.used / (1024 ** 3) 
-    else:
-        print("Componente inválido.")
-        return None
+def monitorar_componente(componente, tipo_dado, num_dados=10):
+    dados = []
+    
+    for i in range(num_dados):
+        if componente == "cpu":
+            dados.append(psutil.cpu_percent(interval=1))
+        elif componente == "memoria":
+            memoria = psutil.virtual_memory()
+            if tipo_dado == "UD":
+                dados.append(memoria.used / (1024 ** 3))  # Valor em GB
+        elif componente == "disco":
+            disco = psutil.disk_usage('/')
+            if tipo_dado == "UD":
+                dados.append(disco.used / (1024 ** 3))  # Valor em GB
+        else:
+            print("Componente inválido.")
+            return None
+
+    return dados
 
 # Função para exibir o menu e capturar as escolhas do usuário
 def exibir_menu():
@@ -31,22 +31,14 @@ def exibir_menu():
     componente = input("Componente escolhido: ").lower()
 
     if componente == "cpu":
-        print("\nEscolha a métrica para CPU:")
-        print("A) Porcentagem (Digite: %)")
         metrica = "%"
     elif componente in ["memoria", "disco"]:
-        print(f"\nEscolha a métrica para {componente.capitalize()}:")
-        print("A) Bytes (Digite: B)")
-        print("B) MegaBytes (Digite: MB)")
-        print("C) GigaBytes (Digite: GB)")
-        metrica = input("Métrica escolhida: ").upper()
+        metrica = "GB"  # Usaremos GigaBytes como exemplo de métrica padrão
     else:
         print("Componente inválido.")
         return
 
-    print("\nEscolha o tipo de dado:")
-    print("Opções: Último Dado (Digite UD), Média da máquina escolhida (Digite MM), Média de todas as máquinas (Digite MT)")
-    tipo_dado = input("Tipo de dado escolhido: ").upper()
+    tipo_dado = "UD"  # Vamos usar o tipo de dado UD (uso direto)
 
     alerta = None
     if tipo_dado == "UD":
@@ -54,7 +46,7 @@ def exibir_menu():
         configurar_alerta = input().lower()
         if configurar_alerta == 's':
             if componente == "cpu":
-                alerta = float(input(f"Digite o valor de alerta para uso de CPU (%): "))
+                alerta = float(input(f"Digite o valor de alerta para uso de CPU ({metrica}): "))
             elif componente == "memoria":
                 alerta = float(input(f"Digite o valor de alerta para uso de Memória ({metrica}): "))
             elif componente == "disco":
@@ -63,22 +55,18 @@ def exibir_menu():
     while True:
         if componente in ["cpu", "memoria", "disco"]:
             if tipo_dado == "UD":
-                if componente == "cpu":
-                    valor = monitorar_componente(componente, tipo_dado)
-                    if alerta is not None and valor > alerta:
-                        print(f"CPU (%): {valor:.1f}% | ALERTA! Valor atual excede o limite configurado de {alerta}%.")
+                valores = monitorar_componente(componente, tipo_dado, num_dados=10)
+                for valor in valores:
+                    if componente == "cpu":
+                        if alerta is not None and valor > alerta:
+                            print(f"CPU (%): {valor:.1f}% | ALERTA! Valor atual excede o limite configurado de {alerta}%.")
+                        else:
+                            print(f"CPU (%): {valor:.1f}%")
                     else:
-                        print(f"CPU (%): {valor:.1f}%")
-                else:
-                    valor = monitorar_componente(componente, tipo_dado)
-                    if alerta is not None and valor > alerta:
-                        print(f"{componente.capitalize()} (GB): {valor:.1f} GB | ALERTA! Valor atual excede o limite configurado de {alerta} GB.")
-                    else:
-                        print(f"{componente.capitalize()} (GB): {valor:.1f} GB")
-            else:
-                print("A lógica para calcular a média ainda não foi implementada.")
-        else:
-            print(f"Nenhum dado encontrado para o componente {componente}.")
+                        if alerta is not None and valor > alerta:
+                            print(f"{componente.capitalize()} (GB): {valor:.1f} GB | ALERTA! Valor atual excede o limite configurado de {alerta} GB.")
+                        else:
+                            print(f"{componente.capitalize()} (GB): {valor:.1f} GB")
 
         print("\nDeseja continuar? (Digite s para continuar ou n para sair)")
         continuar = input().lower()

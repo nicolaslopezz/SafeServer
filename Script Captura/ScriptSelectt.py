@@ -4,9 +4,9 @@ import mysql.connector
 
 # Configurações do banco de dados
 db_config = {
-    'host': '10.18.33.38',
+    'host': '',
     'user': 'root',
-    'password': 'Afro@0703',
+    'password': '',
     'database': 'SafeServer'
 }
 

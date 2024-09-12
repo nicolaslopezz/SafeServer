@@ -21,10 +21,10 @@ public class RegistroDao {
         Integer captura = 1;
         for (registro registroDaVez : registros) {
             System.out.println(captura + "° Captura");
-            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + (registroDaVez.getDtDia()) + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
-            System.out.println("Dados CPU  --> || Porcentagem da CPU = " + (registroDaVez.getPercent_use_cpu()) + "% ||");
-            System.out.println("Dados Memória Ram -->  || Memória Total = " + (registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = " + (registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = " + (registroDaVez.getLivre_ram_gb()) + "GB ||");
-            System.out.println("Dados Disco -->  || Disco Total = " + (registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = " + (registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = " + (registroDaVez.getLivre_disco_gb()) + "GB ||");
+            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + registroDaVez.getDtDia() + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
+            System.out.println("Dados CPU  --> || Porcentagem da CPU = %.1f" .formatted(registroDaVez.getPercent_use_cpu()) + "% ||");
+            System.out.println("Dados Memória Ram -->  || Memória Total = %.1f "  .formatted(registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = %.1f "  .formatted(registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = %.1f " .formatted(registroDaVez.getLivre_ram_gb()) + "GB ||");
+            System.out.println("Dados Disco -->  || Disco Total = %.1f" .formatted(registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = %.1f " .formatted(registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = %.1f " .formatted(registroDaVez.getLivre_disco_gb()) + "GB ||");
             System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
             captura++;
         }
@@ -38,10 +38,10 @@ public class RegistroDao {
         Integer captura = 1;
         for (registro registroDaVez : registros) {
             System.out.println(captura + "° Captura");
-            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + (registroDaVez.getDtDia()) + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
-            System.out.println("Dados CPU  --> || Porcentagem da CPU = " + (registroDaVez.getPercent_use_cpu()) + "% ||");
-            System.out.println("Dados Memória Ram -->  || Memória Total = " + (registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = " + (registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = " + (registroDaVez.getLivre_ram_gb()) + "GB ||");
-            System.out.println("Dados Disco -->  || Disco Total = " + (registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = " + (registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = " + (registroDaVez.getLivre_disco_gb()) + "GB ||");
+            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + registroDaVez.getDtDia() + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
+            System.out.println("Dados CPU  --> || Porcentagem da CPU = %.1f" .formatted(registroDaVez.getPercent_use_cpu()) + "% ||");
+            System.out.println("Dados Memória Ram -->  || Memória Total = %.1f "  .formatted(registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = %.1f "  .formatted(registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = %.1f " .formatted(registroDaVez.getLivre_ram_gb()) + "GB ||");
+            System.out.println("Dados Disco -->  || Disco Total = %.1f" .formatted(registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = %.1f " .formatted(registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = %.1f " .formatted(registroDaVez.getLivre_disco_gb()) + "GB ||");
             System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
             captura++;
         }
@@ -55,10 +55,10 @@ public class RegistroDao {
         Integer captura = 1;
         for (registro registroDaVez : registros) {
             System.out.println(captura + "° Captura");
-            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + (registroDaVez.getDtDia()) + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
-            System.out.println("Dados CPU  --> || Porcentagem da CPU = " + (registroDaVez.getPercent_use_cpu()) + "% ||");
-            System.out.println("Dados Memória Ram -->  || Memória Total = " + (registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = " + (registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = " + (registroDaVez.getLivre_ram_gb()) + "GB ||");
-            System.out.println("Dados Disco -->  || Disco Total = " + (registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = " + (registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = " + (registroDaVez.getLivre_disco_gb()) + "GB ||");
+            System.out.println("Dados Base --> || Id da máquina = " + (registroDaVez.getFkServidor()) + " || Data: " + registroDaVez.getDtDia() + " || Hora: " + (registroDaVez.getDtHora()) + " || " );
+            System.out.println("Dados CPU  --> || Porcentagem da CPU = %.1f" .formatted(registroDaVez.getPercent_use_cpu()) + "% ||");
+            System.out.println("Dados Memória Ram -->  || Memória Total = %.1f "  .formatted(registroDaVez.getTotal_ram_gb()) + "GB" + " || Memória em Uso = %.1f "  .formatted(registroDaVez.getUso_ram_gb()) + "GB || Memória Livre = %.1f " .formatted(registroDaVez.getLivre_ram_gb()) + "GB ||");
+            System.out.println("Dados Disco -->  || Disco Total = %.1f" .formatted(registroDaVez.getTotal_disco_gb()) + "GB" + " || Disco Ocupado = %.1f " .formatted(registroDaVez.getUso_disco_gb()) + "GB || Disco Livre = %.1f " .formatted(registroDaVez.getLivre_disco_gb()) + "GB ||");
             System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
             captura++;
         }

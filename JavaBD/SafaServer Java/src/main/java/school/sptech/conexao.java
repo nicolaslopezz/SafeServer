@@ -15,7 +15,7 @@ public class conexao {
         dataSource.setUrl("jdbc:mysql://localhost:3306/SafeServer");
         // exemplo para MySQL: "jdbc:mysql://localhost:3306/meubanco"
         dataSource.setUsername("root");
-        dataSource.setPassword("Afro@0703");
+        dataSource.setPassword("*********");
         this.template = new JdbcTemplate(dataSource);
     }
     public JdbcTemplate getTemplate() {
