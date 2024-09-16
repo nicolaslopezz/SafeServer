@@ -698,7 +698,7 @@ cores
 .menuBugu {
     width: 300px;
     height: 100%;
-    position: absolute;
+    position: fixed;
     right: -325px; /* por enquanto*/
     background: #091836;
     transition: right 0.5s;
