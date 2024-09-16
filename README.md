@@ -1,2 +1,2 @@
-# Grupo-5---PI
-Repositório destinado ao projeto de PI - 2º Semestre
+# SafeServer
+Repositório destinado ao projeto SafeServer do 2º Semestre do curso de CCO
