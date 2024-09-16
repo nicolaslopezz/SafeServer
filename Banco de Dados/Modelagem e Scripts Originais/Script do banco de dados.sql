@@ -1,5 +1,8 @@
 DROP DATABASE IF EXISTS SafeServer;
 
+CREATE USER 'SafeServerUser'@'localhost' IDENTIFIED BY 'safeserver123';
+GRANT ALL PRIVILEGES ON SafeServer.* TO 'SafeServerUser'@'localhost';
+
 create database SafeServer;
 
 use SafeServer;
@@ -37,15 +40,14 @@ constraint fkServidorRegistros foreign key (fkServidor) references servidor (idS
 
 insert into empresa values 
 (default, "Instagram", "Instagram Meta Platforms INC Facebook Serviços Online do Brasil LTDA", "12345678912345","ABCD1234");
-
 insert into servidor(identificacao, fkEmpresa) values
 ('m1', 1),
 ('m2', 1);
 
 -- select * from registro;
 
--- select * from empresa;
+select * from empresa;
 
--- select * from funcionario;
+select * from funcionario;
 
 -- truncate registro;
