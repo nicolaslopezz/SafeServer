@@ -61,15 +61,15 @@
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-key' id="input-key"></i>
-                        <input type="senha" placeholder="Chave Acesso" id="input_chaveAcesso">
+                        <input type="text" placeholder="Chave Acesso" id="input_chaveAcesso">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="senha" placeholder="Senha" id="input_senha">
+                        <input type="password" placeholder="Senha" id="input_senha">
                     </div>
                     <div class="input-format">
                         <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="senha" placeholder="Confirma Senha" id="input_confirmar_senha">
+                        <input type="password" placeholder="Confirmar Senha" id="input_confirmar_senha">
                     </div>
                 </div>
                 <button onclick="cadastrar()">Cadastrar</button>
@@ -121,6 +121,30 @@
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Preencha todos os campos para prosseguir!";
+
+      return false;
+    } else if (senhaVar != confirmacaoSenhaVar) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "As senhas devem ser idênticas";
+
+      return false;
+    } else if(nomeVar.length <= 2) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Insira um nome válido";
+
+      return false;
+    } else if(emailVar.indexOf('@') < 1 || emailVar.indexOf(".") < 1 || emailVar.length < 4) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Insira um email válido";
+
+      return false;
+    } else if(telefoneVar.length = 11) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Insira um número de telefone válido ()";
 
       return false;
     }
