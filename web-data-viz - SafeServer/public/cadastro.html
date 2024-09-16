@@ -122,10 +122,7 @@
       mensagem_erro.innerHTML =
         "Preencha todos os campos para prosseguir!";
 
-      finalizarAguardar();
       return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
     }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
@@ -134,10 +131,6 @@
         idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
         console.log("Código de ativação válido.");
         break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
       }
     }
 
@@ -171,14 +164,12 @@
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
       });
 
     return false;
@@ -201,10 +192,6 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
   }
 
 </script>
