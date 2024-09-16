@@ -18,8 +18,6 @@ email varchar(200) not null,
 telefone int not null,
 senha varchar(45) not null,
 fkEmpresa int, 
-fkGerente int,
-constraint fkGerenteFuncionario foreign key (fkGerente) references funcionario (idFuncionario),
 constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEmpresa));
 
 create table servidor (
@@ -31,14 +29,9 @@ constraint fkEmpresaServidores foreign key (fkEmpresa) references empresa (idEmp
 create table registro (
 idRegistro int primary key auto_increment,
 dtHora datetime default current_timestamp,
-dtDia datetime default current_timestamp,
 percent_use_cpu float, 
 uso_ram_gb float,
 livre_ram_gb float,
-total_ram_gb float,
-uso_disco_gb float,
-livre_disco_gb float,
-total_disco_gb float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
@@ -49,10 +42,10 @@ insert into servidor(identificacao, fkEmpresa) values
 ('m1', 1),
 ('m2', 1);
 
-select * from registro;
+-- select * from registro;
 
-select * from empresa;
+-- select * from empresa;
 
-select * from funcionario;
+-- select * from funcionario;
 
-truncate registro;
+-- truncate registro;
