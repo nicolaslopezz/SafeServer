@@ -35,6 +35,8 @@ dtHora datetime default current_timestamp,
 percent_use_cpu float, 
 uso_ram_gb float,
 livre_ram_gb float,
+recebido_rede float,
+enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
