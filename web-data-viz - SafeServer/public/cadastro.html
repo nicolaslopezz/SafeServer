@@ -141,7 +141,7 @@
         "Insira um email válido";
 
       return false;
-    } else if(telefoneVar.length = 11) {
+    } else if(telefoneVar.length != 11) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Insira um número de telefone válido ()";
