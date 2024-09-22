@@ -70,7 +70,353 @@ body {
         font-family: poppins;
         font-weight: bold;
         font-size: 25px;
-        width: 50%;
+        /* width: 50%; */
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    
+    .rightBox {
+        width: 55%;
+        height: 100% - 10px;
+        /* Subtraindo 10px por causa da */
+        background-color: white;
+        border-radius: 51px;
+        border-width: 5px;
+        border: #a6a6a6 solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .divInputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    input {
+        height: 40px;
+        width: 200px;
+        background-color: #d9d9d9;
+        border: none;
+        border-radius: 20px;
+        padding-left: 10px;
+    }
+
+    .rightBox button {
+        background-color: #091836;
+        color: white;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 25px;
+        width: 30%;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 16vh;
+        width: 100vw;
+    }
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        
+    }
+    
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 84vh;
+        width: 100vw;
+    }
+    
+    .box {
+        display: flex;
+        flex-direction: column;
+        background-color: #0e1d40;
+        width: 100%;
+        height: 80%;
+        border-radius: 51px;
+    }
+    
+    .leftBox {
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+
+    .leftBox h1 {
+        padding: 0;
+        margin: 0;
+    }
+
+    .leftBox span {
+        display: none;
+    }
+
+    .leftBox button {
+        display: none;
+    }
+    
+    .rightBox {
+        width: 100%;
+        height: 80%;
+        /* Subtraindo 10px por causa da */
+        background-color: white;
+        border-radius: 51px;
+        border-width: 5px;
+        border: #a6a6a6 solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .divInputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+
+
+    @media screen and (min-width: 280px) {
+        input {
+            height: 40px;
+            width: 200px;
+            background-color: #d9d9d9;
+            border: none;
+            border-radius: 20px;
+            padding-left: 10px;
+        }
+    }
+
+    @media screen and (max-width: 280px) {
+        input {
+            height: 40px;
+            width: 60vw;
+            background-color: #d9d9d9;
+            border: none;
+            border-radius: 20px;
+            padding-left: 10px;
+        }
+    }
+
+    @media screen and (max-width: 200px) {
+        h1 {
+            font-size: 20px;
+        }
+    }
+
+
+
+    @media screen and (min-width: 330px) {
+        .rightBox button {
+            background-color: #091836;
+            color: white;
+            font-family: poppins;
+            font-weight: bold;
+            font-size: 25px;
+            width: 30%;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    }
+
+    @media screen and (max-width: 330px) {
+        .rightBox button {
+            background-color: #091836;
+            color: white;
+            font-family: poppins;
+            font-weight: bold;
+            font-size: 25px;
+            width: 99px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 720px) and (min-height: 390px) {
+    
+    
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 16vh;
+        width: 100vw;
+    }
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        
+    }
+    
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 84vh;
+        width: 100vw;
+    }
+    
+    .box {
+        display: flex;
+        flex-direction: row;
+        background-color: #0e1d40;
+        width: 80%;
+        height: 80%;
+        border-radius: 51px;
+    }
+    
+    .leftBox {
+        width: 45%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+
+    .leftBox span {
+        font-size: 25px;
+        width: 80%;
+    }
+
+    .leftBox button {
+        background-color:white;
+        color: #091836;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 25px;
+        /* width: 50%; */
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    
+    .rightBox {
+        width: 55%;
+        height: 100% - 10px;
+        /* Subtraindo 10px por causa da */
+        background-color: white;
+        border-radius: 51px;
+        border-width: 5px;
+        border: #a6a6a6 solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .divInputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    input {
+        height: 40px;
+        width: 200px;
+        background-color: #d9d9d9;
+        border: none;
+        border-radius: 20px;
+        padding-left: 10px;
+    }
+
+    .rightBox button {
+        background-color: #091836;
+        color: white;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 25px;
+        width: 30%;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 720px) and (max-height: 390px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 12vh;
+        width: 100vw;
+    }
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        
+    }
+    
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 88vh;
+        width: 100vw;
+    }
+    
+    .box {
+        display: flex;
+        flex-direction: row;
+        background-color: #0e1d40;
+        width: 90%;
+        height: 90%;
+        border-radius: 51px;
+    }
+    
+    .leftBox {
+        width: 45%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+
+    .leftBox span {
+        font-size: 20px;
+        width: 80%;
+    }
+
+    .leftBox button {
+        background-color:white;
+        color: #091836;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 20px;
+        /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
     }
