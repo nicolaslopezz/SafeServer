@@ -23,6 +23,39 @@ body {
 
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 84vh;
+    width: 100vw;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    background-color: #0e1d40;
+    width: 56%;
+    height: 80%;
+    border-radius: 51px;
+}
+
+.leftBox {
+    width: 45%;
+    height: 100%;
+}
+
+.rightBox {
+    width: 55%;
+    height: 100% - 10px;
+    /* Subtraindo 10px por causa da */
+    background-color: white;
+    border-radius: 51px;
+    border-width: 5px;
+    border: #a6a6a6 solid;
+}
+
+
 /* .navbar ul {
     list-style: none;
     width: 40%;
