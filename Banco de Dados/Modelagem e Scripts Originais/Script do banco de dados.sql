@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS SafeServer;
 
-CREATE USER 'SafeServerUser'@'localhost' IDENTIFIED BY 'safeserver123';
-GRANT ALL PRIVILEGES ON SafeServer.* TO 'SafeServerUser'@'localhost';
+-- CREATE USER 'SafeServerUser'@'localhost' IDENTIFIED BY 'safeserver123';
+-- GRANT ALL PRIVILEGES ON SafeServer.* TO 'SafeServerUser'@'localhost';
 
 create database SafeServer;
 
@@ -18,7 +18,7 @@ create table funcionario (
 idFuncionario int primary key auto_increment,
 nome varchar(200) not null,
 email varchar(200) not null,
-telefone int not null,
+telefone char(11) not null,
 senha varchar(45) not null,
 fkEmpresa int, 
 constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEmpresa));

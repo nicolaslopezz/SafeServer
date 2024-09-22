@@ -3,85 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/teste.css">
+  <link rel="stylesheet" href="css/newCadastro.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <title>Cadastro - SafeServer</title>
 </head>
 <body onload="listar()">
-  <section class="topo">
-        <div class="conter">
-          <div class="menuBugu" id="bugu">
-            <div class="close-burguer">
-                <i class='bx bx-x' onclick="burgerClose()"></i>
-            </div>
-            <div class="pages-burguer">
-              <a href="index.html">Início</a>
-              <a href="login.html">Login</a>
-              <a href="cadastro.html">Cadastro</a>
-            </div>
-        </div>
-        <div class="navbar">
-            <div class="logoImg">
-                <a href="index.html"><img src="assets/imgs/logow.png" alt="Logo"></a>
-            </div>
-            <div class="navBtn">
-              <a href="index.html">Início</a>
-              <a href="login.html">Login</a>
-              <a href="cadastro.html">Cadastro</a>
-            </div>
-            <div class="navBurguer" id="cadastro">
-                <i class='bx bx-menu' onclick="burguer()"></i>
-            </div>
-        </div>
-        <div class="form-container">
-            <div class="formBlue-login">
-                <div class="modulo">
-                    <h1>Bem Vindo!</h1>
-                    <div class="text-Cadastro">
-                        <p>Já possui uma conta? Faça o login.</p>
-                    </div>
-                    <a href="login.html" class="cadBtn-login">Acessar</a>
-                </div>
-            </div>
-            <div class="formCadastroWhite">
-                <h1>Cadastro</h1>
+  <div class="navbar">
+    <div class="logo">
+      <img src="assets/imgs/logow.png" style="width: 50%;">
+    </div>
+    <!-- <ul>
+      <li>Inicio</li>
+      <li>Login</li>
+      <li>Cadastro</li>
+    </ul> -->
+  </div>
+  <div class="box">
+    <div>
 
-                <div class="input-cadastro">
-                    <div class="input-format">
-                        <i class='bx bxs-user' id="input-Cadastro"></i>
-                        <input type="text" placeholder="Nome" id="input_nome">
-                    </div>
-                    <div class="input-format">
-                        <i class='bx bxs-envelope' id="input-lock"></i>
-                        <input type="email" placeholder="Email" id="input_email">
-                    </div>
-                    <div class="input-format">
-                        <i class='bx bxs-phone' id="input-cell"></i>
-                        <input type="text" placeholder="Telefone" id="input_telefone">
-                    </div>
-                    <div class="input-format">
-                        <i class='bx bxs-key' id="input-key"></i>
-                        <input type="text" placeholder="Chave Acesso" id="input_chaveAcesso">
-                    </div>
-                    <div class="input-format">
-                        <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="password" placeholder="Senha" id="input_senha">
-                    </div>
-                    <div class="input-format">
-                        <i class='bx bxs-lock-alt' id="input-lock"></i>
-                        <input type="password" placeholder="Confirmar Senha" id="input_confirmar_senha">
-                    </div>
-                </div>
-                <button onclick="cadastrar()">Cadastrar</button>
-                <div class="card_erro" id="cardErro">
-                  <span id="mensagem_erro"></span>
-                </div>
-                <div id="div_aguardar" class="loading-div">
-                  <img src="./assets/circle-loading.gif" id="loading-gif" />
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+  </div>
 </body>
 </html>
 <script>
