@@ -18,7 +18,7 @@ create table funcionario (
 idFuncionario int primary key auto_increment,
 nome varchar(200) not null,
 email varchar(200) not null,
-telefone char(11) not null,
+cpf char(11) not null,
 senha varchar(45) not null,
 fkEmpresa int, 
 constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEmpresa));
