@@ -11,6 +11,22 @@ body {
     src: url(../assets/fonte/Poppins/Poppins-Black.ttf);
 }
 
+.botaoMobile {
+    display: none;
+    margin-right: 15px;
+}
+
+.botaoMobile button {
+    background-color:white;
+    color: #091836;
+    font-family: poppins;
+    font-weight: bold;
+    font-size: 20px;
+    /* width: 50%; */
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 /* Telas grandes */
 @media screen and (min-width: 1000px) {
 
@@ -65,7 +81,7 @@ body {
     
     .leftBox {
         width: 45%;
-        height: 100%;
+        /* height: 100%; */
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -91,7 +107,6 @@ body {
     
     .rightBox {
         width: 55%;
-        height: 100% - 10px;
         /* Subtraindo 10px por causa da */
         background-color: white;
         border-radius: 51px;
@@ -154,6 +169,11 @@ body {
 
 /* Telas pequenas */
 @media screen and (max-width: 480px) {
+
+    .botaoMobile {
+        display: flex;
+    }
+
 
 
     .navbar {
@@ -346,7 +366,7 @@ body {
         flex-direction: row;
         background-color: #0e1d40;
         width: 80%;
-        height: 80%;
+        height: fit-content;
         border-radius: 51px;
     }
     
@@ -416,9 +436,26 @@ body {
         border-radius: 15px;
         cursor: pointer;
     }
+
+    .boxInputs {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .leftInputs input {
+        width: 90%;
+    }
+
+    .rightInputs input {
+        width: 90%;
+    }
+
 }
 
 @media screen and (min-width: 480px) and (max-width: 720px) {
+
     .navbar {
         display: flex;
         flex-direction: row;
@@ -449,7 +486,7 @@ body {
         flex-direction: row;
         background-color: #0e1d40;
         width: 90%;
-        height: 90%;
+        height: 300px;
         border-radius: 51px;
     }
     
@@ -518,6 +555,20 @@ body {
         /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
+    }
+    .boxInputs {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .leftInputs input {
+        width: 90%;
+    }
+
+    .rightInputs input {
+        width: 90%;
     }
 }
 
@@ -555,7 +606,7 @@ body {
         flex-direction: row;
         background-color: #0e1d40;
         width: 70%;
-        height: 90%;
+        height: 80%;
         border-radius: 51px;
     }
     
@@ -579,7 +630,7 @@ body {
         color: #091836;
         font-family: poppins;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 20px;
         /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
@@ -587,7 +638,6 @@ body {
     
     .rightBox {
         width: 55%;
-        height: 100% - 10px;
         /* Subtraindo 10px por causa da */
         background-color: white;
         border-radius: 51px;
@@ -624,6 +674,27 @@ body {
         width: 30%;
         border-radius: 15px;
         cursor: pointer;
+    }
+
+    .boxInputs {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .leftInputs input {
+        width: 90%;
+    }
+
+    .rightInputs input {
+        width: 90%;
+    }
+
+    @media screen and (max-height: 460px) {
+            .box {
+                height: 300px;
+            }
     }
 }
 
