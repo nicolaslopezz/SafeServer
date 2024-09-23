@@ -3,58 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/teste.css">
+    <link rel="stylesheet" href="css/newLogin.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login - SafeServer</title>
 </head>
 <body>
-    <section class="topo">
-        <div class="menuBugu" id="bugu">
-            <div class="close-burguer">
-                <i class='bx bx-x' onclick="burgerClose()"></i>
-            </div>
-            <div class="pages-burguer">
-                <a href="index.html">Início</a>
-                <a href="login.html">Login</a>
-                <a href="cadastro.html">Cadastro</a>
-            </div>
+    <div class="navbar">
+        <div class="logo">
+          <img src="assets/imgs/logow.png" style="width: 50%;">
         </div>
-        <div class="navbar">
-            <div class="logoImg">
-                <a href="index.html"><img src="assets/imgs/logow.png" alt="Logo"></a>
+        <!-- <ul>
+          <li>Inicio</li>
+          <li>Login</li>
+          <li>Cadastro</li>
+        </ul> -->
+      </div>
+      <div class="main">
+        <div class="box">
+          <div class="leftBox">
+            <h1>Bem vindo!</h1>
+            <span>Insira os seus dados para se conectar</span>
+            <button>Cadastre-se</button>
+          </div>
+          <div class="rightBox">
+            <div class="divInputs">
+              <span>Email</span>
+              <input type="text">
             </div>
-            <div class="navBtn">
-                <a href="index.html">Início</a>
-                <a href="login.html">Login</a>
-                <a href="cadastro.html">Cadastro</a>
+            <div class="divInputs">
+              <span>Senha</span>
+              <input type="password">
             </div>
-            <div class="navBurguer" id="cadastro">
-                <i class='bx bx-menu' onclick="burguer()"></i>
-            </div>
+            <button>Entrar</button>
+    
+          </div>
         </div>
-        <div class="form-container">
-            <div class="formBlue-login">
-                <div class="modulo">
-                    <h1>Bem Vindo!</h1>
-                    <div class="text-login">
-                        <p>Cadastre os seus dados ao lado para acessar!</p>
-                    </div>
-                    <a href="cadastro.html" class="cadBtn-login">Cadastre-se</a>
-                </div>
-            </div>
-            <div class="formLoginWhite">
-                <h1>Login</h1>
-                <div class="card_erro">
-                    <span id="mensagem_erro"></span>
-                </div>
-                <i class='bx bxs-user' id="user-login"></i>
-                <input id="email_input" type="text" placeholder="Email:">
-                <i class='bx bxs-lock-alt' id="user-lock"></i>
-                <input id="senha_input" type="password" placeholder="Senha:">
-                <button onclick="entrar()">Entrar</button>
-            </div>
-        </div>
-    </section>
+      </div>
 </body>
 </html>
 <script>
