@@ -100,7 +100,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
     }
 
     .divInputs {
@@ -130,9 +130,24 @@ body {
         cursor: pointer;
     }
 
-    @media screen and (max-height: 400px) {
+    .boxInputs {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .leftInputs input {
+        width: 90%;
+    }
+
+    .rightInputs input {
+        width: 90%;
+    }
+
+    @media screen and (max-height: 550px) {
         .box {
-            height: 271px;
+            height: 365px;
         }
     }
 }
@@ -171,7 +186,7 @@ body {
         flex-direction: column;
         background-color: #0e1d40;
         width: 100%;
-        height: 80%;
+        height: fit-content;
         border-radius: 51px;
     }
     
@@ -265,6 +280,7 @@ body {
             height: 100%;
         }
     }
+
     @media screen and (min-width: 330px) {
         .rightBox button {
             background-color: #091836;
@@ -277,7 +293,7 @@ body {
             cursor: pointer;
         }
     }
-    
+
     @media screen and (max-width: 330px) {
         .rightBox button {
             background-color: #091836;
@@ -294,6 +310,7 @@ body {
     
     
     
+
 
 /* Telas médias */
 @media screen and (min-width: 480px) and (max-width: 720px) and (min-height: 390px) {
