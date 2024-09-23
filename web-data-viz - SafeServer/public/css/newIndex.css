@@ -1,7 +1,8 @@
 @font-face {
-    font-family: [poppins];
-    src: url([../public/assets/fonte/Poppins/Poppins-Black.ttf]);
+    font-family: poppins;
+    src: url(../assets/fonte/Poppins/Poppins-Black.ttf);
  }
+
 
 
 
@@ -11,6 +12,7 @@ body {
     background: linear-gradient(90deg, rgba(9,24,54,1) 0%, rgba(96,111,130,1) 100%);
     margin: 0;
     padding: 0;
+    font-family: poppins;
 }
 .navbar {
     display: flex;
@@ -35,23 +37,37 @@ body {
 .conteudo {
     text-align: center;
     padding: 50px;
+    margin-right: 100vh;
+
 }
 .conteudo h1 {
     font-size: 48px;
     margin-bottom: 20px;
     color: #fff;
+    font-family: "poppins";
 }
 .conteudo p {
-    font-size: 18px;
+    font-size: 25px;
     margin-bottom: 30px;
     color: #fff;
+    font-family: "poppins";
+    text-align: justify;
     
 }
+.button{
+    margin-right: 80vh;
+    width: 20vh;
+    height: 7vh;
+    border-radius: 14px;
+}
+
 .conteudo .button {
     background-color: #ffffff;
     color:  rgb(9,24,54);
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 25px;
+    font-size: poppins;
+    font-weight: bold;
 }
