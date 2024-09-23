@@ -36,15 +36,31 @@ body {
 }
 .conteudo {
     text-align: center;
-    padding: 50px;
-    margin-right: 100vh;
+    display: flex;
 
+    
 }
+
+.quem-somos{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo{
+    display: flex;
+    width: 60%;
+}
+
 .conteudo h1 {
     font-size: 48px;
     margin-bottom: 20px;
     color: #fff;
     font-family: "poppins";
+    flex-wrap: wrap;
 }
 .conteudo p {
     font-size: 25px;
@@ -53,15 +69,14 @@ body {
     font-family: "poppins";
     text-align: justify;
     
+    
 }
-.button{
-    margin-right: 80vh;
-    width: 20vh;
-    height: 7vh;
-    border-radius: 14px;
+.botao1{
+    display: flex;
+    width: 60%;
 }
 
-.conteudo .button {
+.saiba-mais {
     background-color: #ffffff;
     color:  rgb(9,24,54);
     padding: 10px 20px;
@@ -70,4 +85,11 @@ body {
     font-size: 25px;
     font-size: poppins;
     font-weight: bold;
+    border-radius: 14px
+}
+
+.picture{  
+  display: flex;
+  width: 50%;
+  height: 100%;
 }
