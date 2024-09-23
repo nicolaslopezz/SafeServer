@@ -17,42 +17,51 @@ body {
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+
    
 }
 .navbar a {
     color: #fff;
     text-decoration: none;
     margin: 0 15px;
-    font-size: xx-large;
+    font-size: 2.1rem;
 }
 .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80%;
-    width: 10%;
+    height: 100%;
+    width: 5%;
+
 
 }
 .conteudo {
     text-align: center;
     display: flex;
+    height: 90%;
+    width: 100%;
+    justify-content:space-between ;
+   
 
     
 }
 
 .quem-somos{
     display: flex;
-    width: 50%;
-    height: 100%;
+    width: 90%;
+    height: 70%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .corpo{
     display: flex;
-    width: 60%;
+    width: 90%;
 }
 
 .conteudo h1 {
@@ -63,7 +72,7 @@ body {
     flex-wrap: wrap;
 }
 .conteudo p {
-    font-size: 25px;
+    font-size: 40px;
     margin-bottom: 30px;
     color: #fff;
     font-family: "poppins";
@@ -73,7 +82,8 @@ body {
 }
 .botao1{
     display: flex;
-    width: 60%;
+    width: 90%;
+    
 }
 
 .saiba-mais {
@@ -82,7 +92,7 @@ body {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 35px;
     font-size: poppins;
     font-weight: bold;
     border-radius: 14px
@@ -90,6 +100,44 @@ body {
 
 .picture{  
   display: flex;
-  width: 50%;
+  width: 60%;
   height: 100%;
+  justify-content: end;
+}
+
+.imagem{
+    clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%    );
+
+
+}
+
+.opcoes-pai{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.opcoes{
+    width: 28%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.home{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    
 }
