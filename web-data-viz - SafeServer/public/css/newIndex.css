@@ -51,7 +51,7 @@ body {
 
 .quem-somos{
     display: flex;
-    width: 50%;
+    width: 90%;
     height: 70%;
     flex-direction: column;
     justify-content: center;
@@ -61,7 +61,7 @@ body {
 
 .corpo{
     display: flex;
-    width: 80%;
+    width: 90%;
 }
 
 .conteudo h1 {
@@ -82,7 +82,8 @@ body {
 }
 .botao1{
     display: flex;
-    width: 60%;
+    width: 90%;
+    
 }
 
 .saiba-mais {
@@ -91,7 +92,7 @@ body {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 35px;
     font-size: poppins;
     font-weight: bold;
     border-radius: 14px
@@ -131,4 +132,12 @@ body {
     flex-direction: column;
 
 
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    
 }
