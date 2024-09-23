@@ -13,6 +13,27 @@ body {
 
 /* Telas grandes */
 @media screen and (min-width: 1000px) {
+
+    .box {
+        display: flex;
+        flex-direction: row;
+        background-color: #0e1d40;
+        width: 56%;
+        height: 80%;
+        border-radius: 51px;
+    }
+
+    @media screen and (min-width: 2000px) {
+        .box {
+            width: 1120px;
+        }
+    }
+
+    @media screen and (min-height: 800px) {
+        .box {
+            height: 566px;
+        }
+    }
     
     .navbar {
         display: flex;
@@ -40,14 +61,7 @@ body {
         width: 100vw;
     }
     
-    .box {
-        display: flex;
-        flex-direction: row;
-        background-color: #0e1d40;
-        width: 56%;
-        height: 80%;
-        border-radius: 51px;
-    }
+
     
     .leftBox {
         width: 45%;
@@ -115,8 +129,15 @@ body {
         border-radius: 15px;
         cursor: pointer;
     }
+
+    @media screen and (max-height: 400px) {
+        .box {
+            height: 271px;
+        }
+    }
 }
 
+/* Telas pequenas */
 @media screen and (max-width: 480px) {
     
     .navbar {
@@ -195,8 +216,7 @@ body {
         justify-content: center;
         /* align-items: center; */
     }
-
-
+}
 
     @media screen and (min-width: 280px) {
         input {
@@ -255,6 +275,7 @@ body {
     }
 }
 
+/* Telas médias */
 @media screen and (min-width: 480px) and (max-width: 720px) and (min-height: 390px) {
     
     
@@ -312,7 +333,7 @@ body {
         color: #091836;
         font-family: poppins;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 20px;
         /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
@@ -353,14 +374,14 @@ body {
         color: white;
         font-family: poppins;
         font-weight: bold;
-        font-size: 25px;
-        width: 30%;
+        font-size: 20px;
+        /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
     }
 }
 
-@media screen and (min-width: 480px) and (max-width: 720px) and (max-height: 390px) {
+@media screen and (min-width: 480px) and (max-width: 720px) {
     .navbar {
         display: flex;
         flex-direction: row;
@@ -456,12 +477,119 @@ body {
         color: white;
         font-family: poppins;
         font-weight: bold;
+        font-size: 20px;
+        /* width: 30%; */
+        border-radius: 15px;
+        cursor: pointer;
+    }
+}
+
+/* Tablets */
+@media screen and (min-width: 720px) and (max-width: 1000px) {
+    
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 16vh;
+        width: 100vw;
+    }
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+        width: 10%;
+        
+    }
+    
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 84vh;
+        width: 100vw;
+    }
+    
+    .box {
+        display: flex;
+        flex-direction: row;
+        background-color: #0e1d40;
+        width: 70%;
+        height: 90%;
+        border-radius: 51px;
+    }
+    
+    .leftBox {
+        width: 45%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+
+    .leftBox span {
+        font-size: 25px;
+        width: 80%;
+    }
+
+    .leftBox button {
+        background-color:white;
+        color: #091836;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 25px;
+        /* width: 50%; */
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    
+    .rightBox {
+        width: 55%;
+        height: 100% - 10px;
+        /* Subtraindo 10px por causa da */
+        background-color: white;
+        border-radius: 51px;
+        border-width: 5px;
+        border: #a6a6a6 solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .divInputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    input {
+        height: 40px;
+        width: 200px;
+        background-color: #d9d9d9;
+        border: none;
+        border-radius: 20px;
+        padding-left: 10px;
+    }
+
+    .rightBox button {
+        background-color: #091836;
+        color: white;
+        font-family: poppins;
+        font-weight: bold;
         font-size: 25px;
         width: 30%;
         border-radius: 15px;
         cursor: pointer;
     }
 }
+
     
     /* .navbar ul {
         list-style: none;
