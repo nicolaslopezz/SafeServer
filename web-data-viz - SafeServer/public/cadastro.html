@@ -33,29 +33,29 @@
           <div class="leftInputs">
             <div class="divInputs">
               <span>Usuario</span>
-              <input type="text">
+              <input type="text" id="input_nome">
             </div>
             <div class="divInputs">
               <span>Email</span>
-              <input type="password">
+              <input type="text" id="input_email">
             </div>
             <div class="divInputs">
               <span>Senha</span>
-              <input type="text">
+              <input type="password" id="input_senha">
             </div>
           </div>
           <div class="rightInputs">
             <div class="divInputs">
               <span>CPF</span>
-              <input type="text">
+              <input type="text" id="input_cpf">
             </div>
             <div class="divInputs">
               <span>Cargo</span>
-              <input type="text">
+              <input type="text" placeholder="NÃO FUNCIONAL AINDA">
             </div>
             <div class="divInputs">
               <span>Código</span>
-              <input type="text">
+              <input type="text" id="input_chaveAcesso">
             </div>
           </div>
         </div>
@@ -67,17 +67,6 @@
 </body>
 </html>
 <script>
-  function burguer() {
-      var bugu = document.getElementById('bugu');
-      
-      bugu.style.right = 0;
-  }
-  function burgerClose() {
-      var bugu = document.getElementById('bugu');
-      bugu.style.right = '-325px';
-
-  }
-
   let listaEmpresasCadastradas = [];
     function cadastrar() {
     //aguardar();
@@ -85,52 +74,28 @@
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = input_nome.value;
+    var cpfVar = input_cpf.value;
     var emailVar = input_email.value;
-    var telefoneVar = input_telefone.value;
     var chaveAcessoVar = input_chaveAcesso.value;
     var senhaVar = input_senha.value;
-    var confirmacaoSenhaVar = input_confirmar_senha.value;
     var idEmpresaVincular
 
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      telefoneVar == "" ||
+      cpfVar == "" ||
       chaveAcessoVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "Preencha todos os campos para prosseguir!";
-
-      return false;
-    } else if (senhaVar != confirmacaoSenhaVar) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "As senhas devem ser idênticas";
-
+        alert("Todos os campos são obigatórios")
       return false;
     } else if(nomeVar.length <= 2) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "Insira um nome válido";
-
+      alert("Insira um nome válido")
       return false;
     } else if(emailVar.indexOf('@') < 1 || emailVar.indexOf(".") < 1 || emailVar.length < 4) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "Insira um email válido";
-
+      alert("Insira um email válido")
       return false;
-    } else if(telefoneVar.length != 11) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "Insira um número de telefone válido ()";
-
-      return false;
-    }
-
+    } 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].chaveAcesso == chaveAcessoVar) {
