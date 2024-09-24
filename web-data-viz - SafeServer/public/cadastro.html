@@ -31,38 +31,38 @@
         <span>Insira os seus dados para se cadastrar</span>
         <a href="login.html"><button>Entrar</button></a>
       </div>
-      <div class="rightBox">
+      <form class="rightBox" onsubmit="cadastrar(event)">
         <div class="boxInputs">
           <div class="leftInputs">
             <div class="divInputs">
               <span>Usuario</span>
-              <input type="text" id="input_nome">
+              <input required id ="input_nome" type="text">
             </div>
             <div class="divInputs">
               <span>Email</span>
-              <input type="text" id="input_email">
+              <input required id="input_email" type="text" >
             </div>
             <div class="divInputs">
               <span>Senha</span>
-              <input type="password" id="input_senha">
+              <input required id="input_senha" type="password" >
             </div>
           </div>
           <div class="rightInputs">
             <div class="divInputs">
               <span>CPF</span>
-              <input type="text" id="input_cpf">
+              <input required id="input_cpf" type="text" >
             </div>
             <div class="divInputs">
               <span>Cargo</span>
-              <input type="text" placeholder="NÃO FUNCIONAL AINDA">
+              <input required id="input_cargo" type="text" placeholder="NÃO FUNCIONAL AINDA">
             </div>
             <div class="divInputs">
               <span>Código</span>
-              <input type="text" id="input_chaveAcesso">
+              <input required  id="input_chaveAcesso" type="text">
             </div>
           </div>
         </div>
-        <button>Entrar</button>
+        <button>Cadastrar</button>
 
       </div>
     </div>
@@ -71,7 +71,8 @@
 </html>
 <script>
   let listaEmpresasCadastradas = [];
-    function cadastrar() {
+    function cadastrar(event) {
+      event.preventDefault()
     //aguardar();
 
     //Recupere o valor da nova input pelo nome do id
