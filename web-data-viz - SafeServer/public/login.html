@@ -22,7 +22,7 @@
         </ul> -->
       </div>
       <div class="main">
-        <div class="box">
+        <form class="box" onsubmit="entrar(event)">
           <div class="leftBox">
             <h1>Bem vindo!</h1>
             <span>Insira os seus dados para se conectar</span>
@@ -31,16 +31,16 @@
           <div class="rightBox">
             <div class="divInputs">
               <span>Email</span>
-              <input type="text" id="email_input">
+              <input required type="text" id="email_input">
             </div>
             <div class="divInputs">
               <span>Senha</span>
-              <input type="password" id="senha_input">
+              <input required type="password" id="senha_input">
             </div>
             <button>Entrar</button>
     
           </div>
-        </div>
+        </form>
       </div>
 </body>
 </html>
@@ -56,7 +56,8 @@
 
     }
 
-    function entrar() {
+    function entrar(event) {
+      event.preventDefault()
        function aguardar(){
         console.log('Aguardando requisição...')
        };
