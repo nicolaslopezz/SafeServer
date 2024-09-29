@@ -138,7 +138,6 @@ body {
     justify-content: end;
 }
 
-/* Estilos da seção de serviços */
 .servicos {
     display: flex;
     justify-content: space-between;
@@ -147,7 +146,7 @@ body {
 }
 
 .servicos-conteudo {
-    width: 50%;
+    width: 40%;
     color: white;
 }
 
@@ -173,7 +172,7 @@ body {
 }
 
 .imagem-servico {
-    width: 50%;
+    width: 40%;
 }
 
 .imagem-redonda {
@@ -182,11 +181,10 @@ body {
     border-radius: 50%;
 }
 
-/* Ícones de Serviços */
 .icones-servicos {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: white;
     padding: 30px;
 }
 
@@ -203,12 +201,99 @@ body {
 }
 
 .icone h3 {
-    color: white;
+    color: black;
     font-family: poppins-bold;
     margin: 10px 0;
 }
 
 .icone p {
-    color: white;
+    color: black;
     font-family: poppins;
 }
+
+.soluções{
+    text-align: center;
+    font-family: poppins;
+    background-color: white;
+}
+
+
+.text-solucao{
+    text-align: justify;
+    width: 100%;
+    background-color: white;
+    height: 80%;
+   
+}
+
+.text-solucao p{
+    text-align: center;
+    color: grey;
+    justify-content: center;
+    font-family: poppins;
+    font-size: larger;
+    width: 70%;
+}
+
+.sistema{
+    color: white;
+    font-family: poppins-bold;
+    font-size: 30px;
+    
+}
+
+.sistema p{
+    color: white;
+    font-family: poppins;
+    width: 50%;
+    font-size: 29px;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-around; 
+    background-color: #000d1c; 
+    color: white; 
+    padding: 20px;
+}
+
+.footer-bloco {
+    width: 30%; 
+    text-align: center; 
+}
+
+.footer-bloco h3 {
+    margin-bottom: 10px; 
+}
+
+.footer-bloco a {
+    color: white; 
+    text-decoration: none; 
+}
+
+.footer-bloco a:hover {
+    text-decoration: underline; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
