@@ -1,32 +1,29 @@
 @font-face {
     font-family: poppins;
     src: url(../assets/fonte/Poppins/Poppins-Regular.ttf);
- }
+}
 
- @font-face{
+@font-face {
     font-family: poppins-bold;
     src: url(../assets/fonte/Poppins/Poppins-Black.ttf);
- }
-
-
-
+}
 
 body {
-    background: rgb(9,24,54);
-    background: linear-gradient(90deg, rgb(4, 15, 36) 10%, rgba(96,111,130,1) 100%);
+    background: rgb(9, 24, 54);
+    background: linear-gradient(90deg, rgb(4, 15, 36) 10%, rgba(96, 111, 130, 1) 100%);
     margin: 0;
     padding: 0;
     font-family: poppins;
 }
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 10%;
-
-   
 }
+
 .navbar a {
     color: #fff;
     text-decoration: none;
@@ -34,44 +31,39 @@ body {
     font-size: 2.1rem;
     font-family: poppins-bold;
 }
+
 .logo {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 5%;
-
-
 }
+
 .conteudo {
     text-align: center;
     display: flex;
     height: 90%;
     width: 100%;
-    justify-content:space-between ;
-   
-
-    
+    justify-content: space-between;
 }
 
-.quem-somos{
+.quem-somos {
     display: flex;
     width: 90%;
     height: 70%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
-.title{
+.title {
     display: flex;
     justify-content: start;
     width: 90%;
-    
 }
 
-.corpo{
+.corpo {
     display: flex;
     width: 90%;
 }
@@ -83,52 +75,49 @@ body {
     font-family: poppins-bold;
     flex-wrap: wrap;
 }
+
 .conteudo p {
     font-size: 42px;
     color: #fff;
     font-family: "poppins";
     text-align: justify;
-    
-    
 }
-.botao1{
+
+.botao1 {
     display: flex;
     width: 90%;
-    
 }
 
 .saiba-mais {
     background-color: #ffffff;
-    color:  rgb(9,24,54);
+    color: rgb(9, 24, 54);
     padding: 15px 23px;
     border: none;
     cursor: pointer;
     font-size: 33px;
     font-family: poppins-bold;
-    border-radius: 14px
+    border-radius: 14px;
 }
 
-.picture{  
-  display: flex;
-  width: 60%;
-  height: 100%;
-  justify-content: end;
+.picture {
+    display: flex;
+    width: 60%;
+    height: 100%;
+    justify-content: end;
 }
 
-.imagem{
-    clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%    );
-
-
+.imagem {
+    clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-.opcoes-pai{
+.opcoes-pai {
     display: flex;
     flex-direction: row;
     width: 40%;
     justify-content: space-between;
 }
 
-.opcoes{
+.opcoes {
     width: 28%;
     height: 100%;
     justify-content: center;
@@ -136,18 +125,90 @@ body {
     font-size: 21px;
 }
 
-.home{
+.home {
     height: 100vh;
     display: flex;
     flex-direction: column;
-
-
 }
 
-.container{
+.container {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: end;
-    
+}
+
+/* Estilos da seção de serviços */
+.servicos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.servicos-conteudo {
+    width: 50%;
+    color: white;
+}
+
+.servicos-conteudo h2 {
+    font-size: 48px;
+    font-family: poppins-bold;
+}
+
+.servicos-conteudo p {
+    font-size: 24px;
+    font-family: poppins;
+}
+
+.cadastre-se {
+    background-color: white;
+    color: rgb(9, 24, 54);
+    padding: 15px 30px;
+    border: none;
+    font-size: 24px;
+    font-family: poppins-bold;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.imagem-servico {
+    width: 50%;
+}
+
+.imagem-redonda {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+}
+
+/* Ícones de Serviços */
+.icones-servicos {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+}
+
+.icone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icone img {
+    width: 70px;
+    height: 70px;
+}
+
+.icone h3 {
+    color: white;
+    font-family: poppins-bold;
+    margin: 10px 0;
+}
+
+.icone p {
+    color: white;
+    font-family: poppins;
 }
