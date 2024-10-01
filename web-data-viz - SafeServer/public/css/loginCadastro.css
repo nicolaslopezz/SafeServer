@@ -1,9 +1,9 @@
 body {
-    background: rgb(9,24,54);
-    background: linear-gradient(90deg, rgba(9,24,54,1) 0%, rgba(96,111,130,1) 100%);
+    background: rgb(9, 24, 54);
+    background: linear-gradient(90deg, rgba(9, 24, 54, 1) 0%, rgba(96, 111, 130, 1) 100%);
     margin: 0;
     padding: 0;
-    font-family: poppins ;
+    font-family: poppins;
 }
 
 @font-face {
@@ -15,27 +15,6 @@ body {
 
 @media screen and (min-width: 1000px) {
 
-    .box {
-        display: flex;
-        flex-direction: row;
-        background-color: #0e1d40;
-        width: 65%;
-        height: 80%;
-        border-radius: 51px;
-    }
-
-    @media screen and (min-width: 2000px) {
-        .box {
-            width: 1120px;
-        }
-    }
-
-    @media screen and (min-height: 800px) {
-        .box {
-            height: 566px;
-        }
-    }
-    
     .navbar {
         display: flex;
         flex-direction: row;
@@ -44,31 +23,39 @@ body {
         height: 16vh;
         width: 100vw;
     }
-    
+
     .logo {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 80%;
         width: 10%;
-        
     }
-    
-    .main {
+
+    .box {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 84vh;
-        width: 100vw;
+        flex-direction: row;
+        background-color: #fff;
+        width: 65%;
+        height: 80%;
+        border-radius: 51px;
+        position: relative;
+        /* z-index: 10; */
     }
 
-    .innerBox span {
-        font-size: 25px;
-        width: 80%;
+    .box::before {
+        content: "";
+        position: absolute;
+        border-radius: 45px 0 0 45px;
+        left: 0;
+        /* z-index: 11; */
+        width: 45%;
+        height: 100%;
+        background-color: #091836;
     }
 
-    .innerBox button {
-        background-color:white;
+    .box button {
+        background-color: white;
         color: #091836;
         font-family: poppins;
         font-weight: bold;
@@ -78,33 +65,243 @@ body {
         cursor: pointer;
     }
 
-    .rightBox {
-        width: 40%;
-        height: 100%;
-        background-color: white;
-        border: #a6a6a6 solid;
+    .swapMenu {
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         align-items: center;
-        justify-content: space-evenly;
+        width: 45%;
     }
-    
-    .leftBox {
+
+    .swapMenu .texto {
+        color: white;
         width: 60%;
+        text-align: center;
+    }
+
+    .content {
+        width: 55%;
         height: 100%;
-        background-color: white;
-        border: #a6a6a6 solid;
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         align-items: center;
-        justify-content: space-evenly;
+        z-index: 10;
+    }
+
+    .inputs {
+        width: 80%;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     .divInputs {
         display: flex;
         flex-direction: column;
+    }
+
+    .content button {
+        background-color: #091836;
+        color: white;
+        font-family: poppins;
+        font-weight: bold;
+        font-size: 25px;
+        /* width: 30%; */
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .login .swapMenu {
+        z-index: 12;
+    }
+
+    .cadastro {
+        position: absolute;
+        /* background-color: white; */
+    }
+
+    .cadastro .swapMenu{
+        z-index: -1;
+    }
+
+    .cadastro .content{
+        z-index: -1;
+    }
+
+    .alterarParaCadastro .login .swapMenu {
+        z-index: -1;
+        position: relative;
+        animation: aparecer 2s;
+    }
+
+    .alterarParaCadastro .login .content {
+        z-index: -1;
+        position: relative;
+        animation: deslocamentoEsq 2s;
+
+    }
+
+    .alterarParaCadastro .box::before {
+        z-index: 11;
+        left: 55%;
+        border-radius: 0 45px 45px 0;
+        animation: slidein 2s;
+    }
+
+    .alterarParaCadastro .cadastro .swapMenu {
+        z-index: 12;
+        position: relative;
+        animation: aparecerDir 2s;
+    }
+
+    .alterarParaCadastro .cadastro .content {
+        z-index: 10;
+        animation: surgir 2s;
+     
+    }
+
+    /*  */
+
+    .alterarParaLogin .cadastro .swapMenu {
+        z-index: -1;
+        position: relative;
+        /* animation: aparecer 10s; */
+    }
+
+    .alterarParaLogin .cadastro .content {
+        z-index: -1;
+        position: relative;
+        animation: deslocamentoDir 2s;
+    }
+
+    .alterarParaLogin .box::before {
+        z-index: 11;
+        border-radius:  45px 0 0 45px ;
+        left: 0;
+        animation: slideout 2s;
+    }
+
+    .alterarParaLogin .login .swapMenu {
+        z-index: 12;
+        position: relative;
+        animation: aparecerEsq 2s;
+    }
+
+    .alterarParaLogin .login .content {
+        z-index: 10;
+        animation: surgir 2s;
+    }
+
+    @keyframes deslocamentoEsq {
+        from {
+            left: 0;
+            opacity: 1;
+            z-index: 11;
+
+        }
+
+        
+        30% {
+            opacity: 0;
+        }
+    
+        to {
+            left: -20%;
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+
+    @keyframes deslocamentoDir {
+
+        from {
+            left: 0;
+            opacity: 1;
+            z-index: 11;
+        }
+
+        30% {
+            opacity: 0;
+        }
+    
+        to {
+            left: 55%;
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+
+    @keyframes slidein {
+
+        from {
+            left: 0;
+        border-radius: 45px 0 0 45px ;
+        }
+    
+        to {
+            left: 55%;
+            border-radius: 0 45px 45px 0;
+        }
+    }
+    
+    @keyframes slideout {
+    
+        from {
+            left: 55%;
+            border-radius: 0 45px 45px 0;
+
+        }
+    
+        to {
+            left: 0;
+            border-radius: 45px 0 0 45px ;
+        }
+    }
+
+    @keyframes aparecerEsq {
+        from {
+            left: 55%;
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
+    @keyframes aparecerDir {
+        from {
+            left: -55%;
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
+    @keyframes surgir {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+
+
+    .main {
+        display: flex;
         justify-content: center;
-        /* align-items: center; */
+        align-items: center;
+        height: 84vh;
+        width: 100vw;
     }
 
     input {
@@ -116,55 +313,17 @@ body {
         padding-left: 10px;
     }
 
-    .rightBox button {
-        background-color: #091836;
-        color: white;
-        font-family: poppins;
-        font-weight: bold;
-        font-size: 25px;
-        width: 30%;
-        border-radius: 15px;
-        cursor: pointer;
-    }
-
     .form {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center ;
+        justify-content: center;
     }
 
     .form button {
         width: 30%;
     }
 
-    .boxInputs {
-        display: flex;
-        justify-content: space-evenly;
-        height: 75%;
-        width: 100%;
-    }
-
-    
-    .rightInputs {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 40%;
-    }
-
-    .leftInputs {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 40%;
-    }
-
-    @media screen and (max-height: 400px) {
-        .box {
-            height: 271px;
-        }
-    }
 }
