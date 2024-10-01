@@ -36,8 +36,8 @@ body {
         display: flex;
         flex-direction: row;
         background-color: #fff;
-        width: 65%;
-        height: 80%;
+        width: clamp(400px, 65%, 1000px);
+        height: clamp(300px, 80%, 600px);
         border-radius: 51px;
         position: relative;
         /* z-index: 10; */
@@ -90,11 +90,11 @@ body {
     }
 
     .inputs {
-        width: 80%;
+        width: clamp(200px, 80%, 1000px);
         height: fit-content;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .divInputs {
@@ -165,14 +165,14 @@ body {
     /*  */
 
     .alterarParaLogin .cadastro .swapMenu {
-        z-index: -1;
         position: relative;
+        z-index: -1;
         /* animation: aparecer 10s; */
     }
 
     .alterarParaLogin .cadastro .content {
-        z-index: -1;
         position: relative;
+        z-index: -1;
         animation: deslocamentoDir 2s;
     }
 
