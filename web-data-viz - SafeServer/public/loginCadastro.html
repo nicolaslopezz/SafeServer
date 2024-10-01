@@ -8,6 +8,7 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <title>Login - SafeServer</title>
 </head>
+
 <body>
   <div class="navbar">
     <div class="logo">
@@ -16,11 +17,6 @@
     <div class="botaoMobile">
       <a href="cadastro.html"></a>
     </div>
-    <!-- <ul>
-          <li>Inicio</li>
-          <li>Login</li>
-          <li>Cadastro</li>
-        </ul> -->
   </div>
   <div class="main">
     <div class="login box">
@@ -34,11 +30,11 @@
       <form class="content" onsubmit="entrar(event)">
         <div class="divInputs">
           <span>Email</span>
-          <input required type="text" id="email_input">
+          <input required type="text" id="ipt_emailLogin">
         </div>
         <div class="divInputs">
           <span>Senha</span>
-          <input required type="password" id="senha_input">
+          <input required type="password" id="ipt_senhaLogin">
         </div>
         <button>Entrar</button>
       </form>
@@ -49,29 +45,29 @@
           <div class="esquerda">
             <div class="divInputs">
               <span>Usuario</span>
-              <input required type="text" id="email_input">
+              <input required type="text" id="ipt_userCadastro">
             </div>
             <div class="divInputs">
               <span>Email</span>
-              <input required type="text" id="email_input">
+              <input required type="text" id="ipt_emailCadastro">
             </div>
             <div class="divInputs">
               <span>Senha</span>
-              <input required type="password" id="senha_input">
+              <input required type="password" id="ipt_senhaCadastro">
             </div>
           </div>
           <div class="esquerda">
             <div class="divInputs">
               <span>CPF</span>
-              <input required type="text" id="email_input">
+              <input required type="text" id="ipt_cpfCadastro">
             </div>
             <div class="divInputs">
               <span>Cargo</span>
-              <input required type="text" id="email_input">
+              <input required type="text" id="ipt_cargoCadastro">
             </div>
             <div class="divInputs">
               <span>Código</span>
-              <input required type="password" id="senha_input">
+              <input required type="password" id="ipt_cdgCadastro">
             </div>
           </div>
         </div>
@@ -88,9 +84,12 @@
   </div>
 
 </body>
+
 </html>
 
 <script>
+  let listaEmpresasCadastradas = [];
+
 
   var btnSignin = document.querySelector("#signin");
   var btnSignup = document.querySelector("#signup");
@@ -106,63 +105,30 @@
     body.className = "alterarParaCadastro";
   })
 
-</script>
+  function entrar(event) {
+    event.preventDefault()
 
-<script>
-  function burguer() {
-    var bugu = document.getElementById('bugu');
-
-    bugu.style.right = 0;
-  }
-  function burgerClose() {
-    var bugu = document.getElementById('bugu');
-    bugu.style.right = '-325px';
-
-  }
-
-  function entrar() {
-    function aguardar() {
-      console.log('Aguardando requisição...')
-    };
-    aguardar();
-
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
+    var emailVar = ipt_emailLogin.value;
+    var senhaVar = ipt_senhaLogin.value;
     var tamanhoEmail = emailVar.length;
     var indiceArroba = emailVar.indexOf('@');
     var indicePonto = emailVar.indexOf('.');
     var tamanhoSenha = senhaVar.length;
 
     console.log(tamanhoEmail);
-    if (emailVar == "" || senhaVar == "") {
-      cardErro.style.display = "block"
-      mensagem_erro.innerHTML = "Preencha os Campos para prosseguir.";
-      finalizarAguardar();
-      return false;
-    }
-    else {
-      setInterval(sumirMensagem, 5000)
-    }
     if (indiceArroba < 0 && indicePonto < 0) {
-      mensagem_erro.innerHTML = `Insira um email que contenha @ e .(ponto). <br>`
+      alert(`Insira um email que contenha @ e .(ponto).`)
     }
     if (tamanhoEmail < 7) {
-      cardErro.style.display = "block"
-      mensagem_erro.innerHTML += "Número de carcateres insuficiente no email.";
-      finalizarAguardar();
+      alert("Número de carcateres insuficiente no email.")
       return false;
     } else if (tamanhoEmail > 45) {
-      cardErro.style.display = "block"
-      mensagem_erro.innerHTML += "Número de carcateres muito grande no email.";
-      finalizarAguardar();
+      alert("Número de carcateres muito grande no email.")
       return false;
     } else if (tamanhoSenha <= 6) {
-      cardErro.style.display = "block"
-      mensagem_erro.innerHTML += `Sua senha precisa ter pelo menos 7 caracteres.`
-      finalizarAguardar();
+      alert(`Sua senha precisa ter pelo menos 7 caracteres.`)
       return false;
     }
-
     console.log("FORM LOGIN: ", emailVar);
     console.log("FORM SENHA: ", senhaVar);
 
@@ -187,33 +153,101 @@
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.ID_USUARIO = json.idFuncionario;
-
           setTimeout(function () {
             window.location = "./dashboard/cards.html";
           }, 1000); // apenas para exibir o loading
-
         });
-
       } else {
-
         console.log("Houve um erro ao tentar realizar o login!");
-
         resposta.text().then(texto => {
           console.error(texto);
-          finalizarAguardar(texto);
+          // finalizarAguardar(texto);
         });
       }
-
     }).catch(function (erro) {
       console.log(erro);
     })
+    return false;
+  }
+
+    function cadastrar(event) {
+      event.preventDefault()
+    //aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+      let nomeVar = ipt_userCadastro.value
+      let emailVar = ipt_emailCadastro.value
+      let senhaVar = ipt_senhaCadastro.value
+      let cpfVar = ipt_senhaCadastro.value
+      let cargoVar = ipt_cargoCadastro.value
+      let cdgVar = ipt_cdgCadastro.value
+      var idEmpresaVincular
+
+    if(emailVar.indexOf('@') < 1 || emailVar.indexOf(".") < 1 || emailVar.length < 4) {
+      alert("Insira um email válido")
+      return false;
+    } 
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].chaveAcesso == chaveAcessoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
+        console.log("Código de ativação válido.");
+        break;
+      }
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        cpfServer: cpfVar,
+        telefoneServer: telefoneVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert(" Cadastro feito com sucesso!(NÃO)Redirecionando para tela de Login...")
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 
     return false;
-
   }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none"
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].chaveAcesso)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
   }
+
 
 </script>
