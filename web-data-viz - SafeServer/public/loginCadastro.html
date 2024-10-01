@@ -9,7 +9,7 @@
   <title>Login - SafeServer</title>
 </head>
 
-<body>
+<body onload="listar()">
   <div class="navbar">
     <div class="logo">
       <img src="assets/imgs/logow.png" style="width: 50%;">
@@ -125,10 +125,11 @@
     } else if (tamanhoEmail > 45) {
       alert("Número de carcateres muito grande no email.")
       return false;
-    } else if (tamanhoSenha <= 6) {
-      alert(`Sua senha precisa ter pelo menos 7 caracteres.`)
-      return false;
-    }
+    } 
+    // else if (tamanhoSenha <= 6) {
+      // alert(`Sua senha precisa ter pelo menos 7 caracteres.`)
+      // return false;
+    // }
     console.log("FORM LOGIN: ", emailVar);
     console.log("FORM SENHA: ", senhaVar);
 
@@ -176,13 +177,15 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-      let nomeVar = ipt_userCadastro.value
-      let emailVar = ipt_emailCadastro.value
-      let senhaVar = ipt_senhaCadastro.value
-      let cpfVar = ipt_senhaCadastro.value
-      let cargoVar = ipt_cargoCadastro.value
-      let cdgVar = ipt_cdgCadastro.value
+      var nomeVar = ipt_userCadastro.value
+      var emailVar = ipt_emailCadastro.value
+      var senhaVar = ipt_senhaCadastro.value
+      var cpfVar = ipt_senhaCadastro.value
+      // let cargoVar = ipt_cargoCadastro.value
+      var chaveAcessoVar = ipt_cdgCadastro.value
       var idEmpresaVincular
+
+      console.log(nomeVar, emailVar, senhaVar, cpfVar, chaveAcessoVar)
 
     if(emailVar.indexOf('@') < 1 || emailVar.indexOf(".") < 1 || emailVar.length < 4) {
       alert("Insira um email válido")
@@ -195,6 +198,7 @@
         console.log("Código de ativação válido.");
         break;
       }
+      console.log(listaEmpresasCadastradas)
     }
 
     // Enviando o valor da nova input
@@ -210,7 +214,7 @@
         emailServer: emailVar,
         senhaServer: senhaVar,
         cpfServer: cpfVar,
-        telefoneServer: telefoneVar,
+        // telefoneServer: telefoneVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
