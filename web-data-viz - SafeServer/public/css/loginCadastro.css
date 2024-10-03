@@ -15,6 +15,16 @@ body {
 
 @media screen and (min-width: 1000px) {
 
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 84vh;
+        width: 100vw;
+        background: rgb(9, 24, 54);
+        background: linear-gradient(90deg, rgba(9, 24, 54, 1) 0%, rgba(96, 111, 130, 1) 100%);
+    }
+
     .navbar {
         display: flex;
         flex-direction: row;
@@ -90,7 +100,7 @@ body {
     }
 
     .inputs {
-        width: clamp(200px, 80%, 1000px);
+        width: clamp(200px, 90%, 1000px);
         height: fit-content;
         display: flex;
         flex-direction: row;
@@ -101,6 +111,17 @@ body {
         display: flex;
         flex-direction: column;
     }
+
+    /* .divInputs input {
+        width: 100%
+    } */
+
+    @media screen and (max-width: 1200px) {
+        .divInputs input {
+            width: 90%
+        }   
+    }
+
 
     .content button {
         background-color: #091836;
@@ -292,16 +313,6 @@ body {
         to {
             opacity: 1;
         }
-    }
-
-
-
-    .main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 84vh;
-        width: 100vw;
     }
 
     input {
