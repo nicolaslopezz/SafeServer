@@ -51,7 +51,7 @@ body {
 .quem-somos {
     display: flex;
     width: 90%;
-    height: 70%;
+    height: 90%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -60,7 +60,7 @@ body {
 .title {
     display: flex;
     justify-content: start;
-    width: 90%;
+    width: 70%;
 }
 
 .corpo {
@@ -114,7 +114,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 40%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .opcoes {
