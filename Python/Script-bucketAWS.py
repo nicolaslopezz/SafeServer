@@ -4,18 +4,21 @@ import boto3
 from botocore.exceptions import ClientError
 import os
 import logging
+import datetime
 
-# Definir credenciais da AWS
-AWS_ACCESS_KEY = 'your_access_key'
-AWS_SECRET_KEY = 'your_secret_key'
-AWS_REGION = 'your_aws_region'  # us-west-1
+# Definir credenciais temporárias da AWS (com token de sessão)
+AWS_ACCESS_KEY = ''
+AWS_SECRET_KEY = ''
+AWS_SESSION_TOKEN = ''  # Coloque aqui o token de sessão
+AWS_REGION = 'us-west-1'  # Defina a região da AWS
 
-# Função para configurar o cliente S3 usando credenciais da AWS
+# Função para configurar o cliente S3 usando credenciais temporárias da AWS
 def create_s3_client():
     return boto3.client(
         's3',
         aws_access_key_id=AWS_ACCESS_KEY,
         aws_secret_access_key=AWS_SECRET_KEY,
+        aws_session_token=AWS_SESSION_TOKEN,  # Adicionar o token de sessão
         region_name=AWS_REGION
     )
 
@@ -36,6 +39,8 @@ while i < 5:
     dados_ram_perc.append(round(psutil.virtual_memory().percent, 2))
     dados_rede_recebidos.append(round(psutil.net_io_counters().bytes_recv / (1024 ** 3), 2)) 
     dados_rede_enviados.append(round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2))  
+    data_hora_atual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato: YYYY-MM-DD HH:MM:SS
+
 
     
       
@@ -44,6 +49,7 @@ while i < 5:
 # Criar DataFrame e salvar como CSV
 df = pd.DataFrame({
     'CPU%': dados_cpu,
+    'DataHora': data_hora_atual,
     'RAM-GB-Livre': dados_livre_ram,
     'RAM-GB-USO': dados_uso_ram,
     'RAM%': dados_ram_perc,
@@ -65,4 +71,4 @@ def upload_file(file_name, bucket, object_name=None):
     return True
 
 # Upload do arquivo
-upload_file('dadosColetados.csv', 's3safeserver-raw')
+upload_file('dadosColetados.csv', 'bucket-raw-teste')
