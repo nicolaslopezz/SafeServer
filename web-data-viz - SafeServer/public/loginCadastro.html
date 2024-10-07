@@ -181,7 +181,7 @@
     var emailVar = ipt_emailCadastro.value
     var senhaVar = ipt_senhaCadastro.value
     var cpfVar = ipt_senhaCadastro.value
-    // let cargoVar = ipt_cargoCadastro.value
+    var cargoVar = ipt_cargoCadastro.value
     var chaveAcessoVar = ipt_cdgCadastro.value
     var idEmpresaVincular
 
@@ -214,7 +214,7 @@
         emailServer: emailVar,
         senhaServer: senhaVar,
         cpfServer: cpfVar,
-        // telefoneServer: telefoneVar,
+        cargoServer: cargoVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
@@ -222,7 +222,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          alert(" Cadastro feito com sucesso!(NÃO)Redirecionando para tela de Login...")
+          // alert(" Cadastro feito com sucesso!(NÃO)Redirecionando para tela de Login...")
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -251,6 +251,8 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
+
+      body.className("alterarParaLogin")
   }
 
 
