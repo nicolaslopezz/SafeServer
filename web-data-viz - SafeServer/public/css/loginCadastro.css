@@ -72,6 +72,7 @@ body {
         /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
+        padding: 5px;
     }
 
     .swapMenu {
@@ -127,6 +128,7 @@ body {
         /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
+        padding: 5px;
     }
 
     .login .swapMenu {
@@ -330,6 +332,7 @@ body {
 
     .form button {
         width: 30%;
+        padding: 5px;
     }
 }
 
@@ -400,6 +403,7 @@ body {
         /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
+        padding: 5px;
     }
 
     .swapMenu {
@@ -483,6 +487,7 @@ body {
         /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
+        padding: 5px;
     }
 
     .login .swapMenu {
@@ -685,6 +690,7 @@ body {
 
     .form button {
         width: 30%;
+        padding: 5px;
     }
 
 }
