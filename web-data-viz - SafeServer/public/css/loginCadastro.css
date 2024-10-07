@@ -437,7 +437,6 @@ body {
         width: 160px;
     }
 
-    @media screen and (max-width: 400px) {
 
         .inputs {
             display: flex;
@@ -471,7 +470,7 @@ body {
         .divInputs .span {
             width: 40%;
         }
-    }
+    
 
     .content button {
         background-color: #091836;
