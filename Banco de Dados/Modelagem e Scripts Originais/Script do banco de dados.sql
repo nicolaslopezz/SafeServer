@@ -20,6 +20,7 @@ nome varchar(200) not null,
 email varchar(200) not null,
 cpf char(11) not null,
 senha varchar(45) not null,
+cargo varchar(45),
 fkEmpresa int, 
 constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEmpresa));
 
@@ -52,4 +53,4 @@ select * from empresa;
 
 select * from funcionario;
 
--- truncate registro;
+-- truncate regis
