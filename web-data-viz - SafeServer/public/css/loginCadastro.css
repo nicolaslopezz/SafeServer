@@ -114,7 +114,7 @@ body {
     @media screen and (max-width: 1200px) {
         .divInputs input {
             width: 90%
-        }   
+        }
     }
 
 
@@ -138,11 +138,11 @@ body {
         /* background-color: white; */
     }
 
-    .cadastro .swapMenu{
+    .cadastro .swapMenu {
         z-index: -1;
     }
 
-    .cadastro .content{
+    .cadastro .content {
         z-index: -1;
     }
 
@@ -175,7 +175,7 @@ body {
     .alterarParaCadastro .cadastro .content {
         z-index: 10;
         animation: surgir 2s;
-     
+
     }
 
     /*  */
@@ -194,7 +194,7 @@ body {
 
     .alterarParaLogin .box::before {
         z-index: 11;
-        border-radius:  45px 0 0 45px ;
+        border-radius: 45px 0 0 45px;
         left: 0;
         animation: slideout 2s;
     }
@@ -218,11 +218,11 @@ body {
 
         }
 
-        
+
         30% {
             opacity: 0;
         }
-    
+
         to {
             left: -20%;
             opacity: 0;
@@ -241,7 +241,7 @@ body {
         30% {
             opacity: 0;
         }
-    
+
         to {
             left: 55%;
             opacity: 0;
@@ -253,26 +253,26 @@ body {
 
         from {
             left: 0;
-        border-radius: 45px 0 0 45px ;
+            border-radius: 45px 0 0 45px;
         }
-    
+
         to {
             left: 55%;
             border-radius: 0 45px 45px 0;
         }
     }
-    
+
     @keyframes slideout {
-    
+
         from {
             left: 55%;
             border-radius: 0 45px 45px 0;
 
         }
-    
+
         to {
             left: 0;
-            border-radius: 45px 0 0 45px ;
+            border-radius: 45px 0 0 45px;
         }
     }
 
@@ -340,28 +340,35 @@ body {
 
     .main {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 84vh;
+        /* justify-content: center; */
+        /* align-items: center; */
+        height: min(800px, 84vh);
         width: 100vw;
         background: rgb(9, 24, 54);
         background: linear-gradient(90deg, rgba(9, 24, 54, 1) 0%, rgba(96, 111, 130, 1) 100%);
+        overflow: visible;
     }
 
     .navbar {
         display: flex;
         align-items: center;
         height: 16vh;
-        min-height: 100px;
+        min-height: 80px;
         width: 100vw;
+        overflow: visible;
+
     }
 
     .logo {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 80%;
-        width: 10%;
+        height: 80px;
+        width: 80px;
+    }
+
+    .logo img {
+        width: 30px;
     }
 
     .box {
@@ -370,7 +377,7 @@ body {
         background-color: #fff;
         width: 100%;
         height: 90%;
-        min-height: 460px;
+        min-height: 800px;
         position: relative;
     }
 
@@ -398,7 +405,7 @@ body {
     .swapMenu {
         font-size: 14px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
         align-items: center;
         width: 100%;
@@ -414,17 +421,12 @@ body {
     .content {
         width: 100%;
         height: 60%;
+        max-height: 480px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
         z-index: 10;
-    }
-
-    .inputs {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
     }
 
     .esquerda {
@@ -438,39 +440,39 @@ body {
     }
 
 
-        .inputs {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 100%;
-            height: 80%;
-            min-height: 300px;
-        }
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+        height: 80%;
+        min-height: 300px;
+    }
 
-        .esquerda {
-            width: 100%;
-            height: 40%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .esquerda {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .divInputs {
-            display: flex;
-            flex-direction: row;
-            height: fit-content;
-            justify-content: space-between;
-            width: 90%;
-        }
+    .divInputs {
+        display: flex;
+        flex-direction: row;
+        height: fit-content;
+        justify-content: space-between;
+        width: 90%;
+    }
 
-        .divInputs input {
-            width: 60%;
-        }
+    .divInputs input {
+        width: 60%;
+    }
 
-        .divInputs .span {
-            width: 40%;
-        }
-    
+    .divInputs .span {
+        width: 40%;
+    }
+
 
     .content button {
         background-color: #091836;
@@ -492,11 +494,11 @@ body {
         /* background-color: white; */
     }
 
-    .cadastro .swapMenu{
+    .cadastro .swapMenu {
         z-index: -1;
     }
 
-    .cadastro .content{
+    .cadastro .content {
         z-index: -1;
     }
 
@@ -529,7 +531,7 @@ body {
     .alterarParaCadastro .cadastro .content {
         z-index: 10;
         animation: surgir 2s;
-     
+
     }
 
     /*  */
@@ -571,11 +573,11 @@ body {
 
         }
 
-        
+
         30% {
             opacity: 0;
         }
-    
+
         to {
             top: 60%;
             opacity: 0;
@@ -594,7 +596,7 @@ body {
         30% {
             opacity: 0;
         }
-    
+
         to {
             top: 60%;
             opacity: 0;
@@ -607,19 +609,19 @@ body {
         from {
             top: 0;
         }
-    
+
         to {
             top: 60%;
         }
     }
-    
+
     @keyframes slideout {
-    
+
         from {
             top: 60%;
 
         }
-    
+
         to {
             top: 0;
         }
