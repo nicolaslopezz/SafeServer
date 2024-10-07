@@ -16,6 +16,11 @@ body {
     font-family: poppins;
 }
 
+.inicio {
+    width: 100%;
+    height: 100vh;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -50,26 +55,27 @@ body {
 
 .quem-somos {
     display: flex;
-    width: 90%;
-    height: 90%;
+    width: 85%;
+    height: 85%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .title {
     display: flex;
     justify-content: start;
     width: 70%;
+    height: 14%;
 }
 
 .corpo {
     display: flex;
-    width: 90%;
+    width: 99%;
 }
 
 .conteudo h1 {
-    font-size: 48px;
+    font-size: 45px;
     margin-bottom: 20px;
     color: #fff;
     font-family: poppins-bold;
@@ -77,10 +83,10 @@ body {
 }
 
 .conteudo p {
-    font-size: 42px;
+    font-size: 30px;
     color: #fff;
     font-family: "poppins";
-    text-align: justify;
+    text-align: start;
 }
 
 .botao1 {
@@ -94,7 +100,7 @@ body {
     padding: 15px 23px;
     border: none;
     cursor: pointer;
-    font-size: 33px;
+    font-size: 23px;
     font-family: poppins-bold;
     border-radius: 14px;
 }
@@ -102,7 +108,7 @@ body {
 .picture {
     display: flex;
     width: 60%;
-    height: 100%;
+    height: 90%;
     justify-content: end;
 }
 
@@ -122,11 +128,22 @@ body {
     height: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 21px;
+
+}
+
+
+.espaco {
+    width: 30%;
+    height: 100%;
+    background-color: purple;
+}
+
+.opcoes a {
+    font-size: 30px;
 }
 
 .home {
-    height: 100vh;
+    height: 400vh;
     display: flex;
     flex-direction: column;
 }
@@ -138,17 +155,74 @@ body {
     justify-content: end;
 }
 
-.servicos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px;
+.pagina {
+    height: 200vh;
 }
 
-.servicos-conteudo {
-    width: 40%;
-    color: white;
+.servicos {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 100vh;
+    width: 100%;
 }
+
+.servicos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+}
+
+
+.servicos-conteudo {
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+
+.servicos-esquerda {
+    width: 10%;
+    height: 100%;
+
+}
+
+.servicos-direita {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.titulo-servico {
+    display: flex;
+    width: 93%;
+    height: 25%;
+
+}
+
+.texto-servico {
+    display: flex;
+    width: 93%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-servico {
+    display: flex;
+    width: 93%;
+    height: 15%;
+}
+
 
 .servicos-conteudo h2 {
     font-size: 48px;
@@ -160,24 +234,58 @@ body {
     font-family: poppins;
 }
 
+.parte1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+}
+
+
+.parte2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+    background-color: aliceblue;
+}
+
+.parte1-texto {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    height: 100%;
+
+}
+
+.parte1-imagem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+
 .cadastre-se {
     background-color: white;
     color: rgb(9, 24, 54);
-    padding: 15px 30px;
+    padding: 4px 4px;
     border: none;
-    font-size: 24px;
+    font-size: 19px;
     font-family: poppins-bold;
     cursor: pointer;
     border-radius: 10px;
 }
 
-.imagem-servico {
-    width: 40%;
-}
-
 .imagem-redonda {
-    width: 400px;
-    height: 400px;
+    width: 380px;
+    height: 380px;
     border-radius: 50%;
 }
 
@@ -203,7 +311,7 @@ body {
 .icone h3 {
     color: black;
     font-family: poppins-bold;
-    margin: 10px 0;
+
 }
 
 .icone p {
@@ -211,22 +319,32 @@ body {
     font-family: poppins;
 }
 
-.soluções{
+.soluções {
     text-align: center;
     font-family: poppins;
     background-color: white;
+    height: 100vh;
 }
 
+.titulo-solucao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+}
 
-.text-solucao{
+.text-solucao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: justify;
     width: 100%;
-    background-color: white;
-    height: 80%;
-   
+    height: 25%;
+
 }
 
-.text-solucao p{
+.text-solucao p {
     text-align: center;
     color: grey;
     justify-content: center;
@@ -235,14 +353,28 @@ body {
     width: 70%;
 }
 
-.sistema{
+
+.img-solucao {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    height: 60%;
+   background: linear-gradient(90deg, rgb(4, 15, 36) 10%, rgba(96, 111, 130, 1) 100%);/* Gradiente de cores */
+    color: #fff;
+    padding: 50px 20px;
+    clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
+
+
+}
+
+.sistema {
     color: white;
     font-family: poppins-bold;
     font-size: 30px;
-    
+    background-color:  linear-gradient(90deg, rgb(4, 15, 36) 10%, rgba(96, 111, 130, 1) 100%);
 }
 
-.sistema p{
+.sistema p {
     color: white;
     font-family: poppins;
     width: 50%;
@@ -252,48 +384,26 @@ body {
 
 .footer {
     display: flex;
-    justify-content: space-around; 
-    background-color: #000d1c; 
-    color: white; 
+    justify-content: space-around;
+    background-color: #000d1c;
+    color: white;
     padding: 20px;
 }
 
 .footer-bloco {
-    width: 30%; 
-    text-align: center; 
+    width: 30%;
+    text-align: center;
 }
 
 .footer-bloco h3 {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 .footer-bloco a {
-    color: white; 
-    text-decoration: none; 
+    color: white;
+    text-decoration: none;
 }
 
 .footer-bloco a:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
