@@ -11,9 +11,7 @@ body {
     src: url(../assets/fonte/Poppins/Poppins-Regular.ttf);
 }
 
-/* Telas grandes */
-
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 720px) {
 
     .main {
         display: flex;
@@ -47,7 +45,7 @@ body {
         display: flex;
         flex-direction: row;
         background-color: #fff;
-        width: clamp(400px, 65%, 1000px);
+        width: clamp(600px, 65%, 1000px);
         height: clamp(400px, 80%, 600px);
         border-radius: 51px;
         position: relative;
@@ -116,7 +114,7 @@ body {
     @media screen and (max-width: 1200px) {
         .divInputs input {
             width: 90%
-        }   
+        }
     }
 
 
@@ -140,11 +138,11 @@ body {
         /* background-color: white; */
     }
 
-    .cadastro .swapMenu{
+    .cadastro .swapMenu {
         z-index: -1;
     }
 
-    .cadastro .content{
+    .cadastro .content {
         z-index: -1;
     }
 
@@ -177,7 +175,7 @@ body {
     .alterarParaCadastro .cadastro .content {
         z-index: 10;
         animation: surgir 2s;
-     
+
     }
 
     /*  */
@@ -196,7 +194,7 @@ body {
 
     .alterarParaLogin .box::before {
         z-index: 11;
-        border-radius:  45px 0 0 45px ;
+        border-radius: 45px 0 0 45px;
         left: 0;
         animation: slideout 2s;
     }
@@ -220,11 +218,11 @@ body {
 
         }
 
-        
+
         30% {
             opacity: 0;
         }
-    
+
         to {
             left: -20%;
             opacity: 0;
@@ -243,7 +241,7 @@ body {
         30% {
             opacity: 0;
         }
-    
+
         to {
             left: 55%;
             opacity: 0;
@@ -255,26 +253,26 @@ body {
 
         from {
             left: 0;
-        border-radius: 45px 0 0 45px ;
+            border-radius: 45px 0 0 45px;
         }
-    
+
         to {
             left: 55%;
             border-radius: 0 45px 45px 0;
         }
     }
-    
+
     @keyframes slideout {
-    
+
         from {
             left: 55%;
             border-radius: 0 45px 45px 0;
 
         }
-    
+
         to {
             left: 0;
-            border-radius: 45px 0 0 45px ;
+            border-radius: 45px 0 0 45px;
         }
     }
 
@@ -335,34 +333,42 @@ body {
     }
 }
 
-@media screen and (max-width: 480px) {
+
+
+
+@media screen and (max-width: 720px) {
 
     .main {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 84vh;
+        /* justify-content: center; */
+        /* align-items: center; */
+        height: min(800px, 84vh);
         width: 100vw;
         background: rgb(9, 24, 54);
         background: linear-gradient(90deg, rgba(9, 24, 54, 1) 0%, rgba(96, 111, 130, 1) 100%);
+        overflow: visible;
     }
 
     .navbar {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
-        min-height: 100px;
         height: 16vh;
+        min-height: 80px;
         width: 100vw;
+        overflow: visible;
+
     }
 
     .logo {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 80%;
-        width: 10%;
+        height: 80px;
+        width: 80px;
+    }
+
+    .logo img {
+        width: 30px;
     }
 
     .box {
@@ -371,6 +377,7 @@ body {
         background-color: #fff;
         width: 100%;
         height: 90%;
+        min-height: 800px;
         position: relative;
     }
 
@@ -398,7 +405,7 @@ body {
     .swapMenu {
         font-size: 14px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
         align-items: center;
         width: 100%;
@@ -414,6 +421,7 @@ body {
     .content {
         width: 100%;
         height: 60%;
+        max-height: 480px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -421,23 +429,48 @@ body {
         z-index: 10;
     }
 
-    .inputs {
-        width: clamp(200px, 90%, 1000px);
-        height: fit-content;
+    .esquerda {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        width: 40%;
+    }
+
+    .divInputs input {
+        width: 160px;
+    }
+
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
         justify-content: space-around;
+        width: 100%;
+        height: 80%;
+        min-height: 300px;
+    }
+
+    .esquerda {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .divInputs {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        height: fit-content;
+        justify-content: space-between;
+        width: 90%;
     }
 
-    @media screen and (max-width: 1200px) {
-        .divInputs input {
-            width: 90%
-        }   
+    .divInputs input {
+        width: 60%;
+    }
+
+    .divInputs .span {
+        width: 40%;
     }
 
 
@@ -461,11 +494,11 @@ body {
         /* background-color: white; */
     }
 
-    .cadastro .swapMenu{
+    .cadastro .swapMenu {
         z-index: -1;
     }
 
-    .cadastro .content{
+    .cadastro .content {
         z-index: -1;
     }
 
@@ -491,13 +524,14 @@ body {
     .alterarParaCadastro .cadastro .swapMenu {
         z-index: 12;
         position: relative;
-        /* animation: aparecerDir 2s; */
+        /* animation: aparecerEsq 2s; */
+        animation: surgir 2s;
     }
 
     .alterarParaCadastro .cadastro .content {
         z-index: 10;
         animation: surgir 2s;
-     
+
     }
 
     /*  */
@@ -539,11 +573,11 @@ body {
 
         }
 
-        
+
         30% {
             opacity: 0;
         }
-    
+
         to {
             top: 60%;
             opacity: 0;
@@ -562,7 +596,7 @@ body {
         30% {
             opacity: 0;
         }
-    
+
         to {
             top: 60%;
             opacity: 0;
@@ -575,19 +609,19 @@ body {
         from {
             top: 0;
         }
-    
+
         to {
             top: 60%;
         }
     }
-    
+
     @keyframes slideout {
-    
+
         from {
             top: 60%;
 
         }
-    
+
         to {
             top: 0;
         }
@@ -620,6 +654,10 @@ body {
     @keyframes surgir {
         from {
             opacity: 0;
+        }
+
+        80% {
+            opacity: 0.5;
         }
 
         to {
