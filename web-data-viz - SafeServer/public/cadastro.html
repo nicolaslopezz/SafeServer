@@ -38,6 +38,9 @@
               <span>Usuario</span>
               <input required id ="input_nome" type="text">
             </div>
+            <div class="card_erro" id="cardErro">
+              <span id="mensagem_erro"></span>
+            </div>
             <div class="divInputs">
               <span>Email</span>
               <input required id="input_email" type="text" >
@@ -122,7 +125,6 @@
         emailServer: emailVar,
         senhaServer: senhaVar,
         cpfServer: cpfVar,
-        telefoneServer: telefoneVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
@@ -130,7 +132,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+           cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =
             " Cadastro feito com sucesso! Redirecionando para tela de Login...";
