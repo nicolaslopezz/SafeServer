@@ -11,8 +11,8 @@ dados_rede = []
 
 i = 0
 while i < 5:
-    dados_cpu.append(psutil.cpu_percent(interval = 1));
-    dados_ram.append(psutil.virtual_memory().used / (1024 ** 3));
+    dados_cpu.append(psutil.cpu_percent(interval = 1))
+    dados_ram.append(psutil.virtual_memory().used / (1024 ** 3))
     dados_rede.append(psutil.net_io_counters().bytes_recv)
     i+= 1
 
@@ -20,8 +20,7 @@ df = pd.DataFrame({'CPU%': dados_cpu,
                    'RAMGB': dados_ram,
                    'REDE_RECV': dados_rede})
 
-df.to_csv('dadosColetados.csv', index=False)
-
+df.to_json('dadosColetados.json', index=False)
 
 def upload_file(file_name, bucket, object_name=None):
     """Upload a file to an S3 bucket
@@ -45,4 +44,4 @@ def upload_file(file_name, bucket, object_name=None):
         return False
     return True
 
-upload_file('dadosColetados.csv', 's3safeserver-raw')
+upload_file('dadosColetados.json', 's3safeserver-raw')
