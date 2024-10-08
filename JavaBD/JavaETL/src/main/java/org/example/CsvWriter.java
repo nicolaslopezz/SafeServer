@@ -13,7 +13,7 @@ public class CsvWriter {
 
         ByteArrayOutputStream outputStream =new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        CSVPrinter csvPrinter =new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("CPU%", "RAMGB", "REDE"));
+        CSVPrinter csvPrinter =new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("CPU%", "RAMGB", "REDE_RECV"));
 
         for (Dado dado : dados) {
             csvPrinter.printRecord(
@@ -23,6 +23,7 @@ public class CsvWriter {
             );
         }
             csvPrinter.flush();
+            csvPrinter.close();
             writer.close();
 
         return outputStream;

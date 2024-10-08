@@ -11,7 +11,7 @@ public class Dado {
     private Double dados_ram;
 
     @JsonProperty("REDE_RECV")
-    private Double dados_rede;
+    private Integer dados_rede;
 
     public Double getDados_cpu() {
         return dados_cpu;
@@ -29,11 +29,11 @@ public class Dado {
         this.dados_ram = dados_ram;
     }
 
-    public Double getDados_rede() {
+    public Integer getDados_rede() {
         return dados_rede;
     }
 
-    public void setDados_rede(Double dados_rede) {
+    public void setDados_rede(Integer dados_rede) {
         this.dados_rede = dados_rede;
     }
 }
