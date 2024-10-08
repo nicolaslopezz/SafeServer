@@ -2,7 +2,7 @@ package org.example;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Dados {
+public class Dado {
 
     @JsonProperty("CPU%")
     private Double dados_cpu;
