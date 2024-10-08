@@ -4,6 +4,7 @@ import boto3;
 from botocore.exceptions import ClientError;
 import os;
 import logging;
+import numpy as np;
 
 dados_cpu = []
 dados_ram = []
@@ -20,7 +21,7 @@ df = pd.DataFrame({'CPU%': dados_cpu,
                    'RAMGB': dados_ram,
                    'REDE_RECV': dados_rede})
 
-df.to_json('dadosColetados.json', index=False)
+df.to_json('dadosColetados.json', orient= "records", lines= False)
 
 def upload_file(file_name, bucket, object_name=None):
     """Upload a file to an S3 bucket
