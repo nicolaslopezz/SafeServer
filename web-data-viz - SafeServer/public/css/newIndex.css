@@ -143,7 +143,7 @@ body {
 }
 
 .home {
-    height: 400vh;
+    height: 410vh;
     display: flex;
     flex-direction: column;
 }
@@ -374,11 +374,51 @@ body {
     background-color:  linear-gradient(90deg, rgb(4, 15, 36) 10%, rgba(96, 111, 130, 1) 100%);
 }
 
-.sistema p {
+
+
+
+.corpo-sistema{
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.titulo-sistema{
+    width: 90%;
+    height: 40%;
+    
+    display: flex;
+    align-items: end;
+
+}
+
+.texto-sistema{
+    height: 68%;
+   
     color: white;
     font-family: poppins;
-    width: 50%;
+    width: 90%;
     font-size: 29px;
+}
+
+.imagem-sistema{
+    width: 30%;
+    height: 90%;
+    
+}
+
+.imagem-sistemaper{
+    border-radius: 50px;
+}
+
+.esquerda-sistema{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    width: 60%;
 }
 
 
@@ -387,7 +427,7 @@ body {
     justify-content: space-around;
     background-color: #000d1c;
     color: white;
-    padding: 20px;
+    height: 45%;
 }
 
 .footer-bloco {
