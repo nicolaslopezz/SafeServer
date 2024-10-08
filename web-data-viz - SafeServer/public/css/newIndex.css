@@ -386,8 +386,8 @@ body {
 
 .titulo-sistema{
     width: 90%;
-    height: 20%;
-    background-color: red;
+    height: 40%;
+    
     display: flex;
     align-items: end;
 
@@ -395,7 +395,7 @@ body {
 
 .texto-sistema{
     height: 68%;
-    background-color: gray;
+   
     color: white;
     font-family: poppins;
     width: 90%;
@@ -403,9 +403,13 @@ body {
 }
 
 .imagem-sistema{
-    width: 40%;
+    width: 30%;
     height: 90%;
-    background-color: aqua;
+    
+}
+
+.imagem-sistemaper{
+    border-radius: 50px;
 }
 
 .esquerda-sistema{
@@ -413,7 +417,6 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    background-color: purple;
     height: 100%;
     width: 60%;
 }
@@ -424,7 +427,7 @@ body {
     justify-content: space-around;
     background-color: #000d1c;
     color: white;
-    height: 30%;
+    height: 45%;
 }
 
 .footer-bloco {
