@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../css/dashCss/navbar.css">
     <link rel="stylesheet" href="../css/dashCss/dashGerente01.css">
 </head>
+
 <body>
     <div class="navbar">
         <div class="conteudo-esquerda">
@@ -25,53 +27,186 @@
             <div class="regiao discretizacao">
                 <h1>Regiões a serem mostradas</h1>
                 <div class="opcoes">
-                    <button onclick="selecionar('button_1')" id="button_1" >US-EAST-1</button>
-                    <button onclick="selecionar('button_2')" id="button_2" >US-EAST-2</button>
-                    <button onclick="selecionar('button_3')" id="button_3" >US-EAST-3</button>
+                    <button value="1" onclick="selecionar('button_1')" id="button_1">US-EAST-1</button>
+                    <button value="1" onclick="selecionar('button_2')" id="button_2">US-EAST-2</button>
+                    <button value="1" onclick="selecionar('button_3')" id="button_3">US-EAST-3</button>
                 </div>
             </div>
             <div class="componente discretizacao">
                 <h1>Componentes a serem mostrados</h1>
                 <div class="opcoes">
-                    <button onclick="selecionar('button_4')" id="button_4" >CPU</button>
-                    <button onclick="selecionar('button_5')" id="button_5" >RAM</button>
-                    <button onclick="selecionar('button_6')" id="button_6" >Rede</button>
+                    <button value="1" onclick="selecionar('button_4')" id="button_4">CPU</button>
+                    <button value="1" onclick="selecionar('button_5')" id="button_5">RAM</button>
+                    <button value="1" onclick="selecionar('button_6')" id="button_6">Rede</button>
                 </div>
             </div>
             <div class="tempo discretizacao">
                 <h1>Intervalo de tempo</h1>
                 <div class="opcoes">
-                    <input class="slider" type="range" min="1" max="365" id="input_tempo" onpointermove="mostrar()">
+                    <input class="slider" type="range" min="1" max="60" id="input_tempo" onpointermove="mostrar()">
                     <span id="span_range"></span>
                 </div>
             </div>
             <div class="carregar">
-                <button>Carregar mudanças</button>
+                <button onclick="plotar()">Carregar mudanças</button>
             </div>
         </div>
         <div class="content">
+            <div class="box">
+                <div>
+                    <canvas id="chart1"></canvas>
+                </div>
+            </div>
 
         </div>
     </div>
 </body>
+
 </html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('chart1');
+
+    var botao4 = document.getElementById("button_4")
+    var botao5 = document.getElementById("button_5")
+    var botao6 = document.getElementById("button_6")
+
+    var alertasCpu = [];
+    var alertasRam = [];
+    var alertasRede = [];
+    var labels = [];
+
+    
+    function plotar() {
+        var dias = input_tempo.value;
+        
+        var alertasCpu = [];
+        var alertasRam = [];
+        var alertasRede = [];
+
+        var labels = [];
+        for (i = 0; i < dias; i++) {
+            labels.push(`${i + 1}`)
+        }
+
+        chart1.destroy()
+
+        data = {
+            labels: labels,
+            datasets: []
+        }
+
+        if (botao4.value == 1) {
+            for (i = 0; i < dias; i++) {
+                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                alertasCpu.push(num_aleatorio)
+            }
+            data.datasets.push({
+                label: "AlertaCpu",
+                data: alertasCpu
+            })
+        }
+
+        if (botao5.value == 1) {
+            for (i = 0; i < dias; i++) {
+                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                alertasRam.push(num_aleatorio)
+            }
+            data.datasets.push({
+                label: "AlertaRam",
+                data: alertasRam
+            })
+        }
+
+        if (botao6.value == 1) {
+            for (i = 0; i < dias; i++) {
+                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                alertasRede.push(num_aleatorio)
+            }
+            data.datasets.push({
+                label: "AlertaRede",
+                data: alertasRede
+            })
+        }
+        console.log(alertasCpu, alertasRam, alertasRede)
+
+
+        chart1 = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    }
+
+    chart1 = new Chart(ctx, {
+            type: 'bar',
+            data: null,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    
+
+    function addData(chart, label, newData) {
+        chart.data.labels.push(label);
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(newData);
+        });
+        chart.update();
+    }
+
+    function removeData(chart) {
+        chart.data.labels.pop();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+        chart.update();
+    }
+
+
+
+    Chart.defaults.color = "#FFF"
+</script>
+
 <script>
     mostrar()
     function mostrar() {
         var valor = input_tempo.value
-        if (valor == 1 ) {
+        if (valor == 1) {
             span_range.innerHTML = `1 Dia`
-        } else { 
+        } else {
             span_range.innerHTML = `${valor} Dias`
         }
     }
     function selecionar(botao) {
         var idBotao = document.getElementById(botao)
         console.log(idBotao)
-        if (idBotao.style.backgroundColor == "rgb(14, 29, 64)") {
+        if (idBotao.value == 1) {
             idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
+            idBotao.value = 0;
         } else {
-            idBotao.style.backgroundColor = "#0e1d40"
+            idBotao.value = 1;
+            idBotao.style.backgroundColor = "rgb(14, 29, 64)"
         }
     }
 </script>
