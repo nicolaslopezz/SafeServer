@@ -27,28 +27,25 @@
             <div class="regiao discretizacao">
                 <h1>Regiões a serem mostradas</h1>
                 <div class="opcoes">
-                    <button value="1" onclick="selecionar('button_1')" id="button_1">US-EAST-1</button>
-                    <button value="1" onclick="selecionar('button_2')" id="button_2">US-EAST-2</button>
-                    <button value="1" onclick="selecionar('button_3')" id="button_3">US-EAST-3</button>
+                    <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
+                    <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
+                    <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
                 </div>
             </div>
             <div class="componente discretizacao">
                 <h1>Componentes a serem mostrados</h1>
                 <div class="opcoes">
-                    <button value="1" onclick="selecionar('button_4')" id="button_4">CPU</button>
-                    <button value="1" onclick="selecionar('button_5')" id="button_5">RAM</button>
-                    <button value="1" onclick="selecionar('button_6')" id="button_6">Rede</button>
+                    <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
+                    <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
+                    <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
                 </div>
             </div>
             <div class="tempo discretizacao">
                 <h1>Intervalo de tempo</h1>
                 <div class="opcoes">
-                    <input class="slider" type="range" min="1" max="60" id="input_tempo" onpointermove="mostrar()">
+                    <input class="slider" type="range" min="1" max="60" id="input_tempo" onpointermove="mostrar()" onchange="plotar()">
                     <span id="span_range"></span>
                 </div>
-            </div>
-            <div class="carregar">
-                <button onclick="plotar()">Carregar mudanças</button>
             </div>
         </div>
         <div class="content">
@@ -76,10 +73,9 @@
     var alertasRede = [];
     var labels = [];
 
-    
     function plotar() {
         var dias = input_tempo.value;
-        
+
         var alertasCpu = [];
         var alertasRam = [];
         var alertasRede = [];
@@ -150,22 +146,22 @@
     }
 
     chart1 = new Chart(ctx, {
-            type: 'bar',
-            data: null,
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        stacked: true,
-                    },
-                    x: {
-                        stacked: true
-                    }
+        type: 'bar',
+        data: null,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stacked: true,
+                },
+                x: {
+                    stacked: true
                 }
             }
-        });
-    
+        }
+    });
+
 
     function addData(chart, label, newData) {
         chart.data.labels.push(label);
