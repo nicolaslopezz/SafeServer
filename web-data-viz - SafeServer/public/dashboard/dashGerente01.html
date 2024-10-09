@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/dashCss/navbar.css">
+    <link rel="stylesheet" href="../css/dashCss/dashGerente01.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="conteudo-esquerda">
+            <img src="../assets/imgs/logow.png">
+            <span>SafeServer</span>
+        </div>
+        <div class="conteudo-direita">
+            <span>Gerente</span>
+            <div class="botao-sair">
+                <!-- imagem de sair -->
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="sidebar">
+            <div class="regiao discretizacao">
+                <h1>Regiões a serem mostradas</h1>
+                <div class="opcoes">
+                    <button onclick="selecionar('button_1')" id="button_1" >US-EAST-1</button>
+                    <button onclick="selecionar('button_2')" id="button_2" >US-EAST-2</button>
+                    <button onclick="selecionar('button_3')" id="button_3" >US-EAST-3</button>
+                </div>
+            </div>
+            <div class="componente discretizacao">
+                <h1>Componentes a serem mostrados</h1>
+                <div class="opcoes">
+                    <button onclick="selecionar('button_4')" id="button_4" >CPU</button>
+                    <button onclick="selecionar('button_5')" id="button_5" >RAM</button>
+                    <button onclick="selecionar('button_6')" id="button_6" >Rede</button>
+                </div>
+            </div>
+            <div class="tempo discretizacao">
+                <h1>Intervalo de tempo</h1>
+                <div class="opcoes">
+                    <input class="slider" type="range" min="1" max="365" id="input_tempo" onpointermove="mostrar()">
+                    <span id="span_range"></span>
+                </div>
+            </div>
+            <div class="carregar">
+                <button>Carregar mudanças</button>
+            </div>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    mostrar()
+    function mostrar() {
+        var valor = input_tempo.value
+        if (valor == 1 ) {
+            span_range.innerHTML = `1 Dia`
+        } else { 
+            span_range.innerHTML = `${valor} Dias`
+        }
+    }
+    function selecionar(botao) {
+        var idBotao = document.getElementById(botao)
+        console.log(idBotao)
+        if (idBotao.style.backgroundColor == "rgb(14, 29, 64)") {
+            idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
+        } else {
+            idBotao.style.backgroundColor = "#0e1d40"
+        }
+    }
+</script>

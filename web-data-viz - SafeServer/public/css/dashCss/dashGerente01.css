@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0e1d40;
+    font-family: poppins;
+}
+
+@font-face {
+    font-family: poppins;
+    src: url(../../assets/fonte/Poppins/Poppins-Regular.ttf);
+}
+
+.main {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+}
+
+.sidebar {
+    width: 35%;
+    height: 100%;
+    background-color: rgba(116, 118, 135, 0.6);   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.discretizacao {
+    width: 90%;
+    color: white;
+}
+
+.discretizacao h1 {
+    font-size: 2rem;
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: fit-content;
+    min-height: 40%px;
+}
+
+.opcoes button{
+    padding: 5px 10px 5px 10px;
+    background-color: rgba(116, 118, 135, 0.6);
+    border: none;
+    border-radius: 15px;
+    font-family: poppins;
+    color: white;
+}
+
+.slider {
+    width: 40%;
+}
+
+.opcoes span {
+    width: 20%;
+}
