@@ -41,7 +41,12 @@
             <div class="tempo discretizacao">
                 <h1>Intervalo de tempo</h1>
                 <div class="opcoes">
+                    <input class="slider" type="range" min="1" max="365" id="input_tempo" onpointermove="mostrar()">
+                    <span id="span_range"></span>
                 </div>
+            </div>
+            <div class="carregar">
+                <button>Carregar mudanças</button>
             </div>
         </div>
         <div class="content">
@@ -51,6 +56,15 @@
 </body>
 </html>
 <script>
+    mostrar()
+    function mostrar() {
+        var valor = input_tempo.value
+        if (valor == 1 ) {
+            span_range.innerHTML = `1 Dia`
+        } else { 
+            span_range.innerHTML = `${valor} Dias`
+        }
+    }
     function selecionar(botao) {
         var idBotao = document.getElementById(botao)
         console.log(idBotao)
