@@ -35,6 +35,7 @@ body {
     margin: 0 15px;
     font-size: 2.1rem;
     font-family: poppins-bold;
+    font-size: 20px;
 }
 
 .logo {
@@ -83,7 +84,7 @@ body {
 }
 
 .conteudo p {
-    font-size: 30px;
+    font-size: 24px;
     color: #fff;
     font-family: "poppins";
     text-align: start;
@@ -128,8 +129,10 @@ body {
     height: 100%;
     justify-content: center;
     align-items: center;
+    
 
 }
+
 
 
 .espaco {
@@ -139,7 +142,7 @@ body {
 }
 
 .opcoes a {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .home {
@@ -225,7 +228,7 @@ body {
 
 
 .servicos-conteudo h2 {
-    font-size: 48px;
+    font-size: 45px;
     font-family: poppins-bold;
 }
 
@@ -273,14 +276,14 @@ body {
 
 
 .cadastre-se {
-    background-color: white;
+    background-color: #ffffff;
     color: rgb(9, 24, 54);
-    padding: 4px 4px;
+    padding: 15px 23px;
     border: none;
-    font-size: 19px;
-    font-family: poppins-bold;
     cursor: pointer;
-    border-radius: 10px;
+    font-size: 23px;
+    font-family: poppins-bold;
+    border-radius: 14px;
 }
 
 .imagem-redonda {
@@ -368,6 +371,7 @@ body {
 }
 
 .sistema {
+    height: 110vh;
     color: white;
     font-family: poppins-bold;
     font-size: 30px;
@@ -378,7 +382,7 @@ body {
 
 
 .corpo-sistema{
-    height: 70%;
+    height: 80%;
     display: flex;
     flex-direction: row;
 }
@@ -427,7 +431,12 @@ body {
     justify-content: space-around;
     background-color: #000d1c;
     color: white;
-    height: 45%;
+    height: 20%;
+}
+
+.footer p{
+    margin:0;
+    font-size: 20px;
 }
 
 .footer-bloco {
@@ -437,13 +446,50 @@ body {
 
 .footer-bloco h3 {
     margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .footer-bloco a {
     color: white;
     text-decoration: none;
+    font-size: 20px;
 }
 
 .footer-bloco a:hover {
     text-decoration: underline;
+}
+
+.bola{
+    display: flex;
+    background-color: rgb(47, 45, 45);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconeCima{
+    display: flex;
+width: 100%;
+height: 70%;
+
+align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.iconeBaixo{
+    width: 100%;
+    height: 30%;
+}
+
+.tituloIcone{
+
+}
+
+#servidorimg{
+    height: 50px;
+    width: 50px;
 }
