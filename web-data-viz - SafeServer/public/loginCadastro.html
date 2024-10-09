@@ -27,7 +27,7 @@
         </div>
         <button id="signup">Cadastro</button>
       </div>
-      <form class="content" onsubmit="entrar(event)">
+      <form id="form1" class="content" onsubmit="entrar(event)">
         <div class="divInputs">
           <span>Email</span>
           <input required type="text" id="ipt_emailLogin">
@@ -40,7 +40,7 @@
       </form>
     </div>
     <div class="cadastro box">
-      <form class="content" onsubmit="cadastrar(event)">
+      <form id="form2" class="content" onsubmit="cadastrar(event)">
         <div class="inputs">
           <div class="esquerda">
             <div class="divInputs">
@@ -108,6 +108,7 @@
   function entrar(event) {
     event.preventDefault()
 
+
     var emailVar = ipt_emailLogin.value;
     var senhaVar = ipt_senhaLogin.value;
     var tamanhoEmail = emailVar.length;
@@ -126,6 +127,8 @@
       alert("Número de carcateres muito grande no email.")
       return false;
     }
+    document.getElementById("form1").reset()
+
     // else if (tamanhoSenha <= 6) {
     // alert(`Sua senha precisa ter pelo menos 7 caracteres.`)
     // return false;
@@ -172,6 +175,7 @@
   }
 
   function cadastrar(event) {
+
     event.preventDefault()
     //aguardar();
 
@@ -200,6 +204,9 @@
       }
       console.log(listaEmpresasCadastradas)
     }
+
+    document.getElementById("form2").reset()
+
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
