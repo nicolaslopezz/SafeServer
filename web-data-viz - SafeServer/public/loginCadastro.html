@@ -62,10 +62,6 @@
               <input required type="text" id="ipt_cpfCadastro">
             </div>
             <div class="divInputs">
-              <span>Cargo</span>
-              <input required type="text" id="ipt_cargoCadastro">
-            </div>
-            <div class="divInputs">
               <span>Código</span>
               <input required type="password" id="ipt_cdgCadastro">
             </div>
@@ -88,7 +84,7 @@
 </html>
 
 <script>
-  let listaEmpresasCadastradas = [];
+  let listaCodigosAcesso = [];
 
 
   var btnSignin = document.querySelector("#signin");
@@ -157,6 +153,7 @@
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.ID_USUARIO = json.idFuncionario;
+          sessionStorage.NIVEL_PERMISSAO_USUARIO = json.nivelPermissao;
           setTimeout(function () {
             window.location = "./dashboard/cards.html";
           }, 1000); // apenas para exibir o loading
@@ -185,9 +182,9 @@
     var emailVar = ipt_emailCadastro.value
     var senhaVar = ipt_senhaCadastro.value
     var cpfVar = ipt_senhaCadastro.value
-    var cargoVar = ipt_cargoCadastro.value
     var chaveAcessoVar = ipt_cdgCadastro.value
     var idEmpresaVincular
+    var fkChave
 
     console.log(nomeVar, emailVar, senhaVar, cpfVar, chaveAcessoVar)
 
@@ -196,14 +193,16 @@
       return false;
     }
     // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].chaveAcesso == chaveAcessoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
+    for (let i = 0; i < listaCodigosAcesso.length; i++) {
+      if (listaCodigosAcesso[i].chave == chaveAcessoVar) {
+        idEmpresaVincular = listaCodigosAcesso[i].fkEmpresa
+        fkChave = listaCodigosAcesso[i].idChave
         console.log("Código de ativação válido.");
         break;
       }
-      console.log(listaEmpresasCadastradas)
     }
+
+    console.log(nomeVar, emailVar, senhaVar, cpfVar, idEmpresaVincular, fkChave)
 
     document.getElementById("form2").reset()
 
@@ -221,8 +220,8 @@
         emailServer: emailVar,
         senhaServer: senhaVar,
         cpfServer: cpfVar,
-        cargoServer: cargoVar,
-        idEmpresaVincularServer: idEmpresaVincular
+        idEmpresaVincularServer: idEmpresaVincular,
+        fkChaveServer: fkChave
       }),
     })
       .then(function (resposta) {
@@ -238,7 +237,7 @@
         console.log(`#ERRO: ${resposta}`);
       });
 
-      body.className("alterarParaLogin")
+      // body.className("alterarParaLogin")
   }
 
   function listar() {
@@ -246,13 +245,9 @@
       method: "GET",
     })
       .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].chaveAcesso)
-          });
+        resposta.json().then((codigos) => {
+          listaCodigosAcesso = codigos;
+          console.log(listaCodigosAcesso)
         });
       })
       .catch(function (resposta) {
