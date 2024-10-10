@@ -15,11 +15,12 @@
         <div class="inicio">
             <div class="navbar">
                 <div class="logo">
-                    <img src="assets/imgs/logow.png" style="width: 70px;">
+                    <img src="assets/imgs/logow.png" style="width: 63px;">
                 </div>
                 <div class="opcoes-pai">
-                    <div class="opcoes"> <a href="#">INICIO</a></div>
-                    <div class="opcoes"><a href="./loginCadastro.html">CONECTAR</a></div>
+                    <div class="opcoes"> <a href="#sistema">SISTEMA</a></div>
+                    <div class="opcoes"> <a href="#solucoes">SOLUÇÕES</a></div>
+                    <div class="opcoes"><a href="./loginCadastro.html">LOGIN</a></div>
                 </div>
             </div>
 
@@ -35,19 +36,19 @@
                                 para prevenir e prever as falhas, assim, reduzindo as suas perdas.</p>
                         </div>
                         <div class="botao1">
-                            <button class="saiba-mais">Saiba mais</button>
+                            <button class="saiba-mais"><a href="#sistema">Saiba mais</a></button>
                         </div>
                     </div>
                 </div>
                 <div class="picture">
-                    <img class="imagem" src="./assets/imgs/R.jfif" alt="" width="880px" height="700px">
+                    <img class="imagem" src="./assets/imgs/R.jfif" alt="" width="880px" height="612px">
                 </div>
             </div>
         </div>
 
 
 
-        <div class="servicos">
+        <div class="servicos" id="servicos">
             <div class="servicos-container">
                 <div class="parte1">
                     <div class="parte1-texto">
@@ -70,7 +71,7 @@
 
                                 </div>
                                 <div class="botao-servico">
-                                    <button class="cadastre-se">Cadastre-se</button>
+                                    <button class="cadastre-se"><a href="./cadastro.html">Cadastre-se</a></button>
                                 </div>
                             </div>
 
@@ -83,13 +84,12 @@
                 </div>
 
                 <div class="parte2">
-                    <div class="b1"></div>
-
+                   
                     <div class="icone">
                         <div class="iconeCima">
 
                             <div class="bola">
-                                <img src="./assets/imgs/seguro.png" alt="Segurança">
+                                <img src="./assets/imgs/escudo.png"   id="servidorimg" alt="Segurança">
                             </div>
                             <div class="tituloIcone">
                                 <h3>SEGURANÇA</h3>
@@ -105,7 +105,7 @@
                     <div class="icone">
                         <div class="iconeCima">
                             <div class="bola">
-                                <img src="./assets/imgs/servidor.png" id= "servidorimg" alt="Uptime">
+                                <img src="./assets/imgs/servidor.png" id="servidorimg" alt="Uptime">
                             </div>
                             <div class="tituloIcone">
                                 <h3>MAIOR UPTIME</h3>
@@ -117,14 +117,30 @@
 
                     </div>
                     <div class="icone">
-                        <img src="./assets/imgs/olho-aberto.png" alt="Monitoramento">
-                        <h3>MONITORAMENTO</h3>
-                        <p>Vigilância ininterrupta dos servidores.</p>
+                        <div class="iconeCima">
+                            <div class="bola">
+                                <img src="./assets/imgs/olho.png" id="servidorimg" alt="Monitoramento">
+                            </div>
+                            <div class="tituloIcone">
+                                <h3>MONITORAMENTO</h3>
+                            </div>
+                        </div>
+                        <div class="iconeBaixo">
+                            <p>Vigilância ininterrupta dos servidores.</p>
+                        </div>
                     </div>
                     <div class="icone">
-                        <img src="./assets/imgs/notificacao.png" alt="Notificação">
-                        <h3>NOTIFICAÇÃO</h3>
-                        <p>Alertas rápidos em tempo real.</p>
+                        <div class="iconeCima">
+                            <div class="bola">
+                                <img src="./assets/imgs/notificacao.png" id="servidorimg" alt="Notificação">
+                            </div>
+                            <div class="tituloIcone">
+                                 <h3>NOTIFICAÇÃO</h3>
+                            </div>
+                        </div>
+                        <div class="iconeBaixo">
+                            <p>Alertas rápidos em tempo real.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,8 +149,8 @@
 
 
         <div class="soluções">
-            <div class="titulo-solucao">
-                <h1>SOLUÇÕES SOB MEDIDA</h1>
+            <div class="titulo-solucao" id="solucoes">
+                <h2>SOLUÇÕES SOB MEDIDA</h2>
             </div>
 
 
@@ -147,7 +163,7 @@
             </div>
 
             <div class="img-solucao">
-                <img src="assets/imgs/image-removebg-preview (1).png" alt="">
+                <img src="assets/imgs/image-removebg-preview (1).png" alt="" width="570" height="380">
             </div>
 
 
@@ -160,8 +176,8 @@
 
             <div class="corpo-sistema">
                 <div class="esquerda-sistema">
-                    <div class="titulo-sistema">
-                        <h1>SISTEMA</h1>
+                    <div class="titulo-sistema" id="sistema">
+                        <h2>SISTEMA</h2>
                     </div>
                     <div class="texto-sistema">
                         <p>Capturamos os componentes dos servidores e ferecemos uma visão ampla e detalhada através de
@@ -171,7 +187,7 @@
                 </div>
 
                 <div class="imagem-sistema">
-                    <img class="imagem-sistemaper" src="./assets/imgs/dash.png" alt="" width="500px" height="500px">
+                    <img class="imagem-sistemaper" src="" alt="" width="500px" height="400px">
                 </div>
 
             </div>
@@ -179,24 +195,34 @@
 
 
             <footer class="footer">
-                <div class="footer-bloco contato">
-                    <h3>Contato</h3>
-                    <p>Telefone: <a href="tel:+5511909025255">(11) 9090-25255</a></p>
-                    <p>Email: <a href="mailto:Safe.server@outlook.com">Safe.server@outlook.com</a></p>
+                <div class="icone-footer">
+                    <img src="assets/imgs/logow.png"width="20px" height="20px">
                 </div>
-                <div class="footer-bloco redes-sociais">
-                    <h3>Redes Sociais</h3>
-
-                    <p><a href="#" target="_blank">Twitter</a></p>
-                    <p><a href="#" target="_blank">Instagram</a></p>
+                <div class="footer-bloco">
+                    <div class="footer-conteudo">
+                        <h3>CONTATO</h3>
+                        <p><img src="assets/imgs/telefone (1).png" width="15px" height="15px" id="footericone">(11) 9090-25255</p>
+                        <p><img src="assets/imgs/o-email (1).png" width="15px" height="15px" id="footericone">SServer@gmail.com</p>
+                    </div>
                 </div>
-                <div class="footer-bloco institucional">
-                    <h3>Institucional</h3>
-                    <p><a href="#">Cadastro</a></p>
-                    <p><a href="#">Nossos serviços</a></p>
-
+                <div class="footer-bloco">
+                    <div class="footer-conteudo">
+                        <h3>REDES SOCIAIS</h3>
+                        
+                        <p><img src="assets/imgs/instagram (1).png" width="15px" height="15px" id="footericone">SafeServer</p>
+                        <p><img src="assets/imgs/linkedin (1).png" width="15px" height="15px" id="footericone">Safe_Server</p>
+                    </div>
+                </div>
+            
+                <div class="footer-bloco">
+                    <div class="footer-conteudo">
+                        <h3>INSTITUCIONAL</h3>
+                        <p><img src="assets/imgs/add-task.png" width="15px" height="15px" id="footericone"><a href="#">Cadastro</p>
+                        <p><img src="assets/imgs/manutencao.png" width="15px" height="15px" id="footericone"><a href="#servicos">Nossos serviços</p>
+                    </div>
                 </div>
             </footer>
+            <div class="footer2"><a>Copyright@2024</a><div>
         </div>
 
     </div>
