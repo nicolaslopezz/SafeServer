@@ -49,11 +49,27 @@ body {
 
 .opcoes button{
     padding: 5px 10px 5px 10px;
-    background-color: rgba(116, 118, 135, 0.6);
+    background-color: rgb(14, 29, 64);
     border: none;
     border-radius: 15px;
     font-family: poppins;
     color: white;
+}
+
+.content {
+    width: 65%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 80%;
+    padding: 15px;
+    /* height: 50%; */
+    background-color: rgba(116, 118, 135, 0.6);
+    border-radius: 30px;
 }
 
 .slider {
