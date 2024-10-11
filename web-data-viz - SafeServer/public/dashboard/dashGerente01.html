@@ -43,8 +43,9 @@
             <div class="tempo discretizacao">
                 <h1>Intervalo de tempo</h1>
                 <div class="opcoes">
-                    <input class="slider" type="range" min="1" max="60" id="input_tempo" onpointermove="mostrar()" onchange="plotar()">
-                    <span id="span_range"></span>
+                    <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)" onchange="plotar()">
+                    <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
+                    <span>Dias</span>
                 </div>
             </div>
         </div>
@@ -92,9 +93,13 @@
             datasets: []
         }
 
+        var regiao1 = Number(button_1.value);
+        var regiao2 = Number(button_2.value);
+        var regiao3 = Number(button_3.value);
+
         if (botao4.value == 1) {
             for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
                 alertasCpu.push(num_aleatorio)
             }
             data.datasets.push({
@@ -105,7 +110,7 @@
 
         if (botao5.value == 1) {
             for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3)- 0.5, 0) 
                 alertasRam.push(num_aleatorio)
             }
             data.datasets.push({
@@ -116,7 +121,7 @@
 
         if (botao6.value == 1) {
             for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 - 0.5, 0)
+                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3)- 0.5, 0) 
                 alertasRede.push(num_aleatorio)
             }
             data.datasets.push({
@@ -186,12 +191,13 @@
 
 <script>
     mostrar()
-    function mostrar() {
-        var valor = input_tempo.value
-        if (valor == 1) {
-            span_range.innerHTML = `1 Dia`
+    function mostrar(param) {
+        if (param == 1) {   
+            var valor = input_tempo.value
+            ipt_range.value = valor
         } else {
-            span_range.innerHTML = `${valor} Dias`
+            var valor = ipt_range.value
+            input_tempo.value = valor
         }
     }
     function selecionar(botao) {
