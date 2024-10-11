@@ -10,8 +10,17 @@ function obterCargos(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function obterFunc(idEmpresa) {
+    var instrucaoSql = `
+        SELECT nome, email, cpf, cargo FROM obterFunc WHERE fkEmpresa = ${idEmpresa};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
 module.exports = {
-    obterCargos
+    obterCargos,
+    obterFunc
 };

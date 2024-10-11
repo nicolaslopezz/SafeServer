@@ -8,4 +8,8 @@ router.post("/obterCargos", function (req, res) {
     dashboardController.obterCargos(req, res);
 })
 
+router.post("/obterFunc", function (req, res) {
+    dashboardController.obterFunc(req, res);
+})
+
 module.exports = router;

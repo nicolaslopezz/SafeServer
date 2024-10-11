@@ -139,6 +139,37 @@ select {
     /* height: fit-content; */
 }
 
+.grid-cargos {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 3px solid rgb(14, 29, 64);
+    width: 90%;
+    /* height: 90%; */
+}
+
+.grid-cargos .item {
+    border: 3px solid rgb(14, 29, 64);
+    height: 40px;
+    /* width: 25%; */
+    text-align: center;
+}
+
+.grid-func {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 3px solid rgb(14, 29, 64);
+    width: 90%;
+    /* height: 90%; */
+}
+
+.grid-func .item {
+    border: 3px solid rgb(14, 29, 64);
+    height: 40px;
+    /* width: 25%; */
+    text-align: center;
+}
+
+
 h1 {
     font-family: poppinsBold;
 }

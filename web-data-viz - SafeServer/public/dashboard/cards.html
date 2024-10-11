@@ -48,7 +48,8 @@
                 <button id="btn_cargos">Ver cargos</button>
                 <button id="btn_func">Ver funcionários</button>
             </div>
-            <button onclick="obterDadosCargos()">Chamar fetch</button>
+            <button onclick="obterDadosCargos()">Chamar fetch cargos</button>
+            <button onclick="obterDadosFunc()">Chamar fetch func</button>
         </div>
         <div class="content">
             <div class="cadastrarCargo">
@@ -56,28 +57,30 @@
                     <h1>Adicionar cargo</h1>
                     <div class="item">
                         <span>Insira o nome da função nova</span>
-                        <input type="text">
+                        <input type="text" id="ipt_nome">
                     </div>
                     <div class="item">
                         <span>Insira o nível de permissão da nova função</span>
                         <select id="slct_nivel">
-                            <option value="0" selected disabled>Escolha uma opção</option>
+                            <option value="null" selected disabled>Escolha uma opção</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                         </select>
                     </div>
-                    <button class="botao">Confirmar cadastro</button>
+                    <button class="botao" onclick="cadastrar">Confirmar cadastro</button>
                 </div>
             </div>
             <div class="verCargos">
                 <div class="box">
-                    <div class="grid-cargos"></div>
+                    <h1>Cargos</h1>
+                    <div id="div_cargos" class="grid-cargos "></div>
                 </div>
             </div>
             <div class="verFunc">
                 <div class="box">
-                    <div class="grid-func"></div>
+                    <h1>Funcionários</h1>
+                    <div id="div_func" class="grid-func "></div>
                 </div>
             </div>
         </div>
@@ -106,35 +109,142 @@
 
 <script>
     var dados = {};
+    var html_cargos = `
+                    <div class="item">Número</div>
+                    <div class="item" >Nome</div>
+                    <div class="item" >Nivel Permissão</div>
+                    <div class="item" >Chave</div>`
+    var html_func = `
+                    <div class="item">Nome</div>
+                    <div class="item">Email</div>
+                    <div class="item">Cpf</div>
+                    <div class="item">Cargo</div>`
+    
+    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+    
     function obterDadosCargos() {
-        var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+        html_cargos = `
+                    <div class="item">Número</div>
+                    <div class="item">Nome</div>
+                    <div class="item">Nivel Permissão</div>
+                    <div class="item">Chave</div>`
         console.log(idEmpresa)
 
         fetch("/dashboard/obterCargos", {
             method: "POST",
             headers: {
-                "Content-type" : "application/json"
+                "Content-type": "application/json"
             },
             body: JSON.stringify({
                 idEmpresaServer: idEmpresa
             })
-        }).then(function(resposta) {
-            if (resposta.ok){
+        }).then(function (resposta) {
+            if (resposta.ok) {
                 // console.log("DADOS RECEBIDOS:",resposta)
-                teste = resposta.json().then(json=> {
+                teste = resposta.json().then(json => {
                     dados = {
                         cargos: json.cargo,
                         nivelPermissao: json.nivelPermissao,
                         chave: json.chave
                     }
+                    for (i = 0; i < dados.cargos.length; i++) {
+                        html_cargos += `
+                    <div class="item">${i + 1}</div>
+                    <div class="item">${dados.cargos[i]}</div>
+                    <div class="item">${dados.nivelPermissao[i]}</div>
+                    <div class="item">${dados.chave[i]}</div>
+                    `
+
+                        div_cargos.innerHTML = html_cargos;
+                    }
                 })
+
+                // console.log(html)
+                // div_cargos.innerHTML = ``
+
             } else {
                 console.log("Houve um erro ao receber os dados no cards.html")
             }
-        }).catch(function(erro) {
+
+
+        }).catch(function (erro) {
             console.log("CATCH DO FETCH")
             console.log(erro)
         })
     }
+
+    function obterDadosFunc() {
+        html_func = `
+                    <div class="item">Nome</div>
+                    <div class="item">Email</div>
+                    <div class="item">Cpf</div>
+                    <div class="item">Cargo</div>`
+        console.log(idEmpresa)
+
+        fetch("/dashboard/obterFunc", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                // console.log("DADOS RECEBIDOS:",resposta)
+                teste = resposta.json().then(json => {
+                    dadosFunc = {
+                        nome: json.nome,
+                        email: json.email,
+                        cpf: json.cpf,
+                        cargo: json.cargo
+                    }
+                    for (i = 0; i < dadosFunc.cargo.length; i++) {
+                        html_func += `
+                        <div class="item">${dadosFunc.nome[i]}</div>
+                        <div class="item">${dadosFunc.email[i]}</div>
+                        <div class="item">${dadosFunc.cpf[i]}</div>
+                        <div class="item">${dadosFunc.cargo[i]}</div>
+                    `
+
+                        div_func.innerHTML = html_func;
+                    }
+                })
+
+                // console.log(html)
+                // div_cargos.innerHTML = ``
+
+            } else {
+                console.log("Houve um erro ao receber os dados func no cards.html")
+            }
+
+
+        }).catch(function (erro) {
+            console.log("CATCH DO FETCH")
+            console.log(erro)
+        })
+    }
+
+    function cadastrarCargo() {
+        var nome = ipt_nome.value
+        var nivelPermisaso = slct_nivel.value
+
+        if (nivelPermisaso == "null") {
+            return false
+        }
+
+        fetch("/dashboards/cadastrarcargo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                nivelPermisasoServer: nivelPermisaso,
+                fkEmpresaServer: idEmpresa
+            }),
+        })
+    }
 </script>
+
 </html>
