@@ -23,7 +23,8 @@ function autenticar(req, res) {
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
-                                    nivelPermissao: resultadoAutenticar[0].nivelPermissao
+                                    nivelPermissao: resultadoAutenticar[0].nivelPermissao,
+                                    idEmpresa: resultadoAutenticar[0].idEmpresa
                                 });
                             }  else if (resultadoAutenticar.length == 0) {
                                     res.status(403).send("Email e/ou senha inválido(s)");
