@@ -17,13 +17,14 @@ function autenticar(req, res) {
                 console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                             if (resultadoAutenticar.length == 1) {
-                               const usuario = resultadoAutenticar[0]
+                            //    const usuario = resultadoAutenticar[0]
                                 res.json({
                                     idFuncionario: resultadoAutenticar[0].idFuncionario,
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
-                                    nivelPermissao: resultadoAutenticar[0].nivelPermissao
+                                    nivelPermissao: resultadoAutenticar[0].nivelPermissao,
+                                    idEmpresa: resultadoAutenticar[0].idEmpresa
                                 });
                             }  else if (resultadoAutenticar.length == 0) {
                                     res.status(403).send("Email e/ou senha inválido(s)");

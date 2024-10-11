@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0e1d40;
+    font-family: poppins;
+}
+
+@font-face {
+    font-family: poppins;
+    src: url(../../assets/fonte/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: poppinsBold;
+    src: url(../../assets/fonte/Poppins/Poppins-Bold.ttf);
+}
+
+.main {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    position: relative;
+}
+
+.sideBar {
+    width: 20%;
+    height: 100%;
+    background-color: rgba(116, 118, 135, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    width: 80%;
+    height: 100%;
+    position: relative;
+    background-color: #0e1d40;
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 50%;
+    width: 100%;  
+}
+
+.opcoes button{
+    padding: 5px 10px 5px 10px;
+    background-color: rgb(14, 29, 64);
+    border: none;
+    border-radius: 15px;
+    font-family: poppins;
+    font-size: 20px;
+    color: white;
+    width: 60%;
+    height: 30%;
+}
+
+.opcoes button {
+    cursor: pointer;
+}
+
+.cadastrarCargo {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verCargos {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verFunc {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 50%;
+    height: 80%;
+    background-color: rgba(116, 118, 135, 0.6);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+select {
+    padding: 5px 10px 5px 10px;
+    background-color: rgb(14, 29, 64);
+    border: none;
+    border-radius: 15px;
+    font-family: poppins;
+    color: white;
+    text-align: center;
+    /* width: 60%; */
+}
+
+.botao {
+    padding: 5px 10px 5px 10px;
+    background-color: rgb(14, 29, 64);
+    border: none;
+    border-radius: 15px;
+    font-family: poppins;
+    color: white;
+    width: fit-content;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    /* height: fit-content; */
+}
+
+.grid-cargos {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 3px solid rgb(14, 29, 64);
+    width: 90%;
+    /* height: 90%; */
+}
+
+.grid-cargos .item {
+    border: 3px solid rgb(14, 29, 64);
+    height: 40px;
+    /* width: 25%; */
+    text-align: center;
+}
+
+.grid-func {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 3px solid rgb(14, 29, 64);
+    width: 90%;
+    /* height: 90%; */
+}
+
+.grid-func .item {
+    border: 3px solid rgb(14, 29, 64);
+    height: 40px;
+    /* width: 25%; */
+    text-align: center;
+}
+
+
+h1 {
+    font-family: poppinsBold;
+}
+
+.alterarParaCadastro .cadastrarCargo {
+    z-index: 10;
+}
+
+.alterarParaCadastro .verCargos {
+    z-index: -1;
+}
+
+.alterarParaCadastro .verFunc {
+    z-index: -1;
+}
+
+.alterarParaCargos .cadastrarCargo {
+    z-index: -1;
+}
+
+.alterarParaCargos .verCargos {
+    z-index: 10;
+}
+
+.alterarParaCargos .verFunc {
+    z-index: -1;
+}
+
+.alterarParaFunc .cadastrarCargo {
+    z-index: -1;
+}
+
+.alterarParaFunc .verCargos {
+    z-index: -1;
+}
+
+.alterarParaFunc .verFunc {
+    position: rela;
+    z-index: 10;
+}
