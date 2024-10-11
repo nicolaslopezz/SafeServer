@@ -11,8 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
-
+    <title>SafeServer | Visualização de Usuários</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
@@ -26,16 +25,14 @@
     <link rel="stylesheet" href="../css/dashCss/dashRH.css">
 </head>
 
-<body onload="
-    // validarSessao(), exibirAquarios(),  atualizacaoPeriodica()
-    ">
+<body onload="buscarDados()">
     <div class="navbar">
         <div class="conteudo-esquerda">
             <img src="../assets/imgs/logow.png">
             <span>SafeServer</span>
         </div>
         <div class="conteudo-direita">
-            <span>Gerente</span>
+            <span>RH</span>
             <div class="botao-sair">
                 <!-- imagem de sair -->
             </div>
@@ -45,11 +42,9 @@
         <div class="sideBar">
             <div class="opcoes">
                 <button id="btn_cadastro">Cadastrar novo cargo</button>
-                <button id="btn_cargos">Ver cargos</button>
-                <button id="btn_func">Ver funcionários</button>
+                <button onclick="buscarDados()" id="btn_cargos">Ver cargos</button>
+                <button onclick="buscarDados()" id="btn_func">Ver funcionários</button>
             </div>
-            <button onclick="obterDadosCargos()">Chamar fetch cargos</button>
-            <button onclick="obterDadosFunc()">Chamar fetch func</button>
         </div>
         <div class="content">
             <div class="cadastrarCargo">
@@ -108,21 +103,15 @@
 </script>
 
 <script>
-    var dados = {};
-    var html_cargos = `
-                    <div class="item">Número</div>
-                    <div class="item" >Nome</div>
-                    <div class="item" >Nivel Permissão</div>
-                    <div class="item" >Chave</div>`
-    var html_func = `
-                    <div class="item">Nome</div>
-                    <div class="item">Email</div>
-                    <div class="item">Cpf</div>
-                    <div class="item">Cargo</div>`
-    
     var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-    
+
+    function buscarDados() {
+        obterDadosCargos()
+        obterDadosFunc()
+    }
+
     function obterDadosCargos() {
+        var dados = {};
         html_cargos = `
                     <div class="item">Número</div>
                     <div class="item">Nome</div>
@@ -248,5 +237,4 @@
         })
     }
 </script>
-
 </html>

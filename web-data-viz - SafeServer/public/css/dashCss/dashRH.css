@@ -152,6 +152,7 @@ select {
     height: 40px;
     /* width: 25%; */
     text-align: center;
+    position: relative;
 }
 
 .grid-func {
