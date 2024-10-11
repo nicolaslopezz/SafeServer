@@ -68,7 +68,7 @@
                             <option>3</option>
                         </select>
                     </div>
-                    <button class="botao" onclick="cadastrar">Confirmar cadastro</button>
+                    <button class="botao" onclick="cadastrarCargo()">Confirmar cadastro</button>
                 </div>
             </div>
             <div class="verCargos">
@@ -233,14 +233,16 @@
             return false
         }
 
-        fetch("/dashboards/cadastrarcargo", {
+        console.log('oi')
+
+        fetch("/dashboard/cadastrarCargo", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 nomeServer: nome,
-                nivelPermisasoServer: nivelPermisaso,
+                nivelPermissaoServer: nivelPermisaso,
                 fkEmpresaServer: idEmpresa
             }),
         })

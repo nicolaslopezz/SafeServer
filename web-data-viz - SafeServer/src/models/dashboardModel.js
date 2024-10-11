@@ -18,9 +18,24 @@ function obterFunc(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
+    let codigo = gerarCodigo();
+    var instrucaoSql = `
+        INSERT INTO chaveAcesso(chave, nivelPermissao, fkEmpresa, cargo) VALUES 
+            ("${codigo}", "${nivelPermissao}", "${idEmpresa}", "${cargo}");
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function gerarCodigo() {
+    return Math.random().toString(36).substr(-8).toUpperCase()
+}
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
 module.exports = {
     obterCargos,
-    obterFunc
+    obterFunc,
+    cadastrarCargo
 };

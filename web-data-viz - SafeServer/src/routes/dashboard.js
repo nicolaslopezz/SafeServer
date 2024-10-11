@@ -12,4 +12,7 @@ router.post("/obterFunc", function (req, res) {
     dashboardController.obterFunc(req, res);
 })
 
+router.post("/cadastrarCargo", function (req, res) {
+    dashboardController.cadastrarCargo(req, res);
+})
 module.exports = router;
