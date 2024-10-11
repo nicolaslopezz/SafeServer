@@ -1,9 +1,9 @@
-const { obterCargos } = require("../controllers/dashboardController");
+// const { obterCargos } = require("../controllers/dashboardController");
 var database = require("../database/config")
 
 function obterCargos(idEmpresa) {
     var instrucaoSql = `
-        SELECT cargo, nivelAcesso, chave FROM chave 
+        SELECT cargo, nivelPermissao, chave FROM chaveAcesso 
             WHERE fkEmpresa = '${idEmpresa}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

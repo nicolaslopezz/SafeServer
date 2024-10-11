@@ -1,7 +1,8 @@
-var usuarioModel = require("../models/usuarioModel");
+var dashboardModel = require("../models/dashboardModel");
 
 function obterCargos(req, res) {
-    var idEmpresa = req.body.emailServer;
+    var idEmpresa = req.body.idEmpresaServer;
+    console.log("CHEGUEI NO CONTROLLER COM:", idEmpresa)
 
     if (idEmpresa == undefined) {
         res.status(400).send("A empresa está indefinida!");
@@ -15,8 +16,30 @@ function obterCargos(req, res) {
                 if (resultadoSelect.length == 0) {
                     res.status(403).send("Nenhum resultado encontrado");
                 } else {
+                    // var devolucao = {
+                    //     "cargo": [],
+                    //     "nivelPermissao": [],
+                    //     "chave": []
+                    // };
+                    // for(i = 0; i < resultadoSelect.length; i++) {
+                    //     devolucao.cargo.push(resultadoSelect[i].cargo)
+                    //     devolucao.nivelPermissao.push(resultadoSelect[i].nivelPermissao)
+                    //     devolucao.chave.push(resultadoSelect[i].chave)
+                    // }
+                    var cargo = [];
+                    var nivelPermissao = [];
+                    var chave = [];
+                    for (i = 0; i < resultadoSelect.length; i++) {
+                        cargo.push(resultadoSelect[i].cargo)
+                        nivelPermissao.push(resultadoSelect[i].nivelPermissao)
+                        chave.push(resultadoSelect[i].chave)
+                    }
+                    console.log(cargo, nivelPermissao, chave)
+                    // console.log(devolucao)
                     res.json({
-                        // seguir amanhã
+                        cargo: cargo,
+                        nivelPermissao: nivelPermissao,
+                        chave: chave
                     })
                 }
 
@@ -33,7 +56,7 @@ function obterCargos(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                console.log("\nHouve um erro ao obter os dados! Erro: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );

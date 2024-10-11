@@ -48,6 +48,7 @@
                 <button id="btn_cargos">Ver cargos</button>
                 <button id="btn_func">Ver funcionários</button>
             </div>
+            <button onclick="obterDadosCargos()">Chamar fetch</button>
         </div>
         <div class="content">
             <div class="cadastrarCargo">
@@ -104,10 +105,36 @@
 </script>
 
 <script>
+    var dados = {};
     function obterDadosCargos() {
-        var idEmpresa = sessionStorage.ID_EMRPRESA;
+        var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+        console.log(idEmpresa)
 
-        fetch("/")
+        fetch("/dashboard/obterCargos", {
+            method: "POST",
+            headers: {
+                "Content-type" : "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa
+            })
+        }).then(function(resposta) {
+            if (resposta.ok){
+                // console.log("DADOS RECEBIDOS:",resposta)
+                teste = resposta.json().then(json=> {
+                    dados = {
+                        cargos: json.cargo,
+                        nivelPermissao: json.nivelPermissao,
+                        chave: json.chave
+                    }
+                })
+            } else {
+                console.log("Houve um erro ao receber os dados no cards.html")
+            }
+        }).catch(function(erro) {
+            console.log("CATCH DO FETCH")
+            console.log(erro)
+        })
     }
 </script>
 </html>
