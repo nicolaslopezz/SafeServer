@@ -13,13 +13,23 @@ public class CsvWriter {
 
         ByteArrayOutputStream outputStream =new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        CSVPrinter csvPrinter =new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("CPU%", "RAMGB", "REDE_RECV"));
+        CSVPrinter csvPrinter =new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("CPU%",
+                                                                                   "DATA_HORA",
+                                                                                   "RAMBG-LIVRE",
+                                                                                   "RAMGB-USO",
+                                                                                   "RAM%",
+                                                                                   "REDE_REC",
+                                                                                   "REDE_ENV"));
 
         for (Dado dado : dados) {
             csvPrinter.printRecord(
                 dado.getDados_cpu(),
-                dado.getDados_ram(),
-                dado.getDados_rede()
+                dado.getData_hora(),
+                dado.getDados_ramGB_livre(),
+                dado.getDados_ramGB_uso(),
+                dado.getDados_ram_porcentagem(),
+                dado.getDados_rede_rec(),
+                dado.getDados_rede_env()
             );
         }
             csvPrinter.flush();
