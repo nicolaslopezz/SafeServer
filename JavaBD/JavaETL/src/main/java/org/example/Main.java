@@ -35,7 +35,7 @@ public class Main implements RequestHandler<S3Event, String>{
 
                 s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, null);
 
-                return "Sucesso no processamento!";
+                return "Sucesso no processamento!!";
             } catch (Exception e){
                 context.getLogger().log("Erro" + e.getMessage());
                 return "Erro no processamento";
