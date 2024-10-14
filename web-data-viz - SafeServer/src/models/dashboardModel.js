@@ -28,6 +28,16 @@ function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function registrar_servidor(nome, regiao) {
+    var fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
+    var instrucaoSql = `
+        INSERT INTO servidor(nome, regiao, fkEmpresa) VALUES 
+            ("${nome}", "${regiao}", "${fkEmpresa}");
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function gerarCodigo() {
     return Math.random().toString(36).substr(-8).toUpperCase()
 }
@@ -37,5 +47,6 @@ function gerarCodigo() {
 module.exports = {
     obterCargos,
     obterFunc,
-    cadastrarCargo
+    cadastrarCargo,
+    registrar_servidor
 };

@@ -15,4 +15,8 @@ router.post("/obterFunc", function (req, res) {
 router.post("/cadastrarCargo", function (req, res) {
     dashboardController.cadastrarCargo(req, res);
 })
+
+router.post("/registrar_servidor", function (req, res) {
+    dashboardController.registrar_servidor(req, res);
+})
 module.exports = router;
