@@ -42,7 +42,7 @@ while i < 5:
     data_hora_atual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato: YYYY-MM-DD HH:MM:SS
     i += 1
 
-# Criar DataFrame e salvar como CSV
+# Criar DataFrame e salvar como JSON
 df = pd.DataFrame({
     'CPU%': dados_cpu,
     'DataHora': data_hora_atual,
