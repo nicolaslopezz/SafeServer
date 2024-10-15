@@ -69,11 +69,24 @@
     var botao5 = document.getElementById("button_5")
     var botao6 = document.getElementById("button_6")
 
-    var alertasCpu = [];
-    var alertasRam = [];
-    var alertasRede = [];
-    var labels = [];
+    chart1 = new Chart(ctx, {
+        type: 'bar',
+        data: null,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stacked: true,
+                },
+                x: {
+                    stacked: true
+                }
+            }
+        }
+    });
 
+    plotar()
     function plotar() {
         var dias = input_tempo.value;
 
@@ -149,24 +162,6 @@
             }
         });
     }
-
-    chart1 = new Chart(ctx, {
-        type: 'bar',
-        data: null,
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    stacked: true,
-                },
-                x: {
-                    stacked: true
-                }
-            }
-        }
-    });
-
 
     function addData(chart, label, newData) {
         chart.data.labels.push(label);
