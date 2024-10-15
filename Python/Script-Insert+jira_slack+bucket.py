@@ -9,7 +9,7 @@ import boto3
 from botocore.exceptions import ClientError
 import os
 import logging
-import datetime
+from datetime import datetime
 
 # Limites dos componentes para usar como parâmetro de chamado
 limiteCPU = 75.0 
@@ -94,6 +94,7 @@ def abrir_chamado_jira(categoria, tipo, limite_atual):
         print(f"Falha ao criar chamado para {categoria}. Erro: {e}")
 
 def monitorar_e_enviar_dados(servidor_id):
+    contador_mem = 0
     meusql = mysql.connector.connect(**db_config)
     meucursor = meusql.cursor()
 
@@ -145,24 +146,23 @@ def monitorar_e_enviar_dados(servidor_id):
             return True
 
         # Upload do arquivo
-        upload_file('dadosColetados.json', 's3safeserver-raw')
+        upload_file('dadosColetados.json', 'bucket-raw-teste')
 
         fk_servidor = servidor_id
 
         # Correção na consulta SQL
         query = '''
         INSERT INTO registro (
-            percent_use_cpu,
-            percent_use_ram, 
-            uso_ram,
+            percent_use_cpu, 
+            percent_use_ram,
+            uso_ram_gb,
             livre_ram_gb,
             recebido_rede,
             enviado_rede,
-            fkServidor,
-            dtHora
+            fkServidor
         ) VALUES (%s, %s, %s, %s, %s, %s, %s)
         '''
-        values = (Porcentagem_CPU, GB_RAM_uso, GB_RAM_livre, Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados, fk_servidor,data_hora)
+        values = (Porcentagem_CPU,Porcentagem_RAM_uso, GB_RAM_uso, GB_RAM_livre, GB_rede_recebidos, GB_rede_enviados, fk_servidor)
 
         meucursor.execute(query, values)
         meusql.commit()

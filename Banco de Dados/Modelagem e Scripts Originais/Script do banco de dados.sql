@@ -34,6 +34,7 @@ create table registro (
 idRegistro int primary key auto_increment,
 dtHora datetime default current_timestamp,
 percent_use_cpu float, 
+percent_use_ram float, 
 uso_ram_gb float,
 livre_ram_gb float,
 recebido_rede float,
