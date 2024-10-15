@@ -30,10 +30,10 @@ servidor_id = 1
 client = WebClient(token='')
 
 # Função para enviar a mensagem diretamente
-def enviar_mensagem(categoria):
+def enviar_mensagem(categoria, servidor_id):
     try:
         # Configurar o envio da mensagem para o canal especificado
-        response = client.chat_postMessage(channel='', text=f'Alerta! O uso de {categoria} - Chamado aberto')
+        response = client.chat_postMessage(channel='', text=f'Alerta! O uso de {categoria} - Chamado aberto - Servidor {servidor_id}')
         print(f"Mensagem enviada: {response['message']['text']}")
     except SlackApiError as e:
         print(f"Erro ao enviar mensagem: {e.response['error']}")
@@ -74,12 +74,12 @@ def create_s3_client():
         region_name=AWS_REGION
     )
 
-def abrir_chamado_jira(categoria, tipo, limite_atual):
-    descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%."
+def abrir_chamado_jira(categoria, tipo, limite_atual, servidor_id):
+    descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%, no servidor."
     
     issue_dict = {
         'project': {'key': 'SUP'},  # Substitua pela chave do seu projeto
-        'summary': f"Limite de {categoria} excedido - Uso de {limite_atual:.2f}%",
+        'summary': f"Servidor {servidor_id} - Limite de {categoria} excedido - Uso de {limite_atual:.2f}%",
         'description': descricao,
         'issuetype': {'name': 'Task'}
     }
@@ -189,15 +189,15 @@ def monitorar_e_enviar_dados(servidor_id):
 
         # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado
         if contador_cpu >= 10:
-            abrir_chamado_jira("CPU", limiteCPU, Porcentagem_CPU)
+            abrir_chamado_jira("CPU", limiteCPU, Porcentagem_CPU, servidor_id)
             contador_cpu = 0  
 
         if contador_mem >= 10:
-            abrir_chamado_jira("Memória", limiteMEM, Porcentagem_RAM_uso)
+            abrir_chamado_jira("Memória", limiteMEM, Porcentagem_RAM_uso, servidor_id)
             contador_mem = 0  
 
         if contador_rede >= 10:
-            abrir_chamado_jira("Rede", limiteREDE, max(GB_rede_enviados, GB_rede_recebidos))
+            abrir_chamado_jira("Rede", limiteREDE, max(GB_rede_enviados, GB_rede_recebidos, servidor_id))
             contador_rede = 0  
 
             
