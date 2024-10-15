@@ -10,7 +10,13 @@
 </head>
 
 <body onload="listar()">
-  <div class="navbar">
+  <div class="alerta" id="tela_alerta">
+    <div class="box-alerta" id="box_alerta">
+      <span id="span_alerta" class="texto-alerta"></span>
+      <button onclick="removerAlerta()">OK</button>
+    </div>
+  </div>
+  <div id="navbar" class="navbar">
     <div class="logo">
       <img src="assets/imgs/logow.png" style="width: 50%;">
     </div>
@@ -18,7 +24,7 @@
       <a href="cadastro.html"></a>
     </div>
   </div>
-  <div class="main">
+  <div class="main" id="main">
     <div class="login box">
       <div class="swapMenu">
         <div class="texto">
@@ -67,7 +73,7 @@
             </div>
           </div>
         </div>
-        <button>Entrar</button>
+        <button>Registrar</button>
       </form>
       <div class="swapMenu">
         <div class="texto">
@@ -114,23 +120,17 @@
 
     console.log(tamanhoEmail);
     if (indiceArroba < 0 && indicePonto < 0) {
-      alert(`Insira um email que contenha @ e .(ponto).`)
+      alerta(`Insira um email que contenha @ e .(ponto).`)
+      return false;
     }
     if (tamanhoEmail < 7) {
-      alert("Número de carcateres insuficiente no email.")
+      alerta("Número de carcateres insuficiente no email.")
       return false;
     } else if (tamanhoEmail > 45) {
-      alert("Número de carcateres muito grande no email.")
+      alerta("Número de carcateres muito grande no email.")
       return false;
     }
     document.getElementById("form1").reset()
-
-    // else if (tamanhoSenha <= 6) {
-    // alert(`Sua senha precisa ter pelo menos 7 caracteres.`)
-    // return false;
-    // }
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
 
     fetch("/usuarios/autenticar", {
       method: "POST",
@@ -142,11 +142,7 @@
         senhaServer: senhaVar
       })
     }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
       if (resposta.ok) {
-        console.log(resposta);
-
         resposta.json().then(json => {
           alert('Id de usuário: ' + json.idFuncionario);
           // console.log(JSON.stringify(json));
@@ -154,15 +150,24 @@
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.ID_USUARIO = json.idFuncionario;
           sessionStorage.NIVEL_PERMISSAO_USUARIO = json.nivelPermissao;
+          sessionStorage.ID_EMPRESA = json.idEmpresa;
           setTimeout(function () {
-            window.location = "./dashboard/cards.html";
+            if (json.nivelPermissao == 1) {
+              //  APÓS DASH TÉCNICO FEITA, COLOCAR ROTA AQUI
+              window.location = "./dashboard/"
+            } else if (json.nivelPermissao == 2) {
+              window.location = "./dashboard/dashGerente01.html";
+            } else if (json.nivelPermissao == 4) {
+              window.location = "./dashboard/cards.html";
+            } else {
+              alerta("Não foi encontrada dash referente ao nível de permissão")
+            }
           }, 1000); // apenas para exibir o loading
         });
       } else {
         console.log("Houve um erro ao tentar realizar o login!");
         resposta.text().then(texto => {
           console.error(texto);
-          // finalizarAguardar(texto);
         });
       }
     }).catch(function (erro) {
@@ -174,10 +179,7 @@
   function cadastrar(event) {
 
     event.preventDefault()
-    //aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = ipt_userCadastro.value
     var emailVar = ipt_emailCadastro.value
     var senhaVar = ipt_senhaCadastro.value
@@ -186,10 +188,9 @@
     var idEmpresaVincular
     var fkChave
 
-    console.log(nomeVar, emailVar, senhaVar, cpfVar, chaveAcessoVar)
-
+  
     if (emailVar.indexOf('@') < 1 || emailVar.indexOf(".") < 1 || emailVar.length < 4) {
-      alert("Insira um email válido")
+      alerta("Insira um email válido")
       return false;
     }
     // Verificando se o código de ativação é de alguma empresa cadastrada
@@ -197,12 +198,9 @@
       if (listaCodigosAcesso[i].chave == chaveAcessoVar) {
         idEmpresaVincular = listaCodigosAcesso[i].fkEmpresa
         fkChave = listaCodigosAcesso[i].idChave
-        console.log("Código de ativação válido.");
         break;
       }
     }
-
-    console.log(nomeVar, emailVar, senhaVar, cpfVar, idEmpresaVincular, fkChave)
 
     document.getElementById("form2").reset()
 
@@ -225,8 +223,6 @@
       }),
     })
       .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
         if (resposta.ok) {
           body.className = "alterarParaLogin";
         } else {
@@ -256,5 +252,20 @@
 
   }
 
+  var tela_alerta = document.getElementById("tela_alerta")
+  var box_alerta = document.getElementById("box_alerta")
+
+  function alerta(mensagem) {
+    tela_alerta.style.zIndex = "15"
+    tela_alerta.style.backgroundColor = "rgba(0,0,0,0.3)"
+    box_alerta.style.zIndex = "15"
+    span_alerta.innerHTML = mensagem
+  }
+
+  function removerAlerta() {
+    tela_alerta.style.zIndex = "-1"
+    tela_alerta.style.backgroundColor = null
+    box_alerta.style.zIndex = "-1"
+  }
 
 </script>

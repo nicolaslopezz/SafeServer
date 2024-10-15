@@ -40,10 +40,6 @@ while i < 5:
     dados_rede_recebidos.append(round(psutil.net_io_counters().bytes_recv / (1024 ** 3), 2)) 
     dados_rede_enviados.append(round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2))  
     data_hora_atual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato: YYYY-MM-DD HH:MM:SS
-
-
-    
-      
     i += 1
 
 # Criar DataFrame e salvar como CSV
@@ -55,7 +51,7 @@ df = pd.DataFrame({
     'RAM%': dados_ram_perc,
     'REDE_REC': dados_rede_recebidos, 
     'REDE_ENV': dados_rede_enviados })
-df.to_csv('dadosColetados.csv', index=False)
+df.to_json('dadosColetados.json', index=False)
 
 # Função para upload do arquivo para o bucket S3
 def upload_file(file_name, bucket, object_name=None):
@@ -71,4 +67,4 @@ def upload_file(file_name, bucket, object_name=None):
     return True
 
 # Upload do arquivo
-upload_file('dadosColetados.csv', 'bucket-raw-teste')
+upload_file('dadosColetados.json', 's3safeserver-raw')

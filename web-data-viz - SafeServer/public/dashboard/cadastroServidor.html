@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="ipt_nome">
+        <input type="text" id="ipt_regiao">
+        <button onclick="registrar_servidor()">Confirmar</button>
+    </div>
+</body>
+
+</html>
+<script>
+    function registrar_servidor() {
+        let nome = ipt_nome.value;
+        let regiao = ipt_regiao.value;
+        if (regiao == null || nome == null || regiao == "" || nome == "") {
+            return false;
+        }
+
+        fetch("/dashboard/registrar_servidor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                regiaoServer: regiao,
+            }),
+        })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        // body.className("alterarParaLogin")
+    }
+</script>

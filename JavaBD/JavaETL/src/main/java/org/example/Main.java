@@ -14,7 +14,7 @@ import java.util.List;
 public class Main implements RequestHandler<S3Event, String>{
 
         private final AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-        private static final String DESTINATION_BUCKET = "bucket-safeserver2";
+        private static final String DESTINATION_BUCKET = "s3-safeserver-trusted";
 
         @Override
         public String handleRequest(S3Event s3Event, Context context) {
@@ -35,7 +35,7 @@ public class Main implements RequestHandler<S3Event, String>{
 
                 s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, null);
 
-                return "Sucesso no processamento!";
+                return "Sucesso no processamento!!";
             } catch (Exception e){
                 context.getLogger().log("Erro" + e.getMessage());
                 return "Erro no processamento";
