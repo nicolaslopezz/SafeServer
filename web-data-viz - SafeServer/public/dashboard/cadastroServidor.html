@@ -4,14 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de Servidor</title>
+    <link rel="stylesheet" href="../css/dashCss/navbar.css">
+    <link rel="stylesheet" href="../css/dashCss/dashCadastroServidor.css">
 </head>
 
 <body>
-    <div>
-        <input type="text" id="ipt_nome">
-        <input type="text" id="ipt_regiao">
-        <button onclick="registrar_servidor()">Confirmar</button>
+    <div class="navbar">
+        <div class="conteudo-esquerda">
+            <img src="../assets/imgs/logow.png">
+            <span>SafeServer</span>
+        </div>
+        <div class="conteudo-direita">
+            <span>Gerente</span>
+            <div class="botao-sair">
+                <!-- imagem de sair -->
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="box">
+            <h1>Cadastro de Servidor</h1>
+            <div>
+                <span>Nome do servidor:</span>
+                <input type="text" id="ipt_nome">
+            </div>
+            <div>
+                <span>Região do servidor:</span>
+                <input type="text" id="ipt_regiao">
+            </div>
+            <button onclick="registrar_servidor()">Confirmar</button>
+        </div>
     </div>
 </body>
 
@@ -20,6 +43,7 @@
     function registrar_servidor() {
         let nome = ipt_nome.value;
         let regiao = ipt_regiao.value;
+        let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
         if (regiao == null || nome == null || regiao == "" || nome == "") {
             return false;
         }
@@ -34,6 +58,7 @@
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nome,
                 regiaoServer: regiao,
+                fkEmpresaServer: fkEmpresa,
             }),
         })
             .catch(function (resposta) {
