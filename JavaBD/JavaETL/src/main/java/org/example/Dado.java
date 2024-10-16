@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Dado {
 
     @JsonProperty("CPU%")
     private Double dados_cpu;
 
     @JsonProperty("DataHora")
-    private LocalDateTime data_hora;
+    private String data_hora;
 
     @JsonProperty("RAM-GB-Livre")
     private Double dados_ramGB_livre;
@@ -36,11 +36,11 @@ public class Dado {
         this.dados_cpu = dados_cpu;
     }
 
-    public LocalDateTime getData_hora() {
+    public String getData_hora() {
         return data_hora;
     }
 
-    public void setData_hora(LocalDateTime data_hora) {
+    public void setData_hora(String data_hora) {
         this.data_hora = data_hora;
     }
 
