@@ -1,8 +1,12 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Dado {
 
