@@ -147,7 +147,7 @@ def monitorar_e_enviar_dados(servidor_id):
         Porcentagem_CPU, GB_RAM_uso, GB_RAM_livre, Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados = capturar_dados()
 
         salvar_dados_json()
-        upload_file('dadosColetados.json', 'bucket-raw-teste')
+        upload_file('dadosColetados.json', 's3safeserver-raw')
 
         # Insere os dados no banco de dados
         query = '''
