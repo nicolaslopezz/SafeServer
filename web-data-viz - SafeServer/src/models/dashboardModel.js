@@ -28,10 +28,9 @@ function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function registrar_servidor(nome, regiao) {
-    var fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
+function registrar_servidor(nome, regiao, fkEmpresa) {
     var instrucaoSql = `
-        INSERT INTO servidor(nome, regiao, fkEmpresa) VALUES 
+        INSERT INTO servidor (identificacao, regiao, fkEmpresa) VALUES 
             ("${nome}", "${regiao}", "${fkEmpresa}");
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

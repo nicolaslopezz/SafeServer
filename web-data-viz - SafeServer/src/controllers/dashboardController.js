@@ -124,13 +124,16 @@ function cadastrarCargo(req, res) {
 function registrar_servidor(req, res) {
     var nome = req.body.nomeServer;
     var regiao = req.body.regiaoServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (regiao == undefined) {
         res.status(400).send("Sua região está undefined!");
+    } else if (fkEmpresa == undefined) {
+        res.status(400).send("Sua região está undefined!");
     } else {
-        dashboardModel.registrar_servidor(nome, regiao)
+        dashboardModel.registrar_servidor(nome, regiao, fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);

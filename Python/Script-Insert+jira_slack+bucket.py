@@ -30,10 +30,16 @@ servidor_id = 1
 client = WebClient(token='')
 
 # Função para enviar a mensagem diretamente
-def enviar_mensagem(categoria, servidor_id):
+def enviar_mensagem(categoria):
     try:
         # Configurar o envio da mensagem para o canal especificado
-        response = client.chat_postMessage(channel='', text=f'Alerta! O uso de {categoria} - Chamado aberto - Servidor {servidor_id}')
+        response = client.chat_postMessage(
+        channel='',
+        text=f"⚠️ *Alerta de Uso* ⚠️\n\n"
+            f"💻 Categoria: *{categoria}*\n"
+            f"🔧 Chamado Aberto no Servidor: *{servidor_id}*\n"
+            f"📌 Por favor, verifique imediatamente!"
+)
         print(f"Mensagem enviada: {response['message']['text']}")
     except SlackApiError as e:
         print(f"Erro ao enviar mensagem: {e.response['error']}")
@@ -142,7 +148,7 @@ def monitorar_e_enviar_dados(servidor_id):
             return True
 
         # Upload do arquivo
-        upload_file('dadosColetados.json', 'bucket-raw-teste')
+        upload_file('dadosColetados.json', 's3safeserver-raw')
 
         fk_servidor = servidor_id
 
