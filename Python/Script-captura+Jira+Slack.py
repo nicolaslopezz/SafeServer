@@ -110,27 +110,19 @@ def upload_file(file_name, bucket, object_name=None):
 
 # -------------Integração com o Jira--------------
 
-def enviar_mensagem(categoria):
+def enviar_mensagem(categoria, servidor_id):
     try:
-        # Configurar o envio da mensagem para o canal especificado
-        response = client.chat_postMessage(
-        channel='',
-        text=f"⚠️ *Alerta de Uso* ⚠️\n\n"
-            f"💻 Categoria: *{categoria}*\n"
-            f"🔧 Chamado Aberto no Servidor: *{servidor_id}*\n"
-            f"📌 Por favor, verifique imediatamente!"
-)
+        response = client.chat_postMessage(channel='', text=f'Alerta! O uso de {categoria} - Chamado aberto - Servidor {servidor_id}')
         print(f"Mensagem enviada: {response['message']['text']}")
     except SlackApiError as e:
         print(f"Erro ao enviar mensagem: {e.response['error']}")
 
 def abrir_chamado_jira(categoria, tipo, limite_atual, servidor_id):
-   
-
+    descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%, no servidor."
     issue_dict = {
         'project': {'key': 'SUP'},  # Substitua pela chave do seu projeto
-        'summary': f"Servidor {servidor_id} - Limite de {categoria} excedido",
-        'description':f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%, no servidor{servidor_id}." ,
+        'summary': f"Servidor {servidor_id} - Limite de {categoria} excedido - Uso de {limite_atual:.2f}%",
+        'description': descricao,
         'issuetype': {'name': 'Task'}
     }
 

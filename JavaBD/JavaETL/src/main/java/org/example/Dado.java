@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+<<<<<<< HEAD
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
+=======
+@JsonIgnoreProperties
+>>>>>>> 1230d383cdf32481878bd8ed47ead5ecb8839c43
 public class Dado {
 
     @JsonProperty("CPU%")
