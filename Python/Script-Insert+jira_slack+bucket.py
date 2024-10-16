@@ -47,7 +47,6 @@ email_jira = ''  # Substitua pelo seu e-mail
 api_token = ''  # Substitua pelo seu token de API
 jira = JIRA(options=jira_options, basic_auth=(email_jira, api_token))
 
-
     # Configuração das credenciais temporárias da AWS
 AWS_ACCESS_KEY = ''
 AWS_SECRET_KEY = ''
@@ -62,7 +61,6 @@ dados_ram_perc = []
 dados_rede_recebidos = []
 dados_rede_enviados = []
 data_hora_atual = []
-
 
 # Função para configurar o cliente S3 usando credenciais temporárias da AWS
 def create_s3_client():
@@ -98,9 +96,7 @@ def monitorar_e_enviar_dados(servidor_id):
     meusql = mysql.connector.connect(**db_config)
     meucursor = meusql.cursor()
 
-    print("Conexão com o banco de dados bem-sucedida.")
-
-
+    print("Conexão com o banco de dados bem-sucedida!.")
 
 
     while True:

@@ -14,7 +14,7 @@ import java.util.List;
 public class Main implements RequestHandler<S3Event, String>{
 
         private final AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-        private static final String DESTINATION_BUCKET = "s3-safeserver-trusted";
+        private static final String DESTINATION_BUCKET = "s3safeserver-trusted";
 
         @Override
         public String handleRequest(S3Event s3Event, Context context) {
