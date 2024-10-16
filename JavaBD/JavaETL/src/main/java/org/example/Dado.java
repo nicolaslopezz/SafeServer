@@ -22,10 +22,10 @@ public class Dado {
     private Double dados_ram_porcentagem;
 
     @JsonProperty("REDE_REC")
-    private Integer dados_rede_rec;
+    private Double dados_rede_rec;
 
     @JsonProperty("REDE_ENV")
-    private Integer dados_rede_env;
+    private Double dados_rede_env;
 
     public Double getDados_cpu() {
         return dados_cpu;
@@ -67,19 +67,19 @@ public class Dado {
         this.dados_ram_porcentagem = dados_ram_porcentagem;
     }
 
-    public Integer getDados_rede_rec() {
+    public Double getDados_rede_rec() {
         return dados_rede_rec;
     }
 
-    public void setDados_rede_rec(Integer dados_rede_rec) {
+    public void setDados_rede_rec(Double dados_rede_rec) {
         this.dados_rede_rec = dados_rede_rec;
     }
 
-    public Integer getDados_rede_env() {
+    public Double getDados_rede_env() {
         return dados_rede_env;
     }
 
-    public void setDados_rede_env(Integer dados_rede_env) {
+    public void setDados_rede_env(Double dados_rede_env) {
         this.dados_rede_env = dados_rede_env;
     }
 }
