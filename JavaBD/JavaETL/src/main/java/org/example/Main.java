@@ -22,6 +22,12 @@ public class Main implements RequestHandler<S3Event, String>{
             String sourceBucket = s3Event.getRecords().get(0).getS3().getBucket().getName();
             String sourceKey = s3Event.getRecords().get(0).getS3().getObject().getKey();
 
+            if ("s3safeserver-raw".equals(sourceBucket)){
+                context.getLogger().log("Evento recebido do bucket" + sourceBucket);
+            } else{
+                context.getLogger().log("Evento não recebido ou bucket diferente" + sourceBucket);
+            }
+
             try {
                 InputStream s3InputStrem = s3Client.getObject(sourceBucket, sourceKey).getObjectContent();
 
