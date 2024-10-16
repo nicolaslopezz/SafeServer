@@ -11,8 +11,16 @@ create table empresa(
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(60) not null,
 razaoSocial varchar(200) not null,
-CNPJ char(14) not null,
-chaveAcesso varchar(50));
+CNPJ char(14) not null);
+
+create table chaveAcesso (
+idChave int primary key AUTO_INCREMENT,
+chave varchar(20),
+nivelPermissao int,
+fkEmpresa int,
+cargo varchar(45),
+foreign key (fkEmpresa) references empresa(idEmpresa)
+);
 
 create table funcionario (
 idFuncionario int primary key auto_increment,
@@ -20,8 +28,9 @@ nome varchar(200) not null,
 email varchar(200) not null,
 cpf char(11) not null,
 senha varchar(45) not null,
-cargo varchar(45),
 fkEmpresa int, 
+fkChave int, 
+foreign key (fkChave) references chaveAcesso(idChave),
 constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEmpresa));
 
 create table servidor (
