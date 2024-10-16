@@ -81,12 +81,12 @@ def create_s3_client():
     )
 
 def abrir_chamado_jira(categoria, tipo, limite_atual, servidor_id):
-    descricao = f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%, no servidor."
-    
+   
+
     issue_dict = {
         'project': {'key': 'SUP'},  # Substitua pela chave do seu projeto
-        'summary': f"Servidor {servidor_id} - Limite de {categoria} excedido - Uso de {limite_atual:.2f}%",
-        'description': descricao,
+        'summary': f"Servidor {servidor_id} - Limite de {categoria} excedido",
+        'description':f"O uso de {categoria} ultrapassou o limite de {tipo}. Utilização atual: {limite_atual:.2f}%, no servidor{servidor_id}." ,
         'issuetype': {'name': 'Task'}
     }
     
