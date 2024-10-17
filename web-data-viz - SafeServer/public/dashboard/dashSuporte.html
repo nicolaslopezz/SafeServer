@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Urgências</title>
+    <link rel="stylesheet" href="../css/dashCss/dashSuporte.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="header">Safe Server</div>
+        <div class="dashboard">
+            <div class="table-container">
+                <h2>Urgências</h2>
+                <table id="urgencias-table">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Status</th>
+                            <th>Servidor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CPU</td>
+                            <td id="status-cpu" class="status-alerta">Alerta</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td id="status-ram" class="status-perigo">Perigo</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Rede</td>
+                            <td id="status-rede" class="status-perigo">Perigo</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-container">
+                <h2>Total de Componentes:</h2>
+                <div class="summary-item" id="perigo-count">Perigo: 1</div>
+                <div class="summary-item" id="alerta-count">Alerta: 1</div>
+                <div class="summary-item" id="seguro-count">Seguro: 1</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getRandomStatus() {
+            const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
+            return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
+        }
+
+        function updateTable() {
+            const cpuStatus = getRandomStatus();
+            const ramStatus = getRandomStatus();
+            const redeStatus = getRandomStatus();
+
+            const cpuComponente = document.getElementById('status-cpu');
+            const ramComponente = document.getElementById('status-ram');
+            const redeComponente = document.getElementById('status-rede');
+
+            cpuComponente.textContent = cpuStatus;
+            ramComponente.textContent = ramStatus;
+            redeComponente.textContent = redeStatus;
+
+            
+            mudarCor(cpuComponente, cpuStatus);
+            mudarCor(ramComponente, ramStatus);
+            mudarCor(redeComponente, redeStatus);
+
+            
+            atualizarSumario(cpuStatus, ramStatus, redeStatus);
+        }
+
+        
+        function mudarCor(element, status) {
+            element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
+            if (status === 'Alerta') {
+                element.classList.add('status-alerta');
+            } else if (status === 'Perigo') {
+                element.classList.add('status-perigo');
+            } else {
+                element.classList.add('status-seguro');
+            }
+        }
+
+        function atualizarSumario(cpuStatus, ramStatus, redeStatus) {
+            let perigoContador = 0;  
+            let alertaContador = 0;  
+            let seguroContador = 0; 
+
+            const statusExemplo = [cpuStatus, ramStatus, redeStatus]; 
+            statusExemplo.forEach(status => {
+                if (status === 'Perigo') perigoContador++;
+                if (status === 'Alerta') alertaContador++;
+                if (status === 'Seguro') seguroContador++;
+            });
+
+            document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
+            document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
+            document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
+        }
+
+    
+        setInterval(updateTable, 5000);
+    </script>
+</body>
+</html>
