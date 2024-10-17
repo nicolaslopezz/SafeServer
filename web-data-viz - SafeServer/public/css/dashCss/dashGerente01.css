@@ -70,6 +70,8 @@ body {
     /* height: 50%; */
     background-color: rgba(116, 118, 135, 0.6);
     border-radius: 30px;
+    text-align: center;
+    color: white;
 }
 
 .slider {

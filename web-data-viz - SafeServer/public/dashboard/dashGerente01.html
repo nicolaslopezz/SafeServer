@@ -41,16 +41,16 @@
                 </div>
             </div>
             <div class="tempo discretizacao">
-                <h1>Intervalo de tempo</h1>
+                <h1>Intervalo de tempo em Dias</h1>
                 <div class="opcoes">
                     <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)" onchange="plotar()">
                     <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
-                    <span>Dias</span>
                 </div>
             </div>
         </div>
         <div class="content">
             <div class="box">
+                <h1>Quantidade de alertas por componente</h1>
                 <div>
                     <canvas id="chart1"></canvas>
                 </div>
@@ -63,6 +63,8 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    Chart.defaults.color = "#FFF"
+
     const ctx = document.getElementById('chart1');
 
     var botao4 = document.getElementById("button_4")
@@ -181,11 +183,11 @@
 
 
 
-    Chart.defaults.color = "#FFF"
 </script>
 
 <script>
-    mostrar()
+    mostrar(0)
+    mostrar(1)
     function mostrar(param) {
         if (param == 1) {   
             var valor = input_tempo.value
