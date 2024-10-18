@@ -370,6 +370,20 @@ body {
         justify-content: center;
     }
 
+    #form1{
+        display: flex;
+        align-items: center;
+    }
+
+    .containerLog{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 80%;
+        height: 53%;
+    }
+
     .form button {
         width: 30%;
         padding: 5px;
@@ -474,6 +488,14 @@ body {
         justify-content: space-around;
         align-items: center;
         z-index: 10;
+    }
+    .containerLog{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 80%;
+        height: 53%;
     }
 
     .esquerda {
