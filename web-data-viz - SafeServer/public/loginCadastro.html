@@ -146,7 +146,7 @@
     }).then(function (resposta) {
       if (resposta.ok) {
         resposta.json().then(json => {
-          alert('Id de usuário: ' + json.idFuncionario);
+          // alert('Id de usuário: ' + json.idFuncionario);
           // console.log(JSON.stringify(json));
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
@@ -160,7 +160,7 @@
             } else if (json.nivelPermissao == 2) {
               window.location = "./dashboard/dashGerente01.html";
             } else if (json.nivelPermissao == 4) {
-              window.location = "./dashboard/cards.html";
+              window.location = "./dashboard/dashRH-Func.html";
             } else {
               alerta("Não foi encontrada dash referente ao nível de permissão")
             }
