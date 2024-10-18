@@ -404,3 +404,84 @@ table th {
 
 }
 /*SUPORTE TERMINA AQUI*/
+
+
+/*CADASTRO SERVIDOR COMEÇA AQUI*/
+.main3 {
+  display: flex;
+  height: 80vh;
+  width: 70vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.box2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 55%;
+  height: 75%;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  color: rgb(16, 46, 118);
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cadastrar{
+  padding: 14px;
+  width: 24%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  transition: background 0.4s ease;
+}
+.cadastrar:hover {
+  background: linear-gradient(135deg, #1e357e, #24365f); /* Novo degradê ao passar o mouse */
+  font-size: 17px
+}
+
+.campo{
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.legenda{
+  display: flex;
+  width: 95%;
+  height: 46%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+#ipt {
+  padding: 4px 35px;
+  width: 100%;
+  border-radius: 20px; /* Torna o input bem arredondado */
+  border: 2px solid #0e1d40; /* Borda azul escura */
+  font-size: 16px;
+  color: #0e1d40; /* Cor do texto */
+  background-color: #f9f9f9; /* Fundo claro para contraste */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar o input */
+  transition: all 0.3s ease; /* Transição suave para efeitos */
+}
+
+input:focus {
+  border-color: #1a2e70;
+  background:linear-gradient(135deg, #1e357e, #24365f);  /* Fundo azul escuro ao focar */
+  color: #ffffff; /* Texto branco quando focado */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease; /* Transição suave do fundo */
+}
+
+
+/*CADASTRO SERVIDOR TERMINA AQUI*/
