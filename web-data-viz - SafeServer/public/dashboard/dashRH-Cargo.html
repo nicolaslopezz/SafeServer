@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <title>Sidebar</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
+        </div>
+        <div class="user-details">
+          <p class="title">Analista RH</p>
+          <p class="name">Marta</p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="dashRH-Func.html">
+                <i class="icon ph-bold ph-user"></i>
+                <span class="text">Funcionários</span>
+              </a>
+            </li>
+            <li>
+              <a href="#active">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text" onclick="buscarDados()" id="btn_cargos">Cargos</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="dashRH-Cadastrar.html">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text" onclick="buscarDados()" id="btn_func" id="btn_cadastro">Cadastrar Funcionário</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="credits">
+      <div class="content3">
+        <div class="verCargos">
+          <div class="box3">
+            <h1>Cargos</h1>
+            <div id="div_cargos" class="grid-cargos "></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+  function obterDadosCargos() {
+
+    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+
+    var dados = {};
+    html_cargos = `
+                    <div class="item">Número</div>
+                    <div class="item">Nome</div>
+                    <div class="item">Nivel Permissão</div>
+                    <div class="item">Chave</div>`
+    console.log(idEmpresa)
+
+    fetch("/dashboard/obterCargos", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        idEmpresaServer: idEmpresa
+      })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        // console.log("DADOS RECEBIDOS:",resposta)
+        teste = resposta.json().then(json => {
+          dados = {
+            cargos: json.cargo,
+            nivelPermissao: json.nivelPermissao,
+            chave: json.chave
+          }
+          for (i = 0; i < dados.cargos.length; i++) {
+            html_cargos += `
+                    <div class="item">${i + 1}</div>
+                    <div class="item">${dados.cargos[i]}</div>
+                    <div class="item">${dados.nivelPermissao[i]}</div>
+                    <div class="item">${dados.chave[i]}</div>
+                    `
+
+            div_cargos.innerHTML = html_cargos;
+          }
+        })
+
+        // console.log(html)
+        // div_cargos.innerHTML = ``
+
+      } else {
+        console.log("Houve um erro ao receber os dados no cards.html")
+      }
+
+
+    }).catch(function (erro) {
+      console.log("CATCH DO FETCH")
+      console.log(erro)
+    })
+  }
+
+</script>

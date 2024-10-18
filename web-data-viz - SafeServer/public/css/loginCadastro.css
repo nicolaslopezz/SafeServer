@@ -78,7 +78,7 @@ body {
         justify-content: center;
         align-items: center;
         height: 80%;
-        width: 10%;
+        width: 15%;
     }
 
     .box {
@@ -112,7 +112,7 @@ body {
         /* width: 50%; */
         border-radius: 15px;
         cursor: pointer;
-        padding: 5px;
+        padding: 7px 10px;
     }
 
     .swapMenu {
@@ -168,7 +168,7 @@ body {
         /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
-        padding: 5px;
+        padding: 7px 10px;
     }
 
     .login .swapMenu {
@@ -374,6 +374,9 @@ body {
         width: 30%;
         padding: 5px;
     }
+    
+
+    
 }
 
 
@@ -435,15 +438,15 @@ body {
     }
 
     .box button {
-        background-color: white;
-        color: #091836;
+        background-color: #091836;
+        color: white;
         font-family: poppins;
         font-weight: bold;
         font-size: 25px;
-        /* width: 50%; */
+        /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
-        padding: 5px;
+        padding: 7px 10px;
     }
 
     .swapMenu {
@@ -527,7 +530,7 @@ body {
         /* width: 30%; */
         border-radius: 15px;
         cursor: pointer;
-        padding: 5px;
+        padding: 7px 10px;
     }
 
     .login .swapMenu {

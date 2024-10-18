@@ -440,7 +440,7 @@ table th {
   transition: background 0.4s ease;
 }
 .cadastrar:hover {
-  background: linear-gradient(135deg, #1e357e, #24365f); /* Novo degradê ao passar o mouse */
+  background: linear-gradient(135deg, #8e98bd, #455883); /* Novo degradê ao passar o mouse */
   font-size: 17px
 }
 
@@ -464,7 +464,7 @@ table th {
 }
 
 #ipt {
-  padding: 4px 35px;
+  padding: 5px 35px;
   width: 100%;
   border-radius: 20px; /* Torna o input bem arredondado */
   border: 2px solid #0e1d40; /* Borda azul escura */
@@ -477,11 +477,149 @@ table th {
 
 input:focus {
   border-color: #1a2e70;
-  background:linear-gradient(135deg, #1e357e, #24365f);  /* Fundo azul escuro ao focar */
+  background:linear-gradient(135deg, #8e98bd, #455883);  /* Fundo azul escuro ao focar */
   color: #ffffff; /* Texto branco quando focado */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.4s ease; /* Transição suave do fundo */
 }
 
+#ipt:focus::placeholder {
+  color: #c6c3c3; /* Cor do texto do placeholder quando focado */
+}
 
 /*CADASTRO SERVIDOR TERMINA AQUI*/
+
+/*DASH RH COMEÇA AQUI*/
+.content2 {
+  width: 80%;
+  height: 90%;
+  position: relative;
+  color: #0a25d4;
+}
+
+.cadastrarCargo {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verCargos {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verFunc {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box3 {
+  width: 46%;
+  height: 78%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(16, 46, 118);
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+select {
+  padding: 5px 35px;
+  width: 100%;
+  color: #233869;
+  border-radius: 20px; /* Torna o input bem arredondado */
+  border: 2px solid #0e1d40; /* Borda azul escura */
+  font-size: 16px;
+  background-color: #f9f9f9; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease; 
+}
+
+select:focus {
+  border-color: #1a2e70;
+  background:linear-gradient(135deg, #8e98bd, #455883);  
+  color: #233869;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease; 
+}
+
+
+
+.botao {
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(14, 29, 64);
+  border: none;
+  border-radius: 15px;
+  font-family: poppins;
+  color: white;
+  width: fit-content;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  /* height: fit-content; */
+}
+
+
+.campo2{
+  width: 40%;
+  height: 14%;
+}
+
+.legenda2{
+  width: 100%;
+  height: 48%;
+  text-align: start;
+  font-weight: 600;
+font-size: 17px;
+}
+
+.grid-cargos, .grid-func {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust to fit your needs */
+  border: 3px solid rgb(14, 29, 64);
+  width: 90%;
+  gap: 10px; /* Add spacing between grid items if needed */
+}
+
+.grid-cargos .item, .grid-func .item {
+  border: 3px solid rgb(14, 29, 64);
+  height: 40px; /* Ensure items are sized correctly */
+  text-align: center;
+  display: flex; /* Use flex for centering text */
+  align-items: center; /* Vertically center text */
+  justify-content: center; /* Horizontally center text */
+}
+
+.content3 {
+  width: 99%;
+  height: 90%;
+  position: relative;
+  color: #0a25d4;
+}
+
+
+
+/*DASH RH TERMINA AQUI*/
