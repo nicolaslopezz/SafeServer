@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: poppins;
-  src: url(../assets/fonte/montserrat/Montserrat-Regular.ttf);
+  src: url(../../assets/fonte/montserrat/Montserrat-Regular.ttf);
 }
 
 @font-face {
   font-family: poppins-bold;
-  src: url(../assets/fonte/montserrat/Montserrat-Bold.ttf);
+  src: url(../../assets/fonte/montserrat/Montserrat-Bold.ttf);
 }
 
 /*NAVBAR CSS*/
