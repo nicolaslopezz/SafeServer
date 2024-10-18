@@ -1,0 +1,82 @@
+body {
+    background-color: #0e1d40;
+    font-family: poppins;
+}
+
+.main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #0e1d40;
+    padding: 10px;
+    color: white;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.dashboard {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-container {
+    width: 60%;
+    background-color: rgba(116, 118, 135, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #0e1d40;
+    font-size: 1.2rem;
+}
+
+table th {
+    background-color: #747687;
+    color: white;
+}
+
+.status-alerta {
+    background-color: #ffcc00;
+    color: black;
+}
+
+.status-perigo {
+    background-color: red;
+    color: white;
+}
+
+.status-seguro {
+    background-color: green;
+    color: white;
+}
+
+.summary-container {
+    width: 30%;
+    background-color: rgba(116, 118, 135, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.summary-item {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #747687;
+    border-radius: 10px;
+}

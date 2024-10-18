@@ -122,7 +122,6 @@ select {
     font-family: poppins;
     color: white;
     text-align: center;
-    /* width: 60%; */
 }
 
 .botao {
@@ -136,8 +135,9 @@ select {
     text-align: center;
     display: flex;
     align-items: center;
-    /* height: fit-content; */
 }
+
+
 
 .grid-cargos {
     display: grid;

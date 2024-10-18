@@ -1,0 +1,625 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+@font-face {
+  font-family: poppins;
+  src: url(../assets/fonte/montserrat/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: poppins-bold;
+  src: url(../assets/fonte/montserrat/Montserrat-Bold.ttf);
+}
+
+/*NAVBAR CSS*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: poppins;
+}
+body {
+  background-color: #dbe2f4;
+}
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  
+}
+.sidebar {
+  position: relative;
+  width: 256px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 30px;
+  transition: all 0.3s;
+}
+.sidebar .head {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.user-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.user-img img {
+  width: 100%;
+  object-fit: cover;
+}
+.user-details .title,
+.menu .title {
+  font-size: 10px;
+  font-weight: 500;
+  color: #4343b2;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.user-details .name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav {
+  flex: 1;
+}
+.menu ul li {
+  position: relative;
+  list-style: none;
+  margin-bottom: 5px;
+}
+.menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2a88;
+  text-decoration: none;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.menu ul li > a:hover,
+.menu ul li.active > a {
+  color: #0a25d4;
+  background-color: #8097e22d;
+}
+.menu ul li .icon {
+  font-size: 20px;
+}
+.menu ul li .text {
+  flex: 1;
+}
+.menu ul li .arrow {
+  font-size: 14px;
+  transition: all 0.3s;
+}
+.menu ul li.active .arrow {
+  transform: rotate(180deg);
+}
+.menu .sub-menu {
+  display: none;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  border-left: 1px solid #f6f6f6;
+}
+.menu .sub-menu li a {
+  padding: 10px 8px;
+  font-size: 12px;
+}
+.menu:not(:last-child) {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f6f6f6;
+}
+.menu-btn {
+  position: absolute;
+  right: -14px;
+  top: 3.5%;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #757575;
+  border: 2px solid #f6f6f6;
+  background-color: #fff;
+}
+.menu-btn:hover i {
+  color: #000;
+}
+.menu-btn i {
+  transition: all 0.3s;
+}
+.sidebar.active {
+  width: 92px;
+}
+.sidebar.active .menu-btn i {
+  transform: rotate(180deg);
+}
+.sidebar.active .user-details {
+  display: none;
+}
+.sidebar.active .menu .title {
+  text-align: center;
+}
+.sidebar.active .menu ul li .arrow {
+  display: none;
+}
+.sidebar.active .menu > ul > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar.active .menu > ul > li > a .text {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+.sidebar.active .menu > ul > li > a .text::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 20%;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: #000;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.sidebar.active .menu > ul > li > a:hover .text {
+  left: 50px;
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar.active .menu .sub-menu {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 1px solid #f6f6f6;
+  background-color: #fff;
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.credits {
+  flex: 1; /* Faz com que o .credits ocupe o espaço restante */
+  margin: 0 auto;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/*NAVBAR ACABA AQUI*/
+
+/*CSS DASH GERENTE*/
+.main {
+  height: 89vh;
+  display: flex;
+  color: rgb(16, 46, 118);
+}
+
+.main h1{
+  color: rgb(16, 46, 118);
+}
+
+.sidebar2 {
+  width: 35%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 30px;
+  margin-left: 3%;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4); 
+  border-radius: 8px;
+}
+
+.discretizacao {
+  width: 90%;
+  color: white;
+}
+
+.discretizacao h1 {
+  font-size: 1.6rem;
+}
+
+.opcoes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: fit-content;
+  min-height: 40%;
+}
+
+.opcoes button{
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(16, 46, 118);
+  border: none;
+  border-radius: 15px;
+  font-family: poppins;
+  color: rgb(255, 255, 255);
+}
+
+.content {
+  width: 90%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 90%;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px; 
+}
+
+.slider {
+  width: 40%;
+}
+
+input[type="range"] {
+  accent-color:rgb(16, 46, 118);
+}
+
+.opcoes span {
+  width: 20%;
+}
+
+canvas {
+  width: 99% !important; /* Ajuste a largura para 80% do contêiner */
+  height: 420px !important; /* Ajuste a altura para 500px */
+}
+
+
+/*GERENTE ACABA AQUI*/
+
+
+/*SUPORTE COMEÇA AQUI*/
+
+.main {
+  height: 90vh;
+  display: flex;
+  color: rgb(16, 46, 118);
+}
+
+
+.dashboard {
+  width: 75vw;
+  height: 80vh;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  width: 60%;
+  height: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 20px;
+  color: rgb(16, 46, 118);
+   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border-radius: 9px; 
+  overflow: hidden; 
+  border: 2px solid #0e1d40;
+}
+
+table th, table td {
+  padding: 15px;
+  border: 1px solid #0e1d40;
+  font-size: 1.2rem;
+  background-color: #1d45a169;
+  color: rgb(16, 46, 118);
+  font-weight: 800;
+
+}
+
+table th {
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);
+  color: white;
+}
+
+.status-alerta {
+  background-color: #ffcc00;
+  color: rgb(255, 252, 252);
+  font-weight: 900;
+}
+
+.status-perigo {
+  background-color: red;
+  color: white;
+  font-weight: 900;
+}
+
+.status-seguro {
+  background-color: green;
+  color: white;
+  font-weight: 900;
+}
+
+.summary-container {
+  width: 30%;
+  height: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 20px;
+  color: rgb(16, 46, 118);
+  text-align: center;
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.summary-item {
+  margin: 10px 0;
+  padding: 10px;
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);;
+  border-radius: 10px;
+  color: white;
+}
+
+.main2 h2{
+  margin-bottom: 2%;
+  font-weight: 900;
+
+}
+/*SUPORTE TERMINA AQUI*/
+
+
+/*CADASTRO SERVIDOR COMEÇA AQUI*/
+.main3 {
+  display: flex;
+  height: 80vh;
+  width: 70vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.box2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 55%;
+  height: 75%;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  color: rgb(16, 46, 118);
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cadastrar{
+  padding: 14px;
+  width: 24%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  transition: background 0.4s ease;
+}
+.cadastrar:hover {
+  background: linear-gradient(135deg, #8e98bd, #455883); /* Novo degradê ao passar o mouse */
+  font-size: 17px
+}
+
+.campo{
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.legenda{
+  display: flex;
+  width: 95%;
+  height: 46%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+#ipt {
+  padding: 5px 35px;
+  width: 100%;
+  border-radius: 20px; /* Torna o input bem arredondado */
+  border: 2px solid #0e1d40; /* Borda azul escura */
+  font-size: 16px;
+  color: #0e1d40; /* Cor do texto */
+  background-color: #f9f9f9; /* Fundo claro para contraste */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar o input */
+  transition: all 0.3s ease; /* Transição suave para efeitos */
+}
+
+input:focus {
+  border-color: #1a2e70;
+  background:linear-gradient(135deg, #8e98bd, #455883);  /* Fundo azul escuro ao focar */
+  color: #ffffff; /* Texto branco quando focado */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease; /* Transição suave do fundo */
+}
+
+#ipt:focus::placeholder {
+  color: #c6c3c3; /* Cor do texto do placeholder quando focado */
+}
+
+/*CADASTRO SERVIDOR TERMINA AQUI*/
+
+/*DASH RH COMEÇA AQUI*/
+.content2 {
+  width: 80%;
+  height: 90%;
+  position: relative;
+  color: #0a25d4;
+}
+
+.cadastrarCargo {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verCargos {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verFunc {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box3 {
+  width: 46%;
+  height: 78%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(16, 46, 118);
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+select {
+  padding: 5px 35px;
+  width: 100%;
+  color: #233869;
+  border-radius: 20px; /* Torna o input bem arredondado */
+  border: 2px solid #0e1d40; /* Borda azul escura */
+  font-size: 16px;
+  background-color: #f9f9f9; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease; 
+}
+
+select:focus {
+  border-color: #1a2e70;
+  background:linear-gradient(135deg, #8e98bd, #455883);  
+  color: #233869;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.4s ease; 
+}
+
+
+
+.botao {
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(14, 29, 64);
+  border: none;
+  border-radius: 15px;
+  font-family: poppins;
+  color: white;
+  width: fit-content;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  /* height: fit-content; */
+}
+
+
+.campo2{
+  width: 40%;
+  height: 14%;
+}
+
+.legenda2{
+  width: 100%;
+  height: 48%;
+  text-align: start;
+  font-weight: 600;
+font-size: 17px;
+}
+
+.grid-cargos, .grid-func {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust to fit your needs */
+  border: 3px solid rgb(14, 29, 64);
+  width: 90%;
+  gap: 10px; /* Add spacing between grid items if needed */
+}
+
+.grid-cargos .item, .grid-func .item {
+  border: 3px solid rgb(14, 29, 64);
+  height: 40px; /* Ensure items are sized correctly */
+  text-align: center;
+  display: flex; /* Use flex for centering text */
+  align-items: center; /* Vertically center text */
+  justify-content: center; /* Horizontally center text */
+}
+
+.content3 {
+  width: 99%;
+  height: 90%;
+  position: relative;
+  color: #0a25d4;
+}
+
+
+
+/*DASH RH TERMINA AQUI*/

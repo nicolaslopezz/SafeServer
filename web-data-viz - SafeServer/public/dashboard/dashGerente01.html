@@ -1,65 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/dashCss/navbar.css">
-    <link rel="stylesheet" href="../css/dashCss/dashGerente01.css">
-</head>
+    <title>Sidebar</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="menu-btn">
+          <i class="ph-bold ph-caret-left"></i>
+        </div>
+        <div class="head">
+          <div class="user-img">
+            <img src="../assets/imgs/contact.png" alt="" />
+          </div>
+          <div class="user-details">
+            <p class="title">GERENTE DE TI</p>
+            <p class="name">Roberto</p>
+          </div>
+        </div>
+        <div class="nav">
+          <div class="menu">
+            <p class="title">Menu</p>
+            <ul>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="#">
+                      <span class="text">Users</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span class="text">Subscribers</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="icon ph-bold ph-file-text"></i>
+                  <span class="text">Relatório</span>
+                </a>
+              </li>
+              <li class="active">
+                <a href="">
+                  <i class="icon ph-bold ph-chart-bar"></i>
+                  <span class="text">Gráfico</span>
+                </a>
+              </li>
+              <li>
+                <a href="cadastroServidor.html">
+                  <i class="icon ph-bold ph-gear"></i>
+                  <span class="text">Cadastrar Servidor</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="menu">
+            <p class="title"></p>
+            <ul>
+              <li>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu">
+          <p class="title">Conta</p>
+          <ul>
 
-<body>
-    <div class="navbar">
-        <div class="conteudo-esquerda">
-            <img src="../assets/imgs/logow.png">
-            <span>SafeServer</span>
+            <li>
+              <a href="../index.html">
+                <i class="icon ph-bold ph-sign-out"></i>
+                <span class="text">Sair</span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <div class="conteudo-direita">
-            <span>Gerente</span>
-            <div class="botao-sair">
-                <!-- imagem de sair -->
-            </div>
-        </div>
+      </div>
+      <div class="credits">
+        <div class="main">
+          <div class="sidebar2">
+              <div class="regiao discretizacao">
+                  <h1>Regiões a serem mostradas</h1>
+                  <div class="opcoes">
+                      <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
+                      <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
+                      <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
+                  </div>
+              </div>
+              <div class="componente discretizacao">
+                  <h1>Componentes a serem mostrados</h1>
+                  <div class="opcoes">
+                      <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
+                      <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
+                      <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
+                  </div>
+              </div>
+              <div class="tempo discretizacao">
+                  <h1>Intervalo de tempo</h1>
+                  <div class="opcoes">
+                      <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)" onchange="plotar()">
+                      <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
+                      <span>Dias</span>
+                  </div>
+              </div>
+          </div>
+          <div class="content">
+              <div class="box">
+                  <div>
+                      <canvas id="chart1"></canvas>
+                  </div>
+              </div>
+  
+          </div>
+      </div>
+        
+      </div>
     </div>
-    <div class="main">
-        <div class="sidebar">
-            <div class="regiao discretizacao">
-                <h1>Regiões a serem mostradas</h1>
-                <div class="opcoes">
-                    <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
-                    <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
-                    <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
-                </div>
-            </div>
-            <div class="componente discretizacao">
-                <h1>Componentes a serem mostrados</h1>
-                <div class="opcoes">
-                    <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
-                    <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
-                    <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
-                </div>
-            </div>
-            <div class="tempo discretizacao">
-                <h1>Intervalo de tempo em Dias</h1>
-                <div class="opcoes">
-                    <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)" onchange="plotar()">
-                    <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="box">
-                <h1>Quantidade de alertas por componente</h1>
-                <div>
-                    <canvas id="chart1"></canvas>
-                </div>
-            </div>
 
-        </div>
-    </div>
-</body>
-
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/script.js"></script>
+  </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -148,21 +221,34 @@
 
 
         chart1 = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        stacked: true,
-                    },
-                    x: {
-                        stacked: true
-                    }
+    type: 'bar',
+    data: data,
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                stacked: true,
+                ticks: {
+                    color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo Y
+                }
+            },
+            x: {
+                stacked: true,
+                ticks: {
+                    color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo X
                 }
             }
-        });
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: "rgb(16, 46, 118)" // Cor das labels da legenda
+                }
+            }
+        }
+    }
+});
     }
 
     function addData(chart, label, newData) {
@@ -209,3 +295,4 @@
         }
     }
 </script>
+

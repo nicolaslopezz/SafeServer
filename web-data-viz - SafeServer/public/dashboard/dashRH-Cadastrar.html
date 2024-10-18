@@ -22,8 +22,8 @@
             <img src="../assets/imgs/contact.png" alt="" />
           </div>
           <div class="user-details">
-            <p class="title">GERENTE DE TI</p>
-            <p class="name">Roberto</p>
+            <p class="title">Analista RH</p>
+            <p class="name">Marta</p>
           </div>
         </div>
         <div class="nav">
@@ -44,21 +44,21 @@
                 </ul>
               </li>
               <li>
-                <a href="#">
-                  <i class="icon ph-bold ph-file-text"></i>
-                  <span class="text">Relatório</span>
+                <a href="dashRH-Func.html">
+                  <i class="icon ph-bold ph-user"></i>
+                  <span class="text">Funcionários</span>
                 </a>
               </li>
               <li>
-                <a href="dashGerente01.html">
-                  <i class="icon ph-bold ph-chart-bar"></i>
-                  <span class="text">Gráfico</span>
+                <a href="dashRH-Cargo.html">
+                  <i class="icon ph-bold ph-file-text"></i>
+                  <span class="text" onclick="buscarDados()" id="btn_cargos">Cargos</span>
                 </a>
               </li>
               <li class="active">
                 <a href="#">
                   <i class="icon ph-bold ph-gear"></i>
-                  <span class="text">Cadastrar Servidor</span>
+                  <span class="text" onclick="buscarDados()" id="btn_func"  id="btn_cadastro">Cadastrar Funcionário</span>
                 </a>
               </li>
             </ul>
@@ -86,24 +86,33 @@
         </div>
       </div>
       <div class="credits">
-        <div class="main3">
-          <div class="box2">
-              <h1>Cadastro de Servidor</h1>
-              <div class="campo">
-                <div class="legenda">
-                  <span>Nome do servidor:</span>
-                </div>
-                  <input type="text" id="ipt" placeholder="Digite aqui">
+        <div class="content">
+          <div class="cadastrarCargo">
+              <div class="box3">
+                  <h1>Cadastrar cargo</h1>
+                  <div class="campo2">
+                    <div class="legenda2">
+                      <span>Nome:</span>
+                    </div>
+                      <input type="text" id="ipt" placeholder="Insira nova função">
+                  </div>
+                  <div class="campo2">
+                    <div class="legenda2">
+                      <span>Nível de permissão:</span>
+                    </div>
+                     
+                      <select id="slct_nivel">
+                          <option value="null" selected disabled>Escolha uma opção</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                      </select>
+                  </div>
+                  <button class="cadastrar" onclick="registrar_servidor()">Confirmar</button>
               </div>
-              <div class="campo">
-                <div class="legenda">
-                  <span>Região do servidor:</span>
-                </div>
-                 
-                  <input type="text" id="ipt" placeholder="Digite aqui">
-              </div>
-              <button class="cadastrar" onclick="registrar_servidor()">Confirmar</button>
           </div>
+      </div>
+        
       </div>
         
       </div>
@@ -119,31 +128,30 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  function registrar_servidor() {
-      let nome = ipt_nome.value;
-      let regiao = ipt_regiao.value;
-      let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
-      if (regiao == null || nome == null || regiao == "" || nome == "") {
-          return false;
-      }
 
-      fetch("/dashboard/registrar_servidor", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-              // crie um atributo que recebe o valor recuperado aqui
-              // Agora vá para o arquivo routes/usuario.js
-              nomeServer: nome,
-              regiaoServer: regiao,
-              fkEmpresaServer: fkEmpresa,
-          }),
-      })
-          .catch(function (resposta) {
-              console.log(`#ERRO: ${resposta}`);
-          });
+var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
 
-      // body.className("alterarParaLogin")
-  }
+  function cadastrarCargo() {
+        var nome = ipt_nome.value
+        var nivelPermisaso = slct_nivel.value
+
+        if (nivelPermisaso == "null") {
+            return false
+        }
+
+        console.log('oi')
+
+        fetch("/dashboard/cadastrarCargo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                nivelPermissaoServer: nivelPermisaso,
+                fkEmpresaServer: idEmpresa
+            }),
+        })
+    }
 </script>
+

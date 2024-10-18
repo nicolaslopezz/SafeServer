@@ -483,16 +483,57 @@ body {
 }
 
 .imagem-sistema {
-    width: 50%;
+    width: 55%;
     height: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.fundo-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: 70%;
+    flex-direction: column;
+}
+
+.centerimg{
+    width: 98%;
+    height: 10%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.leftimg{
+    width: 98%;
+    height: 45%;
+    z-index: -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.rightimg{
+    width: 98%;
+    height: 45%;
+    z-index: -1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.decoração{
+    background-color: #011b39;
+    width: 58%;
+    height: 97%;    
+    border-radius: 35px;
+}
+
 .imagem-sistemaper {
-    border-radius: 50px;
+    width: 665px;
+    height: 330px;
 }
 
 .esquerda-sistema {
@@ -501,14 +542,14 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     height: 85%;
-    width: 60%;
+    width: 55%;
 }
 
 
 .footer {
     display: flex;
     justify-content: space-evenly;
-    background-color: #000d1c;
+    background-color: #001429;
     color: white;
     height: 16%;
 }
@@ -638,11 +679,11 @@ body {
 
 
 .container-sistema2 {
-    width: 79%;
-    height: 90%;
+    width: 86%;
+    height: 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .icone-footerM{
@@ -666,7 +707,7 @@ body {
         font-size: 16px;
         width: 100%;
         height: 9%;
-        background-color: rgb(3, 3, 39);
+        background-color: rgb(5, 18, 43);
     }
 
     .navbarMobile a {
@@ -1130,6 +1171,10 @@ body {
         display: none;
     }
 
+    .imagem-sistema{
+        display: none;
+    }
+
     .corpo-sistemaM{
         display: flex;
         flex-direction: column;
@@ -1137,6 +1182,65 @@ body {
         align-items: center;
         width: 100%;
         height: 75%;
+    }
+
+    .esquerda-sistemaM{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+    }
+
+    .imagem-sistemaM{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+    }
+
+    .fundo-imgM{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 96%;
+        height: 70%;
+        flex-direction: column;
+    }
+    
+    .centerimgM{
+        width: 96%;
+        height: 10%;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .leftimgM{
+        width: 96%;
+        height: 45%;
+        z-index: -1;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    .rightimgM{
+        width: 96%;
+        height: 45%;
+        z-index: -1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    
+    .decoraçãoM{
+        background-color:  rgba(14, 20, 59, 0.755);
+        width: 58%;
+        height: 97%;    
+        border-radius: 20px;
     }
 
     .titulo-sistemaM{
@@ -1323,38 +1427,139 @@ body {
     }
 }
 
-/* Laptops e Desktops - até 1200px */
-@media (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar {
+        height: 10%;
+    }
+
+    .navbar a {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 10%;
+    }
+
+    .conteudo {
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+    }
+
+    .quem-somos {
+        width: 90%;
+        height: auto;
+        align-items: center;
+    }
+
+    .title {
+        width: 100%;
+        height: auto;
+        justify-content: center;
+    }
+
     .conteudo h1 {
-        font-size: 42px;
+        font-size: 35px;
     }
 
     .conteudo p {
-        font-size: 22px;
+        font-size: 20px;
     }
 
-    .imagem {
-        clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    .botao1 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .picture {
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
     }
 
     .opcoes-pai {
-        width: 50%;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .opcoes {
+        width: 25%;
+    }
+
+    .opcoes a {
+        font-size: 20px;
+    }
+
+    .servicos-conteudo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .servicos-direita {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 
     .titulo-servico {
-        width: 80%;
+        width: 100%;
+        justify-content: center;
     }
 
-    .imagem-redonda {
-        width: 300px;
-        height: 300px;
+    .texto-servico {
+        width: 90%;
+        text-align: center;
+    }
+
+    .botao-servico {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .parte1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .parte1-texto, .parte1-imagem {
+        width: 90%;
+        height: auto;
+    }
+
+    .imagem-sistema {
+        width: 80%;
+        height: auto;
     }
 
     .footer {
-        flex-direction: row;
-        justify-content: space-between;
-        /* Distribuir o conteúdo no footer */
-        padding: 20px 40px;
-        width: 100%;
+        flex-direction: column;
+        height: auto;
     }
+
+    .footer-conteudo, .footer-bloco {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer2 {
+        font-size: 12px;
+    }
+
+    .decoração {
+        width: 40%; /* Ajuste para cobrir mais da tela em tablets */
+        height: auto; /* Permitir que a altura se ajuste automaticamente */
+        background-size: cover; /* Garante que a imagem continue cobrindo o contêiner */
+        border-radius: 25px;
+        padding: 50px;
+        z-index: -2;
+    }
+
+    .imagem-sistemaper{
+        width: 480px;
+        height: 260px;
+       z-index: 10;
+    }
+   
+
+
 }

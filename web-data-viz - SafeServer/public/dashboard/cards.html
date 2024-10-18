@@ -88,18 +88,24 @@
 
     var body = document.querySelector("body");
 
+    if (btnCadastro) {
+        btnCadastro.addEventListener("click", function () {
+            body.className = "alterarParaCadastro";
+        });
+    }
 
-    btnCadastro.addEventListener("click", function () {
-        body.className = "alterarParaCadastro";
-    });
+    if (btnCargos) {
+        btnCargos.addEventListener("click", function () {
+            body.className = "alterarParaCargos";
+        });
+    }
 
-    btnCargos.addEventListener("click", function () {
-        body.className = "alterarParaCargos";
-    })
+    if (btnFunc) {
+        btnFunc.addEventListener("click", function () {
+            body.className = "alterarParaFunc";
+        });
+    }
 
-    btnFunc.addEventListener("click", function () {
-        body.className = "alterarParaFunc";
-    })
 </script>
 
 <script>
@@ -237,4 +243,5 @@
         })
     }
 </script>
+
 </html>
