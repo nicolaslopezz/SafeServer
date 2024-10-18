@@ -307,3 +307,100 @@ canvas {
 
 
 /*GERENTE ACABA AQUI*/
+
+
+/*SUPORTE COMEÇA AQUI*/
+
+.main {
+  height: 90vh;
+  display: flex;
+  color: rgb(16, 46, 118);
+}
+
+
+.dashboard {
+  width: 75vw;
+  height: 80vh;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  width: 60%;
+  height: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 20px;
+  color: rgb(16, 46, 118);
+   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border-radius: 9px; 
+  overflow: hidden; 
+  border: 2px solid #0e1d40;
+}
+
+table th, table td {
+  padding: 15px;
+  border: 1px solid #0e1d40;
+  font-size: 1.2rem;
+  background-color: #1d45a169;
+  color: rgb(16, 46, 118);
+  font-weight: 800;
+
+}
+
+table th {
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);
+  color: white;
+}
+
+.status-alerta {
+  background-color: #ffcc00;
+  color: rgb(255, 252, 252);
+  font-weight: 900;
+}
+
+.status-perigo {
+  background-color: red;
+  color: white;
+  font-weight: 900;
+}
+
+.status-seguro {
+  background-color: green;
+  color: white;
+  font-weight: 900;
+}
+
+.summary-container {
+  width: 30%;
+  height: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 20px;
+  color: rgb(16, 46, 118);
+  text-align: center;
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.summary-item {
+  margin: 10px 0;
+  padding: 10px;
+  background: linear-gradient(135deg, #0e1d40, #1a2e70);;
+  border-radius: 10px;
+  color: white;
+}
+
+.main2 h2{
+  margin-bottom: 2%;
+  font-weight: 900;
+
+}
+/*SUPORTE TERMINA AQUI*/

@@ -1,114 +1,194 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Urgências</title>
-    <link rel="stylesheet" href="../css/dashCss/dashSuporte.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <title>Sidebar</title>
 </head>
+
 <body>
-
-    <div class="main">
-        <div class="header">Safe Server</div>
-        <div class="dashboard">
-            <div class="table-container">
-                <h2>Urgências</h2>
-                <table id="urgencias-table">
-                    <thead>
-                        <tr>
-                            <th>Componente</th>
-                            <th>Status</th>
-                            <th>Servidor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>CPU</td>
-                            <td id="status-cpu" class="status-alerta">Alerta</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>RAM</td>
-                            <td id="status-ram" class="status-perigo">Perigo</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Rede</td>
-                            <td id="status-rede" class="status-perigo">Perigo</td>
-                            <td>1</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="summary-container">
-                <h2>Total de Componentes:</h2>
-                <div class="summary-item" id="perigo-count">Perigo: 1</div>
-                <div class="summary-item" id="alerta-count">Alerta: 1</div>
-                <div class="summary-item" id="seguro-count">Seguro: 1</div>
-            </div>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
+        <div class="user-details">
+          <p class="title">SUPORTE DE TI</p>
+          <p class="name">Ewerton</p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="#">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+
+          <li>
+            <a href="#">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="credits">
+      <div class="main2">
+        <div class="dashboard">
+          <div class="table-container">
+            <h2>Urgências</h2>
+            <table id="urgencias-table">
+              <thead>
+                <tr>
+                  <th>Componente</th>
+                  <th>Status</th>
+                  <th>Servidor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CPU</td>
+                  <td id="status-cpu" class="status-alerta">Alerta</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>RAM</td>
+                  <td id="status-ram" class="status-perigo">Perigo</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Rede</td>
+                  <td id="status-rede" class="status-perigo">Perigo</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="summary-container">
+            <h2>Total de Componentes:</h2>
+            <div class="summary-item" id="perigo-count">Perigo: 1</div>
+            <div class="summary-item" id="alerta-count">Alerta: 1</div>
+            <div class="summary-item" id="seguro-count">Seguro: 1</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-        function getRandomStatus() {
-            const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
-            return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
-        }
 
-        function updateTable() {
-            const cpuStatus = getRandomStatus();
-            const ramStatus = getRandomStatus();
-            const redeStatus = getRandomStatus();
+  </div>
 
-            const cpuComponente = document.getElementById('status-cpu');
-            const ramComponente = document.getElementById('status-ram');
-            const redeComponente = document.getElementById('status-rede');
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+  <script src="../js/script.js"></script>
+</body>
 
-            cpuComponente.textContent = cpuStatus;
-            ramComponente.textContent = ramStatus;
-            redeComponente.textContent = redeStatus;
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  function getRandomStatus() {
+      const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
+      return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
+  }
 
-            
-            mudarCor(cpuComponente, cpuStatus);
-            mudarCor(ramComponente, ramStatus);
-            mudarCor(redeComponente, redeStatus);
+  function updateTable() {
+      const cpuStatus = getRandomStatus();
+      const ramStatus = getRandomStatus();
+      const redeStatus = getRandomStatus();
 
-            
-            atualizarSumario(cpuStatus, ramStatus, redeStatus);
-        }
+      const cpuComponente = document.getElementById('status-cpu');
+      const ramComponente = document.getElementById('status-ram');
+      const redeComponente = document.getElementById('status-rede');
 
-        
-        function mudarCor(element, status) {
-            element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
-            if (status === 'Alerta') {
-                element.classList.add('status-alerta');
-            } else if (status === 'Perigo') {
-                element.classList.add('status-perigo');
-            } else {
-                element.classList.add('status-seguro');
-            }
-        }
+      cpuComponente.textContent = cpuStatus;
+      ramComponente.textContent = ramStatus;
+      redeComponente.textContent = redeStatus;
 
-        function atualizarSumario(cpuStatus, ramStatus, redeStatus) {
-            let perigoContador = 0;  
-            let alertaContador = 0;  
-            let seguroContador = 0; 
+      
+      mudarCor(cpuComponente, cpuStatus);
+      mudarCor(ramComponente, ramStatus);
+      mudarCor(redeComponente, redeStatus);
 
-            const statusExemplo = [cpuStatus, ramStatus, redeStatus]; 
-            statusExemplo.forEach(status => {
-                if (status === 'Perigo') perigoContador++;
-                if (status === 'Alerta') alertaContador++;
-                if (status === 'Seguro') seguroContador++;
-            });
+      
+      atualizarSumario(cpuStatus, ramStatus, redeStatus);
+  }
 
-            document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
-            document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
-            document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
-        }
+  
+  function mudarCor(element, status) {
+      element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
+      if (status === 'Alerta') {
+          element.classList.add('status-alerta');
+      } else if (status === 'Perigo') {
+          element.classList.add('status-perigo');
+      } else {
+          element.classList.add('status-seguro');
+      }
+  }
 
-    
-        setInterval(updateTable, 5000);
-    </script>
+  function atualizarSumario(cpuStatus, ramStatus, redeStatus) {
+      let perigoContador = 0;  
+      let alertaContador = 0;  
+      let seguroContador = 0; 
+
+      const statusExemplo = [cpuStatus, ramStatus, redeStatus]; 
+      statusExemplo.forEach(status => {
+          if (status === 'Perigo') perigoContador++;
+          if (status === 'Alerta') alertaContador++;
+          if (status === 'Seguro') seguroContador++;
+      });
+
+      document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
+      document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
+      document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
+  }
+
+
+  setInterval(updateTable, 5000);
+</script>
 </body>
 </html>
+
