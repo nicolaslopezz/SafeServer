@@ -24,8 +24,8 @@
           <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
-          <p class="title">SUPORTE DE TI</p>
-          <p class="name" id="nome"></p>
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
         </div>
       </div>
       <div class="nav">
@@ -130,68 +130,71 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-      var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-      nome.innerHTML = nomeUsuario
-      
+  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+  var nome = sessionStorage.getItem("NOME_USUARIO");
+  var cargo = sessionStorage.getItem("CARGO");
+  nomeUsuario.innerHTML = nome
+  cargoUsuario.innerHTML = cargo
+
   function getRandomStatus() {
-      const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
-      return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
+    const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
+    return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
   }
 
   function updateTable() {
-      const cpuStatus = getRandomStatus();
-      const ramStatus = getRandomStatus();
-      const redeStatus = getRandomStatus();
+    const cpuStatus = getRandomStatus();
+    const ramStatus = getRandomStatus();
+    const redeStatus = getRandomStatus();
 
-      const cpuComponente = document.getElementById('status-cpu');
-      const ramComponente = document.getElementById('status-ram');
-      const redeComponente = document.getElementById('status-rede');
+    const cpuComponente = document.getElementById('status-cpu');
+    const ramComponente = document.getElementById('status-ram');
+    const redeComponente = document.getElementById('status-rede');
 
-      cpuComponente.textContent = cpuStatus;
-      ramComponente.textContent = ramStatus;
-      redeComponente.textContent = redeStatus;
+    cpuComponente.textContent = cpuStatus;
+    ramComponente.textContent = ramStatus;
+    redeComponente.textContent = redeStatus;
 
-      
-      mudarCor(cpuComponente, cpuStatus);
-      mudarCor(ramComponente, ramStatus);
-      mudarCor(redeComponente, redeStatus);
 
-      
-      atualizarSumario(cpuStatus, ramStatus, redeStatus);
+    mudarCor(cpuComponente, cpuStatus);
+    mudarCor(ramComponente, ramStatus);
+    mudarCor(redeComponente, redeStatus);
+
+
+    atualizarSumario(cpuStatus, ramStatus, redeStatus);
   }
 
-  
+
   function mudarCor(element, status) {
-      element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
-      if (status === 'Alerta') {
-          element.classList.add('status-alerta');
-      } else if (status === 'Perigo') {
-          element.classList.add('status-perigo');
-      } else {
-          element.classList.add('status-seguro');
-      }
+    element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
+    if (status === 'Alerta') {
+      element.classList.add('status-alerta');
+    } else if (status === 'Perigo') {
+      element.classList.add('status-perigo');
+    } else {
+      element.classList.add('status-seguro');
+    }
   }
 
   function atualizarSumario(cpuStatus, ramStatus, redeStatus) {
-      let perigoContador = 0;  
-      let alertaContador = 0;  
-      let seguroContador = 0; 
+    let perigoContador = 0;
+    let alertaContador = 0;
+    let seguroContador = 0;
 
-      const statusExemplo = [cpuStatus, ramStatus, redeStatus]; 
-      statusExemplo.forEach(status => {
-          if (status === 'Perigo') perigoContador++;
-          if (status === 'Alerta') alertaContador++;
-          if (status === 'Seguro') seguroContador++;
-      });
+    const statusExemplo = [cpuStatus, ramStatus, redeStatus];
+    statusExemplo.forEach(status => {
+      if (status === 'Perigo') perigoContador++;
+      if (status === 'Alerta') alertaContador++;
+      if (status === 'Seguro') seguroContador++;
+    });
 
-      document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
-      document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
-      document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
+    document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
+    document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
+    document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
   }
 
 
   setInterval(updateTable, 5000);
 </script>
 </body>
-</html>
 
+</html>

@@ -24,8 +24,8 @@
           <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
-          <p class="title">Analista RH</p>
-          <p class="name" id="nome"></p>
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
         </div>
       </div>
       <div class="nav">
@@ -91,8 +91,14 @@
       <div class="content3">
         <div class="verCargos">
           <div class="box3">
-            <h1>Cargos</h1>
-            <div id="div_cargos" class="grid-cargos "></div>
+            <div class="boxT">
+              <h1>Cargos</h1>
+            </div>
+            <div class="boxC">
+              <div id="div_cargos" class="grid-cargos "></div>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -118,8 +124,10 @@
   function obterDadosCargos() {
 
     var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-    var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-    nome.innerHTML = nomeUsuario
+    var nome = sessionStorage.getItem("NOME_USUARIO");
+    var cargo = sessionStorage.getItem("CARGO");
+    nomeUsuario.innerHTML = nome
+    cargoUsuario.innerHTML = cargo
 
     var dados = {};
     html_cargos = `

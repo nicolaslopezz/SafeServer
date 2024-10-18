@@ -57,6 +57,8 @@ insert into servidor(identificacao, fkEmpresa) values
 ('m1', 1),
 ('m2', 1);
 
+CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa FROM funcionario JOIN chaveAcesso ON fkChave = idChave);
+
 -- select * from registro;
 
 select * from empresa;

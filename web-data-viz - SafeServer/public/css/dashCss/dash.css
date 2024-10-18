@@ -540,6 +540,21 @@ input:focus {
   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
 }
 
+.boxT{
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxC{
+  height: 75%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
 .item {
   display: flex;
   flex-direction: column;
@@ -596,26 +611,50 @@ select:focus {
 font-size: 17px;
 }
 
-.grid-cargos, .grid-func {
+.grid-cargos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Adjust to fit your needs */
-  border: 3px solid rgb(14, 29, 64);
+  grid-template-columns: auto auto auto auto;
+  border: 3px solid rgb(20, 46, 100);
   width: 90%;
-  gap: 10px; /* Add spacing between grid items if needed */
+  border-radius: 8px;
 }
 
-.grid-cargos .item, .grid-func .item {
-  border: 3px solid rgb(14, 29, 64);
-  height: 40px; /* Ensure items are sized correctly */
+.grid-cargos .item {
+  border: 1px solid  rgb(20, 46, 100);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  display: flex; /* Use flex for centering text */
-  align-items: center; /* Vertically center text */
-  justify-content: center; /* Horizontally center text */
+  position: relative;
 }
+
+.grid-func {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  border: 3px solid rgb(20, 46, 100);
+  width: 90%;
+  border-radius: 8px;
+}
+
+.grid-func .item {
+  border: 1px solid  rgb(20, 46, 100);
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
 
 .content3 {
   width: 99%;
   height: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   position: relative;
   color: #0a25d4;
 }

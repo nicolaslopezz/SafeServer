@@ -19,12 +19,14 @@ function autenticar(req, res) {
                             if (resultadoAutenticar.length == 1) {
                             //    const usuario = resultadoAutenticar[0]
                                 res.json({
+                                   
                                     idFuncionario: resultadoAutenticar[0].idFuncionario,
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
                                     nivelPermissao: resultadoAutenticar[0].nivelPermissao,
-                                    idEmpresa: resultadoAutenticar[0].idEmpresa
+                                    idEmpresa: resultadoAutenticar[0].idEmpresa,
+                                    cargo: resultadoAutenticar[0].cargo
                                 });
                             }  else if (resultadoAutenticar.length == 0) {
                                     res.status(403).send("Email e/ou senha inválido(s)");
@@ -51,6 +53,7 @@ function cadastrar(req, res) {
     var senha = req.body.senhaServer;
     var fkEmpresa = req.body.idEmpresaVincularServer;
     var fkChave = req.body.fkChaveServer;
+    
 
     // Faça as validações dos valores
     if (nome == undefined) {

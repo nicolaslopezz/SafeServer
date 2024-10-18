@@ -24,8 +24,8 @@
           <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
-          <p class="title">GERENTE DE TI</p>
-          <p class="name" id="nome"></p>
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
         </div>
       </div>
       <div class="nav">
@@ -136,9 +136,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   Chart.defaults.color = "#FFF"
-  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-  nome.innerHTML = nomeUsuario
-
+  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+  var nome = sessionStorage.getItem("NOME_USUARIO");
+  var cargo = sessionStorage.getItem("CARGO");
+  nomeUsuario.innerHTML = nome
+  cargoUsuario.innerHTML = cargo
   const ctx = document.getElementById('chart1');
 
   var botao4 = document.getElementById("button_4")

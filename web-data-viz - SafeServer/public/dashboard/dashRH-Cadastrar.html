@@ -24,8 +24,8 @@
           <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
-          <p class="title">Analista RH</p>
-          <p class="name" id="nome"></p>
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
         </div>
       </div>
       <div class="nav">
@@ -116,11 +116,9 @@
       </div>
     </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
       integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
 </body>
 
@@ -129,8 +127,10 @@
 <script>
 
   var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-  nome.innerHTML = nomeUsuario
+  var nome = sessionStorage.getItem("NOME_USUARIO");
+  var cargo = sessionStorage.getItem("CARGO");
+  nomeUsuario.innerHTML = nome
+  cargoUsuario.innerHTML = cargo
 
   function cadastrarCargo() {
     var nome = ipt_nome.value

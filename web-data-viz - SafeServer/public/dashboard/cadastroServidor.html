@@ -1,151 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ICONS -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- STYLESHEET -->
-    <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
-    <title>Sidebar</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="sidebar">
-        <div class="menu-btn">
-          <i class="ph-bold ph-caret-left"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <title>Sidebar</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
-        <div class="head">
-          <div class="user-img">
-            <img src="../assets/imgs/contact.png" alt="" />
-          </div>
-          <div class="user-details">
-            <p class="title">GERENTE DE TI</p>
-            <p class="name" id="nome"></p>
-          </div>
+        <div class="user-details">
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
         </div>
-        <div class="nav">
-          <div class="menu">
-            <p class="title">Menu</p>
-            <ul>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">
-                      <span class="text">Users</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="text">Subscribers</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon ph-bold ph-file-text"></i>
-                  <span class="text">Relatório</span>
-                </a>
-              </li>
-              <li>
-                <a href="dashGerente01.html">
-                  <i class="icon ph-bold ph-chart-bar"></i>
-                  <span class="text">Gráfico</span>
-                </a>
-              </li>
-              <li class="active">
-                <a href="#">
-                  <i class="icon ph-bold ph-gear"></i>
-                  <span class="text">Cadastrar Servidor</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="menu">
-            <p class="title"></p>
-            <ul>
-              <li>
-                
-              </li>
-            </ul>
-          </div>
-        </div>
+      </div>
+      <div class="nav">
         <div class="menu">
-          <p class="title">Conta</p>
+          <p class="title">Menu</p>
           <ul>
-
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
             <li>
-              <a href="../index.html">
-                <i class="icon ph-bold ph-sign-out"></i>
-                <span class="text">Sair</span>
+              <a href="#">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li>
+              <a href="dashGerente01.html">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="#">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Cadastrar Servidor</span>
               </a>
             </li>
           </ul>
         </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="credits">
-        <div class="main3">
-          <div class="box2">
-              <h1>Cadastro de Servidor</h1>
-              <div class="campo">
-                <div class="legenda">
-                  <span>Nome do servidor:</span>
-                </div>
-                  <input type="text" id="ipt" placeholder="Digite aqui">
-              </div>
-              <div class="campo">
-                <div class="legenda">
-                  <span>Região do servidor:</span>
-                </div>
-                 
-                  <input type="text" id="ipt" placeholder="Digite aqui">
-              </div>
-              <button class="cadastrar" onclick="registrar_servidor()">Confirmar</button>
-          </div>
-      </div>
-        
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="credits">
+      <div class="main3">
+        <div class="box2">
+          <h1>Cadastro de Servidor</h1>
+          <div class="campo">
+            <div class="legenda">
+              <span>Nome do servidor:</span>
+            </div>
+            <input type="text" id="ipt" placeholder="Digite aqui">
+          </div>
+          <div class="campo">
+            <div class="legenda">
+              <span>Região do servidor:</span>
+            </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-      crossorigin="anonymous"
-    ></script>
-    <script src="../js/script.js"></script>
-  </body>
+            <input type="text" id="ipt" placeholder="Digite aqui">
+          </div>
+          <button class="cadastrar" onclick="registrar_servidor()">Confirmar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+  <script src="../js/script.js"></script>
+</body>
+
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-      var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-      nome.innerHTML = nomeUsuario
+
+  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+  var nome = sessionStorage.getItem("NOME_USUARIO");
+  var cargo = sessionStorage.getItem("CARGO");
+  nomeUsuario.innerHTML = nome
+  cargoUsuario.innerHTML = cargo
+
   function registrar_servidor() {
-      let nome = ipt_nome.value;
-      let regiao = ipt_regiao.value;
-      let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
-      if (regiao == null || nome == null || regiao == "" || nome == "") {
-          return false;
-      }
+    let nome = ipt_nome.value;
+    let regiao = ipt_regiao.value;
+    let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
+    if (regiao == null || nome == null || regiao == "" || nome == "") {
+      return false;
+    }
 
-      fetch("/dashboard/registrar_servidor", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-              // crie um atributo que recebe o valor recuperado aqui
-              // Agora vá para o arquivo routes/usuario.js
-              nomeServer: nome,
-              regiaoServer: regiao,
-              fkEmpresaServer: fkEmpresa,
-          }),
-      })
-          .catch(function (resposta) {
-              console.log(`#ERRO: ${resposta}`);
-          });
+    fetch("/dashboard/registrar_servidor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
+        regiaoServer: regiao,
+        fkEmpresaServer: fkEmpresa,
+      }),
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 
-      // body.className("alterarParaLogin")
+    // body.className("alterarParaLogin")
   }
 </script>
