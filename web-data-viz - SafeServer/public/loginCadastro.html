@@ -159,10 +159,10 @@
           setTimeout(function () {
             if (json.nivelPermissao == 1) {
               //  APÓS DASH TÉCNICO FEITA, COLOCAR ROTA AQUI
-              window.location = "./dashboard/"
+              window.location = "./dashboard/dashSuporte.html"
             } else if (json.nivelPermissao == 2) {
               window.location = "./dashboard/dashGerente01.html";
-            } else if (json.nivelPermissao == 4) {
+            } else if (json.nivelPermissao >= 3) {
               window.location = "./dashboard/dashRH-Func.html";
             } else {
               alerta("Não foi encontrada dash referente ao nível de permissão")
