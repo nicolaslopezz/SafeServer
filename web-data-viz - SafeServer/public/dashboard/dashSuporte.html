@@ -25,7 +25,7 @@
         </div>
         <div class="user-details">
           <p class="title">SUPORTE DE TI</p>
-          <p class="name">Ewerton</p>
+          <p class="name" id="nome"></p>
         </div>
       </div>
       <div class="nav">
@@ -130,6 +130,9 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+      var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+      nome.innerHTML = nomeUsuario
+      
   function getRandomStatus() {
       const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
       return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];

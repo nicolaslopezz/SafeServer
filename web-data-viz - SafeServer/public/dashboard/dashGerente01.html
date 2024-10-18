@@ -1,298 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ICONS -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- STYLESHEET -->
-    <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
-    <title>Sidebar</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="sidebar">
-        <div class="menu-btn">
-          <i class="ph-bold ph-caret-left"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <title>Sidebar</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
-        <div class="head">
-          <div class="user-img">
-            <img src="../assets/imgs/contact.png" alt="" />
-          </div>
-          <div class="user-details">
-            <p class="title">GERENTE DE TI</p>
-            <p class="name">Roberto</p>
-          </div>
+        <div class="user-details">
+          <p class="title">GERENTE DE TI</p>
+          <p class="name" id="nome"></p>
         </div>
-        <div class="nav">
-          <div class="menu">
-            <p class="title">Menu</p>
-            <ul>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">
-                      <span class="text">Users</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="text">Subscribers</span>
-                    </a>
-                  </li>
-                </ul>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
               </li>
               <li>
                 <a href="#">
-                  <i class="icon ph-bold ph-file-text"></i>
-                  <span class="text">Relatório</span>
-                </a>
-              </li>
-              <li class="active">
-                <a href="">
-                  <i class="icon ph-bold ph-chart-bar"></i>
-                  <span class="text">Gráfico</span>
-                </a>
-              </li>
-              <li>
-                <a href="cadastroServidor.html">
-                  <i class="icon ph-bold ph-gear"></i>
-                  <span class="text">Cadastrar Servidor</span>
+                  <span class="text">Subscribers</span>
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="menu">
-            <p class="title"></p>
-            <ul>
-              <li>
-                
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="menu">
-          <p class="title">Conta</p>
-          <ul>
-
+            </li>
             <li>
-              <a href="../index.html">
-                <i class="icon ph-bold ph-sign-out"></i>
-                <span class="text">Sair</span>
+              <a href="#">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastroServidor.html">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Cadastrar Servidor</span>
               </a>
             </li>
           </ul>
         </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="credits">
-        <div class="main">
-          <div class="sidebar2">
-              <div class="regiao discretizacao">
-                  <h1>Regiões a serem mostradas</h1>
-                  <div class="opcoes">
-                      <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
-                      <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
-                      <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
-                  </div>
-              </div>
-              <div class="componente discretizacao">
-                  <h1>Componentes a serem mostrados</h1>
-                  <div class="opcoes">
-                      <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
-                      <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
-                      <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
-                  </div>
-              </div>
-              <div class="tempo discretizacao">
-                  <h1>Intervalo de tempo</h1>
-                  <div class="opcoes">
-                      <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)" onchange="plotar()">
-                      <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
-                      <span>Dias</span>
-                  </div>
-              </div>
-          </div>
-          <div class="content">
-              <div class="box">
-                  <div>
-                      <canvas id="chart1"></canvas>
-                  </div>
-              </div>
-  
-          </div>
-      </div>
-        
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="credits">
+      <div class="main">
+        <div class="sidebar2">
+          <div class="regiao discretizacao">
+            <h1>Regiões a serem mostradas</h1>
+            <div class="opcoes">
+              <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
+              <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
+              <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
+            </div>
+          </div>
+          <div class="componente discretizacao">
+            <h1>Componentes a serem mostrados</h1>
+            <div class="opcoes">
+              <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
+              <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
+              <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
+            </div>
+          </div>
+          <div class="tempo discretizacao">
+            <h1>Intervalo de tempo</h1>
+            <div class="opcoes">
+              <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)"
+                onchange="plotar()">
+              <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
+              <span>Dias</span>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="box">
+            <div>
+              <canvas id="chart1"></canvas>
+            </div>
+          </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-      crossorigin="anonymous"
-    ></script>
-    <script src="../js/script.js"></script>
-  </body>
+        </div>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+      <script src="../js/script.js"></script>
+</body>
+
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    Chart.defaults.color = "#FFF"
+  Chart.defaults.color = "#FFF"
+  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+  nome.innerHTML = nomeUsuario
 
-    const ctx = document.getElementById('chart1');
+  const ctx = document.getElementById('chart1');
 
-    var botao4 = document.getElementById("button_4")
-    var botao5 = document.getElementById("button_5")
-    var botao6 = document.getElementById("button_6")
+  var botao4 = document.getElementById("button_4")
+  var botao5 = document.getElementById("button_5")
+  var botao6 = document.getElementById("button_6")
+
+  chart1 = new Chart(ctx, {
+    type: 'bar',
+    data: null,
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+        },
+        x: {
+          stacked: true
+        }
+      }
+    }
+  });
+
+  plotar()
+  function plotar() {
+    var dias = input_tempo.value;
+
+    var alertasCpu = [];
+    var alertasRam = [];
+    var alertasRede = [];
+
+    var labels = [];
+    for (i = 0; i < dias; i++) {
+      labels.push(`${i + 1}`)
+    }
+
+    chart1.destroy()
+
+    data = {
+      labels: labels,
+      datasets: []
+    }
+
+    var regiao1 = Number(button_1.value);
+    var regiao2 = Number(button_2.value);
+    var regiao3 = Number(button_3.value);
+
+    if (botao4.value == 1) {
+      for (i = 0; i < dias; i++) {
+        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
+        alertasCpu.push(num_aleatorio)
+      }
+      data.datasets.push({
+        label: "AlertaCpu",
+        data: alertasCpu
+      })
+    }
+
+    if (botao5.value == 1) {
+      for (i = 0; i < dias; i++) {
+        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
+        alertasRam.push(num_aleatorio)
+      }
+      data.datasets.push({
+        label: "AlertaRam",
+        data: alertasRam
+      })
+    }
+
+    if (botao6.value == 1) {
+      for (i = 0; i < dias; i++) {
+        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
+        alertasRede.push(num_aleatorio)
+      }
+      data.datasets.push({
+        label: "AlertaRede",
+        data: alertasRede
+      })
+    }
+    console.log(alertasCpu, alertasRam, alertasRede)
+
 
     chart1 = new Chart(ctx, {
-        type: 'bar',
-        data: null,
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    stacked: true,
-                },
-                x: {
-                    stacked: true
-                }
-            }
-        }
-    });
-
-    plotar()
-    function plotar() {
-        var dias = input_tempo.value;
-
-        var alertasCpu = [];
-        var alertasRam = [];
-        var alertasRede = [];
-
-        var labels = [];
-        for (i = 0; i < dias; i++) {
-            labels.push(`${i + 1}`)
-        }
-
-        chart1.destroy()
-
-        data = {
-            labels: labels,
-            datasets: []
-        }
-
-        var regiao1 = Number(button_1.value);
-        var regiao2 = Number(button_2.value);
-        var regiao3 = Number(button_3.value);
-
-        if (botao4.value == 1) {
-            for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-                alertasCpu.push(num_aleatorio)
-            }
-            data.datasets.push({
-                label: "AlertaCpu",
-                data: alertasCpu
-            })
-        }
-
-        if (botao5.value == 1) {
-            for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3)- 0.5, 0) 
-                alertasRam.push(num_aleatorio)
-            }
-            data.datasets.push({
-                label: "AlertaRam",
-                data: alertasRam
-            })
-        }
-
-        if (botao6.value == 1) {
-            for (i = 0; i < dias; i++) {
-                var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3)- 0.5, 0) 
-                alertasRede.push(num_aleatorio)
-            }
-            data.datasets.push({
-                label: "AlertaRede",
-                data: alertasRede
-            })
-        }
-        console.log(alertasCpu, alertasRam, alertasRede)
-
-
-        chart1 = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
+      type: 'bar',
+      data: data,
+      options: {
         responsive: true,
         scales: {
-            y: {
-                beginAtZero: true,
-                stacked: true,
-                ticks: {
-                    color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo Y
-                }
-            },
-            x: {
-                stacked: true,
-                ticks: {
-                    color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo X
-                }
+          y: {
+            beginAtZero: true,
+            stacked: true,
+            ticks: {
+              color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo Y
             }
+          },
+          x: {
+            stacked: true,
+            ticks: {
+              color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo X
+            }
+          }
         },
         plugins: {
-            legend: {
-                labels: {
-                    color: "rgb(16, 46, 118)" // Cor das labels da legenda
-                }
+          legend: {
+            labels: {
+              color: "rgb(16, 46, 118)" // Cor das labels da legenda
             }
+          }
         }
-    }
-});
-    }
+      }
+    });
+  }
 
-    function addData(chart, label, newData) {
-        chart.data.labels.push(label);
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.push(newData);
-        });
-        chart.update();
-    }
+  function addData(chart, label, newData) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data.push(newData);
+    });
+    chart.update();
+  }
 
-    function removeData(chart) {
-        chart.data.labels.pop();
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.pop();
-        });
-        chart.update();
-    }
+  function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data.pop();
+    });
+    chart.update();
+  }
 
 
 
 </script>
 
 <script>
-    mostrar(0)
-    mostrar(1)
-    function mostrar(param) {
-        if (param == 1) {   
-            var valor = input_tempo.value
-            ipt_range.value = valor
-        } else {
-            var valor = ipt_range.value
-            input_tempo.value = valor
-        }
+  mostrar(0)
+  mostrar(1)
+  function mostrar(param) {
+    if (param == 1) {
+      var valor = input_tempo.value
+      ipt_range.value = valor
+    } else {
+      var valor = ipt_range.value
+      input_tempo.value = valor
     }
-    function selecionar(botao) {
-        var idBotao = document.getElementById(botao)
-        console.log(idBotao)
-        if (idBotao.value == 1) {
-            idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
-            idBotao.value = 0;
-        } else {
-            idBotao.value = 1;
-            idBotao.style.backgroundColor = "rgb(14, 29, 64)"
-        }
+  }
+  function selecionar(botao) {
+    var idBotao = document.getElementById(botao)
+    console.log(idBotao)
+    if (idBotao.value == 1) {
+      idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
+      idBotao.value = 0;
+    } else {
+      idBotao.value = 1;
+      idBotao.style.backgroundColor = "rgb(14, 29, 64)"
     }
+  }
 </script>
-
