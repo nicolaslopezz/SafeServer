@@ -25,7 +25,7 @@
         </div>
         <div class="user-details">
           <p class="title">Analista RH</p>
-          <p class="name">Marta</p>
+          <p class="name" id="nome"></p>
         </div>
       </div>
       <div class="nav">
@@ -118,6 +118,8 @@
   function obterDadosCargos() {
 
     var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+    var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+    nome.innerHTML = nomeUsuario
 
     var dados = {};
     html_cargos = `

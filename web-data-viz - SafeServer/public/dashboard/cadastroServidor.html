@@ -23,7 +23,7 @@
           </div>
           <div class="user-details">
             <p class="title">GERENTE DE TI</p>
-            <p class="name">Roberto</p>
+            <p class="name" id="nome"></p>
           </div>
         </div>
         <div class="nav">
@@ -119,6 +119,8 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+      var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+      nome.innerHTML = nomeUsuario
   function registrar_servidor() {
       let nome = ipt_nome.value;
       let regiao = ipt_regiao.value;
