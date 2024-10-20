@@ -13,7 +13,7 @@
   <title>Sidebar</title>
 </head>
 
-<body onload="obterDadosCargos()">
+<body>
   <div class="container">
     <div class="sidebar">
       <div class="menu-btn">
@@ -45,22 +45,22 @@
               </li>
             </ul>
             </li>
-            <li>
-              <a href="dashRH-Func.html">
-                <i class="icon ph-bold ph-user"></i>
-                <span class="text">Funcionários</span>
-              </a>
-            </li>
-            <li>
-              <a href="dashRH-Cargo.html">
-                <i class="icon ph-bold ph-file-text"></i>
-                <span class="text" onclick="buscarDados()" id="btn_cargos">Cargos</span>
-              </a>
-            </li>
             <li class="active">
               <a href="">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li>
+              <a href="dashGerente01.html">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastroServidor.html">
                 <i class="icon ph-bold ph-gear"></i>
-                <span class="text" onclick="buscarDados()" id="btn_func" id="btn_cadastro">Cadastrar Cargo</span>
+                <span class="text">Cadastrar Servidor</span>
               </a>
             </li>
           </ul>
@@ -88,38 +88,47 @@
       </div>
     </div>
     <div class="credits">
-      <div class="content3">
-        <div class="cadastrarCargo">
-          <div class="box3">
-            <h1>Cadastrar cargo</h1>
-            <div class="campo2">
-              <div class="legenda2">
-                <span>Nome:</span>
+      <div class="relatorioG">
+        <div class="parteSuperior">
+          <div class="containerSUP">
+            <div class="supE">
+              <div class="supTitulo">
+                <h1>Feriados globais mais populares:</h1>
+
               </div>
-              <input type="text" id="ipt" placeholder="Insira nova função">
-            </div>
-            <div class="campo2">
-              <div class="legenda2">
-                <span>Nível de permissão:</span>
+              <div class="supImg">
+                <img src="../assets/imgs/wordcloud.png" width="400px" height="250px"> 
+
               </div>
 
-              <select id="slct_nivel">
-                <option value="null" selected disabled>Escolha uma opção</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
+
             </div>
-            <button class="cadastrar" onclick=" cadastrarCargo()">Confirmar</button>
+            <div class="supD">
+              <img src="../assets/imgs/feriados.png" width="575px" height="300px">
+
+            </div>
+
           </div>
+
+        </div>
+        <div class="parteInferior">
+          <div class="containerINF">
+            <img src="../assets/imgs/cpuxram.png" width="920px" height="305px">
+
+          </div>
+
         </div>
       </div>
+
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-      crossorigin="anonymous"></script>
-    <script src="../js/script.js"></script>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+  <script src="../js/script.js"></script>
 </body>
 
 </html>
@@ -132,26 +141,31 @@
   nomeUsuario.innerHTML = nome
   cargoUsuario.innerHTML = cargo
 
-  function cadastrarCargo() {
-    var nome = ipt_nome.value
-    var nivelPermisaso = slct_nivel.value
-
-    if (nivelPermisaso == "null") {
-      return false
+  function registrar_servidor() {
+    let nome = ipt_nome.value;
+    let regiao = ipt_regiao.value;
+    let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
+    if (regiao == null || nome == null || regiao == "" || nome == "") {
+      return false;
     }
 
-    console.log('oi')
-
-    fetch("/dashboard/cadastrarCargo", {
+    fetch("/dashboard/registrar_servidor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nome,
-        nivelPermissaoServer: nivelPermisaso,
-        fkEmpresaServer: idEmpresa
+        regiaoServer: regiao,
+        fkEmpresaServer: fkEmpresa,
       }),
     })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    // body.className("alterarParaLogin")
   }
 </script>
