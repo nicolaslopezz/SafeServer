@@ -86,6 +86,7 @@
                   <th>Componente</th>
                   <th>Status</th>
                   <th>Servidor</th>
+                  <th>Prioridade</th> 
                 </tr>
               </thead>
               <tbody>
@@ -93,18 +94,22 @@
                   <td>CPU</td>
                   <td id="status-cpu" class="status-alerta">Alerta</td>
                   <td>1</td>
+                  <td id="prioridade-cpu">Alta</td> 
                 </tr>
                 <tr>
                   <td>RAM</td>
                   <td id="status-ram" class="status-perigo">Perigo</td>
                   <td>1</td>
+                  <td id="prioridade-ram">Alta</td> 
                 </tr>
                 <tr>
                   <td>Rede</td>
                   <td id="status-rede" class="status-perigo">Perigo</td>
                   <td>1</td>
+                  <td id="prioridade-rede">Alta</td> 
                 </tr>
               </tbody>
+              
             </table>
           </div>
 
@@ -112,7 +117,6 @@
             <h2>Total de Componentes:</h2>
             <div class="summary-item" id="perigo-count">Perigo: 1</div>
             <div class="summary-item" id="alerta-count">Alerta: 1</div>
-            <div class="summary-item" id="seguro-count">Seguro: 1</div>
           </div>
         </div>
       </div>
@@ -137,60 +141,74 @@
   cargoUsuario.innerHTML = cargo
 
   function getRandomStatus() {
-    const statusExemplo = ['Alerta', 'Perigo', 'Seguro'];
+    const statusExemplo = ['Alerta', 'Perigo'];
     return statusExemplo[Math.floor(Math.random() * statusExemplo.length)];
   }
 
-  function updateTable() {
-    const cpuStatus = getRandomStatus();
-    const ramStatus = getRandomStatus();
-    const redeStatus = getRandomStatus();
-
-    const cpuComponente = document.getElementById('status-cpu');
-    const ramComponente = document.getElementById('status-ram');
-    const redeComponente = document.getElementById('status-rede');
-
-    cpuComponente.textContent = cpuStatus;
-    ramComponente.textContent = ramStatus;
-    redeComponente.textContent = redeStatus;
-
-
-    mudarCor(cpuComponente, cpuStatus);
-    mudarCor(ramComponente, ramStatus);
-    mudarCor(redeComponente, redeStatus);
-
-
-    atualizarSumario(cpuStatus, ramStatus, redeStatus);
+  function calcularPrioridade(status) {
+  if (status === 'Perigo') {
+    return 'Alta';
+  } else if (status === 'Alerta') {
+    return 'Média';
+  } else {
+    return 'Baixa';
   }
+}
+function updateTable() {
+  const cpuStatus = getRandomStatus();
+  const ramStatus = getRandomStatus();
+  const redeStatus = getRandomStatus();
+
+  const cpuComponente = document.getElementById('status-cpu');
+  const ramComponente = document.getElementById('status-ram');
+  const redeComponente = document.getElementById('status-rede');
+
+  cpuComponente.textContent = cpuStatus;
+  ramComponente.textContent = ramStatus;
+  redeComponente.textContent = redeStatus;
+
+  
+  mudarCor(cpuComponente, cpuStatus);
+  mudarCor(ramComponente, ramStatus);
+  mudarCor(redeComponente, redeStatus);
+
+  
+  const cpuPrioridade = calcularPrioridade(cpuStatus);
+  const ramPrioridade = calcularPrioridade(ramStatus);
+  const redePrioridade = calcularPrioridade(redeStatus);
+
+  document.getElementById('prioridade-cpu').textContent = cpuPrioridade;
+  document.getElementById('prioridade-ram').textContent = ramPrioridade;
+  document.getElementById('prioridade-rede').textContent = redePrioridade;
+
+  
+  atualizarSumario(cpuStatus, ramStatus, redeStatus);
+}
 
 
   function mudarCor(element, status) {
-    element.classList.remove('status-alerta', 'status-perigo', 'status-seguro');
+    element.classList.remove('status-alerta', 'status-perigo');
     if (status === 'Alerta') {
       element.classList.add('status-alerta');
     } else if (status === 'Perigo') {
       element.classList.add('status-perigo');
-    } else {
-      element.classList.add('status-seguro');
-    }
+    } 
   }
 
   function atualizarSumario(cpuStatus, ramStatus, redeStatus) {
-    let perigoContador = 0;
-    let alertaContador = 0;
-    let seguroContador = 0;
+  let perigoContador = 0;
+  let alertaContador = 0;
 
-    const statusExemplo = [cpuStatus, ramStatus, redeStatus];
-    statusExemplo.forEach(status => {
-      if (status === 'Perigo') perigoContador++;
-      if (status === 'Alerta') alertaContador++;
-      if (status === 'Seguro') seguroContador++;
-    });
+  const statusExemplo = [cpuStatus, ramStatus, redeStatus];
+  statusExemplo.forEach(status => {
+    if (status === 'Perigo') perigoContador++;
+    if (status === 'Alerta') alertaContador++;
+  });
 
-    document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
-    document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
-    document.getElementById('seguro-count').textContent = `Seguro: ${seguroContador}`;
-  }
+  document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
+  document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
+}
+
 
 
   setInterval(updateTable, 5000);
