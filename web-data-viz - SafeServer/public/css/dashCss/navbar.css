@@ -1,0 +1,36 @@
+.navbar {
+    height: 10vh;
+    width: 100vw;
+    background-color: #091836;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.conteudo-esquerda {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.conteudo-esquerda img {
+    height: 80%;
+}
+
+.conteudo-direita {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    align-items: center;
+}
+
+.botao-sair {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+}
