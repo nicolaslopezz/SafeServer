@@ -4,7 +4,7 @@ import boto3
 from botocore.exceptions import ClientError
 import os
 import logging
-import datetime
+from datetime import datetime
 
 # Definir credenciais temporárias da AWS (com token de sessão)
 AWS_ACCESS_KEY = ''
@@ -23,13 +23,16 @@ def create_s3_client():
     )
 
 # Coletar dados do sistema
+
+servidor_id = 1
+
 dados_cpu = []
 dados_uso_ram = []
 dados_livre_ram = []
 dados_ram_perc = []
 dados_rede_recebidos = []
 dados_rede_enviados = []
-
+dados_id_servidor = []
 i = 0
 while i < 5:
 # Armazenando dados arredondados
@@ -40,10 +43,12 @@ while i < 5:
     dados_rede_recebidos.append(round(psutil.net_io_counters().bytes_recv / (1024 ** 3), 2)) 
     dados_rede_enviados.append(round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2))  
     data_hora_atual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato: YYYY-MM-DD HH:MM:SS
+    dados_id_servidor.append(servidor_id)
     i += 1
 
 # Criar DataFrame e salvar como JSON
 df = pd.DataFrame({
+    'ID_SERVIDOR': dados_id_servidor,
     'CPU%': dados_cpu,
     'DataHora': data_hora_atual,
     'RAM-GB-Livre': dados_livre_ram,
@@ -51,7 +56,7 @@ df = pd.DataFrame({
     'RAM%': dados_ram_perc,
     'REDE_REC': dados_rede_recebidos, 
     'REDE_ENV': dados_rede_enviados })
-df.to_json('dadosColetados.json', index=False)
+df.to_json('dadosColetados.json', orient="records", lines="false")
 
 # Função para upload do arquivo para o bucket S3
 def upload_file(file_name, bucket, object_name=None):

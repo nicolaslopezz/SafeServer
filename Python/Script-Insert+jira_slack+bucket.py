@@ -67,6 +67,7 @@ dados_ram_perc = []
 dados_rede_recebidos = []
 dados_rede_enviados = []
 data_hora_atual = []
+dados_id_servidor = []
 
 # Função para configurar o cliente S3 usando credenciais temporárias da AWS
 def create_s3_client():
@@ -122,9 +123,11 @@ def monitorar_e_enviar_dados(servidor_id):
         dados_ram_perc.append(Porcentagem_RAM_uso)
         dados_rede_recebidos.append(GB_rede_recebidos)
         dados_rede_enviados.append(GB_rede_enviados)
+        dados_id_servidor.append(servidor_id)
 
                 # Criar DataFrame e salvar como JSON
         df = pd.DataFrame({
+            'ID_SERVIDOR': dados_id_servidor,
             'CPU%': dados_cpu,
             'DataHora': data_hora_atual,
             'RAM-GB-Livre': dados_livre_ram,
@@ -132,7 +135,7 @@ def monitorar_e_enviar_dados(servidor_id):
             'RAM%': dados_ram_perc,
             'REDE_REC': dados_rede_recebidos, 
             'REDE_ENV': dados_rede_enviados })
-        df.to_json('dadosColetados.json', index=False)
+        df.to_json('dadosColetados.json', orient="records", lines="false")
 
         # Função para upload do arquivo para o bucket S3
         def upload_file(file_name, bucket, object_name=None):

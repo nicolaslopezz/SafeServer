@@ -50,6 +50,8 @@ dados_ram_perc = []
 dados_rede_recebidos = []
 dados_rede_enviados = []
 data_hora_atual = []
+dados_id_servidor = []
+
 
 #---------Captura dos dados----------
 
@@ -62,6 +64,7 @@ def capturar_dados():
     GB_rede_enviados = round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2)
     data_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+
     # Armazena os dados nos arrays
     dados_cpu.append(Porcentagem_CPU)
     data_hora_atual.append(data_hora)
@@ -70,6 +73,8 @@ def capturar_dados():
     dados_ram_perc.append(Porcentagem_RAM_uso)
     dados_rede_recebidos.append(GB_rede_recebidos)
     dados_rede_enviados.append(GB_rede_enviados)
+    dados_id_servidor.append(servidor_id)
+
 
     return Porcentagem_CPU, GB_RAM_uso, GB_RAM_livre, Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados
 
@@ -87,6 +92,7 @@ def create_s3_client():
 def salvar_dados_json():
 
     df = pd.DataFrame({
+        'ID_SERVIDOR': dados_id_servidor,
         'CPU%': dados_cpu,
         'DataHora': data_hora_atual,
         'RAM-GB-Livre': dados_livre_ram,
@@ -95,7 +101,7 @@ def salvar_dados_json():
         'REDE_REC': dados_rede_recebidos,
         'REDE_ENV': dados_rede_enviados
     })
-    df.to_json('dadosColetados.json', index=False)
+    df.to_json('dadosColetados.json', orient="records", lines="false")
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
