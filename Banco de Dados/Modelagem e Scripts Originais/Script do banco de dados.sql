@@ -51,6 +51,14 @@ enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
+create table alerta (
+idAlerta int primary key auto_increment,
+componente varchar(45),
+fkRegistro int,
+nivelPrioridade int,
+constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
+);
+
 
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
