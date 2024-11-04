@@ -19,4 +19,9 @@ router.post("/cadastrarCargo", function (req, res) {
 router.post("/registrar_servidor", function (req, res) {
     dashboardController.registrar_servidor(req, res);
 })
+
+router.get("/wordcloud", function (req, res) {
+    dashboardController.wordcloud(req, res);
+})
+
 module.exports = router;

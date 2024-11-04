@@ -41,11 +41,20 @@ function gerarCodigo() {
     return Math.random().toString(36).substr(-8).toUpperCase()
 }
 
+function wordcloud() { 
+    var instrucaoSql = `select * from feriado_freq`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
 module.exports = {
     obterCargos,
     obterFunc,
     cadastrarCargo,
-    registrar_servidor
+    registrar_servidor,
+    wordcloud
 };
