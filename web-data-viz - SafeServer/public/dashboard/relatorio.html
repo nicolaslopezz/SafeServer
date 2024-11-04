@@ -10,7 +10,11 @@
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
-  <title>Sidebar</title>
+  <!-- AnyChart Scripts -->
+  <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+
+  <title>Relatório - Nuvem de Palavras</title>
 </head>
 
 <body>
@@ -21,7 +25,7 @@
       </div>
       <div class="head">
         <div class="user-img">
-          <img src="../assets/imgs/contact.png" alt="" />
+          <img src="../assets/imgs/contact.png" alt="User Image" />
         </div>
         <div class="user-details">
           <p class="title" id="cargoUsuario"></p>
@@ -32,21 +36,8 @@
         <div class="menu">
           <p class="title">Menu</p>
           <ul>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">
-                  <span class="text">Users</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="text">Subscribers</span>
-                </a>
-              </li>
-            </ul>
-            </li>
             <li class="active">
-              <a href="">
+              <a href="#">
                 <i class="icon ph-bold ph-file-text"></i>
                 <span class="text">Relatório</span>
               </a>
@@ -66,106 +57,143 @@
           </ul>
         </div>
         <div class="menu">
-          <p class="title"></p>
+          <p class="title">Conta</p>
           <ul>
             <li>
-
+              <a href="../index.html">
+                <i class="icon ph-bold ph-sign-out"></i>
+                <span class="text">Sair</span>
+              </a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="menu">
-        <p class="title">Conta</p>
-        <ul>
-
-          <li>
-            <a href="../index.html">
-              <i class="icon ph-bold ph-sign-out"></i>
-              <span class="text">Sair</span>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
+
     <div class="credits">
       <div class="relatorioG">
         <div class="parteSuperior">
           <div class="containerSUP">
             <div class="supE">
               <div class="supTitulo">
-                <h1>Feriados globais mais populares:</h1>
-
+                <h1>Feriados Globais Mais Populares:</h1>
               </div>
               <div class="supImg">
-                <img src="../assets/imgs/wordcloud.png" width="400px" height="250px"> 
-
+                <!-- Div para exibir a Word Cloud -->
+                <div id="word" style="width: 100%; height: 200px;"></div>
               </div>
-
-
             </div>
             <div class="supD">
-              <img src="../assets/imgs/feriados.png" width="575px" height="300px">
-
+              <img src="../assets/imgs/feriados.png" width="575px" height="300px" alt="Imagem Feriados">
             </div>
-
           </div>
-
         </div>
         <div class="parteInferior">
           <div class="containerINF">
-            <img src="../assets/imgs/cpuxram.png" width="920px" height="305px">
-
+            <img src="../assets/imgs/cpuxram.png" width="920px" height="305px" alt="Imagem CPU x RAM">
           </div>
-
         </div>
       </div>
-
     </div>
-
-
   </div>
 
+  <!-- Jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
   <script src="../js/script.js"></script>
+
+  <!-- Fetch e criação da Word Cloud -->
+  <script>
+    var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+    var cargoUsuario = sessionStorage.getItem("CARGO");
+
+    document.getElementById('nomeUsuario').textContent = nomeUsuario;
+    document.getElementById('cargoUsuario').textContent = cargoUsuario;
+
+    // Função para buscar dados dos feriados
+    async function fetchFeriados() {
+      console.log('Iniciando a requisição para /dashboard/wordcloud');
+
+      try {
+        const response = await fetch('/dashboard/wordcloud', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log('Resposta recebida do servidor:', response);
+
+        // Verifica se a resposta foi bem-sucedida
+        if (!response.ok) {
+          throw new Error('Erro ao obter os dados dos feriados: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Dados brutos recebidos:', data);
+
+        // Formatar os dados para o gráfico de nuvem de palavras
+        // Criação da lista de feriados usando forEach
+        const feriados = [];
+        data.forEach(item => {
+          feriados.push({
+            x: item.nomeFeriado, // 'x' para o nome do feriado
+            value: item.frequencia // 'value' para a frequência
+          });
+        });
+
+
+        console.log('Feriados processados:', feriados);
+        createWordCloud(feriados);
+      } catch (error) {
+        console.error('Erro na requisição dos feriados:', error);
+      }
+    }
+
+    // Função para criar a nuvem de palavras
+    function createWordCloud(feriados) {
+      console.log('Criando a word cloud com os seguintes feriados:', feriados);
+
+      var chart = anychart.tagCloud(feriados);
+
+      // definir cores 
+      var customColor = anychart.scales.linearColor();
+      customColor.colors(["#45b6fe", '#f94449', "#DE73FF"]);
+
+      chart.colorScale(customColor);
+
+
+      chart.angles([0, 45, -45]);
+      chart.colorRange(true);
+      chart.colorRange().length('90%');
+
+      // config da escala de tamanho das palavras com base no valor de frequência
+      chart.scale(anychart.scales.log()); // Usa uma escala logarítmica para equilibrar tamanhos
+      chart.normal().fontSize(function () {
+
+        //multiplica o valor da frequência, mas define um tamanho mínimo e máximo
+        var freq = this.getData('value');
+        var fontSize = freq * 0.4; 
+
+        // define tamanho 
+        if (fontSize < 12) fontSize = 14; // Tamanho mínimo
+        if (fontSize > 50) fontSize = 52; // Tamanho máximo
+
+        return fontSize;
+      });
+
+      // Exibir o gráfico
+      chart.container('word');
+      chart.draw();
+
+      console.log('Word cloud criada com sucesso!');
+    }
+
+    // Chama a função para buscar os feriados ao carregar a página
+    fetchFeriados();
+
+  </script>
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-
-  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-  var nome = sessionStorage.getItem("NOME_USUARIO");
-  var cargo = sessionStorage.getItem("CARGO");
-  nomeUsuario.innerHTML = nome
-  cargoUsuario.innerHTML = cargo
-
-  function registrar_servidor() {
-    let nome = ipt_nome.value;
-    let regiao = ipt_regiao.value;
-    let fkEmpresa = sessionStorage.getItem("ID_EMPRESA")
-    if (regiao == null || nome == null || regiao == "" || nome == "") {
-      return false;
-    }
-
-    fetch("/dashboard/registrar_servidor", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nome,
-        regiaoServer: regiao,
-        fkEmpresaServer: fkEmpresa,
-      }),
-    })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-
-    // body.className("alterarParaLogin")
-  }
-</script>
