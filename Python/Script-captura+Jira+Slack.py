@@ -52,7 +52,6 @@ dados_rede_enviados = []
 data_hora_atual = []
 dados_id_servidor = []
 
-
 #---------Captura dos dados----------
 
 def capturar_dados():

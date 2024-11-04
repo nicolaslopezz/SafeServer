@@ -105,7 +105,6 @@ def monitorar_e_enviar_dados(servidor_id):
 
     print("Conexão com o banco de dados bem-sucedida!.")
 
-
     while True:
         # Coletando dados e arredondando para 2 casas decimais
         Porcentagem_CPU = round(psutil.cpu_percent(interval=1), 2)
