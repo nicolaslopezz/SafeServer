@@ -1,5 +1,0 @@
-FROM mysql:latest
-WORKDIR /
-ENV MYSQL_ROOT_PASSWORD=urubu100
-COPY ../../BD/Script/init.sql
-EXPOSE 3306
