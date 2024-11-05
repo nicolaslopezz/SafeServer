@@ -135,14 +135,40 @@
 
         // Formatar os dados para o gráfico de nuvem de palavras
         // Criação da lista de feriados usando forEach
+
+        const holidaysTranslation = {
+          "NewYearsDay": "Ano Novo",
+          "ChristmasDay": "Natal",
+          "GoodFriday": "Sexta-feira Santa",
+          "EasterMonday": "Páscoa",
+          "LabourDay": "Dia do Trabalho",
+          "IndependenceDay": "Dia da Independência",
+          "St.StephensDay": "Dia de Santo Estêvão",
+          "EasterSunday": "Domingo de Páscoa",
+          "AllSaintsDay": "Dia de Todos os Santos",
+          "AscensionDay": "Dia da Ascensão",
+          "WhitMonday": "Segunda-feira de Pentecostes",
+          "Epiphany": "Dia de Reis",
+          "AssumptionDay": "Assunção de Maria",
+          "Carnival": "Carnaval",
+          "ChristmasEve": "Véspera de Natal",
+          "CorpusChristi": "Corpus Christi",
+          "RegionalHoliday": "Feriado Regional",
+          "MaundyThursday": "Quinta-feira Santa",
+          "ImmaculateConception": "Imaculada Conceição",
+          "NewYearsEve": "Véspera de Ano Novo"
+        };
+
+        // Array para armazenar os feriados
         const feriados = [];
+
+        //  Itera sobre o array 'data' onde possui o nomeFeriado e a frequencia. Acessa o objeto de string e acessa a entidade relacionada a o nome do feriado em inglês e acessa o item com o nome do feriado traduzido armazenando no x caso o nome em ingles nao seja encontrado no objeto ele mantém o nome em inglês
         data.forEach(item => {
           feriados.push({
-            x: item.nomeFeriado, // 'x' para o nome do feriado
+            x: holidaysTranslation[item.nomeFeriado] || item.nomeFeriado, // Traduz ou mantém o nome original
             value: item.frequencia // 'value' para a frequência
           });
         });
-
 
         console.log('Feriados processados:', feriados);
         createWordCloud(feriados);
@@ -174,11 +200,11 @@
 
         //multiplica o valor da frequência, mas define um tamanho mínimo e máximo
         var freq = this.getData('value');
-        var fontSize = freq * 0.4; 
+        var fontSize = freq * 0.4;
 
         // define tamanho 
-        if (fontSize < 12) fontSize = 14; // Tamanho mínimo
-        if (fontSize > 50) fontSize = 52; // Tamanho máximo
+        if (fontSize < 12) fontSize = 13; // Tamanho mínimo
+        if (fontSize > 50) fontSize = 51; // Tamanho máximo
 
         return fontSize;
       });
