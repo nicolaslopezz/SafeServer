@@ -24,4 +24,15 @@ router.get("/wordcloud", function (req, res) {
     dashboardController.wordcloud(req, res);
 })
 
+router.get("/feriado", function (req, res) {
+    dashboardController.feriado(req, res);
+})
+
+router.get("/feriado/:nomeServidor/:empresa", function (req, res) {
+    dashboardController.feriado(req, res);
+});
+
+router.get("/servidor/:empresa", function (req, res) {
+    dashboardController.servidor(req, res);
+})
 module.exports = router;

@@ -14,6 +14,10 @@
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
 
+
+  <!-- scripts do Chart.js - 2022-1 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <title>Relatório - Nuvem de Palavras</title>
 </head>
 
@@ -84,13 +88,18 @@
               </div>
             </div>
             <div class="supD">
-              <img src="../assets/imgs/feriados.png" width="575px" height="300px" alt="Imagem Feriados">
+              <div class="intFeriado">
+                <select id="feriadoSelect" onchange="obterServidorSelecionado()">
+                 
+                </select>
+              </div>
+              <div id="grafico"></div>
             </div>
           </div>
         </div>
         <div class="parteInferior">
           <div class="containerINF">
-            <img src="../assets/imgs/cpuxram.png" width="920px" height="305px" alt="Imagem CPU x RAM">
+
           </div>
         </div>
       </div>
@@ -108,8 +117,12 @@
     var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
     var cargoUsuario = sessionStorage.getItem("CARGO");
 
+
     document.getElementById('nomeUsuario').textContent = nomeUsuario;
     document.getElementById('cargoUsuario').textContent = cargoUsuario;
+
+
+
 
     // Função para buscar dados dos feriados
     async function fetchFeriados() {
@@ -223,3 +236,178 @@
 </body>
 
 </html>
+<script>
+// Função para fazer a requisição e preencher o <select> com servidores
+  async function servidor() {
+  const empresa = sessionStorage.ID_EMPRESA;
+  console.log('Iniciando a requisição para /dashboard/servidor');
+
+  try {
+    const response = await fetch(`/dashboard/servidor/${empresa}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    console.log('Resposta recebida do servidor:', response);
+
+    if (!response.ok) {
+      throw new Error('Erro ao obter os dados: ' + response.statusText);
+    }
+
+    const data = await response.json();
+    console.log('Dados brutos recebidos:', data);
+
+    if (Array.isArray(data)) {
+      const servidores = data.map(item => item.identificacao); // Usando .map() para simplificar
+      console.log('Servidores:', servidores);
+      preencherSelectServidores(servidores);
+    } else {
+      console.error('Erro: A resposta não contém um array de servidores.');
+    }
+  } catch (error) {
+    console.error('Erro na requisição', error);
+  }
+  
+}
+
+// Função para preencher o select com os servidores recebidos
+function preencherSelectServidores(servidores) {
+  const selectElement = document.getElementById("feriadoSelect");
+  selectElement.innerHTML = ''; // Limpa as opções existentes
+
+  servidores.forEach(servidor => {
+    const option = document.createElement('option');
+    option.value = servidor;
+    option.textContent = servidor;
+    selectElement.appendChild(option);
+  });
+
+  console.log('Select preenchido com sucesso.');
+}
+
+// Função que lida com a seleção do servidor no select
+function obterServidorSelecionado() {
+  const valorSelecionado = document.getElementById("feriadoSelect").value;
+  console.log("Valor selecionado:", valorSelecionado);
+
+  obterDadosGrafico(valorSelecionado);
+
+
+
+
+  if (valorSelecionado) {
+    return valorSelecionado;
+  
+ 
+  } else {
+    console.log('Nenhuma opção selecionada ou o valor está vazio.');
+    return null;
+  }
+}
+
+// Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
+async function exibirPosts() {
+  document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
+  await obterDadosGrafico();  // Aguarda a função de obter dados antes de continuar
+}
+
+// Função para obter dados do gráfico com base no servidor selecionado
+async function obterDadosGrafico(valorSelecionado) {
+  const empresa = sessionStorage.ID_EMPRESA;
+  
+  if (!valorSelecionado) {
+    console.error("Nenhum servidor selecionado");
+    return;
+  }
+
+  console.log('Obtendo dados para:', valorSelecionado, 'da empresa:', empresa);
+
+  try {
+    const response = await fetch(`/dashboard/feriado/${valorSelecionado}/${empresa}`, { cache: 'no-store' });
+    if (response.ok) {
+      const resposta = await response.json();
+      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+      plotarGrafico(resposta);
+    } else {
+      console.error('Nenhum dado encontrado');
+    }
+  } catch (error) {
+    console.error('Erro na obtenção dos dados para o gráfico:', error.message);
+  }
+}
+
+// Função para plotar o gráfico
+function plotarGrafico(resposta) {
+  const labels = [];
+  const dados = {
+    labels: labels,
+    datasets: [{
+      label: 'Uso de CPU (%)',
+      data: [],
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+      tension: 0.1
+    }]
+  };
+
+  const holidaysTranslation = {
+    // Suas traduções aqui...
+  };
+
+  resposta.forEach(registro => {
+    const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
+    labels.push(holidaysTranslation[dataFormatada] || dataFormatada);
+    dados.datasets[0].data.push(registro.mediaPercentualCPU);
+  });
+
+  const config = {
+    type: 'bar',
+    data: dados,
+    options: {
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: 'Uso médio do percentual da CPU'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          displayColors: false,
+          labels: {
+            usePointStyle: true,
+            boxWidth: 0,
+            fontColor: 'transparent'
+          }
+        }
+      }
+    }
+  };
+
+  if (grafico) {
+    grafico.destroy();
+  }
+
+  // Adiciona o gráfico à tela
+  grafico = new Chart(document.getElementById('myChartCanvas'), config);
+
+
+}
+
+var grafico 
+
+
+
+// Chama a função para fazer a requisição inicial e preencher o select
+async function inicializar() {
+  await servidor(); // Aguarda o preenchimento do select
+  exibirPosts();    // Exibe o gráfico após a requisição
+}
+
+// Inicia o processo
+inicializar();
+
+</script>

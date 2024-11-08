@@ -151,9 +151,50 @@ function registrar_servidor(req, res) {
     }
 }
 
-function wordcloud(req, res) { // 17/07
-    // Chama a função sexoMural localizada no Model.js para obter os dados do banco de dados
+function wordcloud(req, res) { 
+
     dashboardModel.wordcloud()
+        .then(
+         
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+             
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function feriado(req, res) { 
+    const empresa = req.params.empresa;
+    const nomeServidor = req.params.nomeServidor
+   
+    dashboardModel.feriado(empresa,nomeServidor)
+        .then(
+         
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+             
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function servidor(req, res) { 
+    const empresa = req.params.empresa;
+
+    dashboardModel.servidor(empresa)
         .then(
          
             function (resultado) {
@@ -176,6 +217,8 @@ module.exports = {
     obterFunc,
     cadastrarCargo,
     registrar_servidor,
-    wordcloud
+    wordcloud,
+    feriado,
+    servidor
 
 }
