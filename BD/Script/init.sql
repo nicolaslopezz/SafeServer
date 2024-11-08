@@ -107,10 +107,9 @@ VALUES
 ('2024-05-01 18:00:00', 75, 77, 28, 2, 630, 330, 2);
 
 
-select*from chaveAcesso;
-select * from freq;
-SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
-FROM registro GROUP BY DATE(dtHora) ORDER BY mediaDeUsoCPU DESC;
+-- select*from chaveAcesso;
+-- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
+-- FROM registro GROUP BY DATE(dtHora) ORDER BY mediaDeUsoCPU DESC;
     
 
 
@@ -118,7 +117,7 @@ CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa 
 
 -- select * from registro;
 
-select * from empresa;
+-- select * from empresa;
 
 select * from funcionario;
 
