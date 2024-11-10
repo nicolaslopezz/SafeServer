@@ -144,6 +144,33 @@
     document.getElementById('nomeUsuario').textContent = nomeUsuario;
     document.getElementById('cargoUsuario').textContent = cargoUsuario;
 
+    const feriadosTraduzidos = {
+      "NewYearsDay": "Ano Novo",
+      "ChristmasDay": "Natal",
+      "GoodFriday": "Sexta-feira Santa",
+      "EasterMonday": "Páscoa",
+      "LabourDay": "Dia do Trabalho",
+      "IndependenceDay": "Dia da Independência",
+      "St.StephensDay": "Dia de Santo Estêvão",
+      "EasterSunday": "Domingo de Páscoa",
+      "AllSaintsDay": "Dia de Todos os Santos",
+      "AscensionDay": "Dia da Ascensão",
+      "WhitMonday": "Segunda-feira de Pentecostes",
+      "Epiphany": "Dia de Reis",
+      "AssumptionDay": "Assunção de Maria",
+      "Carnival": "Carnaval",
+      "ChristmasEve": "Véspera de Natal",
+      "CorpusChristi": "Corpus Christi",
+      "RegionalHoliday": "Feriado Regional",
+      "MaundyThursday": "Quinta-feira Santa",
+      "ImmaculateConception": "Imaculada Conceição",
+      "NewYearsEve": "Véspera de Ano Novo"
+    };
+
+    // Array para armazenar os feriados
+    const feriados = [];
+    const periodos = [];
+
 
 
 
@@ -169,39 +196,10 @@
         const data = await response.json();
         console.log('Dados brutos recebidos:', data);
 
-        // Formatar os dados para o gráfico de nuvem de palavras
-        // Criação da lista de feriados usando forEach
-
-        const FeriadosTraduzidos = {
-          "NewYearsDay": "Ano Novo",
-          "ChristmasDay": "Natal",
-          "GoodFriday": "Sexta-feira Santa",
-          "EasterMonday": "Páscoa",
-          "LabourDay": "Dia do Trabalho",
-          "IndependenceDay": "Dia da Independência",
-          "St.StephensDay": "Dia de Santo Estêvão",
-          "EasterSunday": "Domingo de Páscoa",
-          "AllSaintsDay": "Dia de Todos os Santos",
-          "AscensionDay": "Dia da Ascensão",
-          "WhitMonday": "Segunda-feira de Pentecostes",
-          "Epiphany": "Dia de Reis",
-          "AssumptionDay": "Assunção de Maria",
-          "Carnival": "Carnaval",
-          "ChristmasEve": "Véspera de Natal",
-          "CorpusChristi": "Corpus Christi",
-          "RegionalHoliday": "Feriado Regional",
-          "MaundyThursday": "Quinta-feira Santa",
-          "ImmaculateConception": "Imaculada Conceição",
-          "NewYearsEve": "Véspera de Ano Novo"
-        };
-
-        // Array para armazenar os feriados
-        const feriados = [];
-
         //  Itera sobre o array 'data' onde possui o nomeFeriado e a frequencia. Acessa o objeto de string e acessa a entidade relacionada a o nome do feriado em inglês e acessa o item com o nome do feriado traduzido armazenando no x caso o nome em ingles nao seja encontrado no objeto ele mantém o nome em inglês
         data.forEach(item => {
           feriados.push({
-            x: FeriadosTraduzidos[item.nomeFeriado] || item.nomeFeriado, // traduz ou mantém o nome original
+            x: feriadosTraduzidos[item.nomeFeriado] || item.nomeFeriado, // traduz ou mantém o nome original
             value: item.frequencia // 'value' para a frequência
           });
         });
@@ -305,6 +303,8 @@
     selectElement.innerHTML = '';
     selectElement2.innerHTML = '';
 
+
+
     servidores.forEach(servidor => {
       const option = document.createElement('option');
       option.value = servidor;
@@ -319,25 +319,24 @@
       selectElement2.appendChild(option);
     });
 
-    console.log('Select preenchido com sucesso.');
   }
-
-
 
   function obterServidorSelecionado() {
     const valorSelecionado = document.getElementById("feriadoSelect").value;
-    console.log("Valor selecionado:", valorSelecionado);
 
-    obterDadosGrafico(valorSelecionado);
+    // Se não houver um valor selecionado, usa o primeiro servidor automaticamente
+    const servidor = valorSelecionado || document.getElementById("feriadoSelect").options[0].value;
 
-    if (valorSelecionado) {
-      return valorSelecionado;
-
+    if (servidor) {
+      document.getElementById("feriadoSelect").value = servidor;
+      obterDadosGrafico(servidor);
+      return servidor;
     } else {
-      console.log('Nenhuma opção selecionada ou o valor está vazio.');
+      console.log('Nenhuma opção disponível.');
       return null;
     }
   }
+
 
   // Função para obter os dados de períodos
   async function periodo() {
@@ -383,7 +382,7 @@
         };
         const periodos = [];
         data.forEach(item => {
-            mes: periodos.push(meses[item.mes]);
+          mes: periodos.push(meses[item.mes]);
         });
         preencherSelectPeriodo(periodos);
       } else {
@@ -440,6 +439,8 @@
     }
   }
 
+  var grafico
+
   // Função para plotar o gráfico
   function plotarGrafico(resposta) {
     const labels = [];
@@ -448,20 +449,51 @@
       datasets: [{
         label: 'Uso de CPU (%)',
         data: [],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)',
+          'rgba(255,0,0, 0.7)',
+          'rgba(255,20,147, 0.7)',
+          'rgba(186,85,211, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)',
+          'rgba(255,0,0, 1)',
+          'rgba(255,20,147, 1)',
+          'rgba(186,85,211, 1)'
+        ],
+        borderWidth: 2,
         tension: 0.1
       }]
     };
 
-    const holidaysTranslation = {
-      // Suas traduções aqui...
+    const datasTraduzidas = {
+      "2024-01-01": "Ano Novo",
+      "2024-12-25": "Natal",
+      "2024-03-29": "Sexta-feira Santa",
+      "2024-03-31": "Páscoa",
+      "2024-05-01": "Dia do Trabalho",
+      "2024-09-07": "Dia da Independência",
+      "2024-12-26": "Dia de Santo Estêvão",
+      "2024-03-31": "Domingo de Páscoa",
+      "2024-11-01": "Dia de Todos os Santos",
+      "2024-05-30": "Dia da Ascensão",
+      "2024-05-20": "Segunda-feira de Pentecostes",
+      "2024-01-06": "Dia de Reis",
+      "2024-08-15": "Assunção de Maria",
+      "2024-02-13": "Carnaval",
+      "2024-12-24": "Véspera de Natal",
+      "2024-06-20": "Corpus Christi",
+      "2024-12-31": "Véspera de Ano Novo",
+      "2024-08-15": "Imaculada Conceição"
     };
+
+
 
     resposta.forEach(registro => {
       const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
-      labels.push(holidaysTranslation[dataFormatada] || dataFormatada);
+      labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
       dados.datasets[0].data.push(registro.mediaPercentualCPU);
     });
 
@@ -498,18 +530,15 @@
     // Adiciona o gráfico à tela
     grafico = new Chart(document.getElementById('myChartCanvas'), config);
 
-
   }
-
-  var grafico
-
 
 
   // Chama a função para fazer a requisição inicial e preencher o select
   async function inicializar() {
-    await servidor();
-    await periodo();
-    exibirPosts();
+    await servidor(); // Preenche os servidores
+    await periodo(); // Preenche os períodos
+    await exibirPosts(); // Exibe o gráfico
+    obterServidorSelecionado();
   }
 
   // Inicia o processo

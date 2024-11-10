@@ -58,7 +58,7 @@ FROM
 JOIN 
     servidor s ON r.fkServidor = s.idServidor
 WHERE 
-    DATE(r.dtHora) IN ('2024-12-25', '2024-01-01', '2024-04-18', '2024-04-20', '2024-05-01')
+    DATE(r.dtHora) IN ('2024-12-25', '2024-01-01', '2024-03-29', '2024-03-31', '2024-05-01')
     AND s.fkEmpresa = ${empresa}
     AND s.identificacao = "${nomeServidor}"
 GROUP BY 
