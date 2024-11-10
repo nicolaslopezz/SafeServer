@@ -80,6 +80,8 @@ function servidor(empresa) {
 
 
 
+
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
 module.exports = {

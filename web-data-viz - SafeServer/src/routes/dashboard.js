@@ -35,4 +35,6 @@ router.get("/feriado/:nomeServidor/:empresa", function (req, res) {
 router.get("/servidor/:empresa", function (req, res) {
     dashboardController.servidor(req, res);
 })
+
+
 module.exports = router;

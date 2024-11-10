@@ -316,7 +316,7 @@ canvas {
 
 .parteSuperior{
   width: 100%;
-  height: 50%;
+  height: 49%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -326,7 +326,7 @@ canvas {
 
 .parteInferior{
   width: 100%;
-  height: 50%;
+  height: 52%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -408,8 +408,8 @@ canvas {
 }
 
 #myChartCanvas {
-  width: 40vw !important;   /* 80% da largura da tela */
-  height: 40vh !important; /* 40% da altura da tela */
+  width: 39vw !important;   /* 80% da largura da tela */
+  height: 38vh !important; /* 40% da altura da tela */
   position: relative;
 }
 
@@ -420,7 +420,82 @@ canvas {
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4); 
   border-radius: 8px;
   width: 87%;
-  height: 90%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.divisao1{
+  background-color: green;
+  width: 100%;
+  height: 28%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.divcima{
+  background-color: rgb(128, 0, 102);
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+#servidorRelatorio,#periodoRelatorio,#componenteRelatorio, #feriadoSelect {
+  background-color: white; 
+  color: #1f2a88; 
+  font-size: 16px; 
+  font-weight: 500;
+  padding: 5px; 
+  border: 2px solid #1a2e70; 
+  border-radius: 4px; 
+  width: 150px;
+  appearance: auto; 
+}
+
+
+#servidorRelatorio:focus,#periodoRelatorio:focus,#componenteRelatorio:focus, #feriadoSelect:focus {
+  background-color: white;
+  color: #1a2e70; 
+  font-size: 16px; 
+  outline: none; 
+  font-weight: 500;
+  border: 2px solid #1a2e70; 
+}
+
+
+#servidorRelatorio:active,#periodoRelatorio:active,#componenteRelatorio:active, #feriadoSelect:active {
+  background-color: white;
+  color: #1a2e70; 
+  font-size: 16px; 
+  outline: none; 
+  font-weight: 500;
+  border: 2px solid #1a2e70; 
+}
+
+
+
+.divbaixo{
+  background-color: rgb(0, 98, 128);
+  width: 80%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.divisao2{
+  background-color: #0a25d4;
+  width: 100%;
+  height: 72%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -683,7 +758,7 @@ input:focus {
   align-items: center;
 }
 
-select {
+#ipt, #slct_nivel {
   padding: 5px 35px;
   width: 100%;
   color: #233869;
@@ -695,7 +770,7 @@ select {
   transition: all 0.3s ease; 
 }
 
-select:focus {
+#ipt:focus, #slct_nivel:focus {
   border-color: #1a2e70;
   background:linear-gradient(135deg, #8e98bd, #455883);  
   color: #233869;

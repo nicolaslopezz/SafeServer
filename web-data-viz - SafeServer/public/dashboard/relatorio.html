@@ -90,7 +90,7 @@
             <div class="supD">
               <div class="intFeriado">
                 <select id="feriadoSelect" onchange="obterServidorSelecionado()">
-                 
+
                 </select>
               </div>
               <div id="grafico"></div>
@@ -99,6 +99,29 @@
         </div>
         <div class="parteInferior">
           <div class="containerINF">
+            <div class="divisao1">
+              <div class="divcima">
+                <select id="servidorRelatorio" onchange="obterServidorRelatorio()">
+
+                </select>
+                <select id="periodoRelatorio" onchange="obterPeriodoRelatorio()">
+
+                </select>
+                <select id="componenteRelatorio" onchange="obterComponenteRelatorio()">
+
+                </select>
+
+              </div>
+
+              <div class="divbaixo">
+
+              </div>
+         
+
+            </div>
+            <div class="divisao2">
+
+            </div>
 
           </div>
         </div>
@@ -106,13 +129,13 @@
     </div>
   </div>
 
-  <!-- Jquery -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
   <script src="../js/script.js"></script>
 
-  <!-- Fetch e criação da Word Cloud -->
+
   <script>
     var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
     var cargoUsuario = sessionStorage.getItem("CARGO");
@@ -149,7 +172,7 @@
         // Formatar os dados para o gráfico de nuvem de palavras
         // Criação da lista de feriados usando forEach
 
-        const holidaysTranslation = {
+        const FeriadosTraduzidos = {
           "NewYearsDay": "Ano Novo",
           "ChristmasDay": "Natal",
           "GoodFriday": "Sexta-feira Santa",
@@ -178,7 +201,7 @@
         //  Itera sobre o array 'data' onde possui o nomeFeriado e a frequencia. Acessa o objeto de string e acessa a entidade relacionada a o nome do feriado em inglês e acessa o item com o nome do feriado traduzido armazenando no x caso o nome em ingles nao seja encontrado no objeto ele mantém o nome em inglês
         data.forEach(item => {
           feriados.push({
-            x: holidaysTranslation[item.nomeFeriado] || item.nomeFeriado, // Traduz ou mantém o nome original
+            x: FeriadosTraduzidos[item.nomeFeriado] || item.nomeFeriado, // traduz ou mantém o nome original
             value: item.frequencia // 'value' para a frequência
           });
         });
@@ -208,7 +231,7 @@
       chart.colorRange().length('90%');
 
       // config da escala de tamanho das palavras com base no valor de frequência
-      chart.scale(anychart.scales.log()); // Usa uma escala logarítmica para equilibrar tamanhos
+      chart.scale(anychart.scales.log()); // escala logarítmica para equilibrar tamanhos
       chart.normal().fontSize(function () {
 
         //multiplica o valor da frequência, mas define um tamanho mínimo e máximo
@@ -216,20 +239,20 @@
         var fontSize = freq * 0.4;
 
         // define tamanho 
-        if (fontSize < 12) fontSize = 13; // Tamanho mínimo
-        if (fontSize > 50) fontSize = 51; // Tamanho máximo
+        if (fontSize < 12) fontSize = 13; 
+        if (fontSize > 50) fontSize = 51;
 
         return fontSize;
       });
 
-      // Exibir o gráfico
+   
       chart.container('word');
       chart.draw();
 
       console.log('Word cloud criada com sucesso!');
     }
 
-    // Chama a função para buscar os feriados ao carregar a página
+
     fetchFeriados();
 
   </script>
@@ -237,177 +260,193 @@
 
 </html>
 <script>
-// Função para fazer a requisição e preencher o <select> com servidores
+  // Função para fazer a requisição e preencher o <select> com servidores
   async function servidor() {
-  const empresa = sessionStorage.ID_EMPRESA;
-  console.log('Iniciando a requisição para /dashboard/servidor');
+    const empresa = sessionStorage.ID_EMPRESA;
+    console.log('Iniciando a requisição para /dashboard/servidor');
 
-  try {
-    const response = await fetch(`/dashboard/servidor/${empresa}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+    try {
+      const response = await fetch(`/dashboard/servidor/${empresa}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      console.log('Resposta recebida do servidor:', response);
+
+      if (!response.ok) {
+        throw new Error('Erro ao obter os dados: ' + response.statusText);
+      }
+
+      const data = await response.json();
+      console.log('Dados brutos recebidos:', data);
+
+      if (Array.isArray(data)) {
+
+        const servidores = []; 
+
+        data.forEach(item => {
+          servidores.push(item.identificacao); 
+        });
+        preencherSelectServidores(servidores);
+
+
+        if (servidores.length > 0) {
+          // Selecionar automaticamente o primeiro servidor e gerar o gráfico
+          const selectElement = document.getElementById("feriadoSelect");
+          selectElement.value = servidores[0];
+
+          obterDadosGrafico(servidores[0]);
+        }
+
+      } else {
+        console.error('Erro: A resposta não contém um array de servidores.');
+      }
+    } catch (error) {
+      console.error('Erro na requisição', error);
+    }
+
+  }
+
+  // Função para preencher o select com os servidores recebidos
+  function preencherSelectServidores(servidores) {
+    const selectElement = document.getElementById("feriadoSelect");
+    const selectElement2 = document.getElementById("servidorRelatorio")
+    selectElement.innerHTML = '';
+    selectElement2.innerHTML = '';
+
+    servidores.forEach(servidor => {
+      const option = document.createElement('option');
+      option.value = servidor;
+      option.textContent = servidor;
+      selectElement.appendChild(option);
     });
 
-    console.log('Resposta recebida do servidor:', response);
+    servidores.forEach(servidor => {
+      const option = document.createElement('option');
+      option.value = servidor;
+      option.textContent = servidor;
+      selectElement2.appendChild(option);
+    });
 
-    if (!response.ok) {
-      throw new Error('Erro ao obter os dados: ' + response.statusText);
-    }
+    console.log('Select preenchido com sucesso.');
+  }
 
-    const data = await response.json();
-    console.log('Dados brutos recebidos:', data);
 
-    if (Array.isArray(data)) {
-      const servidores = data.map(item => item.identificacao); // Usando .map() para simplificar
-      console.log('Servidores:', servidores);
-      preencherSelectServidores(servidores);
+  function obterServidorSelecionado() {
+    const valorSelecionado = document.getElementById("feriadoSelect").value;
+    console.log("Valor selecionado:", valorSelecionado);
+
+    obterDadosGrafico(valorSelecionado);
+
+    if (valorSelecionado) {
+      return valorSelecionado;
+
     } else {
-      console.error('Erro: A resposta não contém um array de servidores.');
+      console.log('Nenhuma opção selecionada ou o valor está vazio.');
+      return null;
     }
-  } catch (error) {
-    console.error('Erro na requisição', error);
-  }
-  
-}
-
-// Função para preencher o select com os servidores recebidos
-function preencherSelectServidores(servidores) {
-  const selectElement = document.getElementById("feriadoSelect");
-  selectElement.innerHTML = ''; // Limpa as opções existentes
-
-  servidores.forEach(servidor => {
-    const option = document.createElement('option');
-    option.value = servidor;
-    option.textContent = servidor;
-    selectElement.appendChild(option);
-  });
-
-  console.log('Select preenchido com sucesso.');
-}
-
-// Função que lida com a seleção do servidor no select
-function obterServidorSelecionado() {
-  const valorSelecionado = document.getElementById("feriadoSelect").value;
-  console.log("Valor selecionado:", valorSelecionado);
-
-  obterDadosGrafico(valorSelecionado);
-
-
-
-
-  if (valorSelecionado) {
-    return valorSelecionado;
-  
- 
-  } else {
-    console.log('Nenhuma opção selecionada ou o valor está vazio.');
-    return null;
-  }
-}
-
-// Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
-async function exibirPosts() {
-  document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
-  await obterDadosGrafico();  // Aguarda a função de obter dados antes de continuar
-}
-
-// Função para obter dados do gráfico com base no servidor selecionado
-async function obterDadosGrafico(valorSelecionado) {
-  const empresa = sessionStorage.ID_EMPRESA;
-  
-  if (!valorSelecionado) {
-    console.error("Nenhum servidor selecionado");
-    return;
   }
 
-  console.log('Obtendo dados para:', valorSelecionado, 'da empresa:', empresa);
+  
 
-  try {
-    const response = await fetch(`/dashboard/feriado/${valorSelecionado}/${empresa}`, { cache: 'no-store' });
-    if (response.ok) {
-      const resposta = await response.json();
-      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-      plotarGrafico(resposta);
-    } else {
-      console.error('Nenhum dado encontrado');
+  // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
+  async function exibirPosts() {
+    document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
+    await obterDadosGrafico();
+  }
+
+  // Função para obter dados do gráfico com base no servidor selecionado
+  async function obterDadosGrafico(valorSelecionado) {
+    const empresa = sessionStorage.ID_EMPRESA;
+
+    console.log('Obtendo dados para:', valorSelecionado, 'da empresa:', empresa);
+
+    try {
+      const response = await fetch(`/dashboard/feriado/${valorSelecionado}/${empresa}`, { cache: 'no-store' });
+      if (response.ok) {
+        const resposta = await response.json();
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        plotarGrafico(resposta);
+      } else {
+        console.error('Nenhum dado encontrado');
+      }
+    } catch (error) {
+      console.error('Erro na obtenção dos dados para o gráfico:', error.message);
     }
-  } catch (error) {
-    console.error('Erro na obtenção dos dados para o gráfico:', error.message);
   }
-}
 
-// Função para plotar o gráfico
-function plotarGrafico(resposta) {
-  const labels = [];
-  const dados = {
-    labels: labels,
-    datasets: [{
-      label: 'Uso de CPU (%)',
-      data: [],
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1,
-      tension: 0.1
-    }]
-  };
+  // Função para plotar o gráfico
+  function plotarGrafico(resposta) {
+    const labels = [];
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Uso de CPU (%)',
+        data: [],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        tension: 0.1
+      }]
+    };
 
-  const holidaysTranslation = {
-    // Suas traduções aqui...
-  };
+    const holidaysTranslation = {
+      // Suas traduções aqui...
+    };
 
-  resposta.forEach(registro => {
-    const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
-    labels.push(holidaysTranslation[dataFormatada] || dataFormatada);
-    dados.datasets[0].data.push(registro.mediaPercentualCPU);
-  });
+    resposta.forEach(registro => {
+      const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
+      labels.push(holidaysTranslation[dataFormatada] || dataFormatada);
+      dados.datasets[0].data.push(registro.mediaPercentualCPU);
+    });
 
-  const config = {
-    type: 'bar',
-    data: dados,
-    options: {
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: 'Uso médio do percentual da CPU'
+    const config = {
+      type: 'bar',
+      data: dados,
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Uso médio do percentual da CPU'
+            }
           }
-        }
-      },
-      plugins: {
-        legend: {
-          display: true,
-          displayColors: false,
-          labels: {
-            usePointStyle: true,
-            boxWidth: 0,
-            fontColor: 'transparent'
+        },
+        plugins: {
+          legend: {
+            display: true,
+            displayColors: false,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 0,
+              fontColor: 'transparent'
+            }
           }
         }
       }
-    }
-  };
+    };
 
-  if (grafico) {
-    grafico.destroy();
+    if (grafico) {
+      grafico.destroy();
+    }
+
+    // Adiciona o gráfico à tela
+    grafico = new Chart(document.getElementById('myChartCanvas'), config);
+
+
   }
 
-  // Adiciona o gráfico à tela
-  grafico = new Chart(document.getElementById('myChartCanvas'), config);
-
-
-}
-
-var grafico 
+  var grafico
 
 
 
-// Chama a função para fazer a requisição inicial e preencher o select
-async function inicializar() {
-  await servidor(); // Aguarda o preenchimento do select
-  exibirPosts();    // Exibe o gráfico após a requisição
-}
+  // Chama a função para fazer a requisição inicial e preencher o select
+  async function inicializar() {
+    await servidor();
+    exibirPosts();
+  }
 
-// Inicia o processo
-inicializar();
+  // Inicia o processo
+  inicializar();
 
 </script>

@@ -212,6 +212,8 @@ function servidor(req, res) {
 }
 
 
+
+
 module.exports = {
     obterCargos,
     obterFunc,
