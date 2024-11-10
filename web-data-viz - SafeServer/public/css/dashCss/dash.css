@@ -428,7 +428,6 @@ canvas {
 }
 
 .divisao1{
-  background-color: green;
   width: 100%;
   height: 28%;
   display: flex;
@@ -438,7 +437,6 @@ canvas {
 }
 
 .divcima{
-  background-color: rgb(128, 0, 102);
   width: 100%;
   height: 50%;
   display: flex;

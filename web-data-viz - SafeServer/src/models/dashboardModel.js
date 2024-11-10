@@ -41,14 +41,14 @@ function gerarCodigo() {
     return Math.random().toString(36).substr(-8).toUpperCase()
 }
 
-function wordcloud() { 
+function wordcloud() {
     var instrucaoSql = `select * from feriado_freq`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function feriado(empresa, nomeServidor) { 
+function feriado(empresa, nomeServidor) {
     var instrucaoSql = `SELECT 
     DATE(r.dtHora) AS dataRegistro,
     s.identificacao AS nomeServidor,
@@ -71,13 +71,25 @@ ORDER BY
     return database.executar(instrucaoSql);
 }
 
-function servidor(empresa) { 
+function servidor(empresa) {
     var instrucaoSql = `select identificacao,idServidor from servidor where fkEmpresa = ${empresa} `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
+function periodo(empresa) {
+    var instrucaoSql = `SELECT DISTINCT MONTH(r.dtHora) AS mes
+FROM registro r
+JOIN servidor s ON r.fkServidor = s.idServidor
+JOIN empresa e ON s.fkEmpresa = e.idEmpresa
+WHERE e.idEmpresa = ${empresa}
+ORDER BY mes DESC;
+ `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 
@@ -91,5 +103,6 @@ module.exports = {
     registrar_servidor,
     wordcloud,
     feriado,
-    servidor
+    servidor,
+    periodo
 };

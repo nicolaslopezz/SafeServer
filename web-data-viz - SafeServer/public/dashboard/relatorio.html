@@ -116,7 +116,7 @@
               <div class="divbaixo">
 
               </div>
-         
+
 
             </div>
             <div class="divisao2">
@@ -239,13 +239,13 @@
         var fontSize = freq * 0.4;
 
         // define tamanho 
-        if (fontSize < 12) fontSize = 13; 
+        if (fontSize < 12) fontSize = 13;
         if (fontSize > 50) fontSize = 51;
 
         return fontSize;
       });
 
-   
+
       chart.container('word');
       chart.draw();
 
@@ -282,22 +282,12 @@
 
       if (Array.isArray(data)) {
 
-        const servidores = []; 
+        const servidores = [];
 
         data.forEach(item => {
-          servidores.push(item.identificacao); 
+          servidores.push(item.identificacao);
         });
         preencherSelectServidores(servidores);
-
-
-        if (servidores.length > 0) {
-          // Selecionar automaticamente o primeiro servidor e gerar o gráfico
-          const selectElement = document.getElementById("feriadoSelect");
-          selectElement.value = servidores[0];
-
-          obterDadosGrafico(servidores[0]);
-        }
-
       } else {
         console.error('Erro: A resposta não contém um array de servidores.');
       }
@@ -311,6 +301,7 @@
   function preencherSelectServidores(servidores) {
     const selectElement = document.getElementById("feriadoSelect");
     const selectElement2 = document.getElementById("servidorRelatorio")
+
     selectElement.innerHTML = '';
     selectElement2.innerHTML = '';
 
@@ -332,6 +323,7 @@
   }
 
 
+
   function obterServidorSelecionado() {
     const valorSelecionado = document.getElementById("feriadoSelect").value;
     console.log("Valor selecionado:", valorSelecionado);
@@ -347,7 +339,80 @@
     }
   }
 
-  
+  // Função para obter os dados de períodos
+  async function periodo() {
+    const empresa = sessionStorage.ID_EMPRESA;
+    console.log('Iniciando a requisição para /dashboard/periodo');
+
+    try {
+      // Verifique se a variável empresa está sendo recuperada corretamente
+      if (!empresa) {
+        throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
+      }
+
+      const response = await fetch(`/dashboard/periodo/${empresa}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      console.log('Resposta recebida sobre os períodos:', response);
+
+      if (!response.ok) {
+        throw new Error('Erro ao obter os dados: ' + response.statusText);
+      }
+
+      const data = await response.json();
+      console.log('Dados brutos recebidos:', data);
+
+      // Verifique se data é um array e se contém os itens esperados
+      if (Array.isArray(data) && data.length > 0) {
+
+        const meses = {
+          "1": "Janeiro",
+          "2": "Fevereiro",
+          "3": "Março",
+          "4": "Abril",
+          "5": "Maio",
+          "6": "Junho",
+          "7": "Julho",
+          "8": "Agosto",
+          "9": "Setembro",
+          "10": "Outubro",
+          "11": "Novembro",
+          "12": "Dezembro"
+        };
+        const periodos = [];
+        data.forEach(item => {
+            mes: periodos.push(meses[item.mes]);
+        });
+        preencherSelectPeriodo(periodos);
+      } else {
+        console.error('Erro: A resposta não contém um array de períodos válidos.');
+      }
+
+    } catch (error) {
+      console.error('Erro na requisição de períodos', error);
+    }
+  }
+
+  // Função para preencher o select com os períodos
+  function preencherSelectPeriodo(periodos) {
+    const selectElement = document.getElementById("periodoRelatorio");
+    selectElement.innerHTML = ''; // Limpa o conteúdo existente
+
+    periodos.forEach(periodo => {
+      const option = document.createElement('option');
+      option.value = periodo;
+      option.textContent = periodo;
+      selectElement.appendChild(option);
+    });
+
+    console.log('Select de períodos preenchido com sucesso.');
+  }
+
+
+
+
 
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
@@ -443,6 +508,7 @@
   // Chama a função para fazer a requisição inicial e preencher o select
   async function inicializar() {
     await servidor();
+    await periodo();
     exibirPosts();
   }
 
