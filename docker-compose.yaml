@@ -1,4 +1,4 @@
-servies:
+services:
         site:
                 image: site:latest
                 ports:
