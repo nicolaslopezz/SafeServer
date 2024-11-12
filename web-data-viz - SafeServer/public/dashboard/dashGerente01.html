@@ -153,11 +153,7 @@
       if (resposta.ok) {
         console.log("DADOS RECEBIDOS:",resposta)
         teste = resposta.json().then(json => {
-          dados = {
-            alertas: json.alertas,
-            dia: json.dia,
-            fkServidor: json.fkServidor
-          }
+          console.log(json)
         })
       } else {
         // console.log("Houve um erro ao receber os dados no cards.html")
