@@ -12,6 +12,10 @@ router.post("/obterFunc", function (req, res) {
     dashboardController.obterFunc(req, res);
 })
 
+router.get("/buscarCpueRam", function(req, res){
+    dashboardController.buscarCpueRam(req, res);
+})
+
 router.post("/cadastrarCargo", function (req, res) {
     dashboardController.cadastrarCargo(req, res);
 })

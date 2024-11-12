@@ -28,6 +28,14 @@ function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function buscarCpueRam(idServidor){
+    var instrucaoSql = `
+    SELECT percent_use_cpu, percent_use_ram, dtHora from registro WHERE fkServidor = ${idServidor};
+    `
+    console.log("Executando instrução SQL: " + instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
 function registrar_servidor(nome, regiao, fkEmpresa) {
     var instrucaoSql = `
         INSERT INTO servidor (identificacao, regiao, fkEmpresa) VALUES 
@@ -99,6 +107,7 @@ ORDER BY mes DESC;
 module.exports = {
     obterCargos,
     obterFunc,
+    buscarCpueRam,
     cadastrarCargo,
     registrar_servidor,
     wordcloud,

@@ -98,6 +98,10 @@ body {
 .menu ul li .text {
   flex: 1;
 }
+.opcaoAtual{
+  background-color: #e2e7f8;
+  border-radius: 15%;
+}
 .menu ul li .arrow {
   font-size: 14px;
   transition: all 0.3s;
@@ -857,4 +861,61 @@ font-size: 17px;
 
 
 /*DASH RH TERMINA AQUI*/
+
+
+/*DASH SUPORTE-------------------------*/
+
+.opcoes{
+  display: flex;
+  position: relative;
+  top: -120px;
+  left: 80px;
+  justify-content:flex-start;
+}
+
+.botaoOp {
+  display: flex;
+  background-color: #202957 !important;
+  color: white;
+  border-radius: 19px;
+  height: 37px;
+  width: 210px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 70px;
+  font-size: medium;
+}
+
+select {
+  appearance: none; 
+  -webkit-appearance: none; 
+
+  /* Seta */
+  background-image: url(img/seta_processed.png);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+  text-align: center;
+}
+
+canvas {
+  display: flex;
+  width: 100% !important;
+  height: auto;
+  /* position: relative;
+  top: -70px;  */
+}
+
+.display-block{
+  display: block;
+}
+
+.display-none{
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
 
