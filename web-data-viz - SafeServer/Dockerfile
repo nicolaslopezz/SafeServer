@@ -1,6 +1,6 @@
 FROM node:lts-bookworm AS dependencies
 WORKDIR /
-COPY ./web-data-viz-safeserver/package.json .
+COPY ./package.json . 
 RUN npm install
 
 
