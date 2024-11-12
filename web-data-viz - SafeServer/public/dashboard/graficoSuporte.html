@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <title>Dashboard-Suporte</title>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
+        </div>
+        <div class="user-details">
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="dashSuporte.html">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Urgências</span>
+              </a>
+            </li>
+            <li>
+              <a href="graficoSuporte.html" class="opcaoAtual">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráficos</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="credits">
+      <div class="opcoes">
+        <select class="botaoOp">
+          <option value="#"> Servidor: </option>
+        </select>
+        <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
+          <option value="">Componente: </option>
+          <option id="cpuRam" value="cpuRam">CPU E RAM %</option>
+          <option value="dadosRec"></option>
+          <option value="dadosEnv"></option>
+        </select>
+      </div>
+      <div id="graficos">
+          <div id="grafico1" class="display-none">
+            <div id="tituloDashCpuERam" class="tituloDashCpuERam"></div>
+          
+            <canvas id="graficoCpuERam" width="400" height="200"></canvas>  
+          </div>
+
+          <div id="grafico2" class="display-none"></div>
+        </div>
+    </div>
+    <script>
+      var idServidor = sessionStorage.ID_SERVIDOR;
+      let proximaAtualizacao;
+       function esconderTodosOsGraficos() {
+            let todosOsGraficos = document.getElementById("graficos");
+
+            //Removendo ou adicionando classes
+            
+            for (var i = 1; i <= todosOsGraficos.childElementCount; i++) {
+                let elementoAtual = document.getElementById(`grafico${i}`);
+                elementoAtual.classList.remove("display-block");
+                elementoAtual.classList.add("display-none");
+            }
+        }
+
+        function plotarGrafico(cpuRam) {
+
+          console.log(document.getElementById("grafico1"));
+
+    const select = document.getElementById("selectComponente");
+    var valorSelecionado = select.value;
+
+    console.log("Valor selecionado: " + valorSelecionado);
+
+    let todosOsGraficos = document.getElementById("graficos");
+
+    if (valorSelecionado === "cpuRam") {
+      exibirGraficoCpuEram();
+     } //else if (valorSelecionado === "dadosRec") {
+    //   exibirGraficoDadosRec();
+    // } else if (valorSelecionado === "dadosEnv") {
+    //   exibirGraficoDadosEnv();
+    // }
+  }
+
+  function exibirGraficoCpuEram(){
+
+    let todosOsGraficos = document.getElementById("graficos");
+
+    if (grafico1) {  // Verifica se grafico1 existe
+        grafico1.classList.remove("display-none");
+        grafico1.classList.add("display-block");
+    } else {
+        console.error("Elemento #grafico1 não encontrado!");
+    }
+    let cpuRam = document.getElementById("cpuRam");
+    
+    if (cpuRam) {  // Verifica se o elemento #cpuRam existe
+        cpuRam.classList.add("active");
+    } else {
+        console.error("Elemento #cpuRam não encontrado!");
+    }
+
+  document.getElementById("grafico1").classList.remove("display-none"); 
+  document.getElementById("grafico1").classList.add("display-block");
+
+  document.getElementById("cpuRam").classList.add("active");
+
+  const cpuRamElement = document.getElementById("cpuRam");
+    if (cpuRamElement) {
+        cpuRamElement.classList.add("active");
+        console.log("Tudo certo")
+    } else {
+        console.error('Elemento cpuRam não encontrado!');
+    }
+
+    obterDadosGraficoCpueRam();
+  }
+
+  function obterDadosGraficoCpueRam() {
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        console.log('ID do Servidor:', idServidor);
+
+      if (!idServidor) {
+        console.error('O ID do servidor não está definido!');
+        return; // Impede a requisição se não tiver um ID de servidor
+    }
+
+        //Faz uma requisição para obter os dados do Quiz
+        fetch(`/dashboard/buscarCpueRam/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoCpueRam(resposta, idServidor);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(error);
+            });
+    }
+
+    function plotarGraficoCpueRam(reposta, idServidor){
+
+      console.log('Iniciando plotagem do gráfico...');
+
+      if (!resposta || resposta.length === 0) {
+      console.log('Sem dados para plotar');
+      return;
+    }
+
+      tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
+
+      const ctx = document.getElementById('graficoCpuERam').getContext('2d');
+
+      const labels = resposta.map((item) => item.dtHora);
+      const dadosCpu = resposta.map((item) => item.percent_use_cpu); 
+      const dadosRam = resposta.map((item) => item.percent_use_ram);
+
+      console.log('Labels:', labels);
+      console.log('Dados CPU:', dadosCpu);
+      console.log('Dados RAM:', dadosRam);
+
+      new Chart(ctx, {
+    type: 'line', // Tipo de gráfico (linha)
+    data: {
+      labels: labels, // Labels no eixo X (ex: datas ou períodos)
+      datasets: [
+        {
+          label: 'Uso de CPU (%)', // Legenda para a linha da CPU
+          data: dadosCpu, // Dados do uso de CPU
+          borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha (vermelho)
+          backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cor de fundo da linha (sem transparência)
+          fill: false, // Não preencher abaixo da linha
+          tension: 0.1, // Curvatura da linha (0 = linha reta)
+        },
+        {
+          label: 'Uso de RAM (%)', // Legenda para a linha da RAM
+          data: dadosRam, // Dados do uso de RAM
+          borderColor: 'rgba(54, 162, 235, 1)', // Cor da linha (azul)
+          backgroundColor: 'rgba(54, 162, 235, 0.2)', // Cor de fundo da linha (sem transparência)
+          fill: false, // Não preencher abaixo da linha
+          tension: 0.1, // Curvatura da linha (0 = linha reta)
+        }
+      ]
+    },
+    options: {
+      responsive: true, // Faz o gráfico ser responsivo
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Período/Tempo', // Título do eixo X
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Percentual (%)', // Título do eixo Y
+          },
+          min: 0, // Valor mínimo do eixo Y
+          max: 100 // Valor máximo do eixo Y
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'top', // Posição da legenda
+        }
+      }
+    }
+  });
+}
+
+    </script>

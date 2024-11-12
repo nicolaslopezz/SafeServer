@@ -91,6 +91,21 @@ function obterFunc(req, res) {
 
 }
 
+function buscarCpueRam(req, res){
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando últimos acertos para o servidor com ID: ${idServidor}`);
+
+dashboardModel.buscarCpueRam(idServidor).then((resultado) => {
+   if(resultado.length > 0){
+    res.status(200).json(resultado);
+   } else{
+    res.status(204).send("Nenhum resultado encontrado!")
+   }
+    
+})
+}
+
 function cadastrarCargo(req, res) {
     var nome = req.body.nomeServer;
     var nivelPermissao = req.body.nivelPermissaoServer;
@@ -236,6 +251,7 @@ function periodo(req, res) {
 module.exports = {
     obterCargos,
     obterFunc,
+    buscarCpueRam,
     cadastrarCargo,
     registrar_servidor,
     wordcloud,
