@@ -12,7 +12,7 @@ router.post("/obterFunc", function (req, res) {
     dashboardController.obterFunc(req, res);
 })
 
-router.get("/buscarCpueRam", function(req, res){
+router.get("/buscarCpueRam/:idServidor", function(req, res){
     dashboardController.buscarCpueRam(req, res);
 })
 
