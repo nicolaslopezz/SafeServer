@@ -869,7 +869,7 @@ font-size: 17px;
   display: flex;
   position: relative;
   top: -120px;
-  left: 80px;
+  left: 100px;
   justify-content:flex-start;
 }
 
@@ -878,8 +878,8 @@ font-size: 17px;
   background-color: #202957 !important;
   color: white;
   border-radius: 19px;
-  height: 37px;
-  width: 210px;
+  height: 38px;
+  width: 265px;
   justify-content: center;
   align-items: center;
   margin-right: 70px;
@@ -898,12 +898,49 @@ select {
   text-align: center;
 }
 
-canvas {
+.dimensaoGraficoCpu{
   display: flex;
-  width: 100% !important;
-  height: auto;
-  /* position: relative;
-  top: -70px;  */
+  position: relative;
+  background-color: white;
+  border-radius: 11px;
+  justify-content: center;
+  left: -565px;
+  height: 390px;
+  width: 600px;
+  top: 60px;
+}
+
+.tituloDashCpuERam{
+  display: flex;
+  position: relative;
+  left: -477px;
+  top: 48px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.situacaoComp{
+  display: flex;
+  position: relative;
+  left: 200px;
+  top: 21px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.percentCpu{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  justify-content: center;
+}
+
+.percentCpu p{
+  color: white;
+  align-items: center;
 }
 
 .display-block{
