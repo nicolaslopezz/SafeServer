@@ -133,10 +133,45 @@
 </body>
 
 </html>
+<script>
+  obterDados()
+  function obterDados() {
+    
+    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+    var dados = {};
+    console.log(idEmpresa)
+
+    fetch("/dashGerente/obterDados", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        idEmpresaServer: idEmpresa
+      })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        console.log("DADOS RECEBIDOS:",resposta)
+        teste = resposta.json().then(json => {
+          dados = {
+            alertas: json.alertas,
+            dia: json.dia,
+            fkServidor: json.fkServidor
+          }
+        })
+      } else {
+        // console.log("Houve um erro ao receber os dados no cards.html")
+      }
+    }).catch(function (erro) {
+      console.log("CATCH DO FETCH")
+      console.log(erro)
+    })
+  }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Script estático -->
-<script>
+<!-- <script>
   Chart.defaults.color = "#FFF"
   var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
   var nome = sessionStorage.getItem("NOME_USUARIO");
@@ -304,4 +339,4 @@
 <!-- Script live -->
 <script>
   
-</script>
+</script> -->
