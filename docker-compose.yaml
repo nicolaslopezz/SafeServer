@@ -1,0 +1,18 @@
+servies:
+        site:
+                image: site:latest
+                ports:
+                       - "8080:8080"
+                networks:
+                       - rede-compose
+                depends_on:
+                       - db
+        db:
+                image: site:imagembanco
+                ports: 
+                       - "3307:3306"
+                networks:
+                       - rede-compose
+networks:
+        rede-compose:
+              driver: bridge
