@@ -16,22 +16,7 @@ function obterDados(req, res) {
                     if (resultadoSelect.length == 0) {
                         res.status(403).send("Nenhum resultado encontrado");
                     } else {
-                        var alertas = [];
-                        var dia = [];
-                        var servidor = [];
-                        var componente = [];
-                        for (i = 0; i < resultadoSelect.length; i++) {
-                            alertas.push(resultadoSelect[i].alertas)
-                            componente.push(resultadoSelect[i].componente)
-                            dia.push( `"${resultadoSelect[i].dia}"`)
-                            servidor.push(resultadoSelect[i].servidor)
-                        }
-                        res.json({
-                            alertas: alertas,
-                            dia: dia,
-                            servidor: servidor,
-                            componente: componente
-                        })
+                        res.json(resultadoSelect)
                     }
 
 
