@@ -51,6 +51,7 @@ enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
+/*
 SELECT DISTINCT MONTH(dtHora) AS mes
 FROM registro r
 join servidor s on r.fkServidor = s.idServidor
@@ -59,8 +60,9 @@ WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
 
 select * from registro;
+*/
 
-
+-- select * from registro;
 
 
 create table alerta (
@@ -131,6 +133,44 @@ CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa 
 
 -- select * from empresa;
 
-select * from funcionario;
+-- select * from funcionario;
 
--- truncate regis
+INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor)
+VALUES 
+('2024-11-01 10:00:00', 92, 80, 32, 8, 700, 450, 1),  
+('2024-11-01 11:00:00', 89, 90, 36, 4, 720, 400, 1),  
+('2024-11-01 12:00:00', 65, 85, 34, 6, 680, 400, 1),  
+('2024-11-01 13:00:00', 55, 85, 34, 6, 730, 440, 1),  
+('2024-11-01 14:00:00', 55, 60, 24,16, 770, 480, 1),
+
+('2024-11-02 10:00:00', 88, 90, 36, 4, 300, 200, 1),  
+('2024-11-02 18:00:00', 50, 85, 34, 6, 280, 250, 1),  
+('2024-11-02 10:00:00', 55, 80, 32, 8, 220, 180, 1),  
+('2024-11-02 18:00:00', 60, 80, 32, 8, 450, 240, 1),  
+
+('2024-11-03 10:00:00', 80, 80, 27, 5, 560, 330, 1),  
+('2024-11-03 18:00:00', 90, 74, 25, 5, 580, 320, 1),  
+('2024-11-03 10:00:00', 72, 78, 26, 4, 580, 310, 2),  
+('2024-11-03 18:00:00', 71, 77, 27, 4, 590, 350, 2);
+
+
+CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa
+	FROM alerta
+    JOIN registro ON idRegistro = fkRegistro
+    JOIN servidor ON fkServidor = idServidor
+    WHERE month(dtHora) = 11
+    GROUP BY componente, fkServidor, dia, mes, ano
+    ORDER BY ano, mes, dia);
+
+-- SELECT * FROM obterDadosAlerta;
+/*
+DROP VIEW obterDadosAlerta;
+
+SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa
+	FROM alerta
+    JOIN registro ON idRegistro = fkRegistro
+    JOIN servidor ON fkServidor = idServidor
+    WHERE month(dtHora) = 11
+    GROUP BY componente, fkServidor, dia, mes, ano
+    ORDER BY ano, mes, dia;
+*/
