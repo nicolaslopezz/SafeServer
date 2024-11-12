@@ -10,6 +10,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
@@ -97,10 +98,16 @@
         </select>
       </div>
       <div id="graficos">
-          <div id="grafico1" class="display-none">
+          <div id="grafico1" class="display-block">
             <div id="tituloDashCpuERam" class="tituloDashCpuERam"></div>
-          
-            <canvas id="graficoCpuERam" width="400" height="200"></canvas>  
+            <div id="situacao" class="situacaoComp"></div>
+            <div id="percentCpu" class="percentCpu"></div>
+            <div id="percentRam" class="percentRam"></div>
+            <div class="dimensaoGraficoCpu">
+              <div class="corFundoGrafico">
+            <div id="graficoCpuERam" width="400" height="200"></div>
+          </div> 
+          </div>  
           </div>
 
           <div id="grafico2" class="display-none"></div>
@@ -121,7 +128,7 @@
             }
         }
 
-        function plotarGrafico(cpuRam) {
+        function plotarGrafico(idServidor) {
 
           console.log(document.getElementById("grafico1"));
 
@@ -133,7 +140,7 @@
     let todosOsGraficos = document.getElementById("graficos");
 
     if (valorSelecionado === "cpuRam") {
-      exibirGraficoCpuEram();
+      exibirGraficoCpuEram(1);
      } //else if (valorSelecionado === "dadosRec") {
     //   exibirGraficoDadosRec();
     // } else if (valorSelecionado === "dadosEnv") {
@@ -141,7 +148,15 @@
     // }
   }
 
-  function exibirGraficoCpuEram(){
+  window.onload = obterDadosGraficos();
+    //função utilizada para obter dados das funções "exibirDadosQuiz" e "exibirDadosEmocao"
+
+    function obterDadosGraficos() {
+
+        obterDadosGraficoCpueRam(1)
+    }
+
+  function exibirGraficoCpuEram(idServidor){
 
     let todosOsGraficos = document.getElementById("graficos");
 
@@ -153,7 +168,7 @@
     }
     let cpuRam = document.getElementById("cpuRam");
     
-    if (cpuRam) {  // Verifica se o elemento #cpuRam existe
+    if (cpuRam) { 
         cpuRam.classList.add("active");
     } else {
         console.error("Elemento #cpuRam não encontrado!");
@@ -175,7 +190,7 @@
     obterDadosGraficoCpueRam();
   }
 
-  function obterDadosGraficoCpueRam() {
+  function obterDadosGraficoCpueRam(idServidor) {
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
@@ -208,75 +223,111 @@
             });
     }
 
-    function plotarGraficoCpueRam(reposta, idServidor){
+    function plotarGraficoCpueRam(resposta, idServidor) {
+    console.log('Iniciando plotagem do gráfico com ApexCharts...');
 
-      console.log('Iniciando plotagem do gráfico...');
+    // Elementos HTML para exibir os títulos e situação em tempo real
+    tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
+    situacao.innerHTML = `<p> Situação em Tempo Real: </p>`; 
 
-      if (!resposta || resposta.length === 0) {
-      console.log('Sem dados para plotar');
-      return;
-    }
+    // Mapear os dados de resposta para os eixos do gráfico
+    const labels = resposta.map((item) => {
+        // Formatar a data para mostrar apenas a hora e os minutos
+        const dataHora = new Date(item.dtHora);
+        const hora = dataHora.getHours().toString().padStart(2, '0'); // Garantir que a hora tenha 2 dígitos
+        const minutos = dataHora.getMinutes().toString().padStart(2, '0');
+        const segundos = dataHora.getSeconds().toString().padStart(2, '0');
+        return `${hora}:${minutos}:${segundos}`; 
+        return `${hora}:${minutos}:${segundos}`; // Retorna a hora formatada
+    });
 
-      tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
+    const dadosCpu = resposta.map((item) => item.percent_use_cpu); 
+    const dadosRam = resposta.map((item) => item.percent_use_ram);
 
-      const ctx = document.getElementById('graficoCpuERam').getContext('2d');
+    console.log("Dados de CPU:", dadosCpu);
+    console.log("Dados de RAM:", dadosRam);
+    console.log("Labels:", labels);
+    console.log("Hora dos dados:", resposta.map(item => item.dtHora));
 
-      const labels = resposta.map((item) => item.dtHora);
-      const dadosCpu = resposta.map((item) => item.percent_use_cpu); 
-      const dadosRam = resposta.map((item) => item.percent_use_ram);
+    percentCpu.innerHTML = `<p>${dadosCpu[dadosCpu.length - 1]}%</p>`;
+    percentRam.innerHTML = `<p>${dadosRam[dadosRam.length - 1]}%</p>`; 
 
-      console.log('Labels:', labels);
-      console.log('Dados CPU:', dadosCpu);
-      console.log('Dados RAM:', dadosRam);
-
-      new Chart(ctx, {
-    type: 'line', // Tipo de gráfico (linha)
-    data: {
-      labels: labels, // Labels no eixo X (ex: datas ou períodos)
-      datasets: [
-        {
-          label: 'Uso de CPU (%)', // Legenda para a linha da CPU
-          data: dadosCpu, // Dados do uso de CPU
-          borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha (vermelho)
-          backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cor de fundo da linha (sem transparência)
-          fill: false, // Não preencher abaixo da linha
-          tension: 0.1, // Curvatura da linha (0 = linha reta)
+    // Configurações do gráfico ApexCharts
+    const options = {
+        series: [
+            {
+                name: 'Uso de CPU (%)',
+                data: dadosCpu.map((value, index) => ({ x: labels[index], y: value })),
+                color: '#0000FF'
+            },
+            {
+                name: 'Uso de RAM (%)',
+                data: dadosRam.map((value, index) => ({ x: labels[index], y: value })),
+                color: '#FF0000'
+            }
+        ],
+        chart: {
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 1000
+                }
+            },
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false
+            }
         },
-        {
-          label: 'Uso de RAM (%)', // Legenda para a linha da RAM
-          data: dadosRam, // Dados do uso de RAM
-          borderColor: 'rgba(54, 162, 235, 1)', // Cor da linha (azul)
-          backgroundColor: 'rgba(54, 162, 235, 0.2)', // Cor de fundo da linha (sem transparência)
-          fill: false, // Não preencher abaixo da linha
-          tension: 0.1, // Curvatura da linha (0 = linha reta)
-        }
-      ]
-    },
-    options: {
-      responsive: true, // Faz o gráfico ser responsivo
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Período/Tempo', // Título do eixo X
-          }
+        dataLabels: {
+            enabled: false
         },
-        y: {
-          title: {
-            display: true,
-            text: 'Percentual (%)', // Título do eixo Y
-          },
-          min: 0, // Valor mínimo do eixo Y
-          max: 100 // Valor máximo do eixo Y
-        }
-      },
-      plugins: {
+        stroke: {
+            curve: 'smooth'
+        },
+        title: {
+            text: '',
+            align: 'left'
+        },
+        xaxis: {
+            type: 'category',
+            categories: labels,
+            title: {
+                text: 'Período/Tempo',
+            }
+        },
+        yaxis: {
+            max: 100,
+            min: 0,
+            title: {
+                text: 'Percentual (%)'
+            }
+        },
+        tooltip: {
+            enabled: true,
+            x: {
+                format: 'HH:mm'
+            },
+            y: {
+                formatter: function (val) {
+                    return `${val}%`;
+                }
+            }
+        },
         legend: {
-          position: 'top', // Posição da legenda
+            position: 'top'
         }
-      }
-    }
-  });
+    };
+
+    // Inicializando o gráfico ApexCharts no elemento HTML
+    const chart = new ApexCharts(document.querySelector("#graficoCpuERam"), options);
+    chart.render();
 }
+
 
     </script>
