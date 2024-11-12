@@ -8,7 +8,7 @@ library(dplyr)
 library(RMySQL)
 
 # Carregar o arquivo CSV
-dados <- read.csv("/Users/JuuhF/Music/att.csv") 
+dados <- read.csv("/Users/JuuhF/Music/att.csv")
 
 
 
