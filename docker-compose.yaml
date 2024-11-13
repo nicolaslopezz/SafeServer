@@ -1,5 +1,5 @@
 services:
-        site:
+        imagemsite:
                 image: julianafreires/site:imagemsite
                 ports:
                        - "3333:3333"
@@ -7,7 +7,7 @@ services:
                        - rede-compose
                 depends_on:
                        - imagembanco
-        db:
+        imagembanco:
                 image: julianafreires/site:imagembanco
                 ports:
                        - "3306:3306"
