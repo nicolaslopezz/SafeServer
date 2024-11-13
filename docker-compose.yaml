@@ -6,7 +6,7 @@ services:
                 networks:
                        - rede-compose
                 depends_on:
-                       - db
+                       - imagembanco
         db:
                 image: julianafreires/site:imagembanco
                 ports:
