@@ -39,7 +39,7 @@ function buscarCpueRam(idServidor){
 function registrar_servidor(nome, regiao, fkEmpresa) {
     var instrucaoSql = `
         INSERT INTO servidor (identificacao, regiao, fkEmpresa) VALUES 
-            ("${nome}", "${regiao}", "${fkEmpresa}");
+            ("${nome}", "${regiao}", ${fkEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

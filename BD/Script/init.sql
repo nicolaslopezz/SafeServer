@@ -36,6 +36,7 @@ constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEm
 create table servidor (
 idServidor int primary key auto_increment,
 identificacao varchar(45) not null,
+regiao varchar(45) not null,
 fkEmpresa int,
 constraint fkEmpresaServidores foreign key (fkEmpresa) references empresa (idEmpresa));
 

@@ -18,13 +18,15 @@
   font-family: poppins;
 }
 body {
-  background-color: #dbe2f4;
+  background-color: #dbe2f4 !important;
 }
 .container {
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100vh ;
+  max-width: 100%;  
+  padding: 0;
   
 }
 .sidebar {
@@ -662,7 +664,7 @@ table th {
   font-size: 17px;
 }
 
-#ipt {
+#ipt_nome,#ipt_regiao, #ipt_regiao {
   padding: 5px 35px;
   width: 100%;
   border-radius: 20px; /* Torna o input bem arredondado */
@@ -674,17 +676,6 @@ table th {
   transition: all 0.3s ease; /* Transição suave para efeitos */
 }
 
-input:focus {
-  border-color: #1a2e70;
-  background:linear-gradient(135deg, #8e98bd, #455883);  /* Fundo azul escuro ao focar */
-  color: #ffffff; /* Texto branco quando focado */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.4s ease; /* Transição suave do fundo */
-}
-
-#ipt:focus::placeholder {
-  color: #c6c3c3; /* Cor do texto do placeholder quando focado */
-}
 
 /*CADASTRO SERVIDOR TERMINA AQUI*/
 
@@ -760,7 +751,7 @@ input:focus {
   align-items: center;
 }
 
-#ipt, #slct_nivel {
+#ipt_nome, #slct_nivel:focus::placeholder {
   padding: 5px 35px;
   width: 100%;
   color: #233869;
@@ -772,7 +763,7 @@ input:focus {
   transition: all 0.3s ease; 
 }
 
-#ipt:focus, #slct_nivel:focus {
+#ip_nomet:focus, #slct_nivel:focus {
   border-color: #1a2e70;
   background:linear-gradient(135deg, #8e98bd, #455883);  
   color: #233869;
@@ -942,17 +933,4 @@ select {
   color: white;
   align-items: center;
 }
-
-.display-block{
-  display: block;
-}
-
-.display-none{
-  display: none;
-}
-
-.display-flex {
-  display: flex;
-}
-
 

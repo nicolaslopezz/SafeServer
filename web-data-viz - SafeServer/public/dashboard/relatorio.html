@@ -5,9 +5,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ICONS -->
+
+  <!-- bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+
+  <!-- bootstrap Select CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+  <!-- icone nav bar -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <!-- STYLESHEET -->
+
+
+
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
   <!-- AnyChart Scripts -->
@@ -15,8 +24,10 @@
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
 
 
-  <!-- scripts do Chart.js - 2022-1 -->
+  <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 
   <title>Relatório - Nuvem de Palavras</title>
 </head>
@@ -101,13 +112,19 @@
           <div class="containerINF">
             <div class="divisao1">
               <div class="divcima">
-                <select id="servidorRelatorio" onchange="obterServidorRelatorio()">
+                <select class="selectpicker" id="servidorRelatorio" onchange="obterServidorRelatorio()" multiple data-live-search="true">
 
                 </select>
-                <select id="periodoRelatorio" onchange="obterPeriodoRelatorio()">
+                <select class="selectpicker" id="periodoRelatorio" onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
 
                 </select>
-                <select id="componenteRelatorio" onchange="obterComponenteRelatorio()">
+
+                <select class="selectpicker" multiple data-live-search="true">
+                  <option>Mustard</option>
+                  <option>Ketchup</option>
+                  <option>Relish</option>
+
+                  <!-- <select id="componenteRelatorio" onchange="obterComponenteRelatorio()"> -->
 
                 </select>
 
@@ -129,11 +146,15 @@
     </div>
   </div>
 
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-    crossorigin="anonymous"></script>
-  <script src="../js/script.js"></script>
+  <!-- Bootstrap Bundle com o Popper.js -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap Select JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 
 
   <script>
@@ -254,6 +275,8 @@
     fetchFeriados();
 
   </script>
+
+
 </body>
 
 </html>
@@ -297,29 +320,29 @@
 
   // Função para preencher o select com os servidores recebidos
   function preencherSelectServidores(servidores) {
-    const selectElement = document.getElementById("feriadoSelect");
-    const selectElement2 = document.getElementById("servidorRelatorio")
+    const selectElement1 = document.getElementById("feriadoSelect");
+    const selectElement2 = document.getElementById("servidorRelatorio");
 
-    selectElement.innerHTML = '';
+    selectElement1.innerHTML = '';
     selectElement2.innerHTML = '';
 
-
-
     servidores.forEach(servidor => {
-      const option = document.createElement('option');
-      option.value = servidor;
-      option.textContent = servidor;
-      selectElement.appendChild(option);
+        const option1 = document.createElement('option');
+        option1.value = servidor;
+        option1.textContent = servidor;
+        selectElement1.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = servidor;
+        option2.textContent = servidor;
+        selectElement2.appendChild(option2);
     });
 
-    servidores.forEach(servidor => {
-      const option = document.createElement('option');
-      option.value = servidor;
-      option.textContent = servidor;
-      selectElement2.appendChild(option);
-    });
+    // Atualiza o selectpicker
+    $('#servidorRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
+    console.log('Select de servidores preenchido com sucesso.');
+}
 
-  }
 
   function obterServidorSelecionado() {
     const valorSelecionado = document.getElementById("feriadoSelect").value;
@@ -400,17 +423,16 @@
     selectElement.innerHTML = ''; // Limpa o conteúdo existente
 
     periodos.forEach(periodo => {
-      const option = document.createElement('option');
-      option.value = periodo;
-      option.textContent = periodo;
-      selectElement.appendChild(option);
+        const option = document.createElement('option');
+        option.value = periodo;
+        option.textContent = periodo;
+        selectElement.appendChild(option);
     });
 
+    // Atualiza o selectpicker
+    $('#periodoRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
     console.log('Select de períodos preenchido com sucesso.');
-  }
-
-
-
+}
 
 
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
@@ -539,6 +561,7 @@
     await periodo(); // Preenche os períodos
     await exibirPosts(); // Exibe o gráfico
     obterServidorSelecionado();
+    
   }
 
   // Inicia o processo
