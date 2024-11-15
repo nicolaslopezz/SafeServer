@@ -10,6 +10,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
@@ -100,11 +101,13 @@
           <div id="grafico1" class="display-block">
             <div id="tituloDashCpuERam" class="tituloDashCpuERam"></div>
             <div id="situacao" class="situacaoComp"></div>
+          <div class="percentuais">
             <div id="percentCpu" class="percentCpu"></div>
             <div id="percentRam" class="percentRam"></div>
-            <div class="dimensaoGraficoCpu">
+          </div>
+            <div id="dimensaoGraficoCpu" class="dimensaoGraficoCpu">
               <div class="corFundoGrafico">
-            <canvas id="graficoCpuERam" width="400" height="200"></canvas>
+            <div id="graficoCpuERam" width="400" height="200"></div>
           </div> 
           </div>  
           </div>
@@ -228,91 +231,164 @@
     tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
     situacao.innerHTML = `<p> Situação em Tempo Real: </p>`; 
 
-    const ctx = document.getElementById('graficoCpuERam').getContext('2d');
+    const labels = resposta.map((item) => item.hora).reverse();
+    const dadosCpu = resposta.map((item) => item.percent_use_cpu).reverse(); 
+    const dadosRam = resposta.map((item) => item.percent_use_ram).reverse();
 
-    const labels = resposta.map((item) => item.hora);
-    const dadosCpu = resposta.map((item) => item.percent_use_cpu); 
-    const dadosRam = resposta.map((item) => item.percent_use_ram);
-
-    percentCpu.innerHTML = `<p>${dadosCpu[dadosCpu.length - 1]}</p>`;
-    percentRam.innerHTML = `<p>${dadosRam[dadosRam.length - 1]}</p>`; 
+    percentCpu.innerHTML = `<p>CPU: ${dadosCpu[dadosCpu.length - 1]} %</p>`;
+    percentRam.innerHTML = `<p>RAM: ${dadosRam[dadosRam.length - 1]} %</p>`; 
 
     console.log('Labels:', labels);
     console.log('Dados CPU:', dadosCpu);
     console.log('Dados RAM :', dadosRam);
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Uso de CPU (%)',
-                    data: dadosCpu,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 1)',
-                    fill: false,
-                    tension: 0,
-                },
-                {
-                    label: 'Uso de RAM (%)',
-                    data: dadosRam,
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 1)',
-                    fill: false,
-                    tension: 0,
+    const options = {
+        chart: {
+            type: 'line',
+            height: 400,
+            width:600,
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 1000
                 }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Período/Tempo',
-                    },
-                    grid: {
-                      display: false,
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Percentual (%)',
-                    },
-                    min: 0,
-                    max: 100,
-                    grid: {
-                      color: 'rgba(0, 0, 0, 0.1)',
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: { 
-                    enabled: true,
-                    callbacks: {
-                        title: (tooltipItems) => {
-                            return `Hora: ${tooltipItems[0].label}`;
-                        },
-                        label: (tooltipItem) => {
-                            return `${tooltipItem.dataset.label}: ${tooltipItem.raw}%`;
-                        }
-                    },
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    titleColor: '#fff',
-                    bodyColor: '#fff',
-                    padding: 10
-                }
-            },
-            layout: {
-              padding: 20
             }
-        }
-    });
+        },
+        series: [
+            {
+                name: 'Uso de CPU (%)',
+                data: dadosCpu
+            },
+            {
+                name: 'Uso de RAM (%)',
+                data: dadosRam
+            }
+        ],
+        xaxis: {
+            categories: labels,
+            title: {
+                text: 'Período/Tempo'
+            },
+            labels: {
+                rotate: -45
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Percentual (%)'
+            },
+            min: 0,
+            max: 100
+        },
+        colors: ['#36A2EB', '#FF6384'],
+        stroke: {
+            width: 1.7,
+            curve: 'straight'
+        },
+        tooltip: {
+            enabled: true,
+            theme: 'dark',
+            x: {
+                show: true,
+                format: 'HH:mm'
+            },
+            y: {
+                formatter: (value) => `${value}%`
+            }
+        },
+        legend: {
+            position: 'top',
+        },
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    height: 300
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    // Renderizando o gráfico
+    const chart = new ApexCharts(document.querySelector("#graficoCpuERam"), options);
+    chart.render();
+
+    // new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: labels,
+    //         datasets: [
+    //             {
+    //                 label: 'Uso de CPU (%)',
+    //                 data: dadosCpu,
+    //                 borderColor: 'rgba(54, 162, 235, 1)',
+    //                 backgroundColor: 'rgba(54, 162, 235, 1)',
+    //                 fill: false,
+    //                 tension: 0,
+    //             },
+    //             {
+    //                 label: 'Uso de RAM (%)',
+    //                 data: dadosRam,
+    //                 borderColor: 'rgba(255, 99, 132, 1)',
+    //                 backgroundColor: 'rgba(255, 99, 132, 1)',
+    //                 fill: false,
+    //                 tension: 0,
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         scales: {
+    //             x: {
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Período/Tempo',
+    //                 },
+    //                 grid: {
+    //                   display: false,
+    //                 }
+    //             },
+    //             y: {
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Percentual (%)',
+    //                 },
+    //                 min: 0,
+    //                 max: 100,
+    //                 grid: {
+    //                   color: 'rgba(0, 0, 0, 0.1)',
+    //                 }
+    //             }
+    //         },
+    //         plugins: {
+    //             legend: {
+    //                 position: 'top',
+    //             },
+    //             tooltip: { 
+    //                 enabled: true,
+    //                 callbacks: {
+    //                     title: (tooltipItems) => {
+    //                         return `Hora: ${tooltipItems[0].label}`;
+    //                     },
+    //                     label: (tooltipItem) => {
+    //                         return `${tooltipItem.dataset.label}: ${tooltipItem.raw}%`;
+    //                     }
+    //                 },
+    //                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    //                 titleColor: '#fff',
+    //                 bodyColor: '#fff',
+    //                 padding: 10
+    //             }
+    //         },
+    //         layout: {
+    //           padding: 20
+    //         }
+    //     }
+    // });
 }
 
 

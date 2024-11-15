@@ -860,7 +860,8 @@ font-size: 17px;
   display: flex;
   position: relative;
   top: -120px;
-  left: 100px;
+  left: 125px;
+  height: 60px;
   justify-content:flex-start;
 }
 
@@ -896,9 +897,9 @@ select {
   border-radius: 11px;
   justify-content: center;
   left: -565px;
-  height: 390px;
-  width: 600px;
-  top: 60px;
+  height: 397px;
+  width: 640px;
+  top: -10px;
 }
 
 .tituloDashCpuERam{
@@ -911,22 +912,64 @@ select {
   font-weight: bold;
 }
 
+.tituloDashCpuERam p{
+  display: flex;
+  position: relative;
+  top: 55px;
+  left: 30px;
+}
+
 .situacaoComp{
   display: flex;
   position: relative;
   left: 200px;
-  top: 21px;
+  top: 45px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;
+}
+
+.situacaoComp p{
+  display: flex;
+  position: relative;
+  top: 33px;
+  left: 17px;
+  font-weight: bold;
+}
+
+.percentuais{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 160px;
+  left: 10px;
 }
 
 .percentCpu{
   display: flex;
   position: relative;
   background-color: #202957;
+  border-radius: 11px;
   align-items: center;
   justify-content: center;
+  font-weight:bold;
+  width: 175px;
+  height: 46px;
+  left: 260px;
+}
+
+.percentRam{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  justify-content: center;
+  margin-top: 30px;
+  font-weight:bold;
+  width: 175px;
+  height: 46px;
+  left: 260px;
 }
 
 .percentCpu p{

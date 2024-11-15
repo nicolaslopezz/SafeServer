@@ -20,7 +20,7 @@ limiteREDE = 1.0  # GB
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'batatas123',
+    'password': '#Gf49053476881',
     'database': 'SafeServer'
 }
 
@@ -62,7 +62,6 @@ def capturar_dados():
     GB_rede_recebidos = round(psutil.net_io_counters().bytes_recv / (1024 ** 3), 2)
     GB_rede_enviados = round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2)
     data_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
 
     # Armazena os dados nos arrays
     dados_cpu.append(Porcentagem_CPU)
