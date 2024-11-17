@@ -99,12 +99,14 @@
               </div>
             </div>
             <div class="supD">
-              <div class="intFeriado">
-                <select id="feriadoSelect" onchange="obterServidorSelecionado()">
-
-                </select>
+              <div class="supTitulo">
+                <h1>%CPU médio x Top 5 feriados no servidor:</h1>
+                <select id="feriadoSelect" onchange="obterServidorSelecionado()"></select>
               </div>
-              <div id="grafico"></div>
+              <div class="graficoWord">
+                <div id="grafico"></div>
+              </div>
+        
             </div>
           </div>
         </div>
@@ -112,26 +114,26 @@
           <div class="containerINF">
             <div class="divisao1">
               <div class="divcima">
-                <select class="selectpicker" id="servidorRelatorio" onchange="obterServidorRelatorio()" multiple data-live-search="true">
+                <select class="selectpicker" data-none-selected-text="Servidor" id="servidorRelatorio" onchange="obterServidorRelatorio()" multiple data-live-search="true">
 
                 </select>
-                <select class="selectpicker" id="periodoRelatorio" onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
+                <select class="selectpicker" data-none-selected-text="Período" id="periodoRelatorio" onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
 
                 </select>
 
-                <select class="selectpicker" multiple data-live-search="true">
-                  <option>Mustard</option>
-                  <option>Ketchup</option>
-                  <option>Relish</option>
-
-                  <!-- <select id="componenteRelatorio" onchange="obterComponenteRelatorio()"> -->
+                <select class="selectpicker" data-none-selected-text="Componente" id="componenteRelatorio" onchange="obterComponenteRelatorio()" multiple data-live-search="true">
+                  <option>Uso da CPU</option>
+                  <option>Uso da RAM</option>
+                  <option>Dados enviados da rede</option>
+                  <option>Dados recebidos da rede</option>
 
                 </select>
 
               </div>
 
               <div class="divbaixo">
-
+                <button class="buttonRelatorioAnalisar" onclick="analisar()" >Analisar</button>
+                <button class="buttonRelatorioComparar" onclick="comparar()" >Comparar</button>
               </div>
 
 
@@ -273,14 +275,52 @@
 
 
     fetchFeriados();
+    
 
   </script>
+
+  
 
 
 </body>
 
 </html>
 <script>
+
+cont = 0
+
+function comparar() {
+  const compararButton = document.querySelector(".buttonRelatorioComparar");
+  const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+
+  analisarButton.classList.remove("clicked");
+
+  if (cont == 0 || !compararButton.classList.contains("clicked")) {
+    compararButton.classList.add("clicked");
+    cont = 1;
+  } else {
+    compararButton.classList.remove("clicked");
+    cont = 0;
+  }
+}
+
+function analisar() {
+  const compararButton = document.querySelector(".buttonRelatorioComparar");
+  const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+
+  compararButton.classList.remove("clicked");
+
+  if (cont == 0 || !analisarButton.classList.contains("clicked")) {
+    analisarButton.classList.add("clicked");
+    cont = 1;
+  } else {
+    analisarButton.classList.remove("clicked");
+    cont = 0;
+  }
+}
+
+
+
   // Função para fazer a requisição e preencher o <select> com servidores
   async function servidor() {
     const empresa = sessionStorage.ID_EMPRESA;
@@ -318,6 +358,24 @@
 
   }
 
+
+  function obterServidorSelecionado() {
+    const valorSelecionado = document.getElementById("feriadoSelect").value;
+
+    // Se não houver um valor selecionado, usa o primeiro servidor automaticamente
+    const servidor = valorSelecionado || document.getElementById("feriadoSelect").options[0].value;
+
+    if (servidor) {
+      document.getElementById("feriadoSelect").value = servidor;
+      obterDadosGrafico(servidor);
+      return servidor;
+    } else {
+      console.log('Nenhuma opção disponível.');
+      return null;
+    }
+  }
+
+
   // Função para preencher o select com os servidores recebidos
   function preencherSelectServidores(servidores) {
     const selectElement1 = document.getElementById("feriadoSelect");
@@ -343,22 +401,6 @@
     console.log('Select de servidores preenchido com sucesso.');
 }
 
-
-  function obterServidorSelecionado() {
-    const valorSelecionado = document.getElementById("feriadoSelect").value;
-
-    // Se não houver um valor selecionado, usa o primeiro servidor automaticamente
-    const servidor = valorSelecionado || document.getElementById("feriadoSelect").options[0].value;
-
-    if (servidor) {
-      document.getElementById("feriadoSelect").value = servidor;
-      obterDadosGrafico(servidor);
-      return servidor;
-    } else {
-      console.log('Nenhuma opção disponível.');
-      return null;
-    }
-  }
 
 
   // Função para obter os dados de períodos
@@ -434,6 +476,61 @@
     console.log('Select de períodos preenchido com sucesso.');
 }
 
+
+async function componente() {
+    const empresa = sessionStorage.ID_EMPRESA;
+    console.log('Iniciando a requisição para /dashboard/componente');
+
+    try {
+      // Verifique se a variável empresa está sendo recuperada corretamente
+      if (!empresa) {
+        throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
+      }
+
+      const response = await fetch(`/dashboard/componente/${empresa}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      console.log('Resposta recebida sobre os períodos:', response);
+
+      if (!response.ok) {
+        throw new Error('Erro ao obter os dados: ' + response.statusText);
+      }
+
+      const data = await response.json();
+      console.log('Dados brutos recebidos:', data);
+
+      // Verifique se data é um array e se contém os itens esperados
+      if (Array.isArray(data) && data.length > 0) {
+
+        const meses = {
+          "1": "Janeiro",
+          "2": "Fevereiro",
+          "3": "Março",
+          "4": "Abril",
+          "5": "Maio",
+          "6": "Junho",
+          "7": "Julho",
+          "8": "Agosto",
+          "9": "Setembro",
+          "10": "Outubro",
+          "11": "Novembro",
+          "12": "Dezembro"
+        };
+        const periodos = [];
+        data.forEach(item => {
+          mes: periodos.push(meses[item.mes]);
+        });
+        preencherSelectPeriodo(periodos);
+      } else {
+        console.error('Erro: A resposta não contém um array de períodos válidos.');
+      }
+
+    } catch (error) {
+      console.error('Erro na requisição de períodos', error);
+    }
+  }
 
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
