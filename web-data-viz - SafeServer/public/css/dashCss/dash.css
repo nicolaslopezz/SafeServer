@@ -10,6 +10,10 @@
   src: url(../../assets/fonte/montserrat/Montserrat-Bold.ttf);
 }
 
+.bold {
+  font-family: poppins-bold;
+}
+
 /*NAVBAR CSS*/
 * {
   margin: 0;
@@ -364,18 +368,24 @@ input[type="range"] {
 .style-shadow {
   background-color: rgb(255, 255, 255);
   border-radius: 30px;
-  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
 }
 
 .dados-maiores-gerente {
-  width: 55%;
+  width: 65%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .dados-componentes-gerente {
-  width: 40%;
+  width: 30%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dados-topo-gerente {
