@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+  <link rel="stylesheet" href="../css/dashCss/dashGerente02.css" />
+
+  <title>Dashboard-Gerente</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
+        </div>
+        <div class="user-details">
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="relatorio.html">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastroServidor.html">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Cadastrar Servidor</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-dash-gerente flex main">
+      <div class="charts">
+          <div class="servers">
+            
+          </div>
+          <div class="stability chart">
+            <div class="metric">
+
+            </div>
+            <div class="chart-stability">
+
+            </div>
+          </div>
+          <div class="oscilation chart">
+            <div class="metric">
+
+            </div>
+            <div class="chart-oscilation">
+
+            </div>
+          </div>
+        </div>
+  </div>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+  integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+  crossorigin="anonymous"></script>
+<script src="../js/script.js"></script>
+<script>
+  obterDados()
+  function obterDados() {
+
+    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+    console.log(idEmpresa)
+
+    fetch("/dashGerente/obterDados", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        idEmpresaServer: idEmpresa
+      })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        console.log("DADOS RECEBIDOS:", resposta)
+        teste = resposta.json().then(json => {
+          console.log(json)
+          plotar(json)
+        })
+      } else {
+        // console.log("Houve um erro ao receber os dados no cards.html")
+      }
+    }).catch(function (erro) {
+      console.log("CATCH DO FETCH")
+      console.log(erro)
+    })
+  }
+
+  const alertasCpu = [];
+  const alertasRam = [];
+  const alertasRede = [];
+
+  function plotar(dados) {
+    for (i = 0; i < dados.length; i++)
+      if (dados[i].componente == "cpu") {
+        alertasCpu.push(dados[i])
+      } else if (dados[i].componente == "ram") {
+        alertasRam.push(dados[i])
+      } else if (dados[i].componente == "rede") {
+        alertasRede.push(dados[i])
+      }
+  }
+
+  
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

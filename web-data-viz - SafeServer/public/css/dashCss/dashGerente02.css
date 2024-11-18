@@ -1,0 +1,54 @@
+.servers {
+    background-color: lightblue;
+    height: 10%;
+    width: 85%;
+    top: 2em;
+}
+
+.charts {
+    height: 100vh;
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: lightblue; */
+    width: 95%;
+    height: 48%;
+    margin: 8px;
+}
+
+.stability {
+    flex-direction: row;
+}
+
+.oscilation {
+    flex-direction: row;
+}
+
+.metric {
+    background-color: lightcoral;
+    height: 100%;
+    width: 40%;
+    position: relative;
+}
+
+.chart-stability {
+    background-color: aliceblue;
+    height: 100%;
+    width: 50%;
+}
+
+.chart-oscilation {
+    background-color: aliceblue;
+    height: 100%;
+    width: 50%;
+}
+
