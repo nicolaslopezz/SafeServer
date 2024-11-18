@@ -271,7 +271,7 @@ body {
 }
 
 .sidebar2 {
-  width: 35%;
+  width: 20%;
   height: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -340,7 +340,54 @@ input[type="range"] {
   width: 20%;
 }
 
+.content-dash-gerente {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
+.graficos-dash-gerente {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-chart-gerente {
+  width: 100%;
+  height: 60%;
+}
+
+.style-shadow {
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.dados-maiores-gerente {
+  width: 55%;
+  height: 100%;
+}
+
+.dados-componentes-gerente {
+  width: 40%;
+  height: 100%;
+}
+
+.dados-topo-gerente {
+  width: 100%;
+  height: 33%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* ------------------------------- */
 
 .relatorioG {
   width: 100%;

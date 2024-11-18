@@ -77,7 +77,6 @@
       <div class="menu">
         <p class="title">Conta</p>
         <ul>
-
           <li>
             <a href="../index.html">
               <i class="icon ph-bold ph-sign-out"></i>
@@ -87,12 +86,11 @@
         </ul>
       </div>
     </div>
-    <div class="credits">
-      <div class="main">
+    <div class="content-dash-gerente flex main">
         <div class="sidebar2">
           <div class="regiao discretizacao">
             <h1>Regiões a serem mostradas</h1>
-            <div class="opcoes">
+            <div class="">
               <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
               <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
               <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
@@ -100,7 +98,7 @@
           </div>
           <div class="componente discretizacao">
             <h1>Componentes a serem mostrados</h1>
-            <div class="opcoes">
+            <div class="">
               <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
               <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
               <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
@@ -108,7 +106,7 @@
           </div>
           <div class="tempo discretizacao">
             <h1>Intervalo de tempo</h1>
-            <div class="opcoes">
+            <div class="">
               <input class="slider" type="range" min="5" max="60" id="input_tempo" onpointermove="mostrar(1)"
                 onchange="plotar()">
               <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
@@ -116,27 +114,27 @@
             </div>
           </div>
         </div>
-        <div class="content">
-          <div class="box">
-            <div>
-              <canvas id="chart1"></canvas>
-            </div>
+        <div class="graficos-dash-gerente">
+          <div class="dados-topo-gerente">
+            <div class="dados-maiores-gerente style-shadow"></div>
+            <div class="dados-componentes-gerente style-shadow"></div>
           </div>
-
+          <div class="box-chart-gerente style-shadow">
+              <!-- <canvas id="chart1"></canvas> -->
+          </div>
         </div>
-      </div>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-      <script src="../js/script.js"></script>
+    </div>
+  </div>
 </body>
-
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+  integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+  crossorigin="anonymous"></script>
+<script src="../js/script.js"></script>
 <script>
   obterDados()
   function obterDados() {
-    
+
     var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
     var dados = {};
     console.log(idEmpresa)
@@ -151,7 +149,7 @@
       })
     }).then(function (resposta) {
       if (resposta.ok) {
-        console.log("DADOS RECEBIDOS:",resposta)
+        console.log("DADOS RECEBIDOS:", resposta)
         teste = resposta.json().then(json => {
           console.log(json)
         })
@@ -165,174 +163,3 @@
   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Script estático -->
-<!-- <script>
-  Chart.defaults.color = "#FFF"
-  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-  var nome = sessionStorage.getItem("NOME_USUARIO");
-  var cargo = sessionStorage.getItem("CARGO");
-  nomeUsuario.innerHTML = nome
-  cargoUsuario.innerHTML = cargo
-  const ctx = document.getElementById('chart1');
-
-  var botao4 = document.getElementById("button_4")
-  var botao5 = document.getElementById("button_5")
-  var botao6 = document.getElementById("button_6")
-
-  chart1 = new Chart(ctx, {
-    type: 'bar',
-    data: null,
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          stacked: true,
-        },
-        x: {
-          stacked: true
-        }
-      }
-    }
-  });
-
-  plotar()
-  function plotar() {
-    var dias = input_tempo.value;
-
-    var alertasCpu = [];
-    var alertasRam = [];
-    var alertasRede = [];
-
-    var labels = [];
-    for (i = 0; i < dias; i++) {
-      labels.push(`${i + 1}`)
-    }
-
-    chart1.destroy()
-
-    data = {
-      labels: labels,
-      datasets: []
-    }
-
-    var regiao1 = Number(button_1.value);
-    var regiao2 = Number(button_2.value);
-    var regiao3 = Number(button_3.value);
-
-    if (botao4.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasCpu.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaCpu",
-        data: alertasCpu
-      })
-    }
-
-    if (botao5.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasRam.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaRam",
-        data: alertasRam
-      })
-    }
-
-    if (botao6.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasRede.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaRede",
-        data: alertasRede
-      })
-    }
-    console.log(alertasCpu, alertasRam, alertasRede)
-
-
-    chart1 = new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            stacked: true,
-            ticks: {
-              color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo Y
-            }
-          },
-          x: {
-            stacked: true,
-            ticks: {
-              color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo X
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            labels: {
-              color: "rgb(16, 46, 118)" // Cor das labels da legenda
-            }
-          }
-        }
-      }
-    });
-  }
-
-  function addData(chart, label, newData) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.push(newData);
-    });
-    chart.update();
-  }
-
-  function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-    });
-    chart.update();
-  }
-
-
-
-</script>
-
-<script>
-  mostrar(0)
-  mostrar(1)
-  function mostrar(param) {
-    if (param == 1) {
-      var valor = input_tempo.value
-      ipt_range.value = valor
-    } else {
-      var valor = ipt_range.value
-      input_tempo.value = valor
-    }
-  }
-  function selecionar(botao) {
-    var idBotao = document.getElementById(botao)
-    console.log(idBotao)
-    if (idBotao.value == 1) {
-      idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
-      idBotao.value = 0;
-    } else {
-      idBotao.value = 1;
-      idBotao.style.backgroundColor = "rgb(14, 29, 64)"
-    }
-  }
-</script>
-
-<!-- Script live -->
-<script>
-  
-</script> -->
