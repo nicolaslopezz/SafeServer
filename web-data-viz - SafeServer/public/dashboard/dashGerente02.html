@@ -126,21 +126,24 @@
   </div>
 </body>
 </html>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
   integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
   crossorigin="anonymous"></script>
+
 <script src="../js/script.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('MyChart01').getContext('2d');
 
     const meuGrafico = new Chart(ctx, {
-        type: 'bar', // Tipo do gráfico
+        type: 'bar', 
         data: {
-            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], // Rótulos do eixo X
+            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], 
             datasets: [{
                 label: 'Desvio padrão',
-                data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11], // Dados do gráfico
+                data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11], 
                 backgroundColor: 'rgb(212, 214, 84)',
                 borderColor: 'rgb(180, 182, 69)',
                 borderWidth: 3  
@@ -149,13 +152,15 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true // Iniciar eixo Y no zero
+                    beginAtZero: true 
                 }
             },
             devicePixelRatio: 3
         }
     });
   });
+
+
   obterDados()
   function obterDados() {
 
@@ -185,22 +190,6 @@
       console.log(erro)
     })
   }
-
-  const alertasCpu = [];
-  const alertasRam = [];
-  const alertasRede = [];
-
-  function plotar(dados) {
-    for (i = 0; i < dados.length; i++)
-      if (dados[i].componente == "cpu") {
-        alertasCpu.push(dados[i])
-      } else if (dados[i].componente == "ram") {
-        alertasRam.push(dados[i])
-      } else if (dados[i].componente == "rede") {
-        alertasRede.push(dados[i])
-      }
-  }
-
   
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
