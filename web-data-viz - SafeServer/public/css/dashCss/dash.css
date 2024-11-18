@@ -1070,6 +1070,7 @@ select {
   background-position: right 10px center;
   background-size: 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 .dimensaoGraficoCpu {
@@ -1157,4 +1158,11 @@ select {
 .percentCpu p {
   color: white;
   align-items: center;
+}
+
+select:focus{
+  display: flex;
+  outline: none;
+  border-color: #ccced0;
+  box-shadow: 0 0 5px rgba(54, 162, 235, 0.5);
 }

@@ -36,6 +36,20 @@ function buscarCpueRam(idServidor){
     return database.executar(instrucaoSql);
 }
 
+function buscarDadosRec(idServidor){
+    var instrucaoSql= `SELECT recebido_rede, time(dtHora) as hora from registro WHERE fkServidor= ${idServidor};`
+
+    console.log("Executando instrução SQL: " + instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
+function buscarDadosEnv(idServidor){
+    var instrucaoSql = `SELECT enviado_rede, time(dtHora) as hora from registro WHERE fkServidor = ${idServidor};`
+
+    console.log("Executando instução SQL: " + instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
 function registrar_servidor(nome, regiao, fkEmpresa) {
     var instrucaoSql = `
         INSERT INTO servidor (identificacao, regiao, fkEmpresa) VALUES 
@@ -108,6 +122,8 @@ module.exports = {
     obterCargos,
     obterFunc,
     buscarCpueRam,
+    buscarDadosRec,
+    buscarDadosEnv,
     cadastrarCargo,
     registrar_servidor,
     wordcloud,
