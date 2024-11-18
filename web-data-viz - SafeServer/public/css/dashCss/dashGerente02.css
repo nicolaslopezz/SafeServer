@@ -19,7 +19,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    /* background-color: lightblue; */
     width: 95%;
     height: 48%;
     margin: 8px;
@@ -41,9 +40,45 @@
 }
 
 .chart-stability {
-    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 678px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.combo-box {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 30%;
+}
+
+.select {
+    width: 48%;
+}
+
+.chart-title {
+    width: fit-content;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.chart-gerente-02 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .chart-oscilation {
@@ -52,3 +87,10 @@
     width: 50%;
 }
 
+#MyChart01 {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}

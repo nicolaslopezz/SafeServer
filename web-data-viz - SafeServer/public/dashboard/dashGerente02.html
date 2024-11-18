@@ -97,7 +97,21 @@
 
             </div>
             <div class="chart-stability">
-
+              
+              <div class="header">
+                <div class="combo-box">
+                  <select name="component" id="select_component" class="select">
+                    <option value="" selected disabled>Componente</option>
+                  </select>
+                  <select name="date" id="select_date" class="select">
+                    <option value="" selected disabled>Data</option>
+                  </select>
+                </div>
+                <div class="chart-title">Estabilidade de uso</div>
+              </div>
+              <div class="chart-gerente-02">  
+                <canvas id="MyChart01" ></canvas>
+              </div>
             </div>
           </div>
           <div class="oscilation chart">
@@ -117,6 +131,31 @@
   crossorigin="anonymous"></script>
 <script src="../js/script.js"></script>
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('MyChart01').getContext('2d');
+
+    const meuGrafico = new Chart(ctx, {
+        type: 'bar', // Tipo do gráfico
+        data: {
+            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], // Rótulos do eixo X
+            datasets: [{
+                label: 'Desvio padrão',
+                data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11], // Dados do gráfico
+                backgroundColor: 'rgb(212, 214, 84)',
+                borderColor: 'rgb(180, 182, 69)',
+                borderWidth: 3  
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Iniciar eixo Y no zero
+                }
+            },
+            devicePixelRatio: 3
+        }
+    });
+  });
   obterDados()
   function obterDados() {
 
