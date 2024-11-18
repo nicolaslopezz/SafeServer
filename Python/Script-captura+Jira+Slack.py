@@ -31,7 +31,7 @@ client = WebClient(token='')
 
 # Configuração do Jira
 jira_options = {
-    'server': ''  # Substitua pelo seu domínio
+    'server': '' # Substitua pelo seu domínio
 }
 email_jira = ''  # Substitua pelo seu e-mail
 api_token = ''  # Substitua pelo seu token de API
@@ -72,7 +72,6 @@ def capturar_dados():
     dados_rede_recebidos.append(GB_rede_recebidos)
     dados_rede_enviados.append(GB_rede_enviados)
     dados_id_servidor.append(servidor_id)
-
 
     return Porcentagem_CPU, GB_RAM_uso, GB_RAM_livre, Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados
 
@@ -151,7 +150,7 @@ def monitorar_e_enviar_dados(servidor_id):
         Porcentagem_CPU, GB_RAM_uso, GB_RAM_livre, Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados = capturar_dados()
 
         salvar_dados_json()
-        upload_file('dadosColetados.json', 's3safeserver-raw')
+        upload_file('dadosColetados.json', 's3safeserver1-raw')
 
         # Insere os dados no banco de dados
         query = '''

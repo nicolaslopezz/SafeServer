@@ -94,7 +94,7 @@ function obterFunc(req, res) {
 function buscarCpueRam(req, res){
     var idServidor = req.params.idServidor;
 
-    console.log(`Recuperando últimos acertos para o servidor com ID: ${idServidor}`);
+    console.log(`Recuperando últimos dados de Ram e Cpu para o servidor com ID: ${idServidor}`);
 
 dashboardModel.buscarCpueRam(idServidor).then((resultado) => {
    if(resultado.length > 0){
@@ -104,6 +104,34 @@ dashboardModel.buscarCpueRam(idServidor).then((resultado) => {
    }
     
 })
+}
+
+function buscarDadosRec(req, res){
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando últimos dados de redeRecebida para o sevidor com ID: ${idServidor}`)
+
+    dashboardModel.buscarDadosRec(idServidor).then((resultado) =>{
+        if(resultado.length > 0){
+            res.status(200).json(resultado);
+        } else{
+            res.status(204).send("Nenhum resultado encontrado.")
+        }
+    })
+}
+
+function buscarDadosEnv(req, res){
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando últimos dasos de RedeEnviada para o servidor com ID: ${idServidor}`)
+
+    dashboardModel.buscarDadosEnv(idServidor).then((resultado) =>{
+        if(resultado.length > 0){
+            res.satus(200).json(resultado);
+        } else{
+            res.status(204).send("Nenhum resultado encontrado.")
+        }
+    })
 }
 
 function cadastrarCargo(req, res) {
@@ -252,6 +280,8 @@ module.exports = {
     obterCargos,
     obterFunc,
     buscarCpueRam,
+    buscarDadosRec,
+    buscarDadosEnv,
     cadastrarCargo,
     registrar_servidor,
     wordcloud,
