@@ -16,6 +16,9 @@ function obterDados(req, res) {
                     if (resultadoSelect.length == 0) {
                         res.status(403).send("Nenhum resultado encontrado");
                     } else {
+                        for (i = 0; i < resultadoSelect.length; i++) {
+                            console.log(`Entrada ${i}: dia: ${resultadoSelect[i].dia}\n`)
+                        }
                         res.json(resultadoSelect)
                     }
 

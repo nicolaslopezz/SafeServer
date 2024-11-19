@@ -3,7 +3,7 @@ var database = require("../database/config")
 
 function obterDados(idEmpresa) {
     var instrucaoSql = `
-            select alertas, ano, mes, dia, componente, fkServidor, regiao from obterDadosAlerta where fkEmpresa = ${idEmpresa};
+            select dia, mes, ano, alertas, componente, fkServidor, regiao from obterDadosAlerta where fkEmpresa = ${idEmpresa} ORDER BY ano, mes, dia;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

@@ -155,15 +155,17 @@ VALUES
 ('2024-11-03 18:00:00', 71, 77, 27, 4, 590, 350, 2);
 
 
-CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa
+CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
     WHERE month(dtHora) = 11
     GROUP BY componente, fkServidor, dia, mes, ano
-    ORDER BY ano, mes, dia);
+    ORDER BY ano, mes, dia);	
 
--- SELECT * FROM obterDadosAlerta;
+-- DROP VIEW obterDadosAlerta;
+
+SELECT * FROM obterDadosAlerta;
 /*
 DROP VIEW obterDadosAlerta;
 
@@ -175,3 +177,11 @@ SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, d
     GROUP BY componente, fkServidor, dia, mes, ano
     ORDER BY ano, mes, dia;
 */
+
+SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
+	FROM alerta
+    JOIN registro ON idRegistro = fkRegistro
+    JOIN servidor ON fkServidor = idServidor
+    WHERE month(dtHora) = 11
+    GROUP BY componente, fkServidor, dia, mes, ano
+    ORDER BY ano, mes, dia;

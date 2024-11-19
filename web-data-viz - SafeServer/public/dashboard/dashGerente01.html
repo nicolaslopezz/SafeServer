@@ -162,10 +162,17 @@
     }).then(function (resposta) {
       if (resposta.ok) {
         console.log("DADOS RECEBIDOS:", resposta)
-        teste = resposta.json().then(json => {
-          console.log(json);
-          plotar(json);
+        resposta.json().then(valor => {
+          console.log(valor)
+          dadosTotal = valor;
+          plotar(dadosTotal)
         })
+        // plotar(dadosTotal)
+        // plotagem = resposta.json().then(json => {
+        //   console.log("dados:", json);
+        //   dadosTotal = json;
+        //   plotar(json);
+        // })
       } else {
         console.log("Houve um erro ao receber os dados no dashGerente01.html")
       }
@@ -176,6 +183,7 @@
   }
 
   // Variáveis para armazenamento organizado dos dados
+  let dadosTotal;
   const alertasCpuRaw = [];
   const alertasRamRaw = [];
   const alertasRedeRaw = [];
@@ -271,72 +279,50 @@
       mes: dados[dados.length - 1].mes,
       ano: dados[dados.length - 1].ano,
     };
-    for (i = 0;true;i++) {
-      if (i == 0) {
-        // Validando se o índice de 0 tem o valor de data inicial. 
+    for (i = 0;;) {
+      if (alertasCpuTrusted.length == 0) {
         if (alertasCpuRaw[i].dia == data_inicial.dia && alertasCpuRaw[i].mes == data_inicial.mes && alertasCpuRaw[i].ano == data_inicial.ano) {
           alertasCpuTrusted.push(alertasCpuRaw[i])
+          i++
         } else {
-          alertasCpuTrusted.push({alertas: 0, dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano})        
+          alertasCpuTrusted.push({dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0})
         }
-      // } else if (( alertasCpuTrusted[alertasCpuTrusted.length - 1].dia != data_final.dia && alertasCpuTrusted[alertasCpuTrusted.length - 1].mes != data_final.mes && alertasCpuTrusted[alertasCpuTrusted.length - 1].ano != data_final.ano) || i == ) {
-        break;
       } else {
-        if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[i-1]).dia && alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[i-1]).mes && alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[i-1]).ano) {
-          alertasCpuTrusted.push(alertasCpuRaw[i])
+        if (i >= alertasCpuRaw.length) {
+          if (alertasCpuTrusted[alertasCpuTrusted.length - 1].dia == data_final.dia &&
+            alertasCpuTrusted[alertasCpuTrusted.length - 1].mes == data_final.mes &&
+            alertasCpuTrusted[alertasCpuTrusted.length - 1].ano == data_final.ano
+          ) {
+            break;
+          } else {
+            alertasCpuTrusted.push({dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1  ]).dia,
+             mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes, 
+             ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano, alertas: 0})
+          }
         } else {
-          alertasCpuTrusted.push({alertas: 0, dia: adicionarUmDia(alertasCpuTrusted[i-1]).dia, mes: adicionarUmDia(alertasCpuTrusted[i-1]).mes, ano: adicionarUmDia(alertasCpuTrusted[i-1]).ano})        
+          if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).dia && 
+          alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes && 
+          alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano) {
+            alertasCpuTrusted.push(alertasCpuRaw[i])
+            i++
+            // break;
+          } else {
+            alertasCpuTrusted.push({dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1  ]).dia,
+               mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes, 
+               ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano, alertas: 0})
+          }
         }
+      } 
+
       }
-    }
-
-
-    // Validando datas sem, criando o intervalo total e validando um por um:
-
-
-    // for (i = 0;true;i++) {
-
-    // }
-
-    // Plotando gráfico alertas (principal)
-    // chart_alertas = new Chart(id_chart_alertas, {
-    //     type: 'bar',
-    //     data: {
-    //       labels: 'Teste',
-    //       datasets: [{
-    //         labels: 'CPU',
-    //         data: ''
-    //       }]
-    //     },
-    //     options: {
-    //       responsive: true,
-    //       scales: {
-    //         y: {
-    //           beginAtZero: true,
-    //           stacked: true,
-    //           ticks: {
-    //             color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo Y
-    //           }
-    //         },
-    //         x: {
-    //           stacked: true,
-    //           ticks: {
-    //             color: "rgb(16, 46, 118)" // Cor dos rótulos no eixo X
-    //           }
-    //         }
-    //       },
-    //       plugins: {
-    //         legend: {
-    //           labels: {
-    //             color: "rgb(16, 46, 118)" // Cor das labels da legenda
-    //           }
-    //         }
-    //       }
-    //     }
-    //   });
   }
 
-  function adicionarUmDia(data) {
+  function adicionarUmDia(bogos) {
+    let data = {
+      dia: bogos.dia,
+      mes: bogos.mes,
+      ano: bogos.ano
+    }
     if (data.mes == 1 || data.mes == 3 || data.mes == 5 || data.mes == 7 ||  data.mes == 8 || data.mes == 10 || data.mes == 12) {
       // Meses com 31 dias
       if (data.dia == 31) {

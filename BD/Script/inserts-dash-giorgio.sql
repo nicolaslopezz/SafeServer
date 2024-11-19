@@ -239,7 +239,7 @@ VALUES
 
 INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
 	('cpu' , 1, 1),('cpu' , 2, 1),('cpu' , 3, 1),
-    ('cpu ', 4, 1),('cpu' , 5, 1),('cpu' , 6, 1),('cpu' , 7, 1),
+    ('cpu', 4, 1),('cpu' , 5, 1),('cpu' , 6, 1),('cpu' , 7, 1),
     ('cpu', 8, 1),('cpu' , 21, 1),('cpu' , 22, 1),('cpu' , 26, 1),
     ('cpu', 30, 1),('cpu' , 31, 1),('cpu' , 34, 1),('cpu' , 35, 1),
     ('cpu', 39, 1),('cpu' , 40, 1),('cpu' , 41, 1),('cpu' , 42, 1),
@@ -273,7 +273,7 @@ INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
 	('rede' , 72, 1),('rede' , 73, 1),('rede' , 74, 1),('rede' , 77, 1);
     INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
 	('cpu' , 1, 1),('cpu' , 2, 1),('cpu' , 3, 1),
-    ('cpu ', 4, 1),('cpu' , 5, 1),('cpu' , 6, 1),('cpu' , 7, 1),
+    ('cpu', 4, 1),('cpu' , 5, 1),('cpu' , 6, 1),('cpu' , 7, 1),
     ('cpu', 8, 1),('cpu' , 21, 1),('cpu' , 22, 1),('cpu' , 26, 1),
     ('cpu', 30, 1),('cpu' , 31, 1),('cpu' , 34, 1),('cpu' , 35, 1),
     ('cpu', 39, 1),('cpu' , 40, 1),('cpu' , 41, 1),('cpu' , 42, 1),
