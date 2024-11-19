@@ -38,7 +38,7 @@ api_token = ''  # Substitua pelo seu token de API
 jira = JIRA(options=jira_options, basic_auth=(email_jira, api_token))
 
 # Configuração das credenciais temporárias da AWS
-AWS_ACCESS_KEY = ''
+AWS_ACCESS_KEY = ']'
 AWS_SECRET_KEY = ''
 AWS_SESSION_TOKEN = ''  # Coloque aqui o token de sessão
 AWS_REGION = 'us-west-1'  # Defina a região da AWS
