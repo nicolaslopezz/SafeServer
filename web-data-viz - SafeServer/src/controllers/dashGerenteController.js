@@ -15,9 +15,8 @@ function obterDados(req, res) {
 
                     if (resultadoSelect.length == 0) {
                         res.status(403).send("Nenhum resultado encontrado");
-                    } else {
-                        res.json(resultadoSelect)
                     }
+                    res.json(resultadoSelect)
 
 
                 }

@@ -12,7 +12,6 @@ var cors = require("cors");
 var path = require("path");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
-
 var app = express();
 
 var indexRouter = require("./src/routes/index");
@@ -21,6 +20,8 @@ var dashboardRouter = require("./src/routes/dashboard");
 var empresasRouter = require("./src/routes/empresas");
 var dashGerenteRouter = require("./src/routes/dashGerente");
 var servidoresRouter = require("./src/routes/servidores");
+
+const getIssueByID = require('./src/routes/get-issues.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
