@@ -31,7 +31,7 @@ function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
 function buscarCpueRam(idServidor){
     var instrucaoSql = `
     SELECT idServidor, percent_use_cpu, percent_use_ram, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor
-     WHERE fkServidor = ${idServidor};
+    WHERE fkServidor = ${idServidor};
     `
     console.log("Executando instrução SQL: " + instrucaoSql)
     return database.executar(instrucaoSql);

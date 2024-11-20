@@ -86,8 +86,10 @@
     </div>
     <div class="credits">
       <div class="opcoes">
-        <select class="botaoOp">
+        <select id="selectServidor" class="botaoOp" onchange="mudarServidor()">
           <option value="#"> Servidor: </option>
+          <option value="1">Servidor 1</option>
+          <option value="2">Servidor 2</option>
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
           <option value="">Componente: </option>
@@ -128,7 +130,42 @@
     </div>
     <script>
       let proximaAtualizacao;
-       function esconderTodosOsGraficos() {
+       var idServidor = sessionStorage.getItem("idServidor");
+       console.log(idServidor);
+      
+      function listarServidores(){
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        console.log('Buscando servidores...');
+
+        fetch(`/servidores/buscarServidor/${idEmpresa}`, {
+      method: "GET",
+    })
+    .then(function (resposta) {
+      if(!resposta.ok){
+        throw new Error(`Erro na requisição: ${resposta.status}`);
+      }
+        resposta.json().then((servidores) => {
+          servidores.forEach((servidor) => {
+            selectServidor.innerHTML += `<option value='${servidor.idServidor}'> Servidor ${servidor.idServidor}</option>`;
+
+            sessionStorage.setItem("idServidor", servidor.idServidor);
+            console.log("idServidor armazenado no sessionStorage:", servidor.idServidor);
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
+
+    function mudarServidor(){
+      var idServidorSelecionado = document.getElementById("selectServidor").value;
+
+      console.log(idServidorSelecionado);
+    }
+
+      function esconderTodosOsGraficos() {
             let todosOsGraficos = document.getElementById("graficos");
 
             //Removendo ou adicionando classes
@@ -141,6 +178,8 @@
         }
 
         function plotarGrafico(idServidor) {
+
+          var idServidor = sessionStorage.getItem("idServidor");
 
     const select = document.getElementById("selectComponente");
     var valorSelecionado = select.value;
@@ -158,19 +197,21 @@
      //}
   }
 
-  window.onload = () => {obterDadosGraficos();
-  }; 
+  window.onload = function(){
+    listarServidores();
+    obterDadosGraficoCpueRam();
+  };  
 
     function obterDadosGraficos() {
 
-        obterDadosGraficoCpueRam()
+        // obterDadosGraficoCpueRam()
         // obterDadosGraficoDadosRec()
         // obterDadosGraficoDadosEnv()
     }
 
   function exibirGraficoCpuEram(idServidor){
 
-    var idServidor = sessionStorage.ID_SERVIDOR;
+    var idServidor = sessionStorage.getItem("idServidor");
 
     let todosOsGraficos = document.getElementById("graficos");
 
@@ -187,7 +228,7 @@
         console.error('Elemento cpuRam não encontrado!');
     }
 
-    obterDadosGraficoCpueRam();
+     obterDadosGraficoCpueRam();
   }
 
   // function exibirGraficoDadosRec(idServidor){
@@ -216,7 +257,7 @@
 
   function obterDadosGraficoCpueRam(idServidor) {
 
-    var idServidor = sessionStorage.ID_SERVIDOR;
+    var idServidor = sessionStorage.getItem("idServidor");
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
@@ -234,6 +275,7 @@
         fetch(`/dashboard/buscarCpueRam/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
+                
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 

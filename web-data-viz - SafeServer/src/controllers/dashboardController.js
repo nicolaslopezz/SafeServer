@@ -31,8 +31,6 @@ function obterCargos(req, res) {
                             chave: chave
                         })
                     }
-
-
                 }
             ).catch(
                 function (erro) {
