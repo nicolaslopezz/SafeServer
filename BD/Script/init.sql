@@ -6,7 +6,6 @@ DROP DATABASE IF EXISTS SafeServer;
 create database SafeServer;
  
 use SafeServer;
-
 create table empresa(
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(60) not null,
@@ -159,40 +158,27 @@ INSERT INTO registro (idRegistro, dtHora, percent_use_cpu, percent_use_ram, uso_
 INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
 ('ram', 500, 1);
 
-CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
+CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-	WHERE month(dtHora) >= 9
-    GROUP BY componente, fkServidor, dia, mes, ano
-    ORDER BY ano, mes, dia);	
+    GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
+    ORDER BY regiao, ano, mes, dia);	
 
-DROP VIEW obterDadosAlerta;
+-- DROP VIEW obterDadosAlerta;
 
--- SELECT * FROM obterDadosAlerta;
 /*
-DROP VIEW obterDadosAlerta;
-
-SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa
+SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-    WHERE month(dtHora) = 11
-    GROUP BY componente, fkServidor, dia, mes, ano
-    ORDER BY ano, mes, dia;
-
-
-SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
-	FROM alerta
-    JOIN registro ON idRegistro = fkRegistro
-    JOIN servidor ON fkServidor = idServidor
-    WHERE month(dtHora) = 11
-    GROUP BY componente, fkServidor, dia, mes, ano
-    ORDER BY ano, mes, dia;
-	*/
+    -- WHERE month(dtHora) >= 9
+    GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
+    ORDER BY regiao, ano, mes, dia;
 SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, fkServidor, dia, mes, ano
     ORDER BY ano, mes, dia;
+/*
