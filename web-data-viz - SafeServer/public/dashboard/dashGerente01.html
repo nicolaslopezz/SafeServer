@@ -132,7 +132,7 @@
           </div>
         </div>
         <div class="box-chart-gerente style-shadow">
-          <!-- <canvas id="chart_alertas"></canvas> -->
+          <canvas id="chart_alertas"></canvas>
         </div>
       </div>
     </div>
@@ -184,14 +184,23 @@
 
   // Variáveis para armazenamento organizado dos dados
   let dadosTotal;
+
   const alertasCpuRaw = [];
   const alertasRamRaw = [];
   const alertasRedeRaw = [];
-  const alertasCpuTrusted = [];
-  const alertasRamTrusted = [];
-  const alertasRedeTrusted = [];
-  const regioes = [];
-  const regioesDados = [];
+
+  let alertasCpuTrusted = [];
+  let alertasRamTrusted = [];
+  let alertasRedeTrusted = [];
+
+
+  let labelsDatas = []
+  let alertasFullCpu = []
+  let alertasFullRam = []
+  let alertasFullRede = []
+
+  let regioes = [];
+  let regioesDados = [];
 
   let totalAlertas = {
     cpu: 0,
@@ -250,6 +259,9 @@
     }
     div_regiaoMaisAlertas.innerHTML = regiaoMaisAlertas.regiao;
 
+    // Limpando a memória
+    regiaoMaisAlertas = null
+
     // Plotando grafico componentes
     chart_componentes = new Chart(id_chart_componentes, {
       type: 'doughnut',
@@ -267,6 +279,9 @@
       },
     });
 
+    // Limpando a memória
+    totalAlertas = null
+
     // Eliminando lacunas nas datas dos alertas...
     const data_inicial = {
       dia: dados[0].dia,
@@ -279,192 +294,194 @@
       mes: dados[dados.length - 1].mes,
       ano: dados[dados.length - 1].ano,
     };
-    for (i = 0;;) {
-      if (alertasCpuTrusted.length == 0) {
-        if (alertasCpuRaw[i].dia == data_inicial.dia && alertasCpuRaw[i].mes == data_inicial.mes && alertasCpuRaw[i].ano == data_inicial.ano) {
-          alertasCpuTrusted.push(alertasCpuRaw[i])
-          i++
-        } else {
-          alertasCpuTrusted.push({dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0})
-        }
-      } else {
+
+    if (alertasCpuRaw[0].dia == data_inicial.dia && alertasCpuRaw[0].mes == data_inicial.mes && alertasCpuRaw[0].ano == data_inicial.ano) {
+      alertasCpuTrusted.push(alertasCpuRaw[0])
+      i = 1
+    } else {
+      alertasCpuTrusted.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
+      i = 0
+    }
+    for (;;) {
+        if (alertasCpuTrusted[alertasCpuTrusted.length - 1].dia == data_final.dia &&
+          alertasCpuTrusted[alertasCpuTrusted.length - 1].mes == data_final.mes &&
+          alertasCpuTrusted[alertasCpuTrusted.length - 1].ano == data_final.ano
+        ) { break; }
         if (i >= alertasCpuRaw.length) {
-          if (alertasCpuTrusted[alertasCpuTrusted.length - 1].dia == data_final.dia &&
-            alertasCpuTrusted[alertasCpuTrusted.length - 1].mes == data_final.mes &&
-            alertasCpuTrusted[alertasCpuTrusted.length - 1].ano == data_final.ano
-          ) {
-            break;
-          } else {
-            alertasCpuTrusted.push({dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1  ]).dia,
-             mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes, 
-             ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano, alertas: 0})
-          }
+          alertasCpuTrusted.push({
+            dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia,
+            mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes,
+            ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano, alertas: 0
+          })
         } else {
-          if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).dia && 
-          alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes && 
-          alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano) {
+          if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia &&
+            alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes &&
+            alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano) {
             alertasCpuTrusted.push(alertasCpuRaw[i])
             i++
-            // break;
           } else {
-            alertasCpuTrusted.push({dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1  ]).dia,
-               mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).mes, 
-               ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1 ]).ano, alertas: 0})
+            alertasCpuTrusted.push({
+              dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia,
+              mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes,
+              ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano, alertas: 0
+            })
           }
         }
-      } 
-
-      }
-  }
-
-  function adicionarUmDia(bogos) {
-    let data = {
-      dia: bogos.dia,
-      mes: bogos.mes,
-      ano: bogos.ano
+    
     }
-    if (data.mes == 1 || data.mes == 3 || data.mes == 5 || data.mes == 7 ||  data.mes == 8 || data.mes == 10 || data.mes == 12) {
-      // Meses com 31 dias
-      if (data.dia == 31) {
-        // Virada do mês
-        data.dia = 1;
-        if (data.mes == 12) {
-          // Virada do ano
-          data.mes = 1;
-          data.ano+= 1;
+
+    for (i = 0; ;) {
+      if (alertasRamTrusted.length == 0) {
+        if (alertasRamRaw[i].dia == data_inicial.dia && alertasRamRaw[i].mes == data_inicial.mes && alertasRamRaw[i].ano == data_inicial.ano) {
+          alertasRamTrusted.push(alertasRamRaw[i])
+          i++
         } else {
-          data.mes+= 1;
+          alertasRamTrusted.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
         }
       } else {
-        // Apenas um dia
-        data.dia+=1;
-      }
-    } else if (data.mes == 2) {
-      // Fevereiro
-      if (data.ano % 4 == 0) {
-        // Ano bissexto 
-        if (data.dia == 29) {
-          // Virada do mês
-          data.dia = 1;
-          data.mes = 3;
+        if (alertasRamTrusted[alertasRamTrusted.length - 1].dia == data_final.dia &&
+          alertasRamTrusted[alertasRamTrusted.length - 1].mes == data_final.mes &&
+          alertasRamTrusted[alertasRamTrusted.length - 1].ano == data_final.ano
+        ) { break; }
+        if (i >= alertasRamRaw.length) {
+
+          alertasRamTrusted.push({
+            dia: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).dia,
+            mes: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).mes,
+            ano: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).ano, alertas: 0
+          })
+
         } else {
-          // Apenas um dia
-          data.dia+=1;
+          if (alertasRamRaw[i].dia == adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).dia &&
+            alertasRamRaw[i].mes == adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).mes &&
+            alertasRamRaw[i].ano == adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).ano) {
+            alertasRamTrusted.push(alertasRamRaw[i])
+            i++
+          } else {
+            alertasRamTrusted.push({
+              dia: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).dia,
+              mes: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).mes,
+              ano: adicionarUmDia(alertasRamTrusted[alertasRamTrusted.length - 1]).ano, alertas: 0
+            })
+          }
         }
-      } else if (data.dia == 28) {
-        // Ano regular, passada do mês
-        data.dia = 1;
-        data.mes = 3;
-      } else {
-        // Passando apenas um dia
-        data.dia+=1;
       }
+    }
+
+    for (i = 0; ;) {
+      if (alertasRedeTrusted.length == 0) {
+        if (alertasRedeRaw[i].dia == data_inicial.dia && alertasRedeRaw[i].mes == data_inicial.mes && alertasRedeRaw[i].ano == data_inicial.ano) {
+          alertasRedeTrusted.push(alertasRedeRaw[i])
+          i++
+        } else {
+          alertasRedeTrusted.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
+        }
+      } else {
+        if (alertasRedeTrusted[alertasRedeTrusted.length - 1].dia == data_final.dia &&
+          alertasRedeTrusted[alertasRedeTrusted.length - 1].mes == data_final.mes &&
+          alertasRedeTrusted[alertasRedeTrusted.length - 1].ano == data_final.ano
+        ) { break; }
+        if (i >= alertasRedeRaw.length) {
+          alertasRedeTrusted.push({
+            dia: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).dia,
+            mes: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).mes,
+            ano: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).ano, alertas: 0
+          })
+        } else {
+          if (alertasRedeRaw[i].dia == adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).dia &&
+            alertasRedeRaw[i].mes == adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).mes &&
+            alertasRedeRaw[i].ano == adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).ano) {
+            alertasRedeTrusted.push(alertasRedeRaw[i])
+            i++
+          } else {
+            alertasRedeTrusted.push({
+              dia: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).dia,
+              mes: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).mes,
+              ano: adicionarUmDia(alertasRedeTrusted[alertasRedeTrusted.length - 1]).ano, alertas: 0
+            })
+          }
+        }
+      }
+    }
+
+    // Criando os labels com Todas as datas
+    for (dataDaVez = data_inicial; dataDaVez.dia != adicionarUmDia(data_final).dia || dataDaVez.mes != adicionarUmDia(data_final).mes || dataDaVez.ano != adicionarUmDia(data_final).ano; dataDaVez = adicionarUmDia(dataDaVez)) {
+      labelsDatas.push(`${dataDaVez.dia}/${dataDaVez.mes}/${(dataDaVez.ano).toString()[2]}${(dataDaVez.ano).toString()[3]}`)
+    }
+
+    for (i = 0; i < alertasCpuTrusted.length; i++) {
+      alertasFullCpu.push(alertasCpuTrusted[i].alertas)
+      alertasFullRam.push(alertasRamTrusted[i].alertas)
+      alertasFullRede.push(alertasRedeTrusted[i].alertas)
+    }
+
+    // Limpando a memória
+    // alertasCpuTrusted = null
+    // alertasRamTrusted = null
+    // alertasRedeTrusted = null
+
+    dataChartAlertas = {}
+
+    if (alertasFullCpu.length > 60) {
+      // Limitando amostra inicial para 60 (caso haja mais de 60)
+      auxCpu = []
+      auxRam = []
+      auxRede = []
+      auxLabels = []
+      console.log(alertasFullCpu)
+      for (i = alertasFullCpu.length - 1; i > alertasCpuTrusted.length - 61; i--) {
+        auxCpu.push(alertasFullCpu[i])
+        auxRam.push(alertasFullRam[i])
+        auxRede.push(alertasFullRede[i])
+        auxLabels.push(labelsDatas[i])
+      }
+      auxCpu.reverse()
+      auxRam.reverse()
+      auxRede.reverse()
+      auxLabels.reverse()
+
+      dataChartAlertas = {
+        labels: auxLabels,
+        datasets: [{
+          label: "Alertas CPU",
+          data: auxCpu
+        }, {
+          label: "Alertas Ram",
+          data: auxRam
+        }, {
+          label: "Alertas Rede",
+          data: auxRede
+        }
+        ], backgroundColor: ['#e28743',
+            '#c6ccdd',
+            '#485f96']
+      }
+      // auxCpu = null
+      // auxRam = null
+      // auxRede = null
+      // auxLabels = null
     } else {
-      if (data.dia == 30) {
-        data.mes += 1;
-        data.dia = 1;
-      } else {
-        data.dia++;
-      }
-
-    }
-    return data;
-  }
-
-</script>
-
-<!-- <script>
-  Chart.defaults.color = "#FFF"
-  var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-  var nome = sessionStorage.getItem("NOME_USUARIO");
-  var cargo = sessionStorage.getItem("CARGO");
-  nomeUsuario.innerHTML = nome
-  cargoUsuario.innerHTML = cargo
-  const ctx = document.getElementById('chart1');
-
-  var botao4 = document.getElementById("button_4")
-  var botao5 = document.getElementById("button_5")
-  var botao6 = document.getElementById("button_6")
-
-  chart1 = new Chart(ctx, {
-    type: 'bar',
-    data: null,
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          stacked: true,
-        },
-        x: {
-          stacked: true
+      dataChartAlertas = {
+        labels: labelsDatas,
+        datasets: [{
+          label: "Alertas CPU",
+          data: alertasFullCpu
+        }, {
+          label: "Alertas Ram",
+          data: alertasFullRam
+        }, {
+          label: "Alertas Rede",
+          data: alertasFullRede
         }
+        ], backgroundColor: ['#e28743',
+            '#c6ccdd',
+            '#485f96']
       }
     }
-  });
 
-  plotar()
-  function plotar() {
-    var dias = input_tempo.value;
-
-    var alertasCpu = [];
-    var alertasRam = [];
-    var alertasRede = [];
-
-    var labels = [];
-    for (i = 0; i < dias; i++) {
-      labels.push(`${i + 1}`)
-    }
-
-    chart1.destroy()
-
-    data = {
-      labels: labels,
-      datasets: []
-    }
-
-    var regiao1 = Number(button_1.value);
-    var regiao2 = Number(button_2.value);
-    var regiao3 = Number(button_3.value);
-
-    if (botao4.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasCpu.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaCpu",
-        data: alertasCpu
-      })
-    }
-
-    if (botao5.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasRam.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaRam",
-        data: alertasRam
-      })
-    }
-
-    if (botao6.value == 1) {
-      for (i = 0; i < dias; i++) {
-        var num_aleatorio = Math.round(Math.random() * 5 * (regiao1 + regiao2 + regiao3) - 0.5, 0)
-        alertasRede.push(num_aleatorio)
-      }
-      data.datasets.push({
-        label: "AlertaRede",
-        data: alertasRede
-      })
-    }
-    console.log(alertasCpu, alertasRam, alertasRede)
-
-
-    chart1 = new Chart(ctx, {
+    chart_alertas = new Chart(id_chart_alertas, {
       type: 'bar',
-      data: data,
+      data: dataChartAlertas,
       options: {
         responsive: true,
         scales: {
@@ -493,47 +510,58 @@
     });
   }
 
-  function addData(chart, label, newData) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.push(newData);
-    });
-    chart.update();
-  }
-
-  function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-    });
-    chart.update();
-  }
-
-
-
-</script>
-
-<script>
-  mostrar(0)
-  mostrar(1)
-  function mostrar(param) {
-    if (param == 1) {
-      var valor = input_tempo.value
-      ipt_range.value = valor
-    } else {
-      var valor = ipt_range.value
-      input_tempo.value = valor
+  function adicionarUmDia(bogos) {
+    let data = {
+      dia: bogos.dia,
+      mes: bogos.mes,
+      ano: bogos.ano
     }
-  }
-  function selecionar(botao) {
-    var idBotao = document.getElementById(botao)
-    console.log(idBotao)
-    if (idBotao.value == 1) {
-      idBotao.style.backgroundColor = "rgba(116, 118, 135, 0.6)"
-      idBotao.value = 0;
+    if (data.mes == 1 || data.mes == 3 || data.mes == 5 || data.mes == 7 || data.mes == 8 || data.mes == 10 || data.mes == 12) {
+      // Meses com 31 dias
+      if (data.dia == 31) {
+        // Virada do mês
+        data.dia = 1;
+        if (data.mes == 12) {
+          // Virada do ano
+          data.mes = 1;
+          data.ano += 1;
+        } else {
+          data.mes += 1;
+        }
+      } else {
+        // Apenas um dia
+        data.dia += 1;
+      }
+    } else if (data.mes == 2) {
+      // Fevereiro
+      if (data.ano % 4 == 0) {
+        // Ano bissexto 
+        if (data.dia == 29) {
+          // Virada do mês
+          data.dia = 1;
+          data.mes = 3;
+        } else {
+          // Apenas um dia
+          data.dia += 1;
+        }
+      } else if (data.dia == 28) {
+        // Ano regular, passada do mês
+        data.dia = 1;
+        data.mes = 3;
+      } else {
+        // Passando apenas um dia
+        data.dia += 1;
+      }
     } else {
-      idBotao.value = 1;
-      idBotao.style.backgroundColor = "rgb(14, 29, 64)"
+      if (data.dia == 30) {
+        data.mes += 1;
+        data.dia = 1;
+      } else {
+        data.dia++;
+      }
+
     }
+    return data;
   }
+
 </script>

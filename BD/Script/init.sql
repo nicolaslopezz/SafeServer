@@ -82,10 +82,10 @@ INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 ('abcd', 2, 1, 'Analista');
 
-INSERT INTO servidor (identificacao, fkEmpresa) VALUES 
-('reader', 1);
-INSERT INTO servidor (identificacao, fkEmpresa) VALUES 
-('writer', 1);
+INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('reader', 1, 'US-EAST-1');
+INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('writer', 1, 'US-EAST-1');
 
 
 -- Inserir dados na tabela funcionario
@@ -154,18 +154,22 @@ VALUES
 ('2024-11-03 10:00:00', 72, 78, 26, 4, 580, 310, 2),  
 ('2024-11-03 18:00:00', 71, 77, 27, 4, 590, 350, 2);
 
+INSERT INTO registro (idRegistro, dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor) VALUES
+(500, '2024-09-01 10:00:00', 92, 80, 32, 8, 700, 450, 1);
+INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
+('ram', 500, 1);
 
 CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-    WHERE month(dtHora) = 11
+	WHERE month(dtHora) >= 9
     GROUP BY componente, fkServidor, dia, mes, ano
     ORDER BY ano, mes, dia);	
 
--- DROP VIEW obterDadosAlerta;
+DROP VIEW obterDadosAlerta;
 
-SELECT * FROM obterDadosAlerta;
+-- SELECT * FROM obterDadosAlerta;
 /*
 DROP VIEW obterDadosAlerta;
 
@@ -176,12 +180,19 @@ SELECT count(idAlerta), componente, year(dtHora) as ano, month(dtHora) as mes, d
     WHERE month(dtHora) = 11
     GROUP BY componente, fkServidor, dia, mes, ano
     ORDER BY ano, mes, dia;
-*/
+
 
 SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
     WHERE month(dtHora) = 11
+    GROUP BY componente, fkServidor, dia, mes, ano
+    ORDER BY ano, mes, dia;
+	*/
+SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
+	FROM alerta
+    JOIN registro ON idRegistro = fkRegistro
+    JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, fkServidor, dia, mes, ano
     ORDER BY ano, mes, dia;
