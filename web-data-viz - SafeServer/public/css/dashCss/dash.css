@@ -362,8 +362,9 @@ input[type="range"] {
 
 .box-chart-gerente {
   width: 100%;
-  height: 60%;
+  height: 70%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -376,24 +377,26 @@ input[type="range"] {
 }
 
 .dados-maiores-gerente {
-  width: 65%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  text-align: center;
 }
 
 .dados-componentes-gerente {
-  width: 30%;
+  width: 45%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  text-align: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .dados-topo-gerente {
   width: 100%;
-  height: 33%;
+  height: 25%;
   display: flex;
   justify-content: space-between;
 }

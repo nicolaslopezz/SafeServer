@@ -111,20 +111,26 @@
         <div class="dados-topo-gerente">
           <div class="dados-maiores-gerente style-shadow">
             <div style="width: 45%;">
-              <h2 class="bold">Componente com mais alertas:</h2>
-              <div id="div_componenteMaisAlertas"></div>
+              <h3 >Componente com mais alertas:</h2>
+              <div id="div_componenteMaisAlertas" class="bold" style="color: red;"></div>
             </div>
             <div style="width: 45%;">
-              <h2 class="bold">Região com mais alertas:</h2>
-              <div id="div_regiaoMaisAlertas"></div>
+              <h3>Região com mais alertas:</h2>
+              <div id="div_regiaoMaisAlertas" class="bold" style="color: red;"></div>
             </div>
           </div>
           <div class="dados-componentes-gerente style-shadow">
-            <canvas id="chart_componentes"></canvas>
+          <h3>Distribuição dos alertas por componentes</h2>
+            <div style="height: 140%; display: flex; justify-content: flex-start;">
+              <canvas id="chart_componentes"></canvas>
+            </div>
           </div>
         </div>
         <div class="box-chart-gerente style-shadow">
-          <canvas id="chart_alertas"></canvas>
+          <h2>Quantidade de alertas por componentes</h2>
+          <div style="width: 90%;">
+            <canvas id="chart_alertas"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -155,16 +161,8 @@
       if (resposta.ok) {
         console.log("DADOS RECEBIDOS:", resposta)
         resposta.json().then(valor => {
-          console.log(valor)
-          dadosTotal = valor;
-          plotar(dadosTotal)
+          plotar(valor)
         })
-        // plotar(dadosTotal)
-        // plotagem = resposta.json().then(json => {
-        //   console.log("dados:", json);
-        //   dadosTotal = json;
-        //   plotar(json);
-        // })
       } else {
         console.log("Houve um erro ao receber os dados no dashGerente01.html")
       }
@@ -175,7 +173,6 @@
   }
 
   // Variáveis para armazenamento organizado dos dados
-  let dadosTotal;
 
   const alertasCpuRaw = [];
   const alertasRamRaw = [];
@@ -268,7 +265,13 @@
             '#485f96'
           ]
         }]
-      },
+      }, options: {
+        plugins: {
+          legend: {
+            position: 'left'
+          }
+        }
+      }
     });
 
     // Limpando a memória
@@ -294,32 +297,32 @@
       alertasCpuTrusted.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
       i = 0
     }
-    for (;;) {
-        if (alertasCpuTrusted[alertasCpuTrusted.length - 1].dia == data_final.dia &&
-          alertasCpuTrusted[alertasCpuTrusted.length - 1].mes == data_final.mes &&
-          alertasCpuTrusted[alertasCpuTrusted.length - 1].ano == data_final.ano
-        ) { break; }
-        if (i >= alertasCpuRaw.length) {
+    for (; ;) {
+      if (alertasCpuTrusted[alertasCpuTrusted.length - 1].dia == data_final.dia &&
+        alertasCpuTrusted[alertasCpuTrusted.length - 1].mes == data_final.mes &&
+        alertasCpuTrusted[alertasCpuTrusted.length - 1].ano == data_final.ano
+      ) { break; }
+      if (i >= alertasCpuRaw.length) {
+        alertasCpuTrusted.push({
+          dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia,
+          mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes,
+          ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano, alertas: 0
+        })
+      } else {
+        if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia &&
+          alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes &&
+          alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano) {
+          alertasCpuTrusted.push(alertasCpuRaw[i])
+          i++
+        } else {
           alertasCpuTrusted.push({
             dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia,
             mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes,
             ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano, alertas: 0
           })
-        } else {
-          if (alertasCpuRaw[i].dia == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia &&
-            alertasCpuRaw[i].mes == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes &&
-            alertasCpuRaw[i].ano == adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano) {
-            alertasCpuTrusted.push(alertasCpuRaw[i])
-            i++
-          } else {
-            alertasCpuTrusted.push({
-              dia: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).dia,
-              mes: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).mes,
-              ano: adicionarUmDia(alertasCpuTrusted[alertasCpuTrusted.length - 1]).ano, alertas: 0
-            })
-          }
         }
-    
+      }
+
     }
 
     for (i = 0; ;) {
@@ -434,7 +437,7 @@
 
       dataChartAlertas = {
         labels: auxLabels,
-        datasets: [ {
+        datasets: [{
           label: "Alertas Rede",
           data: auxRede,
           backgroundColor: '#485f96'
@@ -467,8 +470,8 @@
           data: alertasFullRede
         }
         ], backgroundColor: ['#e28743',
-            '#c6ccdd',
-            '#485f96']
+          '#c6ccdd',
+          '#485f96']
       }
     }
 
