@@ -28,7 +28,7 @@ function cadastrarCargo(cargo, nivelPermissao, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function buscarCpueRam(idServidor){
+function buscarCpueRam(idServidor) {
     var instrucaoSql = `
     SELECT percent_use_cpu, percent_use_ram, time(dtHora) as hora from registro WHERE fkServidor = ${idServidor};
     `
@@ -100,9 +100,45 @@ ORDER BY mes DESC;
 }
 
 
+function analisar(servidores,periodos,componentes) { 
+    
+    console.log('Servidoresss:', servidores);
+    console.log('Períodosss:', periodos);
+    console.log('Componentesss:', componentes);
 
+    const instrucaoSql = `
+        SELECT 
+            a.componente,
+            s.identificacao AS servidor,
+            MONTH(r.dtHora) AS mes,
+            COUNT(a.idAlerta) AS total_alertas,
+            AVG(CASE 
+                WHEN a.componente = 'CPU' THEN r.percent_use_cpu
+                WHEN a.componente = 'RAM' THEN r.percent_use_ram
+                WHEN a.componente = 'REDE (RECEBIDA)' THEN r.recebido_rede
+                WHEN a.componente = 'REDE (ENVIADA)' THEN r.enviado_rede
+                ELSE NULL
+            END) AS valor_medio
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            a.componente, s.identificacao, MONTH(r.dtHora)
+        ORDER BY 
+            mes DESC, a.componente;
+    `;
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
+    console.log(instrucaoSql)
+
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     obterCargos,
@@ -113,5 +149,6 @@ module.exports = {
     wordcloud,
     feriado,
     servidor,
-    periodo
+    periodo,
+    analisar
 };

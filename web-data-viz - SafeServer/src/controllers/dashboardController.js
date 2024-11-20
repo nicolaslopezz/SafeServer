@@ -248,6 +248,34 @@ function periodo(req, res) {
 }
 
 
+function analisar(req, res) {
+
+    console.log(req.query)
+    // Acessando os parâmetros da query string
+    const servidores = JSON.parse(req.query.servidores);  
+    const periodos = JSON.parse(req.query.periodos);  
+    const componentes = JSON.parse(req.query.componentes);  
+  
+    console.log('Servidores:',servidores);
+    console.log('Períodos:',periodos);
+    console.log('Componentes:',componentes);
+  
+    // Exemplo de como você poderia processar esses dados, talvez buscando em um banco de dados
+    // Suponha que você tenha uma função que busque dados com base nos parâmetros
+    dashboardModel.analisar(servidores, periodos, componentes)
+      .then((resultado) => {
+        if (resultado.length > 0) {
+          res.status(200).json(resultado);
+        } else {
+          res.status(204).send("Nenhum resultado encontrado!");
+        }
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar relatório:', erro);
+        res.status(500).send('Erro ao buscar relatório');
+      });
+  }
+
 module.exports = {
     obterCargos,
     obterFunc,
@@ -257,6 +285,7 @@ module.exports = {
     wordcloud,
     feriado,
     servidor,
-    periodo
+    periodo,
+    analisar
 
 }
