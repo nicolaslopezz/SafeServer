@@ -97,14 +97,6 @@
             <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
           </div>
         </div>
-        <div class="componente discretizacao">
-          <h1 class="bold">Componentes a serem mostrados</h1>
-          <div class="">
-            <button value="1" onclick="selecionar('button_4'), plotar()" id="button_4">CPU</button>
-            <button value="1" onclick="selecionar('button_5'), plotar()" id="button_5">RAM</button>
-            <button value="1" onclick="selecionar('button_6'), plotar()" id="button_6">Rede</button>
-          </div>
-        </div>
         <div class="tempo discretizacao">
           <h1 class="bold">Intervalo de tempo</h1>
           <div class="">
@@ -442,19 +434,20 @@
 
       dataChartAlertas = {
         labels: auxLabels,
-        datasets: [{
+        datasets: [ {
+          label: "Alertas Rede",
+          data: auxRede,
+          backgroundColor: '#485f96'
+        }, {
           label: "Alertas CPU",
-          data: auxCpu
+          data: auxCpu,
+          backgroundColor: '#e28743'
         }, {
           label: "Alertas Ram",
-          data: auxRam
-        }, {
-          label: "Alertas Rede",
-          data: auxRede
-        }
-        ], backgroundColor: ['#e28743',
-            '#c6ccdd',
-            '#485f96']
+          data: auxRam,
+          backgroundColor: '#c6ccdd'
+        },
+        ]
       }
       // auxCpu = null
       // auxRam = null
