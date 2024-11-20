@@ -48,4 +48,8 @@ router.get("/servidor/:empresa", function (req, res) {
 router.get("/periodo/:empresa", function (req, res) {
     dashboardController.periodo(req, res);
 })
+
+router.get("/analisar", function (req, res) {
+    dashboardController.analisar(req, res);
+});
 module.exports = router;

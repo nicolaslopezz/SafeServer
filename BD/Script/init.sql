@@ -6,6 +6,9 @@ DROP DATABASE IF EXISTS SafeServer;
 create database SafeServer;
  
 use SafeServer;
+
+SELECT * FROM registro;
+
 create table empresa(
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(60) not null,
@@ -35,7 +38,7 @@ constraint fkFuncionarioEmpresa foreign key (fkEmpresa) references empresa (idEm
 create table servidor (
 idServidor int primary key auto_increment,
 identificacao varchar(45) not null,
-regiao varchar(45) not null,
+regiao varchar(45),
 fkEmpresa int,
 constraint fkEmpresaServidores foreign key (fkEmpresa) references empresa (idEmpresa));
 
@@ -51,7 +54,6 @@ enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
-/*
 SELECT DISTINCT MONTH(dtHora) AS mes
 FROM registro r
 join servidor s on r.fkServidor = s.idServidor
@@ -60,9 +62,8 @@ WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
 
 select * from registro;
-*/
 
--- select * from registro;
+
 
 
 create table alerta (
@@ -72,6 +73,52 @@ fkRegistro int,
 nivelPrioridade int,
 constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
 );
+
+
+INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) 
+VALUES 
+('CPU', 1, 1),
+('RAM', 1, 2),
+('REDE (RECEBIDA)', 1, 3),
+('CPU', 2, 1),
+('RAM', 2, 2),
+('REDE (RECEBIDA)', 2, 3),
+('CPU', 3, 1),
+('RAM', 3, 2),
+('REDE (RECEBIDA)', 3, 3),
+('CPU', 4, 1),
+('RAM', 4, 2),
+('REDE (RECEBIDA)', 4, 3),
+('CPU', 5, 1),
+('RAM', 5, 2),
+('REDE (RECEBIDA)', 5, 3),
+('CPU', 6, 1),
+('RAM', 6, 2),
+('REDE (RECEBIDA)', 6, 3),
+('CPU', 7, 1),
+('RAM', 7, 2),
+('REDE (RECEBIDA)', 7, 3),
+('CPU', 8, 1),
+('RAM', 8, 2),
+('REDE (RECEBIDA)', 8, 3),
+('CPU', 9, 1),
+('RAM', 9, 2),
+('REDE (RECEBIDA)', 9, 3),
+('CPU', 10, 1),
+('RAM', 10, 2),
+('REDE (RECEBIDA)', 10, 3),
+('CPU', 11, 1),
+('RAM', 11, 2),
+('REDE (RECEBIDA)', 11, 3),
+('CPU', 12, 1),
+('RAM', 12, 2),
+('REDE (RECEBIDA)', 12, 3),
+('CPU', 13, 1),
+('RAM', 13, 2),
+('REDE (RECEBIDA)', 13, 3),
+('CPU', 14, 1),
+('RAM', 14, 2),
+('REDE (RECEBIDA)', 14, 3);
 
 
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
@@ -133,52 +180,35 @@ CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa 
 
 -- select * from empresa;
 
--- select * from funcionario;
+select * from funcionario;
 
-INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor)
-VALUES 
-('2024-11-01 10:00:00', 92, 80, 32, 8, 700, 450, 1),  
-('2024-11-01 11:00:00', 89, 90, 36, 4, 720, 400, 1),  
-('2024-11-01 12:00:00', 65, 85, 34, 6, 680, 400, 1),  
-('2024-11-01 13:00:00', 55, 85, 34, 6, 730, 440, 1),  
-('2024-11-01 14:00:00', 55, 60, 24,16, 770, 480, 1),
+-- truncate regis
+select * from registro;
 
-('2024-11-02 10:00:00', 88, 90, 36, 4, 300, 200, 1),  
-('2024-11-02 18:00:00', 50, 85, 34, 6, 280, 250, 1),  
-('2024-11-02 10:00:00', 55, 80, 32, 8, 220, 180, 1),  
-('2024-11-02 18:00:00', 60, 80, 32, 8, 450, 240, 1),  
-
-('2024-11-03 10:00:00', 80, 80, 27, 5, 560, 330, 1),  
-('2024-11-03 18:00:00', 90, 74, 25, 5, 580, 320, 1),  
-('2024-11-03 10:00:00', 72, 78, 26, 4, 580, 310, 2),  
-('2024-11-03 18:00:00', 71, 77, 27, 4, 590, 350, 2);
-
-INSERT INTO registro (idRegistro, dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor) VALUES
-(500, '2024-09-01 10:00:00', 92, 80, 32, 8, 700, 450, 1);
-INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES
-('ram', 500, 1);
-
-CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
-	FROM alerta
-    JOIN registro ON idRegistro = fkRegistro
-    JOIN servidor ON fkServidor = idServidor
-    GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
-    ORDER BY regiao, ano, mes, dia);	
-
--- DROP VIEW obterDadosAlerta;
-
-/*
-SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
-	FROM alerta
-    JOIN registro ON idRegistro = fkRegistro
-    JOIN servidor ON fkServidor = idServidor
-    -- WHERE month(dtHora) >= 9
-    GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
-    ORDER BY regiao, ano, mes, dia;
-SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkServidor, fkEmpresa, regiao
-	FROM alerta
-    JOIN registro ON idRegistro = fkRegistro
-    JOIN servidor ON fkServidor = idServidor
-    GROUP BY componente, fkServidor, dia, mes, ano
-    ORDER BY ano, mes, dia;
-/*
+SELECT 
+    a.componente,
+    COUNT(a.idAlerta) AS total_alertas,
+    s.identificacao AS servidor,
+    AVG(CASE 
+        WHEN a.componente = 'CPU' THEN r.percent_use_cpu
+        WHEN a.componente = 'RAM' THEN r.percent_use_ram
+        WHEN a.componente = 'REDE (RECEBIDA)' THEN r.recebido_rede
+        WHEN a.componente = 'REDE (ENVIADA)' THEN r.enviado_rede
+        ELSE NULL
+    END) AS media_componente,
+    MONTH(r.dtHora) AS mes
+FROM 
+    alerta a
+JOIN 
+    registro r ON a.fkRegistro = r.idRegistro
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    s.identificacao IN ('reader')
+    AND MONTH(r.dtHora) IN (12)
+    AND a.componente IN ('CPU')
+GROUP BY 
+    a.componente, s.identificacao, MONTH(r.dtHora)
+ORDER BY 
+    s.identificacao, a.componente;
+    

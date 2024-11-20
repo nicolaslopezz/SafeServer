@@ -627,8 +627,8 @@ input[type="range"] {
   height: 67%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   border-radius: 12px;
 }
 
@@ -1173,9 +1173,37 @@ select {
   align-items: center;
 }
 
-select:focus{
+.ranking {
+  width: 100%;
+  height: 100%;
   display: flex;
-  outline: none;
-  border-color: #ccced0;
-  box-shadow: 0 0 5px rgba(54, 162, 235, 0.5);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 8px;
 }
+
+h1 {
+  text-align: center;
+}
+
+#tablee {
+  font-family: Poppins;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #e8f4e5;
+  border: 1px solid #d2d2d2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+}
+  
+#thh, #tdd {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 0 0px 0px 1px solid rgb(167, 169, 164);
+}
+
+#trr:hover {
+  background-color: #dadada67;
+}
+
+

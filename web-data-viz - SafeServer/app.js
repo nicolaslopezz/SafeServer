@@ -18,7 +18,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var dashboardRouter = require("./src/routes/dashboard");
 var empresasRouter = require("./src/routes/empresas");
-var dashGerenteRouter = require("./src/routes/dashGerente")
+var dashGerenteRouter = require("./src/routes/dashGerente");
+var servidoresRouter = require("./src/routes/servidores");
 
 const getIssueByID = require('./src/routes/get-issues.js');
 
@@ -33,6 +34,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/empresas", empresasRouter);
 app.use("/dashGerente", dashGerenteRouter);
+app.use("/servidores", servidoresRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

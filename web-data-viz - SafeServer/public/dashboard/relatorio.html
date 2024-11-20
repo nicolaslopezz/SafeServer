@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
 
   <!-- bootstrap Select CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
   <!-- icone nav bar -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -106,7 +107,7 @@
               <div class="graficoWord">
                 <div id="grafico"></div>
               </div>
-        
+
             </div>
           </div>
         </div>
@@ -114,14 +115,17 @@
           <div class="containerINF">
             <div class="divisao1">
               <div class="divcima">
-                <select class="selectpicker" data-none-selected-text="Servidor" id="servidorRelatorio" onchange="obterServidorRelatorio()" multiple data-live-search="true">
+                <select class="selectpicker" data-none-selected-text="Servidor" id="servidorRelatorio"
+                  onchange="obterServidorRelatorio()" multiple data-live-search="true">
 
                 </select>
-                <select class="selectpicker" data-none-selected-text="Período" id="periodoRelatorio" onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
+                <select class="selectpicker" data-none-selected-text="Período" id="periodoRelatorio"
+                  onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
 
                 </select>
 
-                <select class="selectpicker" data-none-selected-text="Componente" id="componenteRelatorio" onchange="obterComponenteRelatorio()" multiple data-live-search="true">
+                <select class="selectpicker" data-none-selected-text="Componente" id="componenteRelatorio"
+                  onchange="obterComponenteRelatorio()" multiple data-live-search="true">
                   <option>Uso da CPU</option>
                   <option>Uso da RAM</option>
                   <option>Dados enviados da rede</option>
@@ -132,13 +136,32 @@
               </div>
 
               <div class="divbaixo">
-                <button class="buttonRelatorioAnalisar" onclick="analisar()" >Analisar</button>
-                <button class="buttonRelatorioComparar" onclick="comparar()" >Comparar</button>
+                <button class="buttonRelatorioAnalisar" onclick="analisar()">Analisar</button>
+                <button class="buttonRelatorioComparar" onclick="comparar()">Comparar</button>
               </div>
 
 
             </div>
             <div class="divisao2">
+
+              <div class="ranking">
+                <table id="tablee">
+                  <thead>
+                    <tr id="trr"> <!-- titulo do cabeçalho, primeira linha -->
+                      <th id="thh">Servidor</th> <!-- cabeçalho da primeira coluna -->
+                      <th id="thh">Total de Alertas</th> <!-- cabeçalho da segunda coluna -->
+                      <th id="thh">Componente</th>
+                      <th id="thh">Relação com o Limite</th>
+                      <th id="thh">Mês</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ranking">
+
+                    <!--  corpo da tabela, ou seja, é a parte do ranking -->
+                    <!-- as linhas da tabela serão adicionadas dinamicamente pelo JavaScript -->
+                  </tbody>
+                </table>
+              </div>
 
             </div>
 
@@ -275,11 +298,11 @@
 
 
     fetchFeriados();
-    
+
 
   </script>
 
-  
+
 
 
 </body>
@@ -287,37 +310,152 @@
 </html>
 <script>
 
-cont = 0
-
-function comparar() {
-  const compararButton = document.querySelector(".buttonRelatorioComparar");
-  const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
-
-  analisarButton.classList.remove("clicked");
-
-  if (cont == 0 || !compararButton.classList.contains("clicked")) {
-    compararButton.classList.add("clicked");
-    cont = 1;
-  } else {
-    compararButton.classList.remove("clicked");
-    cont = 0;
+  function obterServidorRelatorio() {
+    const select = document.getElementById("servidorRelatorio");
+    const servSelecionado = [];
+    for (let i = 0; i < select.selectedOptions.length; i++) {
+      servSelecionado.push(select.selectedOptions[i].value);
+    }
+    return servSelecionado
+    console.log("Servidores selecionados:", servSelecionado);
   }
-}
 
-function analisar() {
-  const compararButton = document.querySelector(".buttonRelatorioComparar");
-  const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+  function obterPeriodoRelatorio() {
+    const select = document.getElementById("periodoRelatorio");
+    const peridoSelecionado = [];
+    const mes = {
+      "Janeiro": 1,
+      "Fevereiro": 2,
+      "Março": 3,
+      "Abril": 4,
+      "Maio": 5,
+      "Junho": 6,
+      "Julho": 7,
+      "Agosto": 8,
+      "Setembro": 9,
+      "Outubro": 10,
+      "Novembro": 11,
+      "Dezembro": 12
+    }
 
-  compararButton.classList.remove("clicked");
+    for (let i = 0; i < select.selectedOptions.length; i++) {
+      const nomeMes = select.selectedOptions[i].value;
+      peridoSelecionado.push(mes[nomeMes]);
+    }
+    return peridoSelecionado
+    console.log("periodos selecionados:", peridoSelecionado);
 
-  if (cont == 0 || !analisarButton.classList.contains("clicked")) {
-    analisarButton.classList.add("clicked");
-    cont = 1;
-  } else {
+  }
+
+  function obterComponenteRelatorio() {
+    const select = document.getElementById("componenteRelatorio");
+    const componenteSelecionado = [];
+    const componente = {
+      "Uso da CPU": "CPU",
+      "Uso da RAM": "RAM",
+      "Dados enviados da rede": "REDE (RECEBIDA)",
+      "Dados recebidos da rede": "REDE (ENVIADA)"
+    }
+    for (let i = 0; i < select.selectedOptions.length; i++) {
+      nomeComponente = select.selectedOptions[i].value
+      componenteSelecionado.push(componente[nomeComponente]);
+    }
+    return componenteSelecionado
+    console.log("componentes selecionados:", componenteSelecionado);
+  }
+
+
+  cont = 0
+
+  function comparar() {
+    const compararButton = document.querySelector(".buttonRelatorioComparar");
+    const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+
     analisarButton.classList.remove("clicked");
-    cont = 0;
+
+    if (cont == 0 || !compararButton.classList.contains("clicked")) {
+      compararButton.classList.add("clicked");
+      cont = 1;
+    } else {
+      compararButton.classList.remove("clicked");
+      cont = 0;
+    }
   }
-}
+
+  function analisar() {
+    const tabela = document.getElementById('ranking');
+    const compararButton = document.querySelector(".buttonRelatorioComparar");
+    const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+
+    compararButton.classList.remove("clicked");
+
+    if (cont == 0 || !analisarButton.classList.contains("clicked")) {
+      analisarButton.classList.add("clicked");
+      cont = 1;
+
+      const servidores = obterServidorRelatorio();
+      const periodos = obterPeriodoRelatorio();
+      const componentes = obterComponenteRelatorio();
+      const queryParams = new URLSearchParams();
+
+      console.log("abc", periodos)
+    
+      queryParams.append('servidores', JSON.stringify(servidores)); 
+      queryParams.append('periodos', JSON.stringify(periodos));   
+      queryParams.append('componentes', JSON.stringify(componentes)); 
+
+      console.log("URL gerada:", `/dashboard/analisar?${queryParams.toString()}`);
+    
+
+      fetch(`/dashboard/analisar?${queryParams.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          // Verifica
+          if (!response.ok) {
+            throw new Error('Erro ao obter os dados do ranking');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("dados:", data)
+          // Limpa o conteúdo atual do tbody
+          tabela.innerHTML = '';
+
+          // Loop pelos dados e criar as linhas da tabela
+          //o tr define uma linha em uma tabela
+          //o td cria uma célula da linha da tabela, ou seja, na horizontal.
+          data.forEach(item => {
+            const linha = `<tr> 
+                            <td>${item.mes}</td> 
+                            <td>${item.total_alertas}</td>
+                            <td>${item.valor_medio}</td>
+                            <td>${item.servidor}</td>
+                            <td>${item.componente}</td>
+                        </tr>`;
+            tabela.innerHTML += linha;
+          });
+        })
+        .catch(error => {
+          console.error('Erro na requisição do ranking', error);
+        });
+
+      return false;
+
+
+    } else {
+      analisarButton.classList.remove("clicked");
+      cont = 0;
+    }
+
+  }
+
+
+  // document.addEventListener('DOMContentLoaded', Ranking);
+
 
 
 
@@ -385,21 +523,21 @@ function analisar() {
     selectElement2.innerHTML = '';
 
     servidores.forEach(servidor => {
-        const option1 = document.createElement('option');
-        option1.value = servidor;
-        option1.textContent = servidor;
-        selectElement1.appendChild(option1);
+      const option1 = document.createElement('option');
+      option1.value = servidor;
+      option1.textContent = servidor;
+      selectElement1.appendChild(option1);
 
-        const option2 = document.createElement('option');
-        option2.value = servidor;
-        option2.textContent = servidor;
-        selectElement2.appendChild(option2);
+      const option2 = document.createElement('option');
+      option2.value = servidor;
+      option2.textContent = servidor;
+      selectElement2.appendChild(option2);
     });
 
     // Atualiza o selectpicker
     $('#servidorRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
     console.log('Select de servidores preenchido com sucesso.');
-}
+  }
 
 
 
@@ -465,19 +603,19 @@ function analisar() {
     selectElement.innerHTML = ''; // Limpa o conteúdo existente
 
     periodos.forEach(periodo => {
-        const option = document.createElement('option');
-        option.value = periodo;
-        option.textContent = periodo;
-        selectElement.appendChild(option);
+      const option = document.createElement('option');
+      option.value = periodo;
+      option.textContent = periodo;
+      selectElement.appendChild(option);
     });
 
     // Atualiza o selectpicker
     $('#periodoRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
     console.log('Select de períodos preenchido com sucesso.');
-}
+  }
 
 
-async function componente() {
+  async function componente() {
     const empresa = sessionStorage.ID_EMPRESA;
     console.log('Iniciando a requisição para /dashboard/componente');
 
@@ -658,7 +796,7 @@ async function componente() {
     await periodo(); // Preenche os períodos
     await exibirPosts(); // Exibe o gráfico
     obterServidorSelecionado();
-    
+
   }
 
   // Inicia o processo
