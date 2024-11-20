@@ -16,6 +16,14 @@ router.get("/buscarCpueRam/:idServidor", function(req, res){
     dashboardController.buscarCpueRam(req, res);
 })
 
+router.get("/buscarDadosRec/:idServidor", function(req, res){
+    dashboardController.buscarDadosRec(req, res);
+})
+
+router.get("/buscarDadosEnv/:idServidor", function(req, res){
+    dashboardController.buscarDadosEnv(req, res);
+})
+
 router.post("/cadastrarCargo", function (req, res) {
     dashboardController.cadastrarCargo(req, res);
 })

@@ -10,14 +10,13 @@ function obterDados(req, res) {
         dashGerenteModel.obterDados(idEmpresa)
             .then(
                 function (resultadoSelect) {
-                    console.log(`\nResultados encontrados: ${resultadoSelect.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoSelect)}`); // transforma JSON em String
+                    // console.log(`\nResultados encontrados: ${resultadoSelect.length}`);
+                    // console.log(`Resultados: ${JSON.stringify(resultadoSelect)}`); // transforma JSON em String
 
                     if (resultadoSelect.length == 0) {
                         res.status(403).send("Nenhum resultado encontrado");
-                    } else {
-                        res.json(resultadoSelect)
                     }
+                    res.json(resultadoSelect)
 
 
                 }

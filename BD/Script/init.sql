@@ -128,10 +128,10 @@ INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 ('abcd', 2, 1, 'Analista');
 
-INSERT INTO servidor (identificacao, fkEmpresa) VALUES 
-('reader', 1);
-INSERT INTO servidor (identificacao, fkEmpresa) VALUES 
-('writer', 1);
+INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('reader', 1, 'US-EAST-1');
+INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('writer', 1, 'US-EAST-1');
 
 
 -- Inserir dados na tabela funcionario

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+  <link rel="stylesheet" href="../css/dashCss/dashGerente02.css" />
+
+  <title>Dashboard-Gerente</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
+        </div>
+        <div class="user-details">
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="relatorio.html">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastroServidor.html">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Cadastrar Servidor</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-dash-gerente flex main">
+      <div class="charts">
+          <div class="servers">
+            
+          </div>
+          <div class="stability chart">
+            <div class="metric">
+
+            </div>
+            <div class="chart-stability">
+              
+              <div class="header">
+                <div class="combo-box">
+                  <select name="component" id="select_component" class="select">
+                    <option value="" selected disabled>Componente</option>
+                  </select>
+                  <select name="date" id="select_date" class="select">
+                    <option value="" selected disabled>Data</option>
+                  </select>
+                </div>
+                <div class="chart-title">Estabilidade de uso</div>
+              </div>
+              <div class="chart-gerente-02">  
+                <canvas id="MyChart01" ></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="oscilation chart">
+            <div class="metric">
+
+            </div>
+            <div class="chart-oscilation">
+
+            </div>
+          </div>
+        </div>
+  </div>
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+  integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+  crossorigin="anonymous"></script>
+
+<script src="../js/script.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('MyChart01').getContext('2d');
+
+    const meuGrafico = new Chart(ctx, {
+        type: 'bar', 
+        data: {
+            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], 
+            datasets: [{
+                label: 'Desvio padrão',
+                data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11], 
+                backgroundColor: 'rgb(212, 214, 84)',
+                borderColor: 'rgb(180, 182, 69)',
+                borderWidth: 3  
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true 
+                }
+            },
+            devicePixelRatio: 3
+        }
+    });
+  });
+
+
+  obterDados()
+  function obterDados() {
+
+    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+    console.log(idEmpresa)
+
+    fetch("/dashGerente/obterDados", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        idEmpresaServer: idEmpresa
+      })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        console.log("DADOS RECEBIDOS:", resposta)
+        teste = resposta.json().then(json => {
+          console.log(json)
+          plotar(json)
+        })
+      } else {
+        // console.log("Houve um erro ao receber os dados no cards.html")
+      }
+    }).catch(function (erro) {
+      console.log("CATCH DO FETCH")
+      console.log(erro)
+    })
+  }
+  
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
