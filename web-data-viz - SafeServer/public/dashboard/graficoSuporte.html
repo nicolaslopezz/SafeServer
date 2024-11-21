@@ -84,12 +84,10 @@
         </ul>
       </div>
     </div>
+
     <div class="credits">
       <div class="opcoes">
-        <select id="selectServidor" class="botaoOp" onchange="mudarServidor()">
-          <option value="#"> Servidor: </option>
-          <option value="1">Servidor 1</option>
-          <option value="2">Servidor 2</option>
+        <select id="selectServidor" class="botaoOp" onchange="listarServidores()">
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
           <option value="">Componente: </option>
@@ -130,8 +128,8 @@
     </div>
     <script>
       let proximaAtualizacao;
-       var idServidor = sessionStorage.getItem("idServidor");
-       console.log(idServidor);
+      //  var idServidor = sessionStorage.getItem("idServidor");
+      //  console.log(idServidor);
       
       function listarServidores(){
         var idEmpresa = sessionStorage.ID_EMPRESA;
@@ -146,24 +144,58 @@
         throw new Error(`Erro na requisição: ${resposta.status}`);
       }
         resposta.json().then((servidores) => {
+          selectServidor.innerHTML = "";
           servidores.forEach((servidor) => {
             selectServidor.innerHTML += `<option value='${servidor.idServidor}'> Servidor ${servidor.idServidor}</option>`;
 
-            sessionStorage.setItem("idServidor", servidor.idServidor);
-            console.log("idServidor armazenado no sessionStorage:", servidor.idServidor);
           });
+          var idServidorPadrao = sessionStorage.getItem("idServidor");
+
+        if (!idServidorPadrao) {
+          // Se não houver valor no sessionStorage, pega o primeiro servidor como padrão
+          idServidorPadrao = servidores[0].idServidor;
+          sessionStorage.setItem("idServidor", idServidorPadrao);
+          console.log("Valor inicial do idServidor armazenado:", idServidorPadrao);
+        }
+        selectServidor.value = idServidorPadrao;
         });
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
+      plotarGrafico();
     }
+    selectServidor.addEventListener("change", () => {
+          var idServidorSelecionado = parseInt(selectServidor.value);
+          if (!isNaN(idServidorSelecionado)) {
+            console.log(`O valor selecionado é ${idServidorSelecionado}`);
+            sessionStorage.setItem("idServidor", idServidorSelecionado);
+          }
+        });
 
-    function mudarServidor(){
-      var idServidorSelecionado = document.getElementById("selectServidor").value;
+    // function mudarServidor(){
+    //   var idServidorSelecionado = document.getElementById("selectServidor").value;
 
-      console.log(idServidorSelecionado);
-    }
+    //   console.log(idServidorSelecionado);
+
+    //   if(idServidorSelecionado === "Servidor 1"){
+    //     sessionStorage.setItem("idServidor", idServidorSelecionado);
+    //     console.log("Servidor selecionado:", idServidorSelecionado);
+    //   } else if(idServidorSelecionado === "Servidor 2"){
+    //     sessionStorage.setItem("idServidor", idServidorSelecionado);
+    //     console.log("Servidor selecionado: " + idServidorSelecionado);
+    //   }
+
+    //   var componenteSelecionado = document.getElementById("selectComponente").value;
+
+    //   if(componenteSelecionado){
+
+    //     console.log("Atualizando gráfico para:");
+    //     console.log("Servidor:", idServidorSelecionado);
+    //     console.log("Componente:", componenteSelecionado);
+    //     plotarGrafico();
+    //   }
+    // }
 
       function esconderTodosOsGraficos() {
             let todosOsGraficos = document.getElementById("graficos");
@@ -199,6 +231,7 @@
 
   window.onload = function(){
     listarServidores();
+    // mudarServidor();
     obterDadosGraficoCpueRam();
   };  
 
@@ -257,7 +290,9 @@
 
   function obterDadosGraficoCpueRam(idServidor) {
 
-    var idServidor = sessionStorage.getItem("idServidor");
+    var idServidorSelecionado = parseInt(selectServidor.value);
+    var idServidor = sessionStorage.getItem("idServidor", idServidorSelecionado);
+    console.log(idServidor);
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
@@ -514,7 +549,7 @@
 
     let chart;
 
-    function plotarGraficoCpueRam(resposta, idServidor) {
+    function plotarGraficoCpueRam(resposta, idServidorSelecionado) {
     console.log('Iniciando plotagem do gráfico...');
 
     tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
