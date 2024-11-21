@@ -112,14 +112,12 @@
           </div>
 
           <div id="grafico2" class="display-none">
-          <div id="situacao" class="situacaoComp"></div>
           <div id="redeRecebida"></div>
 
           <div id="graficoDadosRec" width="400" heigth="200"></div>
         </div>
 
         <div id="grafico3" class="display-none">
-          <div id="situacao" class="situacaoComp"></div>
           <div id="redeEnviada"></div>
 
           <div id="graficoDadosEnv" width="400" heigth="200"></div>
@@ -128,7 +126,8 @@
     </div>
     <script>
       let proximaAtualizacao;
-      //  var idServidor = sessionStorage.getItem("idServidor");
+      // var idServidorSelecionado = parseInt(selectServidor.value);
+      // var idServidor = sessionStorage.getItem("idServidor",);
       //  console.log(idServidor);
       
       function listarServidores(){
@@ -170,32 +169,10 @@
           if (!isNaN(idServidorSelecionado)) {
             console.log(`O valor selecionado é ${idServidorSelecionado}`);
             sessionStorage.setItem("idServidor", idServidorSelecionado);
+            // location.reload();
+            plotarGraficoCpueRam();
           }
         });
-
-    // function mudarServidor(){
-    //   var idServidorSelecionado = document.getElementById("selectServidor").value;
-
-    //   console.log(idServidorSelecionado);
-
-    //   if(idServidorSelecionado === "Servidor 1"){
-    //     sessionStorage.setItem("idServidor", idServidorSelecionado);
-    //     console.log("Servidor selecionado:", idServidorSelecionado);
-    //   } else if(idServidorSelecionado === "Servidor 2"){
-    //     sessionStorage.setItem("idServidor", idServidorSelecionado);
-    //     console.log("Servidor selecionado: " + idServidorSelecionado);
-    //   }
-
-    //   var componenteSelecionado = document.getElementById("selectComponente").value;
-
-    //   if(componenteSelecionado){
-
-    //     console.log("Atualizando gráfico para:");
-    //     console.log("Servidor:", idServidorSelecionado);
-    //     console.log("Componente:", componenteSelecionado);
-    //     plotarGrafico();
-    //   }
-    // }
 
       function esconderTodosOsGraficos() {
             let todosOsGraficos = document.getElementById("graficos");
@@ -230,16 +207,16 @@
   }
 
   window.onload = function(){
-    listarServidores();
+     listarServidores();
     // mudarServidor();
-    obterDadosGraficoCpueRam();
+    obterDadosGraficos();
   };  
 
     function obterDadosGraficos() {
 
-        // obterDadosGraficoCpueRam()
-        // obterDadosGraficoDadosRec()
-        // obterDadosGraficoDadosEnv()
+         obterDadosGraficoCpueRam()
+         obterDadosGraficoDadosRec()
+         obterDadosGraficoDadosEnv()
     }
 
   function exibirGraficoCpuEram(idServidor){
@@ -290,8 +267,7 @@
 
   function obterDadosGraficoCpueRam(idServidor) {
 
-    var idServidorSelecionado = parseInt(selectServidor.value);
-    var idServidor = sessionStorage.getItem("idServidor", idServidorSelecionado);
+    var idServidor = sessionStorage.getItem("idServidor");
     console.log(idServidor);
 
         if (proximaAtualizacao != undefined) {
@@ -549,8 +525,11 @@
 
     let chart;
 
-    function plotarGraficoCpueRam(resposta, idServidorSelecionado) {
+    function plotarGraficoCpueRam(resposta, idServidor) {
     console.log('Iniciando plotagem do gráfico...');
+    var idServidor = sessionStorage.getItem("idServidor",);
+
+    console.log(idServidor);
 
     tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
     situacao.innerHTML = `<p> Situação em Tempo Real: </p>`; 
