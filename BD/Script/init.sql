@@ -212,3 +212,9 @@ GROUP BY
 ORDER BY 
     s.identificacao, a.componente;
     
+CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
+	FROM alerta
+    JOIN registro ON idRegistro = fkRegistro
+    JOIN servidor ON fkServidor = idServidor
+    GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
+    ORDER BY regiao, ano, mes, dia);	
