@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .servers {
     background-color: lightblue;
     height: 10%;
@@ -81,8 +85,15 @@
     height: 100%;
 }
 
+.chart-gerente-03 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .chart-oscilation {
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
 }
@@ -94,3 +105,12 @@
     border: 1px solid black;
     border-radius: 10px;
 }
+
+#MyChart02 {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
