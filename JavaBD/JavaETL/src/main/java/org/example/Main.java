@@ -34,6 +34,9 @@ public class Main implements RequestHandler<S3Event, String> {
             // Obtém o arquivo do bucket raw
             InputStream s3InputStream = s3Client.getObject(sourceBucket, sourceKey).getObjectContent();
 
+            if (sourceKey.contains("json")) {
+
+
             // Mapeia o conteúdo JSON para um objeto
             Mapper mapper = new Mapper();
             List<Dado> dados = mapper.map(s3InputStream);
@@ -52,7 +55,7 @@ public class Main implements RequestHandler<S3Event, String> {
 
             // Envia o arquivo CSV para o bucket "trusted"
             s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, metadata);
-
+            }
             return "Sucesso no processamento!!";
         } catch (Exception e) {
             context.getLogger().log("Erro: " + e.getMessage());

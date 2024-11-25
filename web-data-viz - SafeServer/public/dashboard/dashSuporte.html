@@ -124,7 +124,11 @@
             <div class="summary-item" id="perigo-count">Perigo: 1</div>
             <div class="summary-item" id="alerta-count">Alerta: 1</div>
           </div>
-        </div>
+          <div class="chart-container">
+            <h2>Gráfico de Alertas por Componente</h2>
+            <canvas id="alertasChart"></canvas>
+          </div>
+        </div>.
       </div>
     </div>
   </div>
@@ -212,6 +216,93 @@ function updateTable() {
   document.getElementById('perigo-count').textContent = `Perigo: ${perigoContador}`;
   document.getElementById('alerta-count').textContent = `Alerta: ${alertaContador}`;
 }
+
+const alertasData = {
+    labels: ['CPU', 'RAM', 'Rede'], // Componentes
+    datasets: [
+      {
+        label: 'Quantidade de Alertas',
+        data: [0, 0, 0], // Inicialmente zerado
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Cores para os componentes
+        borderColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const config = {
+    type: 'bar',
+    data: alertasData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Quantidade de Alertas por Componente',
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+
+  const alertasChart = new Chart(
+    document.getElementById('alertasChart'),
+    config
+  );
+
+  // Função para atualizar os dados do gráfico
+  function atualizarGrafico(cpuStatus, ramStatus, redeStatus) {
+    const data = [cpuStatus, ramStatus, redeStatus].map(status => {
+      if (status === 'Perigo') return 2; // Maior peso
+      if (status === 'Alerta') return 1; // Menor peso
+      return 0; // Sem alerta
+    });
+
+    alertasChart.data.datasets[0].data = data;
+    alertasChart.update();
+  }
+
+  // Atualizar o gráfico quando a tabela é atualizada
+  function updateTable() {
+    const cpuStatus = getRandomStatus();
+    const ramStatus = getRandomStatus();
+    const redeStatus = getRandomStatus();
+
+    const cpuComponente = document.getElementById('status-cpu');
+    const ramComponente = document.getElementById('status-ram');
+    const redeComponente = document.getElementById('status-rede');
+
+    cpuComponente.textContent = cpuStatus;
+    ramComponente.textContent = ramStatus;
+    redeComponente.textContent = redeStatus;
+
+    mudarCor(cpuComponente, cpuStatus);
+    mudarCor(ramComponente, ramStatus);
+    mudarCor(redeComponente, redeStatus);
+
+    const cpuPrioridade = calcularPrioridade(cpuStatus);
+    const ramPrioridade = calcularPrioridade(ramStatus);
+    const redePrioridade = calcularPrioridade(redeStatus);
+
+    document.getElementById('prioridade-cpu').textContent = cpuPrioridade;
+    document.getElementById('prioridade-ram').textContent = ramPrioridade;
+    document.getElementById('prioridade-rede').textContent = redePrioridade;
+
+    atualizarSumario(cpuStatus, ramStatus, redeStatus);
+
+    // Atualizar o gráfico com os novos dados
+    atualizarGrafico(cpuStatus, ramStatus, redeStatus);
+  }
+
+
+
 
 
 
