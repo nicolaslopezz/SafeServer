@@ -302,18 +302,16 @@
 
   </script>
 
-
-
-
 </body>
 
 </html>
 <script>
-  const componenteSelecionado = [];
-  const servSelecionado = [];
-  const peridoSelecionado = [];
+  var componenteSelecionado = [];
+  var servSelecionado = [];
+  var peridoSelecionado = [];
 
   function obterServidorRelatorio() {
+    servSelecionado = [];
     const select = document.getElementById("servidorRelatorio");
 
     for (let i = 0; i < select.selectedOptions.length; i++) {
@@ -324,6 +322,7 @@
   }
 
   function obterPeriodoRelatorio() {
+    peridoSelecionado = [];
     const select = document.getElementById("periodoRelatorio");
 
     const mes = {
@@ -351,6 +350,7 @@
   }
 
   function obterComponenteRelatorio() {
+    componenteSelecionado = [];
     const select = document.getElementById("componenteRelatorio");
     const componente = {
       "Uso da CPU": "CPU",
@@ -384,26 +384,17 @@
       const componentes = obterComponenteRelatorio();
 
       if (servidores.length > 2) {
-        alert("Escolha apenas 2 servidores!")
-      } else if (componentes > 1) {
-        alert("Escolha apenas 1 componente!")
+        alert("Escolha apenas 2 servidores!", servidores.length)
+
+      }else if(servidores.length == 1){
+        alert("Escolha apenas mais 1 servidor!")
       }
-      const queryParams = new URLSearchParams();
-
-
-      alert("aaa", servidores)
 
 
     } else {
       compararButton.classList.remove("clicked");
       cont = 0;
-
-      alert("nao")
     }
-
-
-
-
 
   }
 
