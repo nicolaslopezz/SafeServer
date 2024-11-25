@@ -309,10 +309,13 @@
 
 </html>
 <script>
+  const componenteSelecionado = [];
+  const servSelecionado = [];
+  const peridoSelecionado = [];
 
   function obterServidorRelatorio() {
     const select = document.getElementById("servidorRelatorio");
-    const servSelecionado = [];
+
     for (let i = 0; i < select.selectedOptions.length; i++) {
       servSelecionado.push(select.selectedOptions[i].value);
     }
@@ -322,7 +325,7 @@
 
   function obterPeriodoRelatorio() {
     const select = document.getElementById("periodoRelatorio");
-    const peridoSelecionado = [];
+
     const mes = {
       "Janeiro": 1,
       "Fevereiro": 2,
@@ -349,7 +352,6 @@
 
   function obterComponenteRelatorio() {
     const select = document.getElementById("componenteRelatorio");
-    const componenteSelecionado = [];
     const componente = {
       "Uso da CPU": "CPU",
       "Uso da RAM": "RAM",
@@ -376,10 +378,33 @@
     if (cont == 0 || !compararButton.classList.contains("clicked")) {
       compararButton.classList.add("clicked");
       cont = 1;
+
+      const servidores = obterServidorRelatorio();
+      const periodos = obterPeriodoRelatorio();
+      const componentes = obterComponenteRelatorio();
+
+      if (servidores.length > 2) {
+        alert("Escolha apenas 2 servidores!")
+      } else if (componentes > 1) {
+        alert("Escolha apenas 1 componente!")
+      }
+      const queryParams = new URLSearchParams();
+
+
+      alert("aaa", servidores)
+
+
     } else {
       compararButton.classList.remove("clicked");
       cont = 0;
+
+      alert("nao")
     }
+
+
+
+
+
   }
 
   function analisar() {
@@ -398,14 +423,12 @@
       const componentes = obterComponenteRelatorio();
       const queryParams = new URLSearchParams();
 
-      console.log("abc", periodos)
-    
-      queryParams.append('servidores', JSON.stringify(servidores)); 
-      queryParams.append('periodos', JSON.stringify(periodos));   
-      queryParams.append('componentes', JSON.stringify(componentes)); 
+      queryParams.append('servidores', JSON.stringify(servidores));
+      queryParams.append('periodos', JSON.stringify(periodos));
+      queryParams.append('componentes', JSON.stringify(componentes));
 
       console.log("URL gerada:", `/dashboard/analisar?${queryParams.toString()}`);
-    
+
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
         method: 'GET',
@@ -430,11 +453,11 @@
           //o td cria uma célula da linha da tabela, ou seja, na horizontal.
           data.forEach(item => {
             const linha = `<tr> 
-                            <td>${item.mes}</td> 
-                            <td>${item.total_alertas}</td>
-                            <td>${item.valor_medio}</td>
                             <td>${item.servidor}</td>
                             <td>${item.componente}</td>
+                            <td>${item.total_alertas}</td>
+                            <td>${item.valor_medio}</td>
+                             <td>${item.mes}</td> 
                         </tr>`;
             tabela.innerHTML += linha;
           });
@@ -486,7 +509,28 @@
         data.forEach(item => {
           servidores.push(item.identificacao);
         });
-        preencherSelectServidores(servidores);
+
+        const selectElement1 = document.getElementById("feriadoSelect");
+        const selectElement2 = document.getElementById("servidorRelatorio");
+
+        selectElement1.innerHTML = '';
+        selectElement2.innerHTML = '';
+
+        servidores.forEach(servidor => {
+          const option1 = document.createElement('option');
+          option1.value = servidor;
+          option1.textContent = servidor;
+          selectElement1.appendChild(option1);
+
+          const option2 = document.createElement('option');
+          option2.value = servidor;
+          option2.textContent = servidor;
+          selectElement2.appendChild(option2);
+        });
+
+        // Atualiza o selectpicker
+        $('#servidorRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
+        console.log('Select de servidores preenchido com sucesso.');
       } else {
         console.error('Erro: A resposta não contém um array de servidores.');
       }
@@ -502,41 +546,8 @@
 
     // Se não houver um valor selecionado, usa o primeiro servidor automaticamente
     const servidor = valorSelecionado || document.getElementById("feriadoSelect").options[0].value;
+    obterDadosGrafico(servidor);
 
-    if (servidor) {
-      document.getElementById("feriadoSelect").value = servidor;
-      obterDadosGrafico(servidor);
-      return servidor;
-    } else {
-      console.log('Nenhuma opção disponível.');
-      return null;
-    }
-  }
-
-
-  // Função para preencher o select com os servidores recebidos
-  function preencherSelectServidores(servidores) {
-    const selectElement1 = document.getElementById("feriadoSelect");
-    const selectElement2 = document.getElementById("servidorRelatorio");
-
-    selectElement1.innerHTML = '';
-    selectElement2.innerHTML = '';
-
-    servidores.forEach(servidor => {
-      const option1 = document.createElement('option');
-      option1.value = servidor;
-      option1.textContent = servidor;
-      selectElement1.appendChild(option1);
-
-      const option2 = document.createElement('option');
-      option2.value = servidor;
-      option2.textContent = servidor;
-      selectElement2.appendChild(option2);
-    });
-
-    // Atualiza o selectpicker
-    $('#servidorRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
-    console.log('Select de servidores preenchido com sucesso.');
   }
 
 
@@ -587,80 +598,20 @@
         data.forEach(item => {
           mes: periodos.push(meses[item.mes]);
         });
-        preencherSelectPeriodo(periodos);
-      } else {
-        console.error('Erro: A resposta não contém um array de períodos válidos.');
-      }
+        const selectElement = document.getElementById("periodoRelatorio");
+        selectElement.innerHTML = ''; // Limpa o conteúdo existente
 
-    } catch (error) {
-      console.error('Erro na requisição de períodos', error);
-    }
-  }
-
-  // Função para preencher o select com os períodos
-  function preencherSelectPeriodo(periodos) {
-    const selectElement = document.getElementById("periodoRelatorio");
-    selectElement.innerHTML = ''; // Limpa o conteúdo existente
-
-    periodos.forEach(periodo => {
-      const option = document.createElement('option');
-      option.value = periodo;
-      option.textContent = periodo;
-      selectElement.appendChild(option);
-    });
-
-    // Atualiza o selectpicker
-    $('#periodoRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
-    console.log('Select de períodos preenchido com sucesso.');
-  }
-
-
-  async function componente() {
-    const empresa = sessionStorage.ID_EMPRESA;
-    console.log('Iniciando a requisição para /dashboard/componente');
-
-    try {
-      // Verifique se a variável empresa está sendo recuperada corretamente
-      if (!empresa) {
-        throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
-      }
-
-      const response = await fetch(`/dashboard/componente/${empresa}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      console.log('Resposta recebida sobre os períodos:', response);
-
-      if (!response.ok) {
-        throw new Error('Erro ao obter os dados: ' + response.statusText);
-      }
-
-      const data = await response.json();
-      console.log('Dados brutos recebidos:', data);
-
-      // Verifique se data é um array e se contém os itens esperados
-      if (Array.isArray(data) && data.length > 0) {
-
-        const meses = {
-          "1": "Janeiro",
-          "2": "Fevereiro",
-          "3": "Março",
-          "4": "Abril",
-          "5": "Maio",
-          "6": "Junho",
-          "7": "Julho",
-          "8": "Agosto",
-          "9": "Setembro",
-          "10": "Outubro",
-          "11": "Novembro",
-          "12": "Dezembro"
-        };
-        const periodos = [];
-        data.forEach(item => {
-          mes: periodos.push(meses[item.mes]);
+        periodos.forEach(periodo => {
+          const option = document.createElement('option');
+          option.value = periodo;
+          option.textContent = periodo;
+          selectElement.appendChild(option);
         });
-        preencherSelectPeriodo(periodos);
+
+        // Atualiza o selectpicker
+        $('#periodoRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
+        console.log('Select de períodos preenchido com sucesso.');
+
       } else {
         console.error('Erro: A resposta não contém um array de períodos válidos.');
       }
@@ -669,6 +620,8 @@
       console.error('Erro na requisição de períodos', error);
     }
   }
+
+
 
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
@@ -796,7 +749,6 @@
     await periodo(); // Preenche os períodos
     await exibirPosts(); // Exibe o gráfico
     obterServidorSelecionado();
-
   }
 
   // Inicia o processo
