@@ -3,7 +3,6 @@ body {
 }
 
 .servers {
-    /* background-color: lightblue; */
     height: 10%;
     width: 85%;
     top: 2em;
@@ -63,7 +62,6 @@ body {
 }
 
 .metric {
-    /* background-color: lightcoral; */
     height: 100%;
     width: 40%;
     position: relative;
@@ -74,7 +72,6 @@ body {
 
 .metric-box {
     display: flex;
-    /* background-color: aquamarine; */
     height: 70%;
     width: 40%;
     align-items: center;
@@ -100,7 +97,6 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
 }
@@ -145,7 +141,6 @@ body {
 }
 
 .chart-oscilation {
-    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
 }
