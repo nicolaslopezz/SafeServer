@@ -1171,6 +1171,42 @@ select {
   left: 260px;
 }
 
+.gbRedeRec {
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  border-radius: 11px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 175px;
+  height: 46px;
+  left: 260px;
+}
+
+.gbRedeRec p {
+  color: white;
+  align-items: center;
+}
+
+.gbRedeEnv {
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  border-radius: 11px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 175px;
+  height: 46px;
+  left: 260px;
+}
+
+.gbRedeEnv p {
+  color: white;
+  align-items: center;
+}
+
 .percentCpu p {
   color: white;
   align-items: center;

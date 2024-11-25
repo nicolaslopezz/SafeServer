@@ -16,7 +16,8 @@
 
   <title>Dashboard-Suporte</title>
 </head>
-<body>
+<body onload="listarServidores()">
+
   <div class="container">
     <div class="sidebar">
       <div class="menu-btn">
@@ -87,11 +88,11 @@
 
     <div class="credits">
       <div class="opcoes">
-        <select id="selectServidor" class="botaoOp" onchange="listarServidores()">
+        <select id="selectServidor" class="botaoOp" onchange="plotarGrafico()">
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
           <option value="">Componente: </option>
-          <option id="cpuRam" value="cpuRam">CPU E RAM %</option>
+          <option selected id="cpuRam" value="cpuRam">CPU E RAM %</option>
           <option id="dadosRec" value="dadosRec">Dados Recebidos</option>
           <option id="dadosEnv" value="dadosEnv">Dados Enviados</option>
         </select>
@@ -112,23 +113,23 @@
           </div>
 
           <div id="grafico2" class="display-none">
-          <div id="redeRecebida"></div>
-
+         
+            <div id="situacaoRedeRec" class="situacaoComp"></div>
+            <div id="redeRecebida" class="gbRedeRec"></div>
           <div id="graficoDadosRec" width="400" heigth="200"></div>
         </div>
 
         <div id="grafico3" class="display-none">
-          <div id="redeEnviada"></div>
-
+          
+          <div id="situacaoRedeEnv" class="situacaoComp"></div>
+          <div id="redeEnviada" class="gbRedeEnv"></div>
           <div id="graficoDadosEnv" width="400" heigth="200"></div>
         </div>
         </div>
     </div>
     <script>
       let proximaAtualizacao;
-      // var idServidorSelecionado = parseInt(selectServidor.value);
-      // var idServidor = sessionStorage.getItem("idServidor",);
-      //  console.log(idServidor);
+      var selectServidor = document.getElementById("selectServidor");
       
       function listarServidores(){
         var idEmpresa = sessionStorage.ID_EMPRESA;
@@ -148,36 +149,16 @@
             selectServidor.innerHTML += `<option value='${servidor.idServidor}'> Servidor ${servidor.idServidor}</option>`;
 
           });
-          var idServidorPadrao = sessionStorage.getItem("idServidor");
-
-        if (!idServidorPadrao) {
-          // Se não houver valor no sessionStorage, pega o primeiro servidor como padrão
-          idServidorPadrao = servidores[0].idServidor;
-          sessionStorage.setItem("idServidor", idServidorPadrao);
-          console.log("Valor inicial do idServidor armazenado:", idServidorPadrao);
-        }
-        selectServidor.value = idServidorPadrao;
+          plotarGrafico();
         });
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-      plotarGrafico();
     }
-    selectServidor.addEventListener("change", () => {
-          var idServidorSelecionado = parseInt(selectServidor.value);
-          if (!isNaN(idServidorSelecionado)) {
-            console.log(`O valor selecionado é ${idServidorSelecionado}`);
-            sessionStorage.setItem("idServidor", idServidorSelecionado);
-            // location.reload();
-            plotarGraficoCpueRam();
-          }
-        });
 
       function esconderTodosOsGraficos() {
             let todosOsGraficos = document.getElementById("graficos");
-
-            //Removendo ou adicionando classes
             
             for (var i = 1; i <= todosOsGraficos.childElementCount; i++) {
                 let elementoAtual = document.getElementById(`grafico${i}`);
@@ -188,9 +169,9 @@
 
         function plotarGrafico(idServidor) {
 
-          var idServidor = sessionStorage.getItem("idServidor");
+     var idServidor = selectServidor.value;
 
-    const select = document.getElementById("selectComponente");
+    var select = document.getElementById("selectComponente");
     var valorSelecionado = select.value;
 
     console.log("Valor selecionado: " + valorSelecionado);
@@ -199,34 +180,39 @@
 
     if (valorSelecionado === "cpuRam") {
       exibirGraficoCpuEram(1);
-     }// else if (valorSelecionado === "dadosRec") {
-      // exibirGraficoDadosRec(2);
-     //} else if (valorSelecionado === "dadosEnv") {
-       //exibirGraficoDadosEnv(3);
-     //}
+     } else if (valorSelecionado === "dadosRec") {
+       exibirGraficoDadosRec(2);
+     } else if (valorSelecionado === "dadosEnv") {
+       exibirGraficoDadosEnv(3);
+     }
   }
 
   window.onload = function(){
      listarServidores();
-    // mudarServidor();
-    obterDadosGraficos();
   };  
 
     function obterDadosGraficos() {
 
          obterDadosGraficoCpueRam()
-         obterDadosGraficoDadosRec()
-         obterDadosGraficoDadosEnv()
+          obterDadosGraficoDadosRec()
+          obterDadosGraficoDadosEnv()
     }
 
   function exibirGraficoCpuEram(idServidor){
 
-    var idServidor = sessionStorage.getItem("idServidor");
+    esconderTodosOsGraficos();
+    var idServidor = selectServidor.value;
 
     let todosOsGraficos = document.getElementById("graficos");
 
   document.getElementById("grafico1").classList.remove("display-none"); 
   document.getElementById("grafico1").classList.add("display-block");
+
+
+  if(document.getElementById("grafico2").classList.contains("diplay-block")){
+    document.getElementById("grafico2").classList.remove("display-block")
+    document.getElementById("grafico2").classList.add("display-none");
+  }
 
   document.getElementById("cpuRam").classList.add("active");
 
@@ -241,54 +227,65 @@
      obterDadosGraficoCpueRam();
   }
 
-  // function exibirGraficoDadosRec(idServidor){
+  function exibirGraficoDadosRec(idServidor){
 
-  //   let todosOsGraficos = document.getElementById("graficos");
+    esconderTodosOsGraficos();
+    let todosOsGraficos = document.getElementById("graficos");
 
-  // document.getElementById("grafico2").classList.remove("display-none"); 
-  // document.getElementById("grafico2").classList.add("display-block");
+  document.getElementById("grafico2").classList.remove("display-none"); 
+  document.getElementById("grafico2").classList.add("display-block");
 
-  // document.getElementById("dadosRec").classList.add("active");
+  document.getElementById("dadosRec").classList.add("active");
 
-  // obterDadosGraficoDadosRec();
-  // }
+  if(document.getElementById("grafico1").classList.contains("display-block")){
+    document.getElementById("grafico1").classList.remove("display-block")
+    document.getElementById("grafico1").classList.add("display-none");
+  }
 
-//   function exibirGraficoDadosEnv(idServidor){
+  obterDadosGraficoDadosRec();
+  }
 
-// let todosOsGraficos = document.getElementById("graficos");
+  function exibirGraficoDadosEnv(idServidor){
 
-// document.getElementById("grafico3").classList.remove("display-none"); 
-// document.getElementById("grafico3").classList.add("display-block");
+    esconderTodosOsGraficos();
+let todosOsGraficos = document.getElementById("graficos");
 
-// document.getElementById("dadosEnv").classList.add("active");
+document.getElementById("grafico3").classList.remove("display-none"); 
+document.getElementById("grafico3").classList.add("display-block");
 
-// obterDadosGraficoDadosEnv();
-// }
+document.getElementById("dadosEnv").classList.add("active");
 
+if(document.getElementById("grafico1").classList.contains("display-block")){
+    document.getElementById("grafico1").classList.remove("display-block")
+    document.getElementById("grafico1").classList.add("display-none");
+  }
+
+obterDadosGraficoDadosEnv();
+}
+
+  let intervaloGraficoCpu;
   function obterDadosGraficoCpueRam(idServidor) {
 
-    var idServidor = sessionStorage.getItem("idServidor");
+    var idServidor = selectServidor.value;
     console.log(idServidor);
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
+        if (intervaloGraficoCpu != undefined) {
+            clearTimeout(intervaloGraficoCpu);
         }
 
         console.log('ID do Servidor:', idServidor);
 
       if (!idServidor) {
-        console.error('O ID do servidor não está definido!');
+        console.error('O ID do servidor não está definido!!');
         return; 
     }
 
-      setInterval(() =>{
-        //Faz uma requisição para obter os dados do Quiz
+    intervaloGraficoCpu = setInterval(() => {
         fetch(`/dashboard/buscarCpueRam/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                 
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
 
                     plotarGraficoCpueRam(resposta, idServidor);
 
@@ -300,252 +297,294 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 console.error(error);
-            });}, 1000);
+            });}, 2000);
     }
 
-//    function obterDadosGraficoDadosRec(idServidor){
+    let intervaloGraficoRec;
+   function obterDadosGraficoDadosRec(idServidor){
 
-//     if (proximaAtualizacao != undefined) {
-//             clearTimeout(proximaAtualizacao);
-//         }
+    var idServidor = selectServidor.value;
+    console.log('idServidor: ' + idServidor);
 
-//         console.log('ID do Servidor:', idServidor);
+    if (intervaloGraficoRec != undefined) {
+            clearTimeout(intervaloGraficoRec);
+        }
 
-//       if (!idServidor) {
-//         console.error('O ID do servidor não está definido!');
-//         return; 
-//     }
+      if (!idServidor) {
+        console.error('O ID do servidor não está definido!');
+        return; 
+    }
 
-//       setInterval(() =>{
-//         //Faz uma requisição para obter os dados do Quiz
-//         fetch(`/dashboard/buscarDadosRec/${idServidor}`, { cache: 'no-store' }).then(function (response) {
-//             if (response.ok) {
-//                 response.json().then(function (resposta) {
-//                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-//                     resposta.reverse();
+    intervaloGraficoRec = setInterval(() => {
+        //Faz uma requisição para obter os dados do Quiz
+        fetch(`/dashboard/buscarDadosRec/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-//                     plotarGraficoRec(resposta, idServidor);
+                    plotarGraficoRec(resposta, idServidor);
 
-//                 });
-//             } else {
-//                 console.error('Nenhum dado encontrado ou erro na API');
-//             }
-//         })
-//             .catch(function (error) {
-//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-//                 console.error(error);
-//             });}, 1000);
-//    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(error);
+            });}, 2000);
+   }
 
-//    function obterDadosGraficoDadosEnv(idServidor){
+   let intervaloGraficoEnv;
+   function obterDadosGraficoDadosEnv(idServidor){
 
-//     if (proximaAtualizacao != undefined) {
-//             clearTimeout(proximaAtualizacao);
-//         }
+    var idServidor = selectServidor.value;
+    console.log('idServidor: ' + idServidor);
 
-//         console.log('ID do Servidor:', idServidor);
+    if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
 
-//       if (!idServidor) {
-//         console.error('O ID do servidor não está definido!');
-//         return; 
-//     }
+      if (!idServidor) {
+        console.error('O ID do servidor não está definido!');
+        return; 
+    }
 
-//       setInterval(() =>{
-//         //Faz uma requisição para obter os dados do Quiz
-//         fetch(`/dashboard/buscarDadosEnv/${idServidor}`, { cache: 'no-store' }).then(function (response) {
-//             if (response.ok) {
-//                 response.json().then(function (resposta) {
-//                     console.log(`Dados enviados: ${JSON.stringify(resposta)}`);
-//                     resposta.reverse();
+    intervaloGraficoEnv = setInterval(() => {
+        //Faz uma requisição para obter os dados do Quiz
+        fetch(`/dashboard/buscarDadosEnv/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados enviados: ${JSON.stringify(resposta)}`);
 
-//                     plotarGraficoEnv(resposta, idServidor);
+                    plotarGraficoEnv(resposta, idServidor);
 
-//                 });
-//             } else {
-//                 console.error('Nenhum dado encontrado ou erro na API');
-//             }
-//         })
-//             .catch(function (error) {
-//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-//                 console.error(error);
-//             });}, 1000);
-//    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(error);
+            });}, 2000);
+   }
 
-//    function plotarGraficoRec(resposta, idServidor){
+   let chartRec;
+   function plotarGraficoRec(resposta, idServidor){
 
-//     console.log("Iniciando plotagem do gráfico...");
+    console.log("Iniciando plotagem do gráfico...");
 
-//     const labels = resposta.map((item) => item.hora).reverse();
-//     const dadosRec = resposta.map((item) => item.recebido_rede).reverse();
+    var idServidor = selectServidor.value;
+    console.log('idServidor: ' + idServidor);
 
-//     redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${dadosRec[dadosRec.length - 1]} GB`;
+    const labels = resposta.map((item) => item.hora);
+    const dadosRec = resposta.map((item) => item.recebido_rede);
 
-//       const options = {
-//         chart: {
-//             type: 'area',
-//             height: 350,
-//             animations: {
-//                 enabled: true,
-//                 easing: 'linear',
-//                 dynamicAnimation: {
-//                     speed: 1000,
-//                 },
-//             },
-//         },
-//         series: [
-//             {
-//                 name: 'Rede Recebida (GB)',
-//                 data: dadosRec,
-//             },
-//         ],
-//         xaxis: {
-//             categories: labels,
-//             title: {
-//                 text: 'Hora',
-//             },
-//         },
-//         yaxis: {
-//             title: {
-//                 text: 'Rede Recebida (GB)',
-//             },
-//         },
-//         fill: {
-//             type: 'gradient',
-//             gradient: {
-//                 shadeIntensity: 1,
-//                 opacityFrom: 0.7,
-//                 opacityTo: 0.9,
-//                 stops: [0, 90, 100],
-//             },
-//         },
-//         colors: ['#008FFB'],
-//         dataLabels: {
-//             enabled: false,
-//         },
-//         stroke: {
-//             curve: 'smooth',
-//         },
-//     };
+    console.log('Rede recebida' + dadosRec);
 
-//     if (!chart) {
-//         // Inicializa o gráfico na primeira vez
-//         chart = new ApexCharts(document.querySelector("#graficoDadosRec"), options);
-//         chart.render();
-//     } else {
-//         // Atualiza o gráfico nas próximas vezes
-//         chart.updateOptions({
-//             series: [
-//                 {
-//                     name: 'Rede Recebida (GB)',
-//                     data: dadosRec,
-//                 },
-//             ],
-//             xaxis: {
-//                 categories: labels,
-//             },
-//         });
-//     }
-//    }
+    situacaoRedeRec.innerHTML = `<p> Situação em Tempo Real: </p>`;
 
-//    function plotarGraficoEnv(resposta, idServidor){
+    redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${dadosRec[dadosRec.length - 1]} GB`;
 
-// console.log("Iniciando plotagem do gráfico...");
+      const options = {
+        chart: {
+            type: 'area',
+            height: 350,
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 1000,
+                },
+            },
+        },
+        series: [
+            {
+                name: 'Rede Recebida (GB)',
+                data: dadosRec,
+            },
+        ],
+        xaxis: {
+            categories: labels,
+            title: {
+                text: 'Hora',
+            },
+        },
+        yaxis: {
+            title: {
+                text: 'Rede Recebida (GB)',
+            },
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 90, 100],
+            },
+        },
+        colors: ['#008FFB'],
+        dataLabels: {
+            enabled: false,
+        },
+        stroke: {
+            curve: 'smooth',
+        },
+    };
 
-// const labels = resposta.map((item) => item.hora).reverse();
-// const dadosEnv = resposta.map((item) => item.enviado_rede).reverse();
+    if (!chartRec) {
+        // Inicializa o gráfico na primeira vez
+        chartRec = new ApexCharts(document.querySelector("#graficoDadosRec"), options);
+        chartRec.render();
+    } else {
+        // Atualiza o gráfico nas próximas vezes
+        chartRec.updateOptions({
+            series: [
+                {
+                    name: 'Rede Recebida (GB)',
+                    data: dadosRec,
+                },
+            ],
+            xaxis: {
+                categories: labels,
+            },
+        });
+        chartRec.updateSeries([
+            {
+                name: 'Uso Rede Recebida (GB)',
+                data: dadosRec
+            },
+        ]);
+    }
+   }
 
-// redeEnviada.innerHTML = `<p>REDE ENVIADA: ${dadosEnv[dadosEnv.length - 1]} GB`;
+   let chartEnv;
+   function plotarGraficoEnv(resposta, idServidor){
 
-//   const options = {
-//     chart: {
-//         type: 'area',
-//         height: 350,
-//         animations: {
-//             enabled: true,
-//             easing: 'linear',
-//             dynamicAnimation: {
-//                 speed: 1000,
-//             },
-//         },
-//     },
-//     series: [
-//         {
-//             name: 'Rede Recebida (GB)',
-//             data: dadosEnv,
-//         },
-//     ],
-//     xaxis: {
-//         categories: labels,
-//         title: {
-//             text: 'Hora',
-//         },
-//     },
-//     yaxis: {
-//         title: {
-//             text: 'Rede Recebida (GB)',
-//         },
-//     },
-//     fill: {
-//         type: 'gradient',
-//         gradient: {
-//             shadeIntensity: 1,
-//             opacityFrom: 0.7,
-//             opacityTo: 0.9,
-//             stops: [0, 90, 100],
-//         },
-//     },
-//     colors: ['#008FFB'],
-//     dataLabels: {
-//         enabled: false,
-//     },
-//     stroke: {
-//         curve: 'smooth',
-//     },
-// };
+console.log("Iniciando plotagem do gráfico...");
 
-// if (!chart) {
-//     // Inicializa o gráfico na primeira vez
-//     chart = new ApexCharts(document.querySelector("#graficoDadosEnv"), options);
-//     chart.render();
-// } else {
-//     // Atualiza o gráfico nas próximas vezes
-//     chart.updateOptions({
-//         series: [
-//             {
-//                 name: 'Rede Enviada (GB)',
-//                 data: dadosEnv,
-//             },
-//         ],
-//         xaxis: {
-//             categories: labels,
-//         },
-//     });
-// }
-// }
+var idServidor = selectServidor.value;
+    console.log('idServidor: ' + idServidor);
 
-    let chart;
+const labels = resposta.map((item) => item.hora);
+const dadosEnv = resposta.map((item) => item.enviado_rede);
+
+situacaoRedeEnv.innerHTML = `<p> Situação em Tempo Real: </p>`;
+redeEnviada.innerHTML = `<p>REDE ENVIADA: ${dadosEnv[dadosEnv.length - 1]} GB`;
+
+  const options = {
+    chart: {
+        type: 'area',
+        height: 350,
+        animations: {
+            enabled: true,
+            easing: 'linear',
+            dynamicAnimation: {
+                speed: 1000,
+            },
+        },
+    },
+    series: [
+        {
+            name: 'Rede Recebida (GB)',
+            data: dadosEnv,
+        },
+    ],
+    xaxis: {
+        categories: labels,
+        title: {
+            text: 'Hora',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Rede Recebida (GB)',
+        },
+    },
+    fill: {
+        type: 'gradient',
+        gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100],
+        },
+    },
+    colors: ['#008FFB'],
+    dataLabels: {
+        enabled: false,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+};
+
+if (!chartEnv) {
+    // Inicializa o gráfico na primeira vez
+    chartEnv = new ApexCharts(document.querySelector("#graficoDadosEnv"), options);
+    chartEnv.render();
+} else {
+    // Atualiza o gráfico nas próximas vezes
+    chartEnv.updateOptions({
+        series: [
+            {
+                name: 'Rede Enviada (GB)',
+                data: dadosEnv,
+            },
+        ],
+        xaxis: {
+            categories: labels,
+        },
+    });
+    chartEnv.updateSeries([
+            {
+                name: 'Uso Rede Enviada (GB)',
+                data: dadosEnv
+            },
+        ]);
+}
+}
+
+    let chartCpu;
 
     function plotarGraficoCpueRam(resposta, idServidor) {
     console.log('Iniciando plotagem do gráfico...');
-    var idServidor = sessionStorage.getItem("idServidor",);
-
+  
+    var idServidor = selectServidor.value;
     console.log(idServidor);
 
     tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
     situacao.innerHTML = `<p> Situação em Tempo Real: </p>`; 
 
-    const labels = resposta.map((item) => item.hora).reverse();
-    const dadosCpu = resposta.map((item) => item.percent_use_cpu).reverse(); 
-    const dadosRam = resposta.map((item) => item.percent_use_ram).reverse();
+    const labels = resposta.map((item) => item.hora);
+    const dadosCpu = resposta.map((item) => item.percent_use_cpu); 
+    const dadosRam = resposta.map((item) => item.percent_use_ram);
 
-    percentCpu.innerHTML = `<p>CPU: ${dadosCpu[dadosCpu.length - 1]} %</p>`;
-    percentRam.innerHTML = `<p>RAM: ${dadosRam[dadosRam.length - 1]} %</p>`; 
+    // Reduzir histórico para os últimos 100 registros
+    const limite = 100;
+    const labelsRecentes = labels.slice(-limite);
+    const dadosCpuRecentes = dadosCpu.slice(-limite);
+    const dadosRamRecentes = dadosRam.slice(-limite);
 
-    console.log('Labels:', labels);
-    console.log('Dados CPU:', dadosCpu);
-    console.log('Dados RAM :', dadosRam);
+    var situacaoCpu = `${dadosCpu[dadosCpu.length - 1]}`;
+    var situacaoRam = `${dadosRam[dadosRam.length - 1]}`;
 
-    if (!chart) {
+    percentCpu.innerHTML = `<p>CPU: ${situacaoCpu} %</p>`;
+    percentRam.innerHTML = `<p>RAM: ${situacaoRam} %</p>`;
+    
+    if(situacaoCpu >= 75){
+      percentCpu.innerHTML = `<p style="color: red";> CPU: ${situacaoCpu} %</p>`;
+    } if(situacaoRam >= 85){
+      percentRam.innerHTML = `<p style="color: red";>RAM: ${situacaoRam} %</p>`
+    }
+
+    // console.log('Labels:', labelsRecentes);
+    // console.log('Dados CPU:', dadosCpuRecentes);
+    // console.log('Dados RAM :', dadosRamRecentes);
+
+    if (!chartCpu) {
         // Criar o gráfico uma vez
         const options = {
             chart: {
@@ -553,7 +592,7 @@
                 height: 400,
                 width: 600,
                 animations: {
-                    enabled: true,
+                    enabled: false,
                     easing: 'linear',
                     dynamicAnimation: {
                         speed: 1000
@@ -563,20 +602,20 @@
             series: [
                 {
                     name: 'Uso de CPU (%)',
-                    data: dadosCpu
+                    data: dadosCpuRecentes
                 },
                 {
                     name: 'Uso de RAM (%)',
-                    data: dadosRam
+                    data: dadosRamRecentes
                 }
             ],
             xaxis: {
-                categories: labels,
+                categories: labelsRecentes,
                 title: {
                     text: 'Período/Tempo'
                 },
                 labels: {
-                    rotate: -45
+                    rotate: -30
                 }
             },
             yaxis: {
@@ -618,28 +657,26 @@
             }]
         };
 
-        chart = new ApexCharts(document.querySelector("#graficoCpuERam"), options);
-        chart.render();
+        chartCpu = new ApexCharts(document.querySelector("#graficoCpuERam"), options);
+        chartCpu.render();
     } else {
         // Atualizar apenas os dados do gráfico
-        chart.updateOptions({
+        chartCpu.updateOptions({
             xaxis: {
-                categories: labels
+                categories: labelsRecentes
             }
         });
-        chart.updateSeries([
+        chartCpu.updateSeries([
             {
                 name: 'Uso de CPU (%)',
-                data: dadosCpu
+                data: dadosCpuRecentes
             },
             {
                 name: 'Uso de RAM (%)',
-                data: dadosRam
+                data: dadosRamRecentes
             }
         ]);
     }
   
 }
-
-
     </script>

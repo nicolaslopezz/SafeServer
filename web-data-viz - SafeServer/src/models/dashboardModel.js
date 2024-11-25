@@ -38,7 +38,8 @@ function buscarCpueRam(idServidor) {
 }
 
 function buscarDadosRec(idServidor){
-    var instrucaoSql= `SELECT recebido_rede, time(dtHora) as hora from registro WHERE fkServidor= ${idServidor};`
+    var instrucaoSql= `SELECT recebido_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
+     WHERE fkServidor= ${idServidor};`
 
     console.log("Executando instrução SQL: " + instrucaoSql)
     return database.executar(instrucaoSql);
