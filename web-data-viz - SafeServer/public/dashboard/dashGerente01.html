@@ -97,12 +97,34 @@
             <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
           </div>
         </div>
-        <div class="tempo discretizacao">
+        <div class="tempo discretizacao" style="display: flex; flex-direction: column; align-items: center;">
           <h1 class="bold">Intervalo de tempo</h1>
-          <div class="">
-            <input class="slider" type="range" min="5" max="60" id="input_tempo">
-            <input type="number" name="" id="ipt_range" min="5" max="60" onchange="mostrar(2), plotar()">
-            <span>Dias</span>
+          <div style="width: 100%;">
+            <div style="display: flex; flex-direction: column;">
+              <div style="color: #102e76;">De:</div>
+              <div>
+                <input type="range" id="range_from" style="width: 100%;" onchange="mudarFrom()">
+                <div style="display: flex; justify-content: space-around;">
+                  <div style="color: #102e76;" id="div_from"></div>
+                  <button onclick="alterarFrom( 1)">mais</button>
+                  <button onclick="alterarFrom(-1)">menos</button>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <div style="color: #102e76;">Até:</div>
+              <div>
+                <input type="range" id="range_to" style="width: 100%;" onchange="mudarTo()">
+                <div style="display: flex; justify-content: space-around;">
+                  <div style="color: #102e76;" id="div_to"></div>
+                  <button onclick="alterarTo( 1)">mais</button>
+                  <button onclick="alterarTo(-1)">menos</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button onclick="discretizar()">Confirmar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -142,7 +164,74 @@
   crossorigin="anonymous"></script>
 <script src="../js/script.js"></script>
 <script>
+
+  function alterarFrom(x) {
+    aux  = Number(range_from.value) + Number(x)
+    console.log(aux)
+    range_from.value = aux
+    mudarFrom()
+  }
+
+  function alterarTo(x) {
+    aux  = Number(range_to.value) + Number(x)
+    console.log(aux)
+    range_to.value = aux
+    mudarTo()
+  }
+
   obterDados()
+
+  const range_from = document.getElementById("range_from")
+  const range_to = document.getElementById("range_to")
+
+  
+
+  function mudarFrom() {
+    div_from.innerHTML = labelsDatas[range_from.value]
+  }
+
+  function mudarTo() {
+    div_to.innerHTML = labelsDatas[range_to.value]
+  }
+
+  function discretizar() {
+    if (range_to.value < range_from.value) {
+      alert("Insira um intervalo válido")
+    } else {
+      auxCpu = []
+      auxRam = []
+      auxRede = []
+      auxLabels = []
+      for (i = range_from.value; i <= range_to.value; i++) {
+        auxCpu.push(plotCpu[i])
+        auxRam.push(plotRam[i])
+        auxRede.push(plotRede[i])
+        auxLabels.push(labelsDatas[i])
+      }
+
+      dataChartAlertas = {
+        labels: auxLabels,
+        datasets: [{
+          label: "Alertas Rede",
+          data: auxRede,
+          backgroundColor: '#485f96'
+        }, {
+          label: "Alertas CPU",
+          data: auxCpu,
+          backgroundColor: '#e28743'
+        }, {
+          label: "Alertas Ram",
+          data: auxRam,
+          backgroundColor: '#c6ccdd'
+        },
+        ]
+      }
+
+      chart_alertas.data = dataChartAlertas
+      chart_alertas.update()
+    }
+  }
+
   function obterDados() {
 
     var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
@@ -425,6 +514,17 @@
       auxRam.reverse()
       auxRede.reverse()
       auxLabels.reverse()
+
+      div_from.innerHTML = auxLabels[0]
+      div_to.innerHTML = auxLabels[auxLabels.length - 1]
+
+      range_to.min = 0;
+      range_to.max = labelsDatas.length - 1;
+      range_to.value = labelsDatas.length;
+
+      range_from.min = 0;
+      range_from.max = labelsDatas.length - 1;
+      range_from.value = labelsDatas.indexOf(auxLabels[0]);
 
       dataChartAlertas = {
         labels: auxLabels,

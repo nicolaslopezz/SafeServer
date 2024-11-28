@@ -3,10 +3,35 @@ body {
 }
 
 .servers {
-    background-color: lightblue;
     height: 10%;
     width: 85%;
     top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.server {
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+
+.selected {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background: 
+        linear-gradient(to right, white, white), 
+        linear-gradient(to right bottom, rgb(44, 71, 190) , rgb(255, 0, 221)); 
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
 }
 
 .charts {
@@ -37,10 +62,34 @@ body {
 }
 
 .metric {
-    background-color: lightcoral;
     height: 100%;
     width: 40%;
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.metric-box {
+    display: flex;
+    height: 70%;
+    width: 40%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.text-box {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.values {
+    background-color: white;
+    height: 60%;
+    width: 80%;
+    border-radius: 15px;
 }
 
 .chart-stability {
@@ -48,7 +97,6 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
 }
@@ -93,7 +141,6 @@ body {
 }
 
 .chart-oscilation {
-    /* background-color: aliceblue; */
     height: 100%;
     width: 50%;
 }
