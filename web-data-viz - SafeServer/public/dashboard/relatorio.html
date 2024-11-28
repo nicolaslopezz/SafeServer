@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+
   <!-- bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
 
@@ -28,6 +29,8 @@
   <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+ <!-- icone font awesom -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
   <title>Relatório - Nuvem de Palavras</title>
@@ -93,19 +96,41 @@
             <div class="supE">
               <div class="supTitulo">
                 <h1>Feriados Globais Mais Populares:</h1>
+                
               </div>
               <div class="supImg">
-                <!-- Div para exibir a Word Cloud -->
-                <div id="word" style="width: 100%; height: 200px;"></div>
+                <div class="supImg1">
+                  <div class="wrapper">
+                    <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
+                    <div class="tooltip">Na nuvem de palavras, os feriados mais populares são exibidos com palavras maiores, refletindo sua maior popularidade.</div>
+                  </div>
+
+                </div>
+                <div class="supImg2">
+                        <!-- Div para exibir a Word Cloud -->
+                <div id="word" style="width: 500px; height: 190px;"></div>
+                  
+                </div>
+               
+          
               </div>
             </div>
             <div class="supD">
               <div class="supTitulo">
-                <h1>%CPU médio x Top 5 feriados no servidor:</h1>
+                <h1>Top 5 Feriados vs Uso Médio de CPU (%) no servidor:</h1>
                 <select id="feriadoSelect" onchange="obterServidorSelecionado()"></select>
               </div>
               <div class="graficoWord">
-                <div id="grafico"></div>
+                <div class="graficoWord1">
+                  <div id="grafico"></div>
+                </div>
+                <div class="graficoWord2">
+                  <div class="wrapper">
+                    <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
+                    <div class="tooltip">Cada barra do gráfico representa o percentual de uso médio da CPU durante os feriados, permitindo comparar como o desempenho do servidor variou em diferentes datas festivas, com foco nas mais significativas.</div>
+                  </div>
+                </div>
+           
               </div>
 
             </div>
@@ -196,8 +221,8 @@
       "GoodFriday": "Sexta-feira Santa",
       "EasterMonday": "Páscoa",
       "LabourDay": "Dia do Trabalho",
-      "IndependenceDay": "Dia da Independência",
-      "St.StephensDay": "Dia de Santo Estêvão",
+      "IndependenceDay": "Independência",
+      "St.StephensDay": "Santo Estêvão",
       "EasterSunday": "Domingo de Páscoa",
       "AllSaintsDay": "Dia de Todos os Santos",
       "AscensionDay": "Dia da Ascensão",
@@ -257,44 +282,44 @@
       }
     }
 
-    // Função para criar a nuvem de palavras
-    function createWordCloud(feriados) {
-      console.log('Criando a word cloud com os seguintes feriados:', feriados);
+// Função para criar a nuvem de palavras
+function createWordCloud(feriados) {
+    console.log('Criando a word cloud com os seguintes feriados:', feriados);
 
-      var chart = anychart.tagCloud(feriados);
+    // ordena os feriados pela frequência (valor) de forma decrescente
+    var topFeriados = feriados.sort(function(a, b) {
+        return b.value - a.value;  // decrescente 
+    }).slice(0, 10); 
 
-      // definir cores 
-      var customColor = anychart.scales.linearColor();
-      customColor.colors(["#45b6fe", '#f94449', "#DE73FF"]);
+    var chart = anychart.tagCloud(topFeriados);
 
-      chart.colorScale(customColor);
+    // cores da escala
+    var customColor = anychart.scales.linearColor();
+    customColor.colors(["#45b6fe", '#f94449', "#DE73FF"]);
+    chart.colorScale(customColor);
 
+    chart.angles([0, 23, -23]);
+    chart.colorRange(true);
+    chart.colorRange().length('90%');
 
-      chart.angles([0, 45, -45]);
-      chart.colorRange(true);
-      chart.colorRange().length('90%');
-
-      // config da escala de tamanho das palavras com base no valor de frequência
-      chart.scale(anychart.scales.log()); // escala logarítmica para equilibrar tamanhos
-      chart.normal().fontSize(function () {
-
-        //multiplica o valor da frequência, mas define um tamanho mínimo e máximo
-        var freq = this.getData('value');
-        var fontSize = freq * 0.4;
-
-        // define tamanho 
-        if (fontSize < 12) fontSize = 13;
-        if (fontSize > 50) fontSize = 51;
-
-        return fontSize;
-      });
+    chart.scale(anychart.scales.linear());
 
 
-      chart.container('word');
-      chart.draw();
+    chart.fontSize(function() {
+    //  palavras com frequências maiores possuem fontes maiores
+    return Math.min(8 + (this.value / 100) * 21, 32);  
+});
 
-      console.log('Word cloud criada com sucesso!');
-    }
+chart.tooltip().format(function() {
+        // Personaliza o conteúdo do tooltip
+        return 'Frequência: ' + this.value;
+    });
+
+    chart.container('word');
+    chart.draw();
+
+    console.log('Word cloud criada com sucesso!');
+}
 
 
     fetchFeriados();
@@ -305,7 +330,9 @@
 </body>
 
 </html>
+<script src="../js/script.js"></script>
 <script>
+
   var componenteSelecionado = [];
   var servSelecionado = [];
   var peridoSelecionado = [];
@@ -648,7 +675,7 @@
     const dados = {
       labels: labels,
       datasets: [{
-        label: 'Uso de CPU (%)',
+        label: 'Uso médio da CPU (%) durante os feriados',
         data: [],
         backgroundColor: [
           'rgba(30,144,255, 0.7)',
@@ -720,7 +747,7 @@
               fontColor: 'transparent'
             }
           }
-        }
+        },
       }
     };
 
