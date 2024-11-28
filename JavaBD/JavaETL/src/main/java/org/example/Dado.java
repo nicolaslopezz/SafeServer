@@ -83,4 +83,18 @@ public class Dado {
     public void setDados_rede_env(Double dados_rede_env) {
         this.dados_rede_env = dados_rede_env;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Dado{");
+        sb.append("dados_cpu=").append(dados_cpu);
+        sb.append(", data_hora='").append(data_hora).append('\'');
+        sb.append(", dados_ramGB_livre=").append(dados_ramGB_livre);
+        sb.append(", dados_ramGB_uso=").append(dados_ramGB_uso);
+        sb.append(", dados_ram_porcentagem=").append(dados_ram_porcentagem);
+        sb.append(", dados_rede_rec=").append(dados_rede_rec);
+        sb.append(", dados_rede_env=").append(dados_rede_env);
+        sb.append('}');
+        return sb.toString();
+    }
 }

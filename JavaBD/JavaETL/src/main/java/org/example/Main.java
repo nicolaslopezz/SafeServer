@@ -14,7 +14,7 @@ import java.util.List;
 public class Main implements RequestHandler<S3Event, String> {
 
         private final AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-        private static final String DESTINATION_BUCKET = "s3safeserver-trusted";
+        private static final String DESTINATION_BUCKET = "safeserver-s3-trusted";
 
     @Override
     public String handleRequest(S3Event s3Event, Context context) {
@@ -34,12 +34,11 @@ public class Main implements RequestHandler<S3Event, String> {
             // Obtém o arquivo do bucket raw
             InputStream s3InputStream = s3Client.getObject(sourceBucket, sourceKey).getObjectContent();
 
-            if (sourceKey.contains("json")) {
-
-
+            // Função estática do Mapper para validar qual mapper criar (CSV ou JSON)
+            Mapper mapper = Mapper.ObterTipoAqruivo(sourceKey);
             // Mapeia o conteúdo JSON para um objeto
-            Mapper mapper = new Mapper();
             List<Dado> dados = mapper.map(s3InputStream);
+            System.out.println(dados);
 
             // Escreve os dados em formato CSV
             CsvWriter csvWriter = new CsvWriter();
@@ -55,7 +54,7 @@ public class Main implements RequestHandler<S3Event, String> {
 
             // Envia o arquivo CSV para o bucket "trusted"
             s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, metadata);
-            }
+
             return "Sucesso no processamento!!";
         } catch (Exception e) {
             context.getLogger().log("Erro: " + e.getMessage());

@@ -14,9 +14,9 @@ public class CsvWriter {
         ByteArrayOutputStream outputStream =new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         CSVPrinter csvPrinter =new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("CPU%",
-                                                                                   "DATA_HORA",
-                                                                                   "RAMBG-LIVRE",
-                                                                                   "RAMGB-USO",
+                                                                                   "DataHora",
+                                                                                   "RAM-GB-LIVRE",
+                                                                                   "RAM-GB-USO",
                                                                                    "RAM%",
                                                                                    "REDE_REC",
                                                                                    "REDE_ENV"));
