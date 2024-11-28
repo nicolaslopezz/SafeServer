@@ -103,7 +103,7 @@
             <div style="display: flex; flex-direction: column;">
               <div style="color: #102e76;">De:</div>
               <div>
-                <input type="range" id="range_from" style="width: 100%;" onchange="mudarFrom()">
+                <input type="range" id="ipt_range_from" style="width: 100%;" onchange="mudarFrom()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_from"></div>
                   <button onclick="alterarFrom( 1)">mais</button>
@@ -114,7 +114,7 @@
             <div style="display: flex; flex-direction: column;">
               <div style="color: #102e76;">Até:</div>
               <div>
-                <input type="range" id="range_to" style="width: 100%;" onchange="mudarTo()">
+                <input type="range" id="ipt_range_to" style="width: 100%;" onchange="mudarTo()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_to"></div>
                   <button onclick="alterarTo( 1)">mais</button>
@@ -181,8 +181,8 @@
 
   obterDados()
 
-  const range_from = document.getElementById("range_from")
-  const range_to = document.getElementById("range_to")
+  const range_from = document.getElementById("ipt_range_from")
+  const range_to = document.getElementById("ipt_range_to")
 
   
 
@@ -195,14 +195,16 @@
   }
 
   function discretizar() {
-    if (range_to.value < range_from.value) {
+    var auxTo = Number(ipt_range_to.value)
+    var auxFrom = Number(ipt_range_from.value)
+    if (auxTo < auxFrom) {
       alert("Insira um intervalo válido")
     } else {
       auxCpu = []
       auxRam = []
       auxRede = []
       auxLabels = []
-      for (i = range_from.value; i <= range_to.value; i++) {
+      for (i = auxFrom; i <= auxTo; i++) {
         auxCpu.push(plotCpu[i])
         auxRam.push(plotRam[i])
         auxRede.push(plotRede[i])
@@ -230,6 +232,8 @@
       chart_alertas.data = dataChartAlertas
       chart_alertas.update()
     }
+    auxFrom = null
+    auxTo = null
   }
 
   function obterDados() {
@@ -289,7 +293,7 @@
         totalAlertas.cpu += dados[i].alertas;
       } else if (dados[i].componente == "ram") {
         totalAlertas.ram += dados[i].alertas;
-      } else if (dados[i].componente == "rede") {
+      } else if (dados[i].componente == "rede_recebido") {
         totalAlertas.rede += dados[i].alertas;
       }
     }
@@ -298,9 +302,9 @@
     if (totalAlertas.cpu > totalAlertas.ram && totalAlertas.cpu > totalAlertas.rede) {
       div_componenteMaisAlertas.innerHTML = `CPU`;
     } else if (totalAlertas.ram > totalAlertas.rede) {
-      div_componenteMaisAlertas.innerHTML = `Ram`;
+      div_componenteMaisAlertas.innerHTML = `RAM`;
     } else {
-      div_componenteMaisAlertas.innerHTML = `Rede`;
+      div_componenteMaisAlertas.innerHTML = `REDE`;
     }
 
     for (i = 0; i < dados.length; i++) {
@@ -336,7 +340,6 @@
         }
       }
     }
-
     // Verificando e exibindo região com maior número de alertas
     let regiaoMaisAlertas = regioesDados[0]
     for (i = 1; i < regioes.length; i++) {
@@ -518,11 +521,11 @@
       div_from.innerHTML = auxLabels[0]
       div_to.innerHTML = auxLabels[auxLabels.length - 1]
 
-      range_to.min = 0;
+      range_to.min = 1;
       range_to.max = labelsDatas.length - 1;
       range_to.value = labelsDatas.length;
 
-      range_from.min = 0;
+      range_from.min = 1;
       range_from.max = labelsDatas.length - 1;
       range_from.value = labelsDatas.indexOf(auxLabels[0]);
 
