@@ -262,6 +262,18 @@ body {
   max-width: 1200px;
 }
 
+.creditsG {
+  flex: 1;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
 /*NAVBAR ACABA AQUI*/
 
 /*CSS DASH GERENTE*/
@@ -422,7 +434,6 @@ input[type="range"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .parteInferior {
