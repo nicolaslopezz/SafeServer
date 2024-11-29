@@ -29,7 +29,7 @@
   <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
- <!-- icone font awesom -->
+  <!-- icone font awesom -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
@@ -96,23 +96,24 @@
             <div class="supE">
               <div class="supTitulo">
                 <h1>Feriados Globais Mais Populares:</h1>
-                
+
               </div>
               <div class="supImg">
                 <div class="supImg1">
                   <div class="wrapper">
                     <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
-                    <div class="tooltip">Na nuvem de palavras, os feriados mais populares são exibidos com palavras maiores, refletindo sua maior popularidade.</div>
+                    <div class="tooltip">Na nuvem de palavras, os feriados mais populares são exibidos com palavras
+                      maiores, refletindo sua maior popularidade.</div>
                   </div>
 
                 </div>
                 <div class="supImg2">
-                        <!-- Div para exibir a Word Cloud -->
-                <div id="word" style="width: 500px; height: 190px;"></div>
-                  
+                  <!-- Div para exibir a Word Cloud -->
+                  <div id="word" style="width: 500px; height: 190px;"></div>
+
                 </div>
-               
-          
+
+
               </div>
             </div>
             <div class="supD">
@@ -127,10 +128,12 @@
                 <div class="graficoWord2">
                   <div class="wrapper">
                     <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
-                    <div class="tooltip">Cada barra do gráfico representa o percentual de uso médio da CPU durante os feriados, permitindo comparar como o desempenho do servidor variou em diferentes datas festivas, com foco nas mais significativas.</div>
+                    <div class="tooltip">Cada barra do gráfico representa o percentual de uso médio da CPU durante os
+                      feriados, permitindo comparar como o desempenho do servidor variou em diferentes datas festivas,
+                      com foco nas mais significativas.</div>
                   </div>
                 </div>
-           
+
               </div>
 
             </div>
@@ -282,44 +285,44 @@
       }
     }
 
-// Função para criar a nuvem de palavras
-function createWordCloud(feriados) {
-    console.log('Criando a word cloud com os seguintes feriados:', feriados);
+    // Função para criar a nuvem de palavras
+    function createWordCloud(feriados) {
+      console.log('Criando a word cloud com os seguintes feriados:', feriados);
 
-    // ordena os feriados pela frequência (valor) de forma decrescente
-    var topFeriados = feriados.sort(function(a, b) {
+      // ordena os feriados pela frequência (valor) de forma decrescente
+      var topFeriados = feriados.sort(function (a, b) {
         return b.value - a.value;  // decrescente 
-    }).slice(0, 10); 
+      }).slice(0, 10);
 
-    var chart = anychart.tagCloud(topFeriados);
+      var chart = anychart.tagCloud(topFeriados);
 
-    // cores da escala
-    var customColor = anychart.scales.linearColor();
-    customColor.colors(["#45b6fe", '#f94449', "#DE73FF"]);
-    chart.colorScale(customColor);
+      // cores da escala
+      var customColor = anychart.scales.linearColor();
+      customColor.colors(["#45b6fe", '#f94449', "#DE73FF"]);
+      chart.colorScale(customColor);
 
-    chart.angles([0, 23, -23]);
-    chart.colorRange(true);
-    chart.colorRange().length('90%');
+      chart.angles([0, 23, -23]);
+      chart.colorRange(true);
+      chart.colorRange().length('90%');
 
-    chart.scale(anychart.scales.linear());
+      chart.scale(anychart.scales.linear());
 
 
-    chart.fontSize(function() {
-    //  palavras com frequências maiores possuem fontes maiores
-    return Math.min(8 + (this.value / 100) * 21, 32);  
-});
+      chart.fontSize(function () {
+        //  palavras com frequências maiores possuem fontes maiores
+        return Math.min(8 + (this.value / 100) * 21, 32);
+      });
 
-chart.tooltip().format(function() {
+      chart.tooltip().format(function () {
         // Personaliza o conteúdo do tooltip
         return 'Frequência: ' + this.value;
-    });
+      });
 
-    chart.container('word');
-    chart.draw();
+      chart.container('word');
+      chart.draw();
 
-    console.log('Word cloud criada com sucesso!');
-}
+      console.log('Word cloud criada com sucesso!');
+    }
 
 
     fetchFeriados();
@@ -380,10 +383,10 @@ chart.tooltip().format(function() {
     componenteSelecionado = [];
     const select = document.getElementById("componenteRelatorio");
     const componente = {
-      "Uso da CPU": "CPU",
-      "Uso da RAM": "RAM",
-      "Dados enviados da rede": "REDE (RECEBIDA)",
-      "Dados recebidos da rede": "REDE (ENVIADA)"
+      "Uso da CPU": "cpu",
+      "Uso da RAM": "ram",
+      "Dados enviados da rede": "rede_recebida",
+      "Dados recebidos da rede": "rede_enviada"
     }
     for (let i = 0; i < select.selectedOptions.length; i++) {
       nomeComponente = select.selectedOptions[i].value
@@ -413,7 +416,7 @@ chart.tooltip().format(function() {
       if (servidores.length > 2) {
         alert("Escolha apenas 2 servidores!", servidores.length)
 
-      }else if(servidores.length == 1){
+      } else if (servidores.length == 1) {
         alert("Escolha apenas mais 1 servidor!")
       }
 
@@ -469,10 +472,18 @@ chart.tooltip().format(function() {
           // Loop pelos dados e criar as linhas da tabela
           //o tr define uma linha em uma tabela
           //o td cria uma célula da linha da tabela, ou seja, na horizontal.
+
+          const componentesFormatados = {
+            'cpu': 'CPU',
+            'ram': 'RAM',
+            'dados_enviados': 'Dados enviados pela rede',
+            'dados_recebidos': 'Dados recebidos pela rede'
+          };
           data.forEach(item => {
+
             const linha = `<tr> 
                             <td>${item.servidor}</td>
-                            <td>${item.componente}</td>
+                            <td>${componentesFormatados[item.componente]}</td>
                             <td>${item.total_alertas}</td>
                             <td>${item.valor_medio}</td>
                              <td>${item.mes}</td> 

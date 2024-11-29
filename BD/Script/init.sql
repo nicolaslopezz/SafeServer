@@ -7,7 +7,6 @@ create database SafeServer;
  
 use SafeServer;
 
-SELECT * FROM registro;
 
 create table empresa(
 idEmpresa int primary key auto_increment,
@@ -64,82 +63,29 @@ ORDER BY mes DESC;
 select * from registro;
 
 
-
-
 create table alerta (
 idAlerta int primary key auto_increment,
 componente varchar(45),
 fkRegistro int,
-nivelPrioridade int,
 constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
 );
-
-
-INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) 
-VALUES 
-('cpu', 1, 1),
-('ram', 1, 2),
-('rede_recebida', 1, 3),
-('cpu', 2, 1),
-('ram', 2, 2),
-('rede_recebida', 2, 3),
-('cpu', 3, 1),
-('ram', 3, 2),
-('rede_recebida', 3, 3),
-('cpu', 4, 1),
-('ram', 4, 2),
-('rede_recebida', 4, 3),
-('cpu', 5, 1),
-('ram', 5, 2),
-('rede_recebida', 5, 3),
-('cpu', 6, 1),
-('ram', 6, 2),
-('rede_recebida', 6, 3),
-('cpu', 7, 1),
-('ram', 7, 2),
-('rede_recebida', 7, 3),
-('cpu', 8, 1),
-('ram', 8, 2),
-('rede_recebida', 8, 3),
-('cpu', 9, 1),
-('ram', 9, 2),
-('rede_recebida', 9, 3),
-('cpu', 10, 1),
-('ram', 10, 2),
-('rede_recebida', 10, 3),
-('cpu', 11, 1),
-('ram', 11, 2),
-('rede_recebida', 11, 3),
-('cpu', 12, 1),
-('ram', 12, 2),
-('rede_recebida', 12, 3),
-('cpu', 13, 1),
-('ram', 13, 2),
-('rede_recebida', 13, 3),
-('cpu', 14, 1),
-('ram', 14, 2),
-('rede_recebida', 14, 3);
 
 
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
 
--- Inserir dados na tabela chaveAcesso
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 ('abcd', 2, 1, 'Analista');
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
-('reader', 1, 'US-EAST-1');
-INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('reader', 1, 'US-EAST-1'),
 ('writer', 1, 'US-EAST-1');
 
-
--- Inserir dados na tabela funcionario
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 1),
 ('Marta', 'marta@gmail.com', '12345678901', '123456', 1, 1);
 
--- Inserir registros para o dia 25 de dezembro
+
 INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor)
 VALUES 
 ('2024-12-25 10:00:00', 92, 93, 32, 1, 700, 450, 1),  
@@ -167,6 +113,51 @@ VALUES
 ('2024-05-01 10:00:00', 74, 72, 27, 3, 620, 340, 2),  
 ('2024-05-01 18:00:00', 75, 77, 28, 2, 630, 330, 2);
 
+-- Inserir dados na tabela alerta
+INSERT INTO alerta (componente, fkRegistro) 
+VALUES 
+('cpu', 1),
+('ram', 1),
+('rede_recebida', 1),
+('cpu', 2),
+('ram', 2),
+('rede_recebida', 2),
+('cpu', 3),
+('ram', 3),
+('rede_recebida', 3),
+('cpu', 4),
+('ram', 4),
+('rede_recebida', 4),
+('cpu', 5),
+('ram', 5),
+('rede_recebida', 5),
+('cpu', 6),
+('ram', 6),
+('rede_recebida', 6),
+('cpu', 7),
+('ram', 7),
+('rede_recebida', 7),
+('cpu', 8),
+('ram', 8),
+('rede_recebida', 8),
+('cpu', 9),
+('ram', 9),
+('rede_recebida', 9),
+('cpu', 10),
+('ram', 10),
+('rede_recebida', 10),
+('cpu', 11),
+('ram', 11),
+('rede_recebida', 11),
+('cpu', 12),
+('ram', 12),
+('rede_recebida', 12),
+('cpu', 13),
+('ram', 13),
+('rede_recebida', 13),
+('cpu', 14),
+('ram', 14),
+('rede_recebida', 14);
 
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU

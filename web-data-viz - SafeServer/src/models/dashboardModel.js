@@ -129,10 +129,10 @@ function analisar(servidores,periodos,componentes) {
             MONTH(r.dtHora) AS mes,
             COUNT(a.idAlerta) AS total_alertas,
             AVG(CASE 
-                WHEN a.componente = 'CPU' THEN r.percent_use_cpu
-                WHEN a.componente = 'RAM' THEN r.percent_use_ram
-                WHEN a.componente = 'REDE (RECEBIDA)' THEN r.recebido_rede
-                WHEN a.componente = 'REDE (ENVIADA)' THEN r.enviado_rede
+                WHEN a.componente = 'cpu' THEN r.percent_use_cpu
+                WHEN a.componente = 'ram' THEN r.percent_use_ram
+                WHEN a.componente = 'rede_recebida' THEN r.recebido_rede
+                WHEN a.componente = 'rede_enviada' THEN r.enviado_rede
                 ELSE NULL
             END) AS valor_medio
         FROM 
