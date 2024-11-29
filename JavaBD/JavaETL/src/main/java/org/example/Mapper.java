@@ -1,19 +1,18 @@
 package org.example;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class Mapper {
+public interface Mapper {
+    public List<Dado> map(InputStream inputStream) throws IOException;
 
-    public List<Dado> map(InputStream inputStream) throws IOException {
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        return mapper.readValue(inputStream, new TypeReference<List<Dado>>() {
-        });
+    public static Mapper ObterTipoAqruivo(String nome) {
+        if (nome.contains("json")) {
+            return new MapperJson();
+        } else if (nome.contains("csv")){
+            return new MapperCsv();
+        }
+        return null;
     }
 }

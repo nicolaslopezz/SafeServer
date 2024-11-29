@@ -125,7 +125,7 @@ function buscarDadosEnv(req, res){
 
     dashboardModel.buscarDadosEnv(idServidor).then((resultado) =>{
         if(resultado.length > 0){
-            res.satus(200).json(resultado);
+            res.status(200).json(resultado);
         } else{
             res.status(204).send("Nenhum resultado encontrado.")
         }

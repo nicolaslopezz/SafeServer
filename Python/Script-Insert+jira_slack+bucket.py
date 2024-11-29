@@ -19,8 +19,8 @@ limiteREDE = 1.0  # GB
 # Configurações do banco de dados
 db_config = {
     'host': 'localhost',
-    'user': 'root',
-    'password': 'batatas123',
+    'user': 'SafeServerUser',
+    'password': 'safeserver123',
     'database': 'SafeServer'
 }
 
@@ -46,7 +46,7 @@ def enviar_mensagem(categoria):
 
 # Configurações do Jira
 jira_options = {
-    'server': ''  # Substitua pelo seu domínio
+    'server': 'https://safe-server.atlassian.net/'  # Substitua pelo seu domínio
 }
 
 email_jira = ''  # Substitua pelo seu e-mail
@@ -57,7 +57,7 @@ jira = JIRA(options=jira_options, basic_auth=(email_jira, api_token))
 AWS_ACCESS_KEY = ''
 AWS_SECRET_KEY = ''
 AWS_SESSION_TOKEN = ''  # Coloque aqui o token de sessão
-AWS_REGION = 'us-west-1'  # Defina a região da AWS
+AWS_REGION = 'us-east-1'  # Defina a região da AWS
 
 #Array para enviar os dados para o bucket
 dados_cpu = []
@@ -100,6 +100,9 @@ def abrir_chamado_jira(categoria, tipo, limite_atual, servidor_id):
 
 def monitorar_e_enviar_dados(servidor_id):
     contador_mem = 0
+    contador_cpu = 0
+    contador_rede_enviados = 0
+    contador_rede_recebidos = 0
     meusql = mysql.connector.connect(**db_config)
     meucursor = meusql.cursor()
 
@@ -150,7 +153,7 @@ def monitorar_e_enviar_dados(servidor_id):
             return True
 
         # Upload do arquivo
-        upload_file('dadosColetados.json', 's3safeserver-raw')
+        upload_file('dadosColetados.json', 'safeserver-s3-raw')
 
         fk_servidor = servidor_id
 
@@ -186,165 +189,88 @@ def monitorar_e_enviar_dados(servidor_id):
         else:
             contador_mem = 0
         
-        
-        #if GB_rede_enviados > limiteREDE or GB_rede_recebidos > limiteREDE:
-         #   contador_rede += 1
-        #else:
-         #   contador_rede = 0
+        if GB_rede_enviados > limiteREDE:
+            contador_rede_enviados += 1
+        else:
+            contador_rede_enviados = 0
 
-          # Verificação de limites para rede separadamente
-    if GB_rede_enviados > limiteREDE:
-        contador_rede_enviados += 1
-    else:
-        contador_rede_enviados = 0
+        if GB_rede_recebidos > limiteREDE:
+            contador_rede_recebidos += 1
+        else:
+            contador_rede_recebidos = 0
 
-    if GB_rede_recebidos > limiteREDE:
-        contador_rede_recebidos += 1
-    else:
-        contador_rede_recebidos = 0
+        query = '''
+            SELECT idRegistro FROM registro WHERE fkServidor = 1 ORDER BY dtHora Desc LIMIT 1;
+        '''
 
-    # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado para rede enviada
-    if contador_rede_enviados >= 10:
-        idUltimoRegistro = meucursor.fetchall()
-    query = '''
-    INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("rede-enviada", %s, 1)
-    '''
-    values = (idUltimoRegistro)
-    meucursor.execute(query, values)
-    
-    abrir_chamado_jira(
-        "Rede Enviada", 
-        "GB Enviados", 
-        GB_rede_enviados, 
-        servidor_id
-    )
-    contador_rede_enviados = 0
+        values = (fk_servidor)
+        meusql2 = mysql.connector.connect(**db_config)
+
+        cursor2 = meusql2.cursor(buffered=True) 
+        cursor2.execute(query)
+        meusql2.commit()
+        idUltimoRegistro = cursor2.fetchall()[0][0]
+
+
+        # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado para rede enviada
+        if contador_rede_enviados >= 10:
+            query = '''
+            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede-enviada", %s)
+            '''
+            values = [idUltimoRegistro]
+            meucursor.execute(query, values)
+
+            abrir_chamado_jira(
+                "Rede Enviada", 
+                "GB Enviados", 
+                GB_rede_enviados, 
+                servidor_id
+            )
+            contador_rede_enviados = 0
 
 # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado para rede recebida
-    if contador_rede_recebidos >= 10:
-        idUltimoRegistro = meucursor.fetchall()
-    query = '''
-    INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("rede-recebida", %s, 1)
-    '''
-    values = (idUltimoRegistro)
-    meucursor.execute(query, values)
-    
-    abrir_chamado_jira(
-        "Rede Recebida", 
-        "GB Recebidos", 
-        GB_rede_recebidos, 
-        servidor_id
-    )
-    contador_rede_recebidos = 0
-
-    query = '''
-        SELECT idRegistro FROM registro WHERE fkServidor = %s ORDER BY dtHora Desc LIMIT 1;
-        '''
-
-    values = (fk_servidor)
-
-    meucursor.execute(query, values)
-    meusql.commit()
-
-        # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado
-    if contador_cpu >= 10:
-            idUltimoRegistro = meucursor.fetchall()
+        if contador_rede_recebidos >= 10:
             query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("cpu", %s, 1)
+            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede-recebida", %s)
             '''
-            values = (idUltimoRegistro)
+            values = [idUltimoRegistro]
             meucursor.execute(query, values)
 
+            abrir_chamado_jira(
+                "Rede Recebida", 
+                "GB Recebidos", 
+                 GB_rede_recebidos, 
+                servidor_id
+            )
+            contador_rede_recebidos = 0
 
-            abrir_chamado_jira("CPU", limiteCPU, Porcentagem_CPU, servidor_id)
-            meusql.commit()
-            contador_cpu = 0  
-
-    if contador_mem >= 10:
-            idUltimoRegistro = meucursor.fetchall()
-            query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("ram", %s, 1)
-            '''
-            values = (idUltimoRegistro)
-            meucursor.execute(query, values)
-            idUltimoRegistro = meucursor.fetchall()
-            
-            abrir_chamado_jira("Memória", limiteMEM, Porcentagem_RAM_uso, servidor_id)
-            contador_mem = 0  
-
-    if contador_rede >= 10:
-            idUltimoRegistro = meucursor.fetchall()
-            query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("rede", %s, 1)
-            '''
-            values = (idUltimoRegistro)
-            meucursor.execute(query, values)
-
-            idUltimoRegistro = meucursor.fetchall()
-            abrir_chamado_jira("Rede", limiteREDE, max(GB_rede_enviados, GB_rede_recebidos, servidor_id))
-            contador_rede = 0  
-
-            
-
-    time.sleep(1)
-
-    query = '''
-        SELECT idRegistro FROM registro WHERE fkServidor = %s ORDER BY dtHora Desc LIMIT 1;
-        '''
-
-    values = (fk_servidor)
-
-    meucursor.execute(query, values)
-    meusql.commit()
-
-        # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado
-    if contador_cpu >= 10:
-            idUltimoRegistro = meucursor.fetchall()
-            query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("cpu", %s, 1)
-            '''
-            values = (idUltimoRegistro)
-            meucursor.execute(query, values)
+            # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado
+        if contador_cpu >= 10:
+                query = '''
+                INSERT INTO alerta (componente, fkRegistro) VALUES ("cpu", %s)
+                '''
+                values = [idUltimoRegistro]
+                meucursor.execute(query, values)
 
 
-            abrir_chamado_jira("CPU", limiteCPU, Porcentagem_CPU, servidor_id)
-            meusql.commit()
-            contador_cpu = 0  
+                abrir_chamado_jira("CPU", limiteCPU, Porcentagem_CPU, servidor_id)
+                meusql.commit()
+                contador_cpu = 0  
 
-    if contador_mem >= 10:
-            idUltimoRegistro = meucursor.fetchall()
-            query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("ram", %s, 1)
-            '''
-            values = (idUltimoRegistro)
-            meucursor.execute(query, values)
-            idUltimoRegistro = meucursor.fetchall()
-            
-            abrir_chamado_jira("Memória", limiteMEM, Porcentagem_RAM_uso, servidor_id)
-            contador_mem = 0  
+        if contador_mem >= 10:
+                query = '''
+                INSERT INTO alerta (componente, fkRegistro) VALUES ("ram", %s)
+                '''
+                values = [idUltimoRegistro]
+                meucursor.execute(query, values)
+                idUltimoRegistro = meucursor.fetchall()
 
-    if contador_rede >= 10:
-            idUltimoRegistro = meucursor.fetchall()
-            query = '''
-            INSERT INTO alerta (componente, fkRegistro, nivelPrioridade) VALUES ("rede", %s, 1)
-            '''
-            values = (idUltimoRegistro)
-            meucursor.execute(query, values)
+                abrir_chamado_jira("Memória", limiteMEM, Porcentagem_RAM_uso, servidor_id)
+                contador_mem = 0  
 
-            idUltimoRegistro = meucursor.fetchall()
-            abrir_chamado_jira("Rede", limiteREDE, max(GB_rede_enviados, GB_rede_recebidos, servidor_id))
-            contador_rede = 0  
+        time.sleep(1)
 
-            
-
-    time.sleep(1)
+            # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado
 
 # Chamada da função para monitorar e enviar dados
 monitorar_e_enviar_dados(servidor_id)
-
-
-
-
-
-
-

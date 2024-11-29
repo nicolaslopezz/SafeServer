@@ -251,7 +251,7 @@ body {
 .credits {
   flex: 1;
   /* Faz com que o .credits ocupe o espaço restante */
-  margin: 0 auto;
+  /* margin: 0 auto; */
   color: #fff;
   text-align: center;
   font-size: 1rem;
@@ -259,6 +259,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  max-width: 1200px;
 }
 
 /*NAVBAR ACABA AQUI*/
@@ -625,7 +626,6 @@ input[type="range"] {
   border: 2px solid #1a2e70;
 }
 
-
 #servidorRelatorio:active,
 #periodoRelatorio:active,
 #componenteRelatorio:active {
@@ -640,13 +640,13 @@ input[type="range"] {
 .display-none {
   display: none;
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.5s ease;
 }
 
 .display-block {
   display: block;
   opacity: 1;
-  transition: opacity 0.3 ease-in;
+  transition: opacity 0.5s ease;
 }
 
 .divbaixo {
@@ -1156,6 +1156,18 @@ table th {
 
 
 
+.dimensaoGraficoRec{
+  display: flex;
+  position: relative;
+  background-color: white;
+  border-radius: 11px;
+  justify-content: center;
+  left: -565px;
+  height: 397px;
+  width: 640px;
+  top: 27px;
+}
+
 .dimensaoGraficoCpu {
   display: flex;
   position: relative;
@@ -1166,6 +1178,18 @@ table th {
   height: 397px;
   width: 640px;
   top: -10px;
+}
+
+.dimensaoGraficoEnv{
+  display: flex;
+  position: relative;
+  background-color: white;
+  border-radius: 11px;
+  justify-content: center;
+  left: -565px;
+  height: 397px;
+  width: 640px;
+  top: 27px;
 }
 
 .tituloDashCpuERam {
@@ -1246,9 +1270,27 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 175px;
-  height: 46px;
+  width: 188px;
+  height: 52px;
   left: 260px;
+  top: 190px;
+}
+
+.tituloDashRec{
+  display: flex;
+  position: relative;
+  left: -477px;
+  top: 45px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.tituloDashRec p {
+  display: flex;
+  position: relative;
+  top: 23px;
+  left: 20px;
 }
 
 .gbRedeRec p {
@@ -1264,9 +1306,27 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 175px;
-  height: 46px;
+  width: 188px;
+  height: 52px;
   left: 260px;
+  top: 190px;
+}
+
+.tituloDashEnv{
+  display: flex;
+  position: relative;
+  left: -477px;
+  top: 45px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.tituloDashEnv p {
+  display: flex;
+  position: relative;
+  top: 23px;
+  left: 20px;
 }
 
 .gbRedeEnv p {

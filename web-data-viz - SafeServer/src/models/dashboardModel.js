@@ -38,15 +38,16 @@ function buscarCpueRam(idServidor) {
 }
 
 function buscarDadosRec(idServidor){
-    var instrucaoSql= `SELECT recebido_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
-     WHERE fkServidor= ${idServidor};`
+    var instrucaoSql= `SELECT idServidor, recebido_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
+     WHERE fkServidor = ${idServidor};`
 
     console.log("Executando instrução SQL: " + instrucaoSql)
     return database.executar(instrucaoSql);
 }
 
 function buscarDadosEnv(idServidor){
-    var instrucaoSql = `SELECT enviado_rede, time(dtHora) as hora from registro JOIN servidor on fkServidor= ${idServidor};`
+    var instrucaoSql = `SELECT idServidor, enviado_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
+     WHERE fkServidor = ${idServidor};`
 
     console.log("Executando instução SQL: " + instrucaoSql)
     return database.executar(instrucaoSql);
