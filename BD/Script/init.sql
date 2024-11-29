@@ -7,8 +7,6 @@ create database SafeServer;
  
 use SafeServer;
 
-SELECT * FROM registro;
-
 create table empresa(
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(60) not null,
@@ -54,17 +52,14 @@ enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
+/*
 SELECT DISTINCT MONTH(dtHora) AS mes
 FROM registro r
 join servidor s on r.fkServidor = s.idServidor
 Join empresa e on s.fkEmpresa = e.idEmpresa
 WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
-
-select * from registro;
-
-
-
+*/
 
 create table alerta (
 idAlerta int primary key auto_increment,
@@ -72,53 +67,6 @@ componente varchar(45),
 fkRegistro int,
 constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
 );
-
-
-INSERT INTO alerta (componente, fkRegistro)
-VALUES 
-('cpu', 1),
-('ram', 1),
-('rede_recebida', 1),
-('cpu', 2),
-('ram', 2),
-('rede_recebida', 2),
-('cpu', 3),
-('ram', 3),
-('rede_recebida', 3),
-('cpu', 4),
-('ram', 4),
-('rede_recebida', 4),
-('cpu', 5),
-('ram', 5),
-('rede_recebida', 5),
-('cpu', 6),
-('ram', 6),
-('rede_recebida', 6),
-('cpu', 7),
-('ram', 7),
-('rede_recebida', 7),
-('cpu', 8),
-('ram', 8),
-('rede_recebida', 8),
-('cpu', 9),
-('ram', 9),
-('rede_recebida', 9),
-('cpu', 10),
-('ram', 10),
-('rede_recebida', 10),
-('cpu', 11),
-('ram', 11),
-('rede_recebida', 11),
-('cpu', 12),
-('ram', 12),
-('rede_recebida', 12),
-('cpu', 13),
-('ram', 13),
-('rede_recebida', 13),
-('cpu', 14),
-('ram', 14),
-('rede_recebida', 14);
-
 
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
@@ -167,6 +115,52 @@ VALUES
 ('2024-05-01 18:00:00', 75, 77, 28, 2, 630, 330, 2);
 
 
+INSERT INTO alerta (componente, fkRegistro)
+VALUES 
+('cpu', 1),
+('ram', 1),
+('rede_recebida', 1),
+('cpu', 2),
+('ram', 2),
+('rede_recebida', 2),
+('cpu', 3),
+('ram', 3),
+('rede_recebida', 3),
+('cpu', 4),
+('ram', 4),
+('rede_recebida', 4),
+('cpu', 5),
+('ram', 5),
+('rede_recebida', 5),
+('cpu', 6),
+('ram', 6),
+('rede_recebida', 6),
+('cpu', 7),
+('ram', 7),
+('rede_recebida', 7),
+('cpu', 8),
+('ram', 8),
+('rede_recebida', 8),
+('cpu', 9),
+('ram', 9),
+('rede_recebida', 9),
+('cpu', 10),
+('ram', 10),
+('rede_recebida', 10),
+('cpu', 11),
+('ram', 11),
+('rede_recebida', 11),
+('cpu', 12),
+('ram', 12),
+('rede_recebida', 12),
+('cpu', 13),
+('ram', 13),
+('rede_recebida', 13),
+('cpu', 14),
+('ram', 14),
+('rede_recebida', 14);
+
+
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
 -- FROM registro GROUP BY DATE(dtHora) ORDER BY mediaDeUsoCPU DESC;
@@ -174,15 +168,6 @@ VALUES
 
 
 CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa FROM funcionario JOIN chaveAcesso ON fkChave = idChave);
-
--- select * from registro;
-
--- select * from empresa;
-
-select * from funcionario;
-
--- truncate regis
-select * from registro;
 
 SELECT 
     a.componente,
@@ -217,3 +202,6 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
     JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
+    
+    select dia, mes, ano, alertas, componente, regiao from obterDadosAlerta WHERE fkEmpresa = 1 ORDER BY componente, ano, mes, dia;
+    
