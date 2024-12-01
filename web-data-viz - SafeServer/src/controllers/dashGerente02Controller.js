@@ -2,24 +2,33 @@ var dashGerente02Model = require("../models/dashGerente02Model.js");
 
 async function calcularDesvioPadrao() {
     try {
+        console.log("Iniciando cálculo automático do desvio padrão...");
+
         var servidores = await dashGerente02Model.getServidores();
 
         for (var servidor of servidores) {
+            console.log(`Processando servidor: ${servidor.idServidor} - ${servidor.identificacao}`);
+            var desvioPadraoCPU = await dashGerente02Model.getDesvioPadraoCPU(servidor.idServidor);
 
-            var desvioPadraoCPU = await dashGerente02Model.getDesvioPadraoCPU(servidor.id);
-            if (desvioPadraoCPU !== null) {
-                await dashGerente02Model.guardarResultado(servidor.id, 'cpu', desvioPadraoCPU);
-                console.log(`Servidor: ${servidor.nome}, Componente: CPU, Desvio Padrão: ${desvioPadraoCPU}`);
+            if (desvioPadraoCPU !== null && !isNaN(desvioPadraoCPU) && typeof desvioPadraoCPU === 'number') {
+                await dashGerente02Model.guardarResultado(servidor.idServidor, 'cpu', desvioPadraoCPU);
+                console.log(`Servidor: ${servidor.identificacao}, Componente: CPU, Desvio Padrão: ${desvioPadraoCPU}`);
+            } else {
+                console.log(`Desvio padrão da CPU não encontrado ou é inválido para o servidor ${servidor.identificacao}`);
             }
 
-            var desvioPadraoRAM = await dashGerente02Model.getDesvioPadraoRAM(servidor.id);
-            if (desvioPadraoRAM !== null) {
-                await dashGerente02Model.guardarResultado(servidor.id, 'ram', desvioPadraoRAM);
-                console.log(`Servidor: ${servidor.nome}, Componente: RAM, Desvio Padrão: ${desvioPadraoRAM}`);
+            var desvioPadraoRAM = await dashGerente02Model.getDesvioPadraoRAM(servidor.idServidor);
+
+            if (desvioPadraoRAM !== null && !isNaN(desvioPadraoRAM) && typeof desvioPadraoRAM === 'number') {
+                await dashGerente02Model.guardarResultado(servidor.idServidor, 'ram', desvioPadraoRAM);
+                console.log(`Servidor: ${servidor.identificacao}, Componente: RAM, Desvio Padrão: ${desvioPadraoRAM}`);
+            } else {
+                console.log(`Desvio padrão da RAM não encontrado ou é inválido para o servidor ${servidor.identificacao}`);
             }
         }
     } catch (error) {
         console.error('Erro ao calcular desvio padrão:', error.message);
+        console.error(error);
     }
 }
 

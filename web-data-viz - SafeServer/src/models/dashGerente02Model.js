@@ -1,10 +1,19 @@
 var database = require("../database/config")
 
 async function getServidores() {
-  var instrucaoSql = 'SELECT idServidor, identificacao FROM servidor';
-  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  var instrucaoSql = `
+      SELECT idServidor, identificacao 
+      FROM servidor;
+  `;
+  console.log("Executando a instrução SQL:\n", instrucaoSql);
+
   var [rows] = await database.executar(instrucaoSql);
-  return rows;
+
+  // Adicionar log para depuração
+  console.log("Resultado da consulta (getServidores):", rows);
+
+  // Garantir que o retorno seja um array
+  return Array.isArray(rows) ? rows : [rows];
 }
 
 async function getDesvioPadraoCPU(servidorId) {
@@ -14,8 +23,16 @@ async function getDesvioPadraoCPU(servidorId) {
     WHERE fkServidor = ${servidorId} AND dtHora >= NOW() - INTERVAL 1 HOUR;
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  var [rows] = await database.executar(instrucaoSql, [servidorId]);
-  return rows[0]?.desvio_padrao_cpu;
+  var rows = await database.executar(instrucaoSql);
+  var desvioPadraoCPU;
+
+  if (Array.isArray(rows)) {
+    desvioPadraoCPU = rows[0]?.desvio_padrao_cpu;
+  } else {
+    desvioPadraoCPU = rows.desvio_padrao_cpu;
+  }
+
+  return desvioPadraoCPU || null;
 }
 
 async function getDesvioPadraoRAM(servidorId) {
@@ -25,14 +42,24 @@ async function getDesvioPadraoRAM(servidorId) {
     WHERE fkServidor = ${servidorId} AND dtHora >= NOW() - INTERVAL 1 HOUR;
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  var [rows] = await database.executar(instrucaoSql, [servidorId]);
-  return rows[0]?.desvio_padrao_ram;
+  var rows = await database.executar(instrucaoSql);
+  var desvioPadraoRAM;
+
+  if (Array.isArray(rows)) {
+    desvioPadraoRAM = rows[0]?.desvio_padrao_ram;
+  } else {
+    desvioPadraoRAM = rows.desvio_padrao_ram;
+  }
+
+  return desvioPadraoRAM || null;
 }
+
+
 
 async function guardarResultado(servidorId, componente, desvioPadrao) {
   var instrucaoSql = `
     INSERT INTO estatisticas_horarias (fkServidor, componente, timestamp, desvio_padrao)
-    VALUES (${servidorId}, ${componente}, NOW(), ${desvioPadrao});
+    VALUES (${servidorId}, "${componente}", NOW(), ${desvioPadrao});
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   await database.executar(instrucaoSql, [servidorId, componente, desvioPadrao]);
