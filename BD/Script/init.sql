@@ -62,7 +62,7 @@ WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
 
 select * from registro;
-
+*/
 
 create table alerta (
 idAlerta int primary key auto_increment,
