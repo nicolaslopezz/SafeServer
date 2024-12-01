@@ -34,7 +34,6 @@ async function datasDisponiveis(req, res) {
     }
 }
 
-// Controlador para dados do gráfico
 async function dadosGrafico(req, res) {
     var { serverId, component, date } = req.query;
     try {
