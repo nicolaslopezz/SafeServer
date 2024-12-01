@@ -6,13 +6,8 @@ async function getServidores() {
       FROM servidor;
   `;
   console.log("Executando a instrução SQL:\n", instrucaoSql);
-
   var [rows] = await database.executar(instrucaoSql);
-
-  // Adicionar log para depuração
   console.log("Resultado da consulta (getServidores):", rows);
-
-  // Garantir que o retorno seja um array
   return Array.isArray(rows) ? rows : [rows];
 }
 
@@ -53,8 +48,6 @@ async function getDesvioPadraoRAM(servidorId) {
 
   return desvioPadraoRAM || null;
 }
-
-
 
 async function guardarResultado(servidorId, componente, desvioPadrao) {
   var instrucaoSql = `
