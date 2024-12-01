@@ -5,7 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
   <!-- bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
@@ -33,7 +36,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
-  <title>Relatório - Nuvem de Palavras</title>
+  <title>Relatório-Gerente</title>
 </head>
 
 <body>
@@ -44,7 +47,7 @@
       </div>
       <div class="head">
         <div class="user-img">
-          <img src="../assets/imgs/contact.png" alt="User Image" />
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
           <p class="title" id="cargoUsuario"></p>
@@ -55,8 +58,21 @@
         <div class="menu">
           <p class="title">Menu</p>
           <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
             <li class="active">
-              <a href="#">
+              <a href="">
                 <i class="icon ph-bold ph-file-text"></i>
                 <span class="text">Relatório</span>
               </a>
@@ -76,20 +92,28 @@
           </ul>
         </div>
         <div class="menu">
-          <p class="title">Conta</p>
+          <p class="title"></p>
           <ul>
             <li>
-              <a href="../index.html">
-                <i class="icon ph-bold ph-sign-out"></i>
-                <span class="text">Sair</span>
-              </a>
+
             </li>
           </ul>
         </div>
       </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="credits">
+    <div class="creditsG">
       <div class="relatorioG">
         <div class="parteSuperior">
           <div class="containerSUP">
@@ -109,7 +133,7 @@
                 </div>
                 <div class="supImg2">
                   <!-- Div para exibir a Word Cloud -->
-                  <div id="word" style="width: 500px; height: 190px;"></div>
+                  <div id="word" style="width: 450px; height: 195px;"></div>
 
                 </div>
 
@@ -118,7 +142,7 @@
             </div>
             <div class="supD">
               <div class="supTitulo">
-                <h1>Top 5 Feriados vs Uso Médio de CPU (%) no servidor:</h1>
+                <h1>Top 5 Feriados vs Uso Médio de CPU (%) no servidor: </h1>
                 <select id="feriadoSelect" onchange="obterServidorSelecionado()"></select>
               </div>
               <div class="graficoWord">
@@ -170,17 +194,18 @@
 
 
             </div>
-            <div class="divisao2">
+            <div class="divisao2" id="divisao2">
 
               <div class="ranking">
                 <table id="tablee">
                   <thead>
                     <tr id="trr"> <!-- titulo do cabeçalho, primeira linha -->
                       <th id="thh">Servidor</th> <!-- cabeçalho da primeira coluna -->
-                      <th id="thh">Total de Alertas</th> <!-- cabeçalho da segunda coluna -->
-                      <th id="thh">Componente</th>
-                      <th id="thh">Relação com o Limite</th>
-                      <th id="thh">Mês</th>
+                      <th id="thh">Componente</th> <!-- cabeçalho da segunda coluna -->
+                      <th id="thh">Minimo</th>
+                      <th id="thh">Máximo</th>
+                      <th id="thh">Média</th>
+
                     </tr>
                   </thead>
                   <tbody id="ranking">
@@ -190,8 +215,28 @@
                   </tbody>
                 </table>
               </div>
-
             </div>
+
+            <div class="divisao2C" id="divisao2C" display="none">
+              <div class="DE" id="DE">
+                <div id="grafico2">
+
+                </div>
+
+              </div>
+
+              <div class="DD" id="DD">
+
+                <div class="comp" id="comp">
+
+                </div>
+
+
+
+              </div>
+            </div>
+
+
 
           </div>
         </div>
@@ -382,6 +427,7 @@
   function obterComponenteRelatorio() {
     componenteSelecionado = [];
     const select = document.getElementById("componenteRelatorio");
+
     const componente = {
       "Uso da CPU": "cpu",
       "Uso da RAM": "ram",
@@ -396,29 +442,85 @@
     console.log("componentes selecionados:", componenteSelecionado);
   }
 
+  function gerarQueryParams() {
+    const servidores = obterServidorRelatorio();
+    const periodos = obterPeriodoRelatorio();
+    const componentes = obterComponenteRelatorio();
+
+    const queryParams = new URLSearchParams();
+    queryParams.append('servidores', JSON.stringify(servidores));
+    queryParams.append('periodos', JSON.stringify(periodos));
+    queryParams.append('componentes', JSON.stringify(componentes));
+
+    return queryParams.toString();
+  }
+
 
   cont = 0
 
   function comparar() {
+    const comparacao = document.getElementById('comp');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
 
+    // Garantir que o botão de comparação esteja no estado certo
     analisarButton.classList.remove("clicked");
 
     if (cont == 0 || !compararButton.classList.contains("clicked")) {
       compararButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
+      // Mostrar/ocultar elementos da página conforme necessário
+      document.getElementById("divisao2").style.display = 'none';
+      document.getElementById("divisao2C").style.display = 'flex';
+      document.getElementById("DD").style.display = 'flex';
+      document.getElementById("DE").style.display = 'flex';
+      document.getElementById("grafico2").style.display = 'flex';
 
-      if (servidores.length > 2) {
-        alert("Escolha apenas 2 servidores!", servidores.length)
+      // Requisição para obter dados de comparação
+      fetch(`/dashboard/comparar?${queryParams.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao obter os dados do ranking');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("dados GRAFICO2:", data);
+          let nomeServ = [];
+          let totalServ = [];
+          let somaTotal = 0;
 
-      } else if (servidores.length == 1) {
-        alert("Escolha apenas mais 1 servidor!")
-      }
+          // Limpar a div comparacao2 antes de adicionar os novos dados
+          comparacao.innerHTML = "";
+
+          // Adicionar dados na div comparacao2
+          data.forEach(item => {
+            nomeServ.push(item.servidor);
+            totalServ.push(item.total_alertas);
+            somaTotal += item.total_alertas;
+          });
+
+          comparacao.innerHTML += `
+            <p>
+              <strong>Total de alertas:</strong> ${somaTotal} <br>
+          
+            </p>
+          `;
+
+          // plotar o gráfico após adicionar os dados no gráfico
+          plotarGrafico2(nomeServ, totalServ);
+        })
+        .catch(error => {
+          console.error('Erro na requisição do ranking para comparar2', error);
+        });
+
 
 
     } else {
@@ -432,6 +534,7 @@
     const tabela = document.getElementById('ranking');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
 
     compararButton.classList.remove("clicked");
 
@@ -439,17 +542,12 @@
       analisarButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
-      const queryParams = new URLSearchParams();
 
-      queryParams.append('servidores', JSON.stringify(servidores));
-      queryParams.append('periodos', JSON.stringify(periodos));
-      queryParams.append('componentes', JSON.stringify(componentes));
-
-      console.log("URL gerada:", `/dashboard/analisar?${queryParams.toString()}`);
-
+      document.getElementById("divisao2").style.display = 'flex';
+      document.getElementById("divisao2C").style.display = 'none';
+      document.getElementById("DD").style.display = 'none';
+      document.getElementById("DE").style.display = 'none';
+      document.getElementById("grafico2").style.display = 'none';
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
         method: 'GET',
@@ -458,7 +556,7 @@
         },
       })
         .then(response => {
-          // Verifica
+  
           if (!response.ok) {
             throw new Error('Erro ao obter os dados do ranking');
           }
@@ -466,27 +564,32 @@
         })
         .then(data => {
           console.log("dados:", data)
-          // Limpa o conteúdo atual do tbody
+          // limpa o conteúdo atual do tbody
           tabela.innerHTML = '';
 
           // Loop pelos dados e criar as linhas da tabela
           //o tr define uma linha em uma tabela
           //o td cria uma célula da linha da tabela, ou seja, na horizontal.
 
-          const componentesFormatados = {
-            'cpu': 'CPU',
-            'ram': 'RAM',
-            'dados_enviados': 'Dados enviados pela rede',
-            'dados_recebidos': 'Dados recebidos pela rede'
+          const mapComponentes = {
+            'percent_use_cpu': 'CPU',
+            'percent_use_ram': 'RAM',
+            'recebido_rede': 'Rede (dados recebidos)',
+            'enviado_rede': 'Rede (dados enviados)'
+
           };
+
+
           data.forEach(item => {
 
             const linha = `<tr> 
                             <td>${item.servidor}</td>
-                            <td>${componentesFormatados[item.componente]}</td>
-                            <td>${item.total_alertas}</td>
-                            <td>${item.valor_medio}</td>
-                             <td>${item.mes}</td> 
+                            <td>${mapComponentes[item.componente]}</td>
+                            <td>${item.min}</td>
+                            <td>${item.max}</td>
+                             <td>${item.media}</td>
+
+                           
                         </tr>`;
             tabela.innerHTML += linha;
           });
@@ -655,6 +758,7 @@
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
     document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
+    document.getElementById("grafico2").innerHTML += `<canvas id="myChartCanvas2"></canvas>`;
     await obterDadosGrafico();
   }
 
@@ -679,6 +783,7 @@
   }
 
   var grafico
+  var grafico2
 
   // Função para plotar o gráfico
   function plotarGrafico(resposta) {
@@ -770,6 +875,67 @@
     grafico = new Chart(document.getElementById('myChartCanvas'), config);
 
   }
+
+  function plotarGrafico2(nomeServ, totalServ) {
+
+    const labels = nomeServ;
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Comparação da quantidade de alertas por servidor',
+        data: totalServ,
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)'
+        ],
+        borderWidth: 2
+      }]
+    };
+
+    const config2 = {
+      type: 'pie',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: {
+                size: 14
+              },
+              color: '#333'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const percentage = ((value / totalServ.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                return `${label}: ${value} alertas (${percentage}%)`;
+              }
+            },
+          }
+        }
+      }
+    };
+
+    // Verifica se existe um gráfico anterior e destrói para evitar duplicatas
+    if (grafico2) {
+      grafico2.destroy();
+    }
+
+    // Renderiza o novo gráfico no canvas
+    grafico2 = new Chart(document.getElementById('myChartCanvas2'), config2);
+  }
+
+
+
 
 
   // Chama a função para fazer a requisição inicial e preencher o select

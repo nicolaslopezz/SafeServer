@@ -93,9 +93,9 @@
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
           <option value="">Componente: </option>
-          <option selected id="cpuRam" value="cpuRam">CPU E RAM %</option>
-          <option id="dadosRec" value="dadosRec">Dados Recebidos</option>
-          <option id="dadosEnv" value="dadosEnv">Dados Enviados</option>
+          <option id="cpuRam" value="cpuRam" class="option">CPU E RAM %</option>
+          <option id="dadosRec" value="dadosRec" class="option">Dados Recebidos</option>
+          <option id="dadosEnv" value="dadosEnv" class="option">Dados Enviados</option>
         </select>
       </div>
       <div id="graficos">
@@ -106,6 +106,7 @@
             <div id="percentCpu" class="percentCpu"></div>
             <div id="percentRam" class="percentRam"></div>
           </div>
+          <div id="qtdAlertas" class="qtdAlertas"></div>
           <div id="dimensaoGraficoCpu" class="dimensaoGraficoCpu">
             <div class="corFundoGrafico">
               <div id="graficoCpuERam" width="400" height="200"></div>
@@ -115,20 +116,22 @@
 
         <div id="grafico2" class="display-none">
           <div id="tituloDashRec" class="tituloDashRec"></div>
-          <div id="situacaoRedeRec" class="situacaoComp"></div>
+          <div id="situacaoRedeRec" class="situacaoCompRec"></div>
           <div id="redeRecebida" class="gbRedeRec"></div>
+          <div id="qtdAlertasRec" class="qtdAlertasRec"></div>
           <div id="dimensaoGraficoRec" class="dimensaoGraficoRec">
-          <div id="graficoDadosRec" width="400" heigth="200"></div>
-        </div>
+            <div id="graficoDadosRec" width="400" heigth="200"></div>
+          </div>
         </div>
 
         <div id="grafico3" class="display-none">
           <div id="tituloDashEnv" class="tituloDashEnv"></div>
-          <div id="situacaoRedeEnv" class="situacaoComp"></div>
+          <div id="situacaoRedeEnv" class="situacaoCompEnv"></div>
           <div id="redeEnviada" class="gbRedeEnv"></div>
+          <div id="qtdAlertasEnv" class="qtdAlertasEnv"></div>
           <div id="dimensaoGraficoEnv" class="dimensaoGraficoEnv">
-          <div id="graficoDadosEnv" width="400" heigth="200"></div>
-        </div>
+            <div id="graficoDadosEnv" width="400" heigth="200"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -389,22 +392,53 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 100;
+        const limite = 60;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosRec = resposta.map((item) => item.recebido_rede).slice(-limite);
+        var situacaoRec = `${dadosRec[dadosRec.length - 1]}`;
 
         console.log('Rede recebida' + dadosRec);
 
         tituloDashRec.innerHTML = `<p> Desempenho da Rede - Dados Recebidos </p>`;
         situacaoRedeRec.innerHTML = `<p> Situação em Tempo Real: </p>`;
 
-        redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${dadosRec[dadosRec.length - 1]} GB`;
+        redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${situacaoRec} GB`;
+
+          const agora = new Date();
+        const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+
+        const dadosUltimaHora = [];
+        for (let i = 0; i < resposta.length; i++) {
+          const horaRegistro = new Date(resposta[i].hora);
+          if (horaRegistro >= umaHoraAtras) {
+            dadosUltimaHora.push(resposta[i]);
+          }
+        }
+
+        let alertasRedeRec = 0;
+
+        for (let i = 0; i < dadosUltimaHora.length; i++) {
+          const item = dadosUltimaHora[i];
+          labels.push(item.hora);
+          dadosRec.push(item.recebido_rede);
+
+          if (item.recebido_rede >= 75) {
+            alertasRedeRec++;
+          }
+        }  
+
+        if (situacaoRec >= 1.0) {
+          redeRecebida.innerHTML = `<p style="color: red";> REDE RECEBIDA: ${situacaoRec} GB</p>`;
+        }
+
+        qtdAlertasRec.innerHTML = `<p> Quantidade de Alertas na última hora: <br><br>
+                                    REDE RECEBIDA: ${alertasRedeRec} </p>`;
 
         const options = {
           chart: {
             type: 'area',
             height: 400,
-              width: 600,
+            width: 600,
             animations: {
               enabled: true,
               easing: 'linear',
@@ -421,7 +455,7 @@
           ],
           xaxis: {
             categories: labels,
-            labels:{
+            labels: {
               offsetY: 3,
             },
             title: {
@@ -487,19 +521,50 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 100;
+        const limite = 60;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosEnv = resposta.map((item) => item.enviado_rede).slice(-limite);
+        var situacaoEnv = `${dadosEnv[dadosEnv.length - 1]}`;
 
         tituloDashEnv.innerHTML = `<p> Desempenho da Rede - Dados Enviados </p>`;
         situacaoRedeEnv.innerHTML = `<p> Situação em Tempo Real: </p>`;
-        redeEnviada.innerHTML = `<p> REDE ENVIADA: ${dadosEnv[dadosEnv.length - 1]} GB`;
+        redeEnviada.innerHTML = `<p> REDE ENVIADA: ${situacaoEnv} GB`;
+
+        const agora = new Date();
+        const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+
+        const dadosUltimaHora = [];
+        for (let i = 0; i < resposta.length; i++) {
+          const horaRegistro = new Date(resposta[i].hora);
+          if (horaRegistro >= umaHoraAtras) {
+            dadosUltimaHora.push(resposta[i]);
+          }
+        }
+
+        let alertasRedeEnv = 0;
+
+        for (let i = 0; i < dadosUltimaHora.length; i++) {
+          const item = dadosUltimaHora[i];
+          labels.push(item.hora);
+          dadosEnv.push(item.enviado_rede);
+
+          if (item.enviado_rede >= 75) {
+            alertasRedeEnv++;
+          }
+        }  
+
+        if (situacaoEnv >= 1.0) {
+          redeEnviada.innerHTML = `<p style="color: red";> REDE ENVIADA: ${situacaoEnv} GB</p>`;
+        }
+
+        qtdAlertasEnv.innerHTML = `<p> Quantidade de Alertas na última hora: <br><br>
+                                    REDE ENVIADA: ${alertasRedeEnv} </p>`;
 
         const options = {
           chart: {
             type: 'area',
             height: 400,
-              width: 600,
+            width: 600,
             animations: {
               enabled: true,
               easing: 'linear',
@@ -587,19 +652,49 @@
         const dadosCpu = resposta.map((item) => item.percent_use_cpu).slice(-limite);
         const dadosRam = resposta.map((item) => item.percent_use_ram).slice(-limite);
 
-        // Reduzir histórico para os últimos 100 registros
-
         var situacaoCpu = `${dadosCpu[dadosCpu.length - 1]}`;
         var situacaoRam = `${dadosRam[dadosRam.length - 1]}`;
 
         percentCpu.innerHTML = `<p>CPU: ${situacaoCpu} %</p>`;
         percentRam.innerHTML = `<p>RAM: ${situacaoRam} %</p>`;
 
+        const agora = new Date();
+        const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+
+        const dadosUltimaHora = [];
+        for (let i = 0; i < resposta.length; i++) {
+          const horaRegistro = new Date(resposta[i].hora);
+          if (horaRegistro >= umaHoraAtras) {
+            dadosUltimaHora.push(resposta[i]);
+          }
+        }
+
+        let alertasCpu = 0;
+        let alertasRam = 0;
+
+        for (let i = 0; i < dadosUltimaHora.length; i++) {
+          const item = dadosUltimaHora[i];
+          labels.push(item.hora);
+          dadosCpu.push(item.percent_use_cpu);
+          dadosRam.push(item.percent_use_ram);
+
+          if (item.percent_use_cpu >= 75) {
+            alertasCpu++;
+          }
+          if (item.percent_use_ram >= 85) {
+            alertasRam++;
+          }
+        }
+
         if (situacaoCpu >= 75) {
-          percentCpu.innerHTML = `<p style="color: red";> CPU: ${situacaoCpu} %</p>`;
+          percentCpu.innerHTML = `<p style="color: red";> CPU:: ${situacaoCpu} %</p>`;
         } if (situacaoRam >= 85) {
           percentRam.innerHTML = `<p style="color: red";>RAM: ${situacaoRam} %</p>`
         }
+
+        qtdAlertas.innerHTML = `<p> Quantidade de Alertas na última hora: <br>
+                                    CPU: ${alertasCpu} <br>
+                                    RAM: ${alertasRam} </p>`;
 
         // console.log('Labels:', labelsRecentes);
         // console.log('Dados CPU:', dadosCpuRecentes);
@@ -633,7 +728,8 @@
             xaxis: {
               categories: labels,
               title: {
-                text: 'Período/Tempo'
+                text: 'Período/Tempo',
+                offsetY: -10,
               },
               labels: {
                 rotate: -30
@@ -698,6 +794,5 @@
             }
           ]);
         }
-
       }
     </script>

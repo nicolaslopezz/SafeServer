@@ -262,6 +262,18 @@ body {
   max-width: 1200px;
 }
 
+.creditsG {
+  flex: 1;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
 /*NAVBAR ACABA AQUI*/
 
 /*CSS DASH GERENTE*/
@@ -417,17 +429,16 @@ input[type="range"] {
 
 .parteSuperior {
   width: 100%;
-  height: 44%;
+  height: 38%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .parteInferior {
   width: 100%;
-  height: 54%;
+  height: 63%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -436,7 +447,7 @@ input[type="range"] {
 
 .containerSUP {
   width: 96%;
-  height: 90%;
+  height: 99%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -452,11 +463,12 @@ input[type="range"] {
 }
 
 .supTitulo {
+  margin-left: 2%;
   width: 100%;
-  height: 15%;
+  height: 13%;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   font-weight: 600;
 }
 
@@ -546,11 +558,23 @@ input[type="range"] {
 
 
 #myChartCanvas {
-  width: 33vw !important;
-  height: 33vh !important;
+  width: 32vw !important;
+  height: 31vh !important;
   z-index: -1 !important;
 }
 
+#myChartCanvas2 {
+  width: 12vw !important;
+  height: 25vh !important;
+  z-index: 2 !important;
+}
+
+.comp, .comp2 {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  color: #0e1b5b;
+}
 
 
 .containerINF {
@@ -662,11 +686,44 @@ input[type="range"] {
   background-color: white;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
   width: 100%;
-  height: 67%;
+  height: 71%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  border-radius: 12px;
+}
+
+.divisao2C {
+  width: 100%;
+  height: 67%;
+  display:none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DE {
+  background-color: white;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  width: 48%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.DD {
+  background-color: white;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  width: 48%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
 }
 
@@ -1152,9 +1209,36 @@ table th {
   align-items: center;
   margin-right: 70px;
   font-size: medium;
+  cursor: pointer;
 }
 
+select{
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  background-image: url(img/seta_processed.png); 
+  background-repeat: no-repeat;
+  background-position: right 10px center; 
+  background-size: 11px;
+  text-align: center;
+}
 
+#selectComponente{
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+#selectComponente option {
+  padding: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #202957; 
+}
+
+ .option{
+  color: white;
+  align-items: center;
+ }
 
 .dimensaoGraficoRec{
   display: flex;
@@ -1165,7 +1249,7 @@ table th {
   left: -565px;
   height: 397px;
   width: 640px;
-  top: 27px;
+  top: -70px;
 }
 
 .dimensaoGraficoCpu {
@@ -1189,7 +1273,7 @@ table th {
   left: -565px;
   height: 397px;
   width: 640px;
-  top: 27px;
+  top: -70px;
 }
 
 .tituloDashCpuERam {
@@ -1224,6 +1308,42 @@ table th {
   position: relative;
   top: 33px;
   left: 17px;
+  font-weight: bold;
+}
+
+.situacaoCompRec {
+  display: flex;
+  position: relative;
+  left: 220px;
+  top: 140px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.situacaoCompRec p {
+  display: flex;
+  position: relative;
+  top: 5px;
+  left: 3px;
+  font-weight: bold;
+}
+
+.situacaoCompEnv {
+  display: flex;
+  position: relative;
+  left: 220px;
+  top: 170px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.situacaoCompEnv p {
+  display: flex;
+  position: relative;
+  top: -20px;
+  left: 9px;
   font-weight: bold;
 }
 
@@ -1262,6 +1382,44 @@ table th {
   left: 260px;
 }
 
+.qtdAlertas{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+}
+
+.qtdAlertasEnv{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  left: 235px;
+  top: 320px;
+}
+
+.qtdAlertasRec{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  left: 235px;
+  top: 320px;
+}
+
 .gbRedeRec {
   display: flex;
   position: relative;
@@ -1270,17 +1428,17 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 188px;
-  height: 52px;
-  left: 260px;
-  top: 190px;
+  width: 210px;
+  height: 60px;
+  left: 255px;
+  top: 245px;
 }
 
 .tituloDashRec{
   display: flex;
   position: relative;
   left: -477px;
-  top: 45px;
+  top: 148px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;
@@ -1306,17 +1464,17 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 188px;
-  height: 52px;
-  left: 260px;
-  top: 190px;
+  width: 210px;
+  height: 60px;
+  left: 255px;
+  top: 245px;
 }
 
 .tituloDashEnv{
   display: flex;
   position: relative;
   left: -477px;
-  top: 45px;
+  top: 148px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;

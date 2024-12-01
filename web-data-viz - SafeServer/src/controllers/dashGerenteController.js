@@ -17,8 +17,6 @@ function obterDados(req, res) {
                         res.status(403).send("Nenhum resultado encontrado");
                     }
                     res.json(resultadoSelect)
-
-
                 }
             ).catch(
                 function (erro) {
@@ -28,7 +26,6 @@ function obterDados(req, res) {
                 }
             );
     }
-
 }
 
 module.exports = {

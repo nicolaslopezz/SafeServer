@@ -52,4 +52,13 @@ router.get("/periodo/:empresa", function (req, res) {
 router.get("/analisar", function (req, res) {
     dashboardController.analisar(req, res);
 });
+
+router.get("/comparar", function (req, res) {
+    dashboardController.comparar(req, res);
+});
+
+
+
+
+
 module.exports = router;

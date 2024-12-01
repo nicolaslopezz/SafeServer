@@ -20,7 +20,7 @@ limiteREDE = 1.0  # GB
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '#Gf49053476881',
+    'password': '',
     'database': 'SafeServer'
 }
 
