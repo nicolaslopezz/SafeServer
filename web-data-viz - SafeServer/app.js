@@ -22,6 +22,7 @@ var empresasRouter = require("./src/routes/empresas");
 var dashGerenteRouter = require("./src/routes/dashGerente");
 var servidoresRouter = require("./src/routes/servidores");
 var dashGerente02Router = require("./src/routes/dashGerente02.js")
+var dashGerente02Controller = require("./src/controllers/dashGerente02Controller.js")
 
 const getIssueByID = require('./src/routes/get-issues.js');
 
