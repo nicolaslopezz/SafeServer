@@ -141,6 +141,36 @@ async function getDados(servidorId) {
   }
 }
 
+async function dadosGraficoOscilacao(serverId, component, date) {
+  var instrucaoSql = `
+      SELECT HOUR(timestamp) AS hour, oscilacao
+        FROM estatisticas_horarias
+        WHERE fkServidor = ${serverId}
+          AND componente = "${component}"
+          AND DATE(timestamp) = "${date}"
+        ORDER BY hour;
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  try {
+    var rows = await database.executar(instrucaoSql, [serverId, component, date]);
+
+    console.log("Resultado da consulta:", rows);
+
+    if (Array.isArray(rows) && rows.length === 0) {
+      console.log("Nenhum dado encontrado para os parâmetros fornecidos.");
+      return [];
+    } else {
+      console.log("Dados encontrados:", rows);
+      return rows;
+    }
+  } catch (erro) {
+    console.error("Erro ao executar consulta:", erro);
+    throw erro;
+  }
+}
+
 module.exports = {
   getServidores,
   getDesvioPadraoCPU,
@@ -148,5 +178,5 @@ module.exports = {
   guardarResultado,
   datasDisponiveis,
   dadosGrafico,
-  getDados
+  dadosGraficoOscilacao
 };

@@ -60,7 +60,18 @@ async function dadosGrafico(req, res) {
         var data = await dashGerente02Model.dadosGrafico(serverId, component, date);
         res.json(data);
     } catch (error) {
-        console.error("Erro ao buscar dados do gráfico:", error);
+        console.error("Erro ao buscar dados do gráfico de estabilidade:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados do gráfico.' });
+    }
+}
+
+async function dadosGraficoOscilacao(req, res) {
+    var { serverId, component, date } = req.query;
+    try {
+        var data = await dashGerente02Model.dadosGraficoOscilacao(serverId, component, date);
+        res.json(data);
+    } catch (error) {
+        console.error("Erro ao buscar dados do gráfico de oscilação:", error);
         res.status(500).json({ error: 'Erro ao buscar dados do gráfico.' });
     }
 }
@@ -68,5 +79,6 @@ async function dadosGrafico(req, res) {
 module.exports = {
     calcularDesvioPadraoeOscilacao,
     datasDisponiveis,
-    dadosGrafico
+    dadosGrafico,
+    dadosGraficoOscilacao
 }
