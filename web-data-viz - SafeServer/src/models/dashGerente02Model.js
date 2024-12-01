@@ -71,7 +71,6 @@ async function datasDisponiveis(serverId) {
   }
 }
 
-
 async function dadosGrafico(serverId, component, date) {
   var instrucaoSql = `
       SELECT HOUR(timestamp) AS hour, desvio_padrao
@@ -85,32 +84,26 @@ async function dadosGrafico(serverId, component, date) {
   console.log("Parâmetros para consulta:", [serverId, component, date]);
 
   try {
-    // Executando a consulta
     var [rows] = await database.executar(instrucaoSql, [serverId, component, date]);
-    
-    // Log após execução da consulta para mostrar o resultado
+
     console.log("Resultado da consulta:", rows);
 
-    // Garantir que o retorno seja tratado como um array
     if (!Array.isArray(rows)) {
-      rows = [rows]; // Converte para array caso o resultado seja um único objeto
+      rows = [rows];
     }
 
-    // Verificar se o array de resultados tem dados
     if (rows.length === 0) {
       console.log("Nenhum dado encontrado para os parâmetros fornecidos.");
-      return []; // Retorna um array vazio
+      return [];
     } else {
       console.log("Dados encontrados:", rows);
-      return rows; // Retorna os dados encontrados
+      return rows;
     }
   } catch (erro) {
-    // Se ocorrer um erro na execução da consulta
     console.error("Erro ao executar consulta:", erro);
-    throw erro; // Relança o erro para que possa ser tratado em outro lugar, se necessário
+    throw erro;
   }
 }
-
 
 module.exports = {
   getServidores,

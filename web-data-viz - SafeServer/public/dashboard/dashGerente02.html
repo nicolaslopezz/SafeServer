@@ -198,14 +198,12 @@
 
     let selectedServerId = null;
 
-    // Seleção de servidor
     serverElements.forEach((server) => {
       server.addEventListener("click", function () {
         selecionarServidor(server);
       });
     });
 
-    // Selecionar servidor e buscar datas
     function selecionarServidor(server) {
       serverElements.forEach((el) => el.classList.remove("selected"));
       server.classList.add("selected");
@@ -213,14 +211,13 @@
 
       if (isNaN(selectedServerId)) {
         console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
-        return; // Interrompe o processo se o serverId não for válido
+        return;
       }
 
       console.log("Servidor selecionado:", selectedServerId);
       obterDatas(selectedServerId);
     }
 
-    // Buscar datas disponíveis
     function obterDatas(serverId) {
       console.log("Buscando datas para o servidor:", serverId);
 
@@ -244,7 +241,6 @@
         });
     }
 
-    // Atualizar o dropdown de datas
     function atualizarDatas(dates) {
       console.log("Atualizando dropdown de datas:", dates);
 
@@ -257,7 +253,6 @@
       });
     }
 
-    // Adicionar event listener aos selects
     [selectComponent, selectDate].forEach((select) => {
       select.addEventListener("change", () => {
         if (selectedServerId && selectComponent.value && selectDate.value) {
@@ -266,7 +261,6 @@
       });
     });
 
-    // Buscar dados do gráfico
     function obterDadosGrafico(serverId, component, date) {
       console.log("Buscando dados do gráfico para:");
       console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
@@ -293,50 +287,48 @@
         });
     }
 
-    // Atualizar o gráfico
     function atualizarGrafico(data) {
-  console.log("Atualizando gráfico com dados:", data);
+      console.log("Atualizando gráfico com dados:", data);
 
-  if (meuGrafico) {
-    meuGrafico.destroy(); // Destruir gráfico anterior, se existir
-  }
+      if (meuGrafico) {
+        meuGrafico.destroy();
+      }
 
-  // Transformando os dados em um formato que o Chart.js espera
-  const labels = data.map((row) => `${row.hour}`); // Usando as horas como labels
-  const values = data.map((row) => parseFloat(row.desvio_padrao)); // Convertendo desvio_padrao para número
+      const labels = data.map((row) => `${row.hour}`);
+      const values = data.map((row) => parseFloat(row.desvio_padrao));
 
-  meuGrafico = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels, // Labels são as horas
-      datasets: [{
-        label: 'Desvio padrão',
-        data: values, // Os valores de desvio padrão
-        backgroundColor: 'rgb(212, 214, 84)',
-        borderColor: 'rgb(180, 182, 69)',
-        borderWidth: 3
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Desvio Padrão'
-          }
+      meuGrafico = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Desvio padrão',
+            data: values,
+            backgroundColor: 'rgb(212, 214, 84)',
+            borderColor: 'rgb(180, 182, 69)',
+            borderWidth: 3
+          }]
         },
-        x: {
-          title: {
-            display: true,
-            text: 'Hora'
-          }
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Desvio Padrão'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Hora'
+              }
+            }
+          },
+          devicePixelRatio: 3
         }
-      },
-      devicePixelRatio: 3
+      });
     }
-  });
-}
 
   });
 
