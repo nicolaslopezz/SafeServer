@@ -201,10 +201,11 @@
                   <thead>
                     <tr id="trr"> <!-- titulo do cabeçalho, primeira linha -->
                       <th id="thh">Servidor</th> <!-- cabeçalho da primeira coluna -->
-                      <th id="thh">Total de Alertas</th> <!-- cabeçalho da segunda coluna -->
-                      <th id="thh">Componente</th>
-                      <th id="thh">Relação com o Limite</th>
-                      <th id="thh">Mês</th>
+                      <th id="thh">Componente</th> <!-- cabeçalho da segunda coluna -->
+                      <th id="thh">Minimo</th>
+                      <th id="thh">Máximo</th>
+                      <th id="thh">Média</th>
+
                     </tr>
                   </thead>
                   <tbody id="ranking">
@@ -221,14 +222,16 @@
                 <div id="grafico2">
 
                 </div>
-                <div id="grafico"></div>
+
               </div>
 
               <div class="DD" id="DD">
 
-                <div class="comp">
+                <div class="comp" id="comp">
 
                 </div>
+
+
 
               </div>
             </div>
@@ -461,26 +464,21 @@
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
     const queryParams = gerarQueryParams();
 
+    // Garantir que o botão de comparação esteja no estado certo
     analisarButton.classList.remove("clicked");
 
     if (cont == 0 || !compararButton.classList.contains("clicked")) {
       compararButton.classList.add("clicked");
       cont = 1;
 
-
-      // if (servidores.length > 2) {
-      //   alert("Escolha apenas 2 servidores!", servidores.length)
-
-      // } else if (servidores.length == 1) {
-      //   alert("Escolha apenas mais 1 servidor!")
-      // }
-
+      // Mostrar/ocultar elementos da página conforme necessário
       document.getElementById("divisao2").style.display = 'none';
       document.getElementById("divisao2C").style.display = 'flex';
       document.getElementById("DD").style.display = 'flex';
       document.getElementById("DE").style.display = 'flex';
       document.getElementById("grafico2").style.display = 'flex';
 
+      // Requisição para obter dados de comparação
       fetch(`/dashboard/comparar?${queryParams.toString()}`, {
         method: 'GET',
         headers: {
@@ -488,39 +486,47 @@
         },
       })
         .then(response => {
-          // Verifica
           if (!response.ok) {
             throw new Error('Erro ao obter os dados do ranking');
           }
           return response.json();
         })
         .then(data => {
-          console.log("dados:", data)
-          nomeServ = []
-          totalServ = []
+          console.log("dados GRAFICO2:", data);
+          let nomeServ = [];
+          let totalServ = [];
+          let somaTotal = 0;
 
+          // Limpar a div comparacao2 antes de adicionar os novos dados
+          comparacao.innerHTML = "";
+
+          // Adicionar dados na div comparacao2
           data.forEach(item => {
-
-        
-            nomeServ.push(item.servidor)
-            totalServ.push(item.total_alertas)
-          
-
+            nomeServ.push(item.servidor);
+            totalServ.push(item.total_alertas);
+            somaTotal += item.total_alertas;
           });
 
+          comparacao.innerHTML += `
+            <p>
+              <strong>Total de alertas:</strong> ${somaTotal} <br>
+          
+            </p>
+          `;
 
+          // plotar o gráfico após adicionar os dados no gráfico
           plotarGrafico2(nomeServ, totalServ);
         })
         .catch(error => {
-          console.error('Erro na requisição do ranking', error);
+          console.error('Erro na requisição do ranking para comparar2', error);
         });
+
 
 
     } else {
       compararButton.classList.remove("clicked");
       cont = 0;
     }
-
 
   }
 
@@ -550,7 +556,7 @@
         },
       })
         .then(response => {
-          // Verifica
+  
           if (!response.ok) {
             throw new Error('Erro ao obter os dados do ranking');
           }
@@ -558,27 +564,32 @@
         })
         .then(data => {
           console.log("dados:", data)
-          // Limpa o conteúdo atual do tbody
+          // limpa o conteúdo atual do tbody
           tabela.innerHTML = '';
 
           // Loop pelos dados e criar as linhas da tabela
           //o tr define uma linha em uma tabela
           //o td cria uma célula da linha da tabela, ou seja, na horizontal.
 
-          const componentesFormatados = {
-            'cpu': 'CPU',
-            'ram': 'RAM',
-            'rede_enviada': 'Rede dados enviados',
-            'rede_recebida': 'Rede dados recebidos'
+          const mapComponentes = {
+            'percent_use_cpu': 'CPU',
+            'percent_use_ram': 'RAM',
+            'recebido_rede': 'Rede (dados recebidos)',
+            'enviado_rede': 'Rede (dados enviados)'
+
           };
+
+
           data.forEach(item => {
 
             const linha = `<tr> 
                             <td>${item.servidor}</td>
-                            <td>${componentesFormatados[item.componente]}</td>
-                            <td>${item.total_alertas}</td>
-                            <td>${item.valor_medio}</td>
-                             <td>${item.mes}</td> 
+                            <td>${mapComponentes[item.componente]}</td>
+                            <td>${item.min}</td>
+                            <td>${item.max}</td>
+                             <td>${item.media}</td>
+
+                           
                         </tr>`;
             tabela.innerHTML += linha;
           });
@@ -866,6 +877,7 @@
   }
 
   function plotarGrafico2(nomeServ, totalServ) {
+
     const labels = nomeServ;
     const dados = {
       labels: labels,
@@ -899,15 +911,15 @@
               color: '#333'
             }
           },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const label = context.label || '';
-              const value = context.raw || 0;
-              const percentage = ((value / totalServ.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
-              return `${label}: ${value} alertas (${percentage}%)`;
-            }
-          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const percentage = ((value / totalServ.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                return `${label}: ${value} alertas (${percentage}%)`;
+              }
+            },
           }
         }
       }
