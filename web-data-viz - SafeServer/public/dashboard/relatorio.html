@@ -5,7 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
   <!-- bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
@@ -33,7 +36,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
-  <title>Relatório - Nuvem de Palavras</title>
+  <title>Relatório-Gerente</title>
 </head>
 
 <body>
@@ -44,7 +47,7 @@
       </div>
       <div class="head">
         <div class="user-img">
-          <img src="../assets/imgs/contact.png" alt="User Image" />
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
           <p class="title" id="cargoUsuario"></p>
@@ -55,8 +58,21 @@
         <div class="menu">
           <p class="title">Menu</p>
           <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
             <li class="active">
-              <a href="#">
+              <a href="">
                 <i class="icon ph-bold ph-file-text"></i>
                 <span class="text">Relatório</span>
               </a>
@@ -76,16 +92,24 @@
           </ul>
         </div>
         <div class="menu">
-          <p class="title">Conta</p>
+          <p class="title"></p>
           <ul>
             <li>
-              <a href="../index.html">
-                <i class="icon ph-bold ph-sign-out"></i>
-                <span class="text">Sair</span>
-              </a>
+
             </li>
           </ul>
         </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -109,7 +133,7 @@
                 </div>
                 <div class="supImg2">
                   <!-- Div para exibir a Word Cloud -->
-                  <div id="word" style="width: 500px; height: 190px;"></div>
+                  <div id="word" style="width: 450px; height: 195px;"></div>
 
                 </div>
 
@@ -190,8 +214,26 @@
                   </tbody>
                 </table>
               </div>
-
             </div>
+
+            <div class="divisao2C" id="divisao2C" display="none">
+              <div class="DE" id="DE">
+                <div id="grafico2">
+
+                </div>
+                <div id="grafico"></div>
+              </div>
+
+              <div class="DD" id="DD">
+
+                <div class="comp">
+
+                </div>
+
+              </div>
+            </div>
+
+
 
           </div>
         </div>
@@ -382,7 +424,7 @@
   function obterComponenteRelatorio() {
     componenteSelecionado = [];
     const select = document.getElementById("componenteRelatorio");
-  
+
     const componente = {
       "Uso da CPU": "cpu",
       "Uso da RAM": "ram",
@@ -397,12 +439,27 @@
     console.log("componentes selecionados:", componenteSelecionado);
   }
 
+  function gerarQueryParams() {
+    const servidores = obterServidorRelatorio();
+    const periodos = obterPeriodoRelatorio();
+    const componentes = obterComponenteRelatorio();
+
+    const queryParams = new URLSearchParams();
+    queryParams.append('servidores', JSON.stringify(servidores));
+    queryParams.append('periodos', JSON.stringify(periodos));
+    queryParams.append('componentes', JSON.stringify(componentes));
+
+    return queryParams.toString();
+  }
+
 
   cont = 0
 
   function comparar() {
+    const comparacao = document.getElementById('comp');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
 
     analisarButton.classList.remove("clicked");
 
@@ -410,9 +467,6 @@
       compararButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
 
       // if (servidores.length > 2) {
       //   alert("Escolha apenas 2 servidores!", servidores.length)
@@ -421,12 +475,52 @@
       //   alert("Escolha apenas mais 1 servidor!")
       // }
 
-      document.getElementById("divisao2").style.display ='none';
+      document.getElementById("divisao2").style.display = 'none';
+      document.getElementById("divisao2C").style.display = 'flex';
+      document.getElementById("DD").style.display = 'flex';
+      document.getElementById("DE").style.display = 'flex';
+      document.getElementById("grafico2").style.display = 'flex';
+
+      fetch(`/dashboard/comparar?${queryParams.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          // Verifica
+          if (!response.ok) {
+            throw new Error('Erro ao obter os dados do ranking');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("dados:", data)
+          nomeServ = []
+          totalServ = []
+
+          data.forEach(item => {
+
+        
+            nomeServ.push(item.servidor)
+            totalServ.push(item.total_alertas)
+          
+
+          });
+
+
+          plotarGrafico2(nomeServ, totalServ);
+        })
+        .catch(error => {
+          console.error('Erro na requisição do ranking', error);
+        });
+
 
     } else {
       compararButton.classList.remove("clicked");
       cont = 0;
     }
+
 
   }
 
@@ -434,6 +528,7 @@
     const tabela = document.getElementById('ranking');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
 
     compararButton.classList.remove("clicked");
 
@@ -441,19 +536,12 @@
       analisarButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
-      const queryParams = new URLSearchParams();
 
-      document.getElementById("divisao2").style.display ='flex';
-
-      queryParams.append('servidores', JSON.stringify(servidores));
-      queryParams.append('periodos', JSON.stringify(periodos));
-      queryParams.append('componentes', JSON.stringify(componentes));
-
-      console.log("URL gerada:", `/dashboard/analisar?${queryParams.toString()}`);
-
+      document.getElementById("divisao2").style.display = 'flex';
+      document.getElementById("divisao2C").style.display = 'none';
+      document.getElementById("DD").style.display = 'none';
+      document.getElementById("DE").style.display = 'none';
+      document.getElementById("grafico2").style.display = 'none';
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
         method: 'GET',
@@ -659,6 +747,7 @@
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
     document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
+    document.getElementById("grafico2").innerHTML += `<canvas id="myChartCanvas2"></canvas>`;
     await obterDadosGrafico();
   }
 
@@ -683,6 +772,7 @@
   }
 
   var grafico
+  var grafico2
 
   // Função para plotar o gráfico
   function plotarGrafico(resposta) {
@@ -774,6 +864,66 @@
     grafico = new Chart(document.getElementById('myChartCanvas'), config);
 
   }
+
+  function plotarGrafico2(nomeServ, totalServ) {
+    const labels = nomeServ;
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Comparação da quantidade de alertas por servidor',
+        data: totalServ,
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)'
+        ],
+        borderWidth: 2
+      }]
+    };
+
+    const config2 = {
+      type: 'pie',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: {
+                size: 14
+              },
+              color: '#333'
+            }
+          },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.label || '';
+              const value = context.raw || 0;
+              const percentage = ((value / totalServ.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+              return `${label}: ${value} alertas (${percentage}%)`;
+            }
+          },
+          }
+        }
+      }
+    };
+
+    // Verifica se existe um gráfico anterior e destrói para evitar duplicatas
+    if (grafico2) {
+      grafico2.destroy();
+    }
+
+    // Renderiza o novo gráfico no canvas
+    grafico2 = new Chart(document.getElementById('myChartCanvas2'), config2);
+  }
+
+
+
 
 
   // Chama a função para fazer a requisição inicial e preencher o select
