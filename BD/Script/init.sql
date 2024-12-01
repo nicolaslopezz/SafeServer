@@ -7,6 +7,7 @@ create database SafeServer;
  
 use SafeServer;
 
+
 create table empresa(
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(60) not null,
@@ -59,7 +60,9 @@ join servidor s on r.fkServidor = s.idServidor
 Join empresa e on s.fkEmpresa = e.idEmpresa
 WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
-*/
+
+select * from registro;
+
 
 create table alerta (
 idAlerta int primary key auto_increment,
@@ -68,25 +71,22 @@ fkRegistro int,
 constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
 );
 
+
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
 
--- Inserir dados na tabela chaveAcesso
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 ('abcd', 2, 1, 'Analista');
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
-('reader', 1, 'US-EAST-1');
-INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
+('reader', 1, 'US-EAST-1'),
 ('writer', 1, 'US-EAST-1');
 
-
--- Inserir dados na tabela funcionario
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 1),
 ('Marta', 'marta@gmail.com', '12345678901', '123456', 1, 1);
 
--- Inserir registros para o dia 25 de dezembro
+
 INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor)
 VALUES 
 ('2024-12-25 10:00:00', 92, 93, 32, 1, 700, 450, 1),  
@@ -114,8 +114,8 @@ VALUES
 ('2024-05-01 10:00:00', 74, 72, 27, 3, 620, 340, 2),  
 ('2024-05-01 18:00:00', 75, 77, 28, 2, 630, 330, 2);
 
-
-INSERT INTO alerta (componente, fkRegistro)
+-- Inserir dados na tabela alerta
+INSERT INTO alerta (componente, fkRegistro) 
 VALUES 
 ('cpu', 1),
 ('ram', 1),
@@ -159,7 +159,6 @@ VALUES
 ('cpu', 14),
 ('ram', 14),
 ('rede_recebida', 14);
-
 
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
