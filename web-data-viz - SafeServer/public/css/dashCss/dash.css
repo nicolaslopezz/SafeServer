@@ -1203,9 +1203,36 @@ table th {
   align-items: center;
   margin-right: 70px;
   font-size: medium;
+  cursor: pointer;
 }
 
+select{
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  background-image: url(img/seta_processed.png); 
+  background-repeat: no-repeat;
+  background-position: right 10px center; 
+  background-size: 11px;
+  text-align: center;
+}
 
+#selectComponente{
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+#selectComponente option {
+  padding: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #202957; 
+}
+
+ .option{
+  color: white;
+  align-items: center;
+ }
 
 .dimensaoGraficoRec{
   display: flex;
@@ -1216,7 +1243,7 @@ table th {
   left: -565px;
   height: 397px;
   width: 640px;
-  top: 27px;
+  top: -70px;
 }
 
 .dimensaoGraficoCpu {
@@ -1240,7 +1267,7 @@ table th {
   left: -565px;
   height: 397px;
   width: 640px;
-  top: 27px;
+  top: -70px;
 }
 
 .tituloDashCpuERam {
@@ -1275,6 +1302,42 @@ table th {
   position: relative;
   top: 33px;
   left: 17px;
+  font-weight: bold;
+}
+
+.situacaoCompRec {
+  display: flex;
+  position: relative;
+  left: 220px;
+  top: 140px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.situacaoCompRec p {
+  display: flex;
+  position: relative;
+  top: 5px;
+  left: 3px;
+  font-weight: bold;
+}
+
+.situacaoCompEnv {
+  display: flex;
+  position: relative;
+  left: 220px;
+  top: 170px;
+  font-size: 21px;
+  color: #202957;
+  font-weight: bold;
+}
+
+.situacaoCompEnv p {
+  display: flex;
+  position: relative;
+  top: -20px;
+  left: 9px;
   font-weight: bold;
 }
 
@@ -1313,6 +1376,44 @@ table th {
   left: 260px;
 }
 
+.qtdAlertas{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+}
+
+.qtdAlertasEnv{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  left: 235px;
+  top: 320px;
+}
+
+.qtdAlertasRec{
+  display: flex;
+  position: relative;
+  background-color: #202957;
+  align-items: center;
+  border-radius: 11px;
+  width: 250px;
+  height: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  left: 235px;
+  top: 320px;
+}
+
 .gbRedeRec {
   display: flex;
   position: relative;
@@ -1321,17 +1422,17 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 188px;
-  height: 52px;
-  left: 260px;
-  top: 190px;
+  width: 210px;
+  height: 60px;
+  left: 255px;
+  top: 245px;
 }
 
 .tituloDashRec{
   display: flex;
   position: relative;
   left: -477px;
-  top: 45px;
+  top: 148px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;
@@ -1357,17 +1458,17 @@ table th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 188px;
-  height: 52px;
-  left: 260px;
-  top: 190px;
+  width: 210px;
+  height: 60px;
+  left: 255px;
+  top: 245px;
 }
 
 .tituloDashEnv{
   display: flex;
   position: relative;
   left: -477px;
-  top: 45px;
+  top: 148px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;

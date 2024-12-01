@@ -89,100 +89,95 @@
     </div>
     <div class="content-dash-gerente flex main">
       <div class="charts">
+        <div class="servers">
           <div class="servers">
-            <div class="sv-01 server selected">
-              Server 001
-            </div>
-            <div class="sv-02 server">
-              Server 002
-            </div>
-            <div class="sv-03 server">
-              Server 003
-            </div>
-            <div class="sv-04 server">
-              Server 004
-            </div>
+            <div class="sv-01 server selected" data-id="1">Server 001</div>
+            <div class="sv-02 server" data-id="2">Server 002</div>
+            <div class="sv-03 server" data-id="3">Server 003</div>
+            <div class="sv-04 server" data-id="4">Server 004</div>
           </div>
-          <div class="stability chart">
-            <div class="metric">
-              <div class="horario-maior-stab metric-box">
-                <div class="text-box">
-                  Horário de Maior Estabilidade
-                </div>
-                <div class="values">
-
-                </div>
+        </div>
+        <div class="stability chart">
+          <div class="metric">
+            <div class="horario-maior-stab metric-box">
+              <div class="text-box">
+                Horário de Maior Estabilidade
               </div>
-              <div class="horario-menor-stab metric-box">
-                <div class="text-box">
-                  Horário de Menor Estabilidade
-                </div>
-                <div class="values">
+              <div class="values">
 
-                </div>
               </div>
             </div>
-            <div class="chart-stability">
-              
-              <div class="header">
-                <div class="combo-box">
-                  <select name="component" id="select_component" class="select">
-                    <option value="" disabled selected>Componente</option>
-                    <option value="">CPU</option>
-                    <option value="">RAM</option>
-                  </select>
-                  <select name="date" id="select_date" class="select">
-                    <option value="" selected disabled>Data</option>
-                  </select>
-                </div>
-                <div class="chart-title">Estabilidade de uso</div>
+            <div class="horario-menor-stab metric-box">
+              <div class="text-box">
+                Horário de Menor Estabilidade
               </div>
-              <div class="chart-gerente-02">  
-                <canvas id="MyChart01" ></canvas>
+              <div class="values">
+
               </div>
             </div>
           </div>
-          <div class="oscilation chart">
-            <div class="metric">
-              <div class="horario-maior-osc metric-box">
-                <div class="text-box">
-                  Horário de Maior Oscilação
-                </div>
-                <div class="values">
+          <div class="chart-stability">
 
-                </div>
+            <div class="header">
+              <div class="combo-box">
+                <select name="component" id="select_component_stab" class="select">
+                  <option value="" disabled selected>Componente</option>
+                  <option value="cpu">CPU</option>
+                  <option value="ram">RAM</option>
+                </select>
+                <select name="date" id="select_date" class="select">
+                  <option value="" selected disabled>Data</option>
+                </select>
               </div>
-              <div class="horario-menor-osc metric-box">
-                <div class="text-box">
-                  Horário de Menor Oscilação
-                </div>
-                <div class="values">
-
-                </div>
-              </div>
+              <div class="chart-title">Estabilidade de uso</div>
             </div>
-            <div class="chart-oscilation">
-              <div class="header">
-                <div class="combo-box">
-                  <select name="component" id="select_component" class="select">
-                    <option value="" disabled selected>Componente</option>
-                    <option value="">CPU</option>
-                    <option value="">RAM</option>
-                  </select>
-                  <select name="date" id="select_date" class="select">
-                    <option value="" selected disabled>Data</option>
-                  </select>
-                </div>
-                <div class="chart-title">Taxa de Oscilação</div>
-              </div>
-              <div class="chart-gerente-03">  
-                <canvas id="MyChart02" ></canvas>
-              </div>
+            <div class="chart-gerente-02">
+              <canvas id="MyChart01"></canvas>
             </div>
           </div>
         </div>
-  </div>
+        <div class="oscilation chart">
+          <div class="metric">
+            <div class="horario-maior-osc metric-box">
+              <div class="text-box">
+                Horário de Maior Oscilação
+              </div>
+              <div class="values">
+
+              </div>
+            </div>
+            <div class="horario-menor-osc metric-box">
+              <div class="text-box">
+                Horário de Menor Oscilação
+              </div>
+              <div class="values">
+
+              </div>
+            </div>
+          </div>
+          <div class="chart-oscilation">
+            <div class="header">
+              <div class="combo-box">
+                <select name="component" id="select_component" class="select">
+                  <option value="" disabled selected>Componente</option>
+                  <option value="">CPU</option>
+                  <option value="">RAM</option>
+                </select>
+                <select name="date" id="select_date" class="select">
+                  <option value="" selected disabled>Data</option>
+                </select>
+              </div>
+              <div class="chart-title">Taxa de Oscilação</div>
+            </div>
+            <div class="chart-gerente-03">
+              <canvas id="MyChart02"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
+
 </html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
@@ -192,87 +187,242 @@
 <script src="../js/script.js"></script>
 
 <script>
+
   document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('MyChart01').getContext('2d');
+    let meuGrafico;
 
-    const meuGrafico = new Chart(ctx, {
-        type: 'bar', 
-        data: {
-            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], 
-            datasets: [{
-                label: 'Desvio padrão',
-                data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11], 
-                backgroundColor: 'rgb(212, 214, 84)',
-                borderColor: 'rgb(180, 182, 69)',
-                borderWidth: 3  
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true 
-                }
-            },
-            devicePixelRatio: 3
-        }
+    const selectComponent = document.getElementById("select_component_stab");
+    const selectDate = document.getElementById("select_date");
+    const serverElements = document.querySelectorAll(".server");
+
+    let selectedServerId = null;
+
+    // Seleção de servidor
+    serverElements.forEach((server) => {
+      server.addEventListener("click", function () {
+        selecionarServidor(server);
+      });
     });
-  });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById('MyChart02').getContext('2d');
+    // Selecionar servidor e buscar datas
+    function selecionarServidor(server) {
+      serverElements.forEach((el) => el.classList.remove("selected"));
+      server.classList.add("selected");
+      selectedServerId = parseInt(server.getAttribute("data-id"), 10);
 
-    const meuGrafico = new Chart(ctx, {
-        type: 'line', 
-        data: {
-            labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', "25", "26", "27", "28", "29", "30"], 
-            datasets: [{
-                label: 'Taxa de Oscilação',
-                data: [18, 26, 23, 35, 36, 51, 48, 37, 89, 125, 45, 32, 43, 12, 56, 67, 54, 34, 54, 93, 23, 54, 22, 34, 20, 23, 23, 40, 99, 75], 
-                backgroundColor: 'rgb(70,130,180',
-                borderColor: 'rgb(65,105,225)',
-                borderWidth: 3  
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true 
-                }
-            },
-            devicePixelRatio: 3
-        }
-    });
-  });
-
-  obterDados()
-  function obterDados() {''
-
-    var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-    console.log(idEmpresa)
-
-    fetch("/dashGerente/obterDados", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        idEmpresaServer: idEmpresa
-      })
-    }).then(function (resposta) {
-      if (resposta.ok) {
-        console.log("DADOS RECEBIDOS:", resposta)
-        teste = resposta.json().then(json => {
-          console.log(json)
-          plotar(json)
-        })
-      } else {
-        // console.log("Houve um erro ao receber os dados no cards.html")
+      if (isNaN(selectedServerId)) {
+        console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
+        return; // Interrompe o processo se o serverId não for válido
       }
-    }).catch(function (erro) {
-      console.log("CATCH DO FETCH")
-      console.log(erro)
-    })
+
+      console.log("Servidor selecionado:", selectedServerId);
+      obterDatas(selectedServerId);
+    }
+
+    // Buscar datas disponíveis
+    function obterDatas(serverId) {
+      console.log("Buscando datas para o servidor:", serverId);
+
+      fetch(`/dashGerente02/datas?serverId=${serverId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((resposta) => {
+          if (resposta.ok) {
+            resposta.json().then((dates) => {
+              atualizarDatas(dates);
+            });
+          } else {
+            console.error("Erro ao buscar datas.");
+          }
+        })
+        .catch((erro) => {
+          console.error("Erro na requisição obterDatas:", erro);
+        });
+    }
+
+    // Atualizar o dropdown de datas
+    function atualizarDatas(dates) {
+      console.log("Atualizando dropdown de datas:", dates);
+
+      selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
+      dates.forEach((date) => {
+        const option = document.createElement("option");
+        option.value = date;
+        option.textContent = date;
+        selectDate.appendChild(option);
+      });
+    }
+
+    // Adicionar event listener aos selects
+    [selectComponent, selectDate].forEach((select) => {
+      select.addEventListener("change", () => {
+        if (selectedServerId && selectComponent.value && selectDate.value) {
+          obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
+        }
+      });
+    });
+
+    // Buscar dados do gráfico
+    function obterDadosGrafico(serverId, component, date) {
+      console.log("Buscando dados do gráfico para:");
+      console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
+
+      const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+      fetch(`/dashGerente02/grafico?${queryString}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((resposta) => {
+          if (resposta.ok) {
+            resposta.json().then((data) => {
+              atualizarGrafico(data);
+            });
+          } else {
+            console.error("Erro ao buscar dados do gráfico.");
+          }
+        })
+        .catch((erro) => {
+          console.error("Erro na requisição obterDadosGrafico:", erro);
+        });
+    }
+
+    // Atualizar o gráfico
+    function atualizarGrafico(data) {
+  console.log("Atualizando gráfico com dados:", data);
+
+  if (meuGrafico) {
+    meuGrafico.destroy(); // Destruir gráfico anterior, se existir
   }
-  
+
+  // Transformando os dados em um formato que o Chart.js espera
+  const labels = data.map((row) => `${row.hour}`); // Usando as horas como labels
+  const values = data.map((row) => parseFloat(row.desvio_padrao)); // Convertendo desvio_padrao para número
+
+  meuGrafico = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels, // Labels são as horas
+      datasets: [{
+        label: 'Desvio padrão',
+        data: values, // Os valores de desvio padrão
+        backgroundColor: 'rgb(212, 214, 84)',
+        borderColor: 'rgb(180, 182, 69)',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Desvio Padrão'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Hora'
+          }
+        }
+      },
+      devicePixelRatio: 3
+    }
+  });
+}
+
+  });
+
+
+
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const ctx = document.getElementById('MyChart01').getContext('2d');
+
+  //   const meuGrafico = new Chart(ctx, {
+  //       type: 'bar',
+  //       data: {
+  //           labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+  //           datasets: [{
+  //               label: 'Desvio padrão',
+  //               data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11],
+  //               backgroundColor: 'rgb(212, 214, 84)',
+  //               borderColor: 'rgb(180, 182, 69)',
+  //               borderWidth: 3
+  //           }]
+  //       },
+  //       options: {
+  //           scales: {
+  //               y: {
+  //                   beginAtZero: true
+  //               }
+  //           },
+  //           devicePixelRatio: 3
+  //       }
+  //   });
+  // });
+
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const ctx = document.getElementById('MyChart02').getContext('2d');
+
+  //   const meuGrafico = new Chart(ctx, {
+  //       type: 'line',
+  //       data: {
+  //           labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', "25", "26", "27", "28", "29", "30"],
+  //           datasets: [{
+  //               label: 'Taxa de Oscilação',
+  //               data: [18, 26, 23, 35, 36, 51, 48, 37, 89, 125, 45, 32, 43, 12, 56, 67, 54, 34, 54, 93, 23, 54, 22, 34, 20, 23, 23, 40, 99, 75],
+  //               backgroundColor: 'rgb(70,130,180',
+  //               borderColor: 'rgb(65,105,225)',
+  //               borderWidth: 3
+  //           }]
+  //       },
+  //       options: {
+  //           scales: {
+  //               y: {
+  //                   beginAtZero: true
+  //               }
+  //           },
+  //           devicePixelRatio: 3
+  //       }
+  //   });
+  // });
+
+  // obterDados()
+  // function obterDados() {''
+
+  //   var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+  //   console.log(idEmpresa)
+
+  //   fetch("/dashGerente02/obterDados", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       idEmpresaServer: idEmpresa
+  //     })
+  //   }).then(function (resposta) {
+  //     if (resposta.ok) {
+  //       console.log("DADOS RECEBIDOS:", resposta)
+  //       teste = resposta.json().then(json => {
+  //         console.log(json)
+  //         plotar(json)
+  //       })
+  //     } else {
+  //       // console.log("Houve um erro ao receber os dados no cards.html")
+  //     }
+  //   }).catch(function (erro) {
+  //     console.log("CATCH DO FETCH")
+  //     console.log(erro)
+  //   })
+  // }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -70,6 +70,16 @@ fkRegistro int,
 constraint fkRegistrosAlerta foreign key (fkRegistro) references registro (idRegistro)
 );
 
+CREATE TABLE estatisticas_horarias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fkServidor INT NOT NULL,
+    componente ENUM('cpu', 'ram') NOT NULL,
+    timestamp DATETIME NOT NULL,
+    desvio_padrao DECIMAL(4, 2) NOT NULL,
+    horaCalculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
+);
+
 
 INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
