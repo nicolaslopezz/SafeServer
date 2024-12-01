@@ -69,18 +69,19 @@ async function datasDisponiveis(serverId) {
   console.log("Parametros para consulta:", [serverId]);
 
   try {
-    var [rows] = await database.executar(instrucaoSql, [serverId]);
+    var rows = await database.executar(instrucaoSql, [serverId]);
 
     console.log("Resultado da consulta:", rows);
     console.log("Tipo de rows:", typeof rows);
     console.log("Estrutura de rows:", rows);
 
+    // Verifica se rows é um array, caso contrário coloca em um array
     rows = Array.isArray(rows) ? rows : [rows];
     console.log("Estrutura de rows após transformação:", rows);
 
     if (rows.length > 0) {
       console.log("Mapeando datas:", rows.map(row => row.date));
-      return rows.map(row => row.date);
+      return rows.map(row => row.date);  // Retorna todas as datas encontradas
     } else {
       console.log("Nenhuma data encontrada.");
       return [];
@@ -104,15 +105,11 @@ async function dadosGrafico(serverId, component, date) {
   console.log("Parâmetros para consulta:", [serverId, component, date]);
 
   try {
-    var [rows] = await database.executar(instrucaoSql, [serverId, component, date]);
+    var rows = await database.executar(instrucaoSql, [serverId, component, date]);
 
     console.log("Resultado da consulta:", rows);
 
-    if (!Array.isArray(rows)) {
-      rows = [rows];
-    }
-
-    if (rows.length === 0) {
+    if (Array.isArray(rows) && rows.length === 0) {
       console.log("Nenhum dado encontrado para os parâmetros fornecidos.");
       return [];
     } else {
