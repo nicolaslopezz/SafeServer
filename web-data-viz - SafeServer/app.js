@@ -40,14 +40,14 @@ app.use("/dashGerente", dashGerenteRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/dashGerente02", dashGerente02Router);
 
-// Configurar cron para rodar a cada nova hora
+// configurar cron para rodar a cada nova hora
 cron.schedule('0 * * * *', () => {
-    console.log('Iniciando cálculo automático do desvio padrão...');
-    dashGerente02Controller.calcularDesvioPadrao();
-  });
+  console.log('Iniciando cálculo automático do desvio padrão e oscilação...');
+  dashGerente02Controller.calcularDesvioPadraoeOscilacao();
+});
 
 app.listen(PORTA_APP, function () {
-    console.log(`
+  console.log(`
     ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
     ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
     ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   

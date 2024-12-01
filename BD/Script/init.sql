@@ -77,6 +77,7 @@ CREATE TABLE estatisticas_horarias (
     timestamp DATETIME NOT NULL,
     desvio_padrao DECIMAL(4, 2) NOT NULL,
     horaCalculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    oscilacao FLOAT,
     FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
 );
 

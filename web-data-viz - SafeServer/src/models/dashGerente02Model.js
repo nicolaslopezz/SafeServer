@@ -49,13 +49,13 @@ async function getDesvioPadraoRAM(servidorId) {
   return desvioPadraoRAM || null;
 }
 
-async function guardarResultado(servidorId, componente, desvioPadrao) {
+async function guardarResultado(servidorId, componente, desvioPadrao, oscilacao) {
   var instrucaoSql = `
-    INSERT INTO estatisticas_horarias (fkServidor, componente, timestamp, desvio_padrao)
-    VALUES (${servidorId}, "${componente}", NOW(), ${desvioPadrao});
+    INSERT INTO estatisticas_horarias (fkServidor, componente, timestamp, desvio_padrao, oscilacao)
+    VALUES (${servidorId}, "${componente}", NOW(), ${desvioPadrao}, ${oscilacao});
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  await database.executar(instrucaoSql, [servidorId, componente, desvioPadrao]);
+  await database.executar(instrucaoSql, [servidorId, componente, desvioPadrao, oscilacao]);
 }
 
 async function datasDisponiveis(serverId) {
@@ -125,11 +125,31 @@ async function dadosGrafico(serverId, component, date) {
   }
 }
 
+async function getDados(servidorId) {
+  var instrucaoSql = `
+      SELECT dtHora, percent_use_cpu, percent_use_ram
+      FROM registro
+      WHERE fkServidor = ${servidorId} AND dtHora >= NOW() - INTERVAL 1 HOUR;
+  `;
+  console.log("Consulta SQL: \n", instrucaoSql); 
+  const resultado = await database.executar(instrucaoSql);
+  
+  console.log("Resultado da consulta:", JSON.stringify(resultado));
+
+  if (Array.isArray(resultado) && resultado.length > 0) {
+      return resultado;
+  } else {
+      console.log("Nenhum dado encontrado.");
+      return []; 
+  }
+}
+
 module.exports = {
   getServidores,
   getDesvioPadraoCPU,
   getDesvioPadraoRAM,
   guardarResultado,
   datasDisponiveis,
-  dadosGrafico
+  dadosGrafico,
+  getDados
 };
