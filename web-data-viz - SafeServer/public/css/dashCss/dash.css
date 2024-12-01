@@ -569,6 +569,12 @@ input[type="range"] {
   z-index: 2 !important;
 }
 
+.comp, .comp2 {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  color: #0e1b5b;
+}
 
 
 .containerINF {
