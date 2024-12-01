@@ -429,7 +429,7 @@ input[type="range"] {
 
 .parteSuperior {
   width: 100%;
-  height: 44%;
+  height: 38%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -438,7 +438,7 @@ input[type="range"] {
 
 .parteInferior {
   width: 100%;
-  height: 54%;
+  height: 63%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -447,7 +447,7 @@ input[type="range"] {
 
 .containerSUP {
   width: 96%;
-  height: 90%;
+  height: 99%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -463,11 +463,12 @@ input[type="range"] {
 }
 
 .supTitulo {
+  margin-left: 2%;
   width: 100%;
-  height: 15%;
+  height: 13%;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   font-weight: 600;
 }
 
@@ -557,9 +558,15 @@ input[type="range"] {
 
 
 #myChartCanvas {
-  width: 33vw !important;
-  height: 33vh !important;
+  width: 32vw !important;
+  height: 31vh !important;
   z-index: -1 !important;
+}
+
+#myChartCanvas2 {
+  width: 12vw !important;
+  height: 25vh !important;
+  z-index: 2 !important;
 }
 
 
@@ -673,11 +680,44 @@ input[type="range"] {
   background-color: white;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
   width: 100%;
-  height: 67%;
+  height: 71%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  border-radius: 12px;
+}
+
+.divisao2C {
+  width: 100%;
+  height: 67%;
+  display:none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DE {
+  background-color: white;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  width: 48%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.DD {
+  background-color: white;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  width: 48%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
 }
 

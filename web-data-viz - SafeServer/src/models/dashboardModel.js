@@ -1,4 +1,5 @@
 // const { obterCargos } = require("../controllers/dashboardController");
+
 var database = require("../database/config")
 
 function obterCargos(idEmpresa) {
@@ -157,6 +158,92 @@ function analisar(servidores,periodos,componentes) {
     return database.executar(instrucaoSql);
 }
 
+
+function analisar(servidores,periodos,componentes) { 
+    
+    console.log('Servidoresss:', servidores);
+    console.log('Períodosss:', periodos);
+    console.log('Componentesss:', componentes);
+
+    const instrucaoSql = `
+        SELECT 
+            a.componente,
+            s.identificacao AS servidor,
+            MONTH(r.dtHora) AS mes,
+            COUNT(a.idAlerta) AS total_alertas,
+            AVG(CASE 
+                WHEN a.componente = 'cpu' THEN r.percent_use_cpu
+                WHEN a.componente = 'ram' THEN r.percent_use_ram
+                WHEN a.componente = 'rede_recebida' THEN r.recebido_rede
+                WHEN a.componente = 'rede_enviada' THEN r.enviado_rede
+                ELSE NULL
+            END) AS valor_medio
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            a.componente, s.identificacao, MONTH(r.dtHora)
+        ORDER BY 
+            mes DESC, a.componente;
+    `;
+
+    console.log(instrucaoSql)
+
+    return database.executar(instrucaoSql);
+}
+
+
+function comparar(servidores,periodos,componentes) { 
+
+    const instrucaoSql = `
+       SELECT 
+    a.componente,
+    COUNT(a.idAlerta) AS total_alertas,
+    s.identificacao AS servidor,
+    MIN(CASE 
+        WHEN a.componente = 'cpu' THEN r.percent_use_cpu
+        WHEN a.componente = 'ram' THEN r.percent_use_ram
+        WHEN a.componente = 'rede_enviada' THEN r.recebido_rede
+        WHEN a.componente = 'rede_recebida' THEN r.enviado_rede
+        ELSE NULL
+    END) AS valor_minimo,
+    MAX(CASE 
+        WHEN a.componente = 'cpu' THEN r.percent_use_cpu
+        WHEN a.componente = 'ram' THEN r.percent_use_ram
+        WHEN a.componente = 'rede_recebida' THEN r.recebido_rede
+        WHEN a.componente = 'rede_enviada' THEN r.enviado_rede
+        ELSE NULL
+    END) AS valor_maximo
+FROM 
+    alerta a
+JOIN 
+    registro r ON a.fkRegistro = r.idRegistro
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+    AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
+    AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')}) 
+GROUP BY 
+    a.componente, s.identificacao -- Agrupado apenas por componente e servidor
+ORDER BY 
+    s.identificacao, a.componente;
+    `;
+
+    console.log(instrucaoSql)
+
+    return database.executar(instrucaoSql);
+}
+
+
+
 module.exports = {
     obterCargos,
     obterFunc,
@@ -169,5 +256,6 @@ module.exports = {
     feriado,
     servidor,
     periodo,
-    analisar
+    analisar,
+    comparar
 };
