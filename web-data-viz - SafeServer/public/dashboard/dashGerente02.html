@@ -47,15 +47,21 @@
             </ul>
             </li>
             <li>
-              <a href="relatorio.html">
-                <i class="icon ph-bold ph-file-text"></i>
-                <span class="text">Relatório</span>
+              <a href="dashGerente01.html">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
               </a>
             </li>
             <li class="active">
-              <a href="">
-                <i class="icon ph-bold ph-chart-bar"></i>
-                <span class="text">Gráfico</span>
+              <a href="dashGerente02.html">
+                <i class="icon ph-bold ph-gauge"></i>
+                <span class="text">Desempenho</span>
+              </a>
+            </li>
+            <li>
+              <a href="relatorio.html">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
               </a>
             </li>
             <li>
@@ -186,8 +192,15 @@
   crossorigin="anonymous"></script>
 
 <script src="../js/script.js"></script>
+<script>
+  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+  var cargoUsuario = sessionStorage.getItem("CARGO");
+
+  document.getElementById('nomeUsuario').textContent = nomeUsuario;
+  document.getElementById('cargoUsuario').textContent = cargoUsuario;</script>
 
 <script>
+
 
   document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('MyChart01').getContext('2d');
@@ -334,147 +347,147 @@
   });
 
   document.addEventListener("DOMContentLoaded", function () {
-  const ctx = document.getElementById('MyChart02').getContext('2d');
-  let meuGrafico;
+    const ctx = document.getElementById('MyChart02').getContext('2d');
+    let meuGrafico;
 
-  const selectComponent = document.getElementById("select_component_osc");
-  const selectDate = document.getElementById("select_date_osc");
-  const serverElements = document.querySelectorAll(".server");
+    const selectComponent = document.getElementById("select_component_osc");
+    const selectDate = document.getElementById("select_date_osc");
+    const serverElements = document.querySelectorAll(".server");
 
-  let selectedServerId = null;
+    let selectedServerId = null;
 
-  serverElements.forEach((server) => {
-    server.addEventListener("click", function () {
-      selecionarServidor(server);
+    serverElements.forEach((server) => {
+      server.addEventListener("click", function () {
+        selecionarServidor(server);
+      });
     });
-  });
 
-  function selecionarServidor(server) {
-    serverElements.forEach((el) => el.classList.remove("selected"));
-    server.classList.add("selected");
-    selectedServerId = parseInt(server.getAttribute("data-id"), 10);
+    function selecionarServidor(server) {
+      serverElements.forEach((el) => el.classList.remove("selected"));
+      server.classList.add("selected");
+      selectedServerId = parseInt(server.getAttribute("data-id"), 10);
 
-    if (isNaN(selectedServerId)) {
-      console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
-      return;
+      if (isNaN(selectedServerId)) {
+        console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
+        return;
+      }
+
+      console.log("Servidor selecionado:", selectedServerId);
+      obterDatas(selectedServerId);
     }
 
-    console.log("Servidor selecionado:", selectedServerId);
-    obterDatas(selectedServerId);
-  }
+    function obterDatas(serverId) {
+      console.log("Buscando datas para o servidor:", serverId);
 
-  function obterDatas(serverId) {
-    console.log("Buscando datas para o servidor:", serverId);
-
-    fetch(`/dashGerente02/datas?serverId=${serverId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((dates) => {
-            atualizarDatas(dates);
-          });
-        } else {
-          console.error("Erro ao buscar datas.");
+      fetch(`/dashGerente02/datas?serverId=${serverId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
         }
       })
-      .catch((erro) => {
-        console.error("Erro na requisição obterDatas:", erro);
-      });
-  }
-
-  function atualizarDatas(dates) {
-    console.log("Atualizando dropdown de datas:", dates);
-
-    selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
-    dates.forEach((date) => {
-      const option = document.createElement("option");
-      option.value = date;
-      option.textContent = date;
-      selectDate.appendChild(option);
-    });
-  }
-
-  [selectComponent, selectDate].forEach((select) => {
-    select.addEventListener("change", () => {
-      if (selectedServerId && selectComponent.value && selectDate.value) {
-        obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
-      }
-    });
-  });
-
-  function obterDadosGrafico(serverId, component, date) {
-    console.log("Buscando dados do gráfico para:");
-    console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
-
-    const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
-
-    fetch(`/dashGerente02/grafico/osc?${queryString}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((data) => {
-            atualizarGrafico(data);
-          });
-        } else {
-          console.error("Erro ao buscar dados do gráfico.");
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro na requisição obterDadosGrafico:", erro);
-      });
-  }
-
-  function atualizarGrafico(data) {
-    console.log("Atualizando gráfico com dados:", data);
-
-    if (meuGrafico) {
-      meuGrafico.destroy();
+        .then((resposta) => {
+          if (resposta.ok) {
+            resposta.json().then((dates) => {
+              atualizarDatas(dates);
+            });
+          } else {
+            console.error("Erro ao buscar datas.");
+          }
+        })
+        .catch((erro) => {
+          console.error("Erro na requisição obterDatas:", erro);
+        });
     }
 
-    const labels = data.map((row) => `${row.hour}`);
-    const values = data.map((row) => parseFloat(row.oscilacao));
+    function atualizarDatas(dates) {
+      console.log("Atualizando dropdown de datas:", dates);
 
-    meuGrafico = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Oscilação',
-          data: values,
-          backgroundColor: 'rgb(75, 192, 192)',
-          borderColor: 'rgb(54, 162, 235)',
-          borderWidth: 3
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Oscilação'
+      selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
+      dates.forEach((date) => {
+        const option = document.createElement("option");
+        option.value = date;
+        option.textContent = date;
+        selectDate.appendChild(option);
+      });
+    }
+
+    [selectComponent, selectDate].forEach((select) => {
+      select.addEventListener("change", () => {
+        if (selectedServerId && selectComponent.value && selectDate.value) {
+          obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
+        }
+      });
+    });
+
+    function obterDadosGrafico(serverId, component, date) {
+      console.log("Buscando dados do gráfico para:");
+      console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
+
+      const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+      fetch(`/dashGerente02/grafico/osc?${queryString}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((resposta) => {
+          if (resposta.ok) {
+            resposta.json().then((data) => {
+              atualizarGrafico(data);
+            });
+          } else {
+            console.error("Erro ao buscar dados do gráfico.");
+          }
+        })
+        .catch((erro) => {
+          console.error("Erro na requisição obterDadosGrafico:", erro);
+        });
+    }
+
+    function atualizarGrafico(data) {
+      console.log("Atualizando gráfico com dados:", data);
+
+      if (meuGrafico) {
+        meuGrafico.destroy();
+      }
+
+      const labels = data.map((row) => `${row.hour}`);
+      const values = data.map((row) => parseFloat(row.oscilacao));
+
+      meuGrafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Oscilação',
+            data: values,
+            backgroundColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(54, 162, 235)',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Oscilação'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Hora'
+              }
             }
           },
-          x: {
-            title: {
-              display: true,
-              text: 'Hora'
-            }
-          }
-        },
-        devicePixelRatio: 3
-      }
-    });
-  }
-});
+          devicePixelRatio: 3
+        }
+      });
+    }
+  });
 
 
 
