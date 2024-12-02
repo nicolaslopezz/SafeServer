@@ -97,7 +97,8 @@
             <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
           </div>
         </div>
-        <div class="tempo discretizacao" style="display: flex; height: 50%; flex-direction: column; align-items: center; justify-content: space-around;">
+        <div class="tempo discretizacao"
+          style="display: flex; height: 50%; flex-direction: column; align-items: center; justify-content: space-around;">
           <h1 class="bold">Intervalo de tempo</h1>
           <div style="width: 100%; height: 80%; display: flex; flex-direction: column; justify-content: space-around;">
             <div style="display: flex; flex-direction: column;">
@@ -165,16 +166,23 @@
   crossorigin="anonymous"></script>
 <script src="../js/script.js"></script>
 <script>
+  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+  var cargoUsuario = sessionStorage.getItem("CARGO");
+
+
+  document.getElementById('nomeUsuario').textContent = nomeUsuario;
+  document.getElementById('cargoUsuario').textContent = cargoUsuario;
+
 
   function alterarFrom(x) {
-    aux  = Number(range_from.value) + Number(x)
+    aux = Number(range_from.value) + Number(x)
     console.log(aux)
     range_from.value = aux
     mudarFrom()
   }
 
   function alterarTo(x) {
-    aux  = Number(range_to.value) + Number(x)
+    aux = Number(range_to.value) + Number(x)
     console.log(aux)
     range_to.value = aux
     mudarTo()
@@ -185,7 +193,7 @@
   const range_from = document.getElementById("ipt_range_from")
   const range_to = document.getElementById("ipt_range_to")
 
-  
+
 
   function mudarFrom() {
     div_from.innerHTML = labelsDatas[range_from.value]
@@ -233,7 +241,7 @@
           label: "Alertas Rede Recebidos",
           data: auxRedeRec,
           backgroundColor: '#161d2e'
-        } ,{
+        }, {
           label: "Alertas CPU",
           data: auxCpu,
           backgroundColor: '#e28743'
@@ -352,7 +360,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = [dados[i]]
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
-        } else if (dados[i].componente == 'rede_enviado'){
+        } else if (dados[i].componente == 'rede_enviado') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = [dados[i]]
@@ -370,7 +378,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu.push(dados[i])
         } else if (dados[i].componente == 'ram') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam.push(dados[i])
-        } else if (dados[i].componente == 'rede_enviado'){
+        } else if (dados[i].componente == 'rede_enviado') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv.push(dados[i])
         } else {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
@@ -378,7 +386,7 @@
       }
     }
 
-    
+
     // Verificando e exibindo região com maior número de alertas
     let regiaoMaisAlertas = regioesDados[0]
     for (i = 1; i < regioes.length; i++) {
@@ -494,7 +502,7 @@
       }
       regioesDados[i].listRam = auxRam
       auxRam = null
-      
+
       auxRede = []
       if (compararData(regioesDados[i].listRedeEnv[0], data_inicial)) {
         auxRede.push(regioesDados[i].listRedeEnv[0])

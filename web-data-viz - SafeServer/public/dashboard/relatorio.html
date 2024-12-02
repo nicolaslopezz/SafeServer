@@ -556,11 +556,11 @@
         .catch(error => {
           console.error('Erro na requisição do ranking para comparar2', error);
           if (grafico2) {
-          grafico2.destroy(); // Remover gráfico se existir
-        }
+            grafico2.destroy(); 
+          }
           comparacao.innerHTML = "";
           info.innerHTML = "";
-          
+
 
           const servidorSelect = document.getElementById("servidorRelatorio");
           const periodoSelect = document.getElementById("periodoRelatorio");
@@ -817,7 +817,7 @@
     console.log('Iniciando a requisição para /dashboard/periodo');
 
     try {
-      // Verifique se a variável empresa está sendo recuperada corretamente
+     
       if (!empresa) {
         throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
       }
@@ -836,7 +836,7 @@
       const data = await response.json();
       console.log('Dados brutos recebidos:', data);
 
-      // Verifique se data é um array e se contém os itens esperados
+      
       if (Array.isArray(data) && data.length > 0) {
 
         const meses = {
@@ -913,109 +913,109 @@
   let grafico2 = null;
 
   function plotarGrafico(resposta) {
-  const labels = [];
-  const dados = {
-    labels: labels,
-    datasets: [{
-      label: 'Uso médio da CPU (%) durante os feriados',
-      data: [],
-      backgroundColor: [
-        'rgba(30,144,255, 0.7)',
-        'rgba(128,0,128, 0.7)',
-        'rgba(255,0,0, 0.7)',
-        'rgba(255,20,147, 0.7)',
-        'rgba(186,85,211, 0.7)'
-      ],
-      borderColor: [
-        'rgba(30,144,255, 1)',
-        'rgba(128,0,128, 1)',
-        'rgba(255,0,0, 1)',
-        'rgba(255,20,147, 1)',
-        'rgba(186,85,211, 1)'
-      ],
-      borderWidth: 2,
-      tension: 0.1
-    }]
-  };
+    const labels = [];
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Uso médio da CPU (%) durante os feriados',
+        data: [],
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)',
+          'rgba(255,0,0, 0.7)',
+          'rgba(255,20,147, 0.7)',
+          'rgba(186,85,211, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)',
+          'rgba(255,0,0, 1)',
+          'rgba(255,20,147, 1)',
+          'rgba(186,85,211, 1)'
+        ],
+        borderWidth: 2,
+        tension: 0.1
+      }]
+    };
 
-  const datasTraduzidas = {
-    "2024-01-01": "Ano Novo",
-    "2024-12-25": "Natal",
-    "2024-03-29": "Sexta-feira Santa",
-    "2024-03-31": "Páscoa",
-    "2024-05-01": "Dia do Trabalho",
-    "2024-09-07": "Dia da Independência",
-    "2024-12-26": "Dia de Santo Estêvão",
-    "2024-03-31": "Domingo de Páscoa",
-    "2024-11-01": "Dia de Todos os Santos",
-    "2024-05-30": "Dia da Ascensão",
-    "2024-05-20": "Segunda-feira de Pentecostes",
-    "2024-01-06": "Dia de Reis",
-    "2024-08-15": "Assunção de Maria",
-    "2024-02-13": "Carnaval",
-    "2024-12-24": "Véspera de Natal",
-    "2024-06-20": "Corpus Christi",
-    "2024-12-31": "Véspera de Ano Novo",
-    "2024-08-15": "Imaculada Conceição"
-  };
+    const datasTraduzidas = {
+      "2024-01-01": "Ano Novo",
+      "2024-12-25": "Natal",
+      "2024-03-29": "Sexta-feira Santa",
+      "2024-03-31": "Páscoa",
+      "2024-05-01": "Dia do Trabalho",
+      "2024-09-07": "Dia da Independência",
+      "2024-12-26": "Dia de Santo Estêvão",
+      "2024-03-31": "Domingo de Páscoa",
+      "2024-11-01": "Dia de Todos os Santos",
+      "2024-05-30": "Dia da Ascensão",
+      "2024-05-20": "Segunda-feira de Pentecostes",
+      "2024-01-06": "Dia de Reis",
+      "2024-08-15": "Assunção de Maria",
+      "2024-02-13": "Carnaval",
+      "2024-12-24": "Véspera de Natal",
+      "2024-06-20": "Corpus Christi",
+      "2024-12-31": "Véspera de Ano Novo",
+      "2024-08-15": "Imaculada Conceição"
+    };
 
-  resposta.forEach(registro => {
-    const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
-    labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
-    dados.datasets[0].data.push(registro.mediaPercentualCPU);
-  });
+    resposta.forEach(registro => {
+      const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
+      labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
+      dados.datasets[0].data.push(registro.mediaPercentualCPU);
+    });
 
-  const config = {
-    type: 'bar',
-    data: dados,
-    options: {
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: 'Uso médio do percentual da CPU'
-          },
-          suggestedMin: 0, // Adiciona o limite inferior do eixo Y
-          suggestedMax: 100 // Limite superior do eixo Y
-        }
-      },
-      plugins: {
-        legend: {
-          display: true,
-          displayColors: false,
-          labels: {
-            usePointStyle: true,
-            boxWidth: 0,
-            fontColor: 'transparent'
+    const config = {
+      type: 'bar',
+      data: dados,
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Uso médio do percentual da CPU'
+            },
+            suggestedMin: 0, 
+            suggestedMax: 100 
           }
         },
-        annotation: {
-          annotations: {
-            line: {
-              type: 'line',
-              yMin: 75, // Define o valor Y da linha
-              yMax: 75, // Define o valor Y da linha
-              borderColor: 'red', // Cor da linha
-              borderWidth: 2, // Largura da linha
-              label: {
-                content: '75%', // Texto no topo da linha
-                enabled: true,
-                position: 'right'
+        plugins: {
+          legend: {
+            display: true,
+            displayColors: false,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 0,
+              fontColor: 'transparent'
+            }
+          },
+          annotation: {
+            annotations: {
+              line: {
+                type: 'line',
+                yMin: 75, 
+                yMax: 75,
+                borderColor: 'red', 
+                borderWidth: 2, 
+                label: {
+                  content: '75%', 
+                  enabled: true,
+                  position: 'right'
+                }
               }
             }
           }
         }
       }
+    };
+
+    if (grafico) {
+      grafico.destroy();
     }
-  };
 
-  if (grafico) {
-    grafico.destroy();
+   
+    grafico = new Chart(document.getElementById('myChartCanvas'), config);
   }
-
-  // Adiciona o gráfico à tela
-  grafico = new Chart(document.getElementById('myChartCanvas'), config);
-}
 
 
   function plotarGrafico2(nomeServ, totalServ) {
@@ -1044,7 +1044,7 @@
         plugins: {
           legend: {
             display: true,
-            position: 'right', // Posiciona as legendas à direita
+            position: 'right', 
             labels: {
               font: {
                 size: 14
@@ -1066,12 +1066,12 @@
       }
     };
 
-    // Verifica se existe um gráfico anterior e destrói para evitar duplicatas
+    // verifica se existe um gráfico anterior e destrói para evitar duplicatas
     if (grafico2) {
       grafico2.destroy();
     }
 
-    // Renderiza o novo gráfico no canvas
+    // renderiza o novo gráfico no canvas
     grafico2 = new Chart(document.getElementById('myChartCanvas2'), config2);
   }
 
@@ -1103,7 +1103,6 @@
     }
   }
 
-  // Chama a função para fazer a requisição inicial e preencher o select
   async function inicializar() {
     await servidor(); // Preenche os servidores
     await periodo(); // Preenche os períodos
