@@ -189,7 +189,7 @@
 
               <div class="divbaixo">
                 <button class="buttonRelatorioAnalisar" onclick="analisar()">Analisar</button>
-                <button class="buttonRelatorioComparar" onclick="comparar()">Comparar</button>
+                <button class="buttonRelatorioComparar" onclick="comparar()">Alertas</button>
               </div>
 
 
@@ -202,7 +202,7 @@
                     <tr id="trr"> <!-- titulo do cabeçalho, primeira linha -->
                       <th id="thh">Servidor</th> <!-- cabeçalho da primeira coluna -->
                       <th id="thh">Componente</th> <!-- cabeçalho da segunda coluna -->
-                      <th id="thh">Minimo</th>
+                      <th id="thh">Mínimo</th>
                       <th id="thh">Máximo</th>
                       <th id="thh">Média</th>
 
@@ -219,19 +219,18 @@
 
             <div class="divisao2C" id="divisao2C" display="none">
               <div class="DE" id="DE">
-                <div id="grafico2">
+                <div class="DD" id="DD">
+
+                  <div class="comp" id="comp">
+  
+                  </div>
+  
+  
+  
+                </div>
+                <div id="grafico2"></div>
 
                 </div>
-
-              </div>
-
-              <div class="DD" id="DD">
-
-                <div class="comp" id="comp">
-
-                </div>
-
-
 
               </div>
             </div>
@@ -477,6 +476,8 @@
       document.getElementById("DD").style.display = 'flex';
       document.getElementById("DE").style.display = 'flex';
       document.getElementById("grafico2").style.display = 'flex';
+      document.getElementById("comp").style.display = 'flex';
+
 
       // Requisição para obter dados de comparação
       fetch(`/dashboard/comparar?${queryParams.toString()}`, {
@@ -509,7 +510,7 @@
 
           comparacao.innerHTML += `
             <p>
-              <strong>Total de alertas:</strong> ${somaTotal} <br>
+             Total de alertas: ${somaTotal}
           
             </p>
           `;
@@ -519,6 +520,8 @@
         })
         .catch(error => {
           console.error('Erro na requisição do ranking para comparar2', error);
+          comparacao.innerHTML = ""
+          comparacao.innerHTML = `<p id="erroCatch">Selecione pelo menos um servidor, um período e um componente</p>`
         });
 
 
@@ -556,16 +559,22 @@
         },
       })
         .then(response => {
-  
+
           if (!response.ok) {
             throw new Error('Erro ao obter os dados do ranking');
           }
           return response.json();
         })
         .then(data => {
+
           console.log("dados:", data)
           // limpa o conteúdo atual do tbody
           tabela.innerHTML = '';
+          var colorMedia = ""
+          var colorMax = ""
+          var colorMin = ""
+          var percentual = ""
+          var GB = ""
 
           // Loop pelos dados e criar as linhas da tabela
           //o tr define uma linha em uma tabela
@@ -580,22 +589,87 @@
           };
 
 
+          let linhas = "";
+
           data.forEach(item => {
+            let colorMedia = "";
+            let colorMax = "";
+            let colorMin = "";
+            let percentual = "";
+            let GB = "";
 
+            if (item.componente === "percent_use_cpu") {
+              if (item.media > 75) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 75) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 75) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              percentual = "%";
+            }
+
+            if (item.componente === "percent_use_ram") {
+              if (item.media > 85) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 85) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 85) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              percentual = "%";
+            }
+
+            if (item.componente === "recebido_rede" || item.componente === "enviado_rede") {
+              if (item.media > 85) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 85) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 85) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              GB = " GB";
+            }
             const linha = `<tr> 
-                            <td>${item.servidor}</td>
-                            <td>${mapComponentes[item.componente]}</td>
-                            <td>${item.min}</td>
-                            <td>${item.max}</td>
-                             <td>${item.media}</td>
-
-                           
-                        </tr>`;
-            tabela.innerHTML += linha;
+                    <td>${item.servidor}</td>
+                    <td>${mapComponentes[item.componente]}</td>
+                    <td style="color: ${colorMin};">${item.min}${percentual}${GB}</td>
+                    <td style="color: ${colorMax};">${item.max}${percentual}${GB}</td>
+                    <td style="color: ${colorMedia};">${item.media}${percentual}${GB}</td>
+                </tr>`;
+            linhas += linha;
           });
+
+          tabela.innerHTML += linhas;
         })
         .catch(error => {
-          console.error('Erro na requisição do ranking', error);
+          console.error('Erro na requisição', error);
+          tabela.innerHTML = ""
+          tabela.innerHTML = '<tr><td id="erroCatch" colspan="5">Selecione pelo menos um servidor, um período e um componente</td></tr>';
         });
 
       return false;
@@ -892,12 +966,12 @@
           'rgba(30,144,255, 1)',
           'rgba(128,0,128, 1)'
         ],
-        borderWidth: 2
+        borderWidth: 1
       }]
     };
 
     const config2 = {
-      type: 'pie',
+      type: 'doughnut',
       data: dados,
       options: {
         plugins: {

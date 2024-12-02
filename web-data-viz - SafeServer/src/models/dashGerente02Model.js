@@ -178,5 +178,6 @@ module.exports = {
   guardarResultado,
   datasDisponiveis,
   dadosGrafico,
+  getDados,
   dadosGraficoOscilacao
 };
