@@ -132,7 +132,7 @@ function analisar(servidores, periodos, componentes) {
             s.identificacao AS servidor, 
             MIN(r.componenteDaVez) AS min, 
             MAX(r.componenteDaVez) AS max,
-            AVG(r.componenteDaVez) AS media 
+            ROUND(AVG(r.componenteDaVez), 2) AS media
         FROM 
             registro r
         JOIN 
