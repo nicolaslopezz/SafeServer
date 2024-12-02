@@ -31,6 +31,8 @@
 
   <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
 
   <!-- icone font awesom -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -506,18 +508,18 @@
           return response.json();
         })
         .then(data => {
+
           console.log("dados GRAFICO2:", data);
           let nomeServ = [];
           let totalServ = [];
           let somaTotal = 0;
           let mediaTotal = 0;
           info.innerHTML = ""
+          comparacao.innerHTML = ""
 
-          // Limpar a div comparacao2 antes de adicionar os novos dados
-          info.innerHTML = "";
 
-          // Adicionar dados na div comparacao2
           data.forEach(item => {
+
             nomeServ.push(item.servidor);
             totalServ.push(item.total_alertas);
             somaTotal += item.total_alertas;
@@ -528,10 +530,10 @@
 
           let nomesAcimaMedia = [];
           let encontrou = false;
-          // Itera manualmente para encontrar os valores acima da média
+
           for (let i = 0; i < totalServ.length; i++) {
             if (totalServ[i] > mediaTotal) {
-              nomesAcimaMedia.push(nomeServ[i]); // Adiciona o nome correspondente
+              nomesAcimaMedia.push(nomeServ[i]);
               encontrou = true
             }
           }
@@ -547,13 +549,28 @@
       
           `;
 
+
           // plotar o gráfico após adicionar os dados no gráfico
           plotarGrafico2(nomeServ, totalServ);
         })
         .catch(error => {
           console.error('Erro na requisição do ranking para comparar2', error);
-          comparacao.innerHTML = ""
-          comparacao.innerHTML = `<p id="erroCatch">Selecione pelo menos um servidor, um período e um componente</p>`
+          if (grafico2) {
+          grafico2.destroy(); // Remover gráfico se existir
+        }
+          comparacao.innerHTML = "";
+          info.innerHTML = "";
+          
+
+          const servidorSelect = document.getElementById("servidorRelatorio");
+          const periodoSelect = document.getElementById("periodoRelatorio");
+          const componenteSelect = document.getElementById("componenteRelatorio");
+
+          if (!servidorSelect.selectedOptions.length || !periodoSelect.selectedOptions.length || !componenteSelect.selectedOptions.length) {
+            comparacao.innerHTML = `<p id="erroCatch">Selecione pelo menos um servidor, um período e um componente</p>`;
+          } else {
+            comparacao.innerHTML = `<p id="erroCatch" style="color: green !important;">Nenhum alerta encontrado para o servidor, período e componente selecionados</p>`;
+          }
         });
 
 
@@ -673,17 +690,17 @@
             }
 
             if (item.componente === "recebido_rede" || item.componente === "enviado_rede") {
-              if (item.media > 85) {
+              if (item.media > 200) {
                 colorMedia = "red";
               } else {
                 colorMedia = "green";
               }
-              if (item.max > 85) {
+              if (item.max > 200) {
                 colorMax = "red";
               } else {
                 colorMax = "green";
               }
-              if (item.min > 85) {
+              if (item.min > 200) {
                 colorMin = "red";
               } else {
                 colorMin = "green";
@@ -893,98 +910,113 @@
   }
 
   var grafico
-  var grafico2
+  let grafico2 = null;
 
-  // Função para plotar o gráfico
   function plotarGrafico(resposta) {
-    const labels = [];
-    const dados = {
-      labels: labels,
-      datasets: [{
-        label: 'Uso médio da CPU (%) durante os feriados',
-        data: [],
-        backgroundColor: [
-          'rgba(30,144,255, 0.7)',
-          'rgba(128,0,128, 0.7)',
-          'rgba(255,0,0, 0.7)',
-          'rgba(255,20,147, 0.7)',
-          'rgba(186,85,211, 0.7)'
-        ],
-        borderColor: [
-          'rgba(30,144,255, 1)',
-          'rgba(128,0,128, 1)',
-          'rgba(255,0,0, 1)',
-          'rgba(255,20,147, 1)',
-          'rgba(186,85,211, 1)'
-        ],
-        borderWidth: 2,
-        tension: 0.1
-      }]
-    };
+  const labels = [];
+  const dados = {
+    labels: labels,
+    datasets: [{
+      label: 'Uso médio da CPU (%) durante os feriados',
+      data: [],
+      backgroundColor: [
+        'rgba(30,144,255, 0.7)',
+        'rgba(128,0,128, 0.7)',
+        'rgba(255,0,0, 0.7)',
+        'rgba(255,20,147, 0.7)',
+        'rgba(186,85,211, 0.7)'
+      ],
+      borderColor: [
+        'rgba(30,144,255, 1)',
+        'rgba(128,0,128, 1)',
+        'rgba(255,0,0, 1)',
+        'rgba(255,20,147, 1)',
+        'rgba(186,85,211, 1)'
+      ],
+      borderWidth: 2,
+      tension: 0.1
+    }]
+  };
 
-    const datasTraduzidas = {
-      "2024-01-01": "Ano Novo",
-      "2024-12-25": "Natal",
-      "2024-03-29": "Sexta-feira Santa",
-      "2024-03-31": "Páscoa",
-      "2024-05-01": "Dia do Trabalho",
-      "2024-09-07": "Dia da Independência",
-      "2024-12-26": "Dia de Santo Estêvão",
-      "2024-03-31": "Domingo de Páscoa",
-      "2024-11-01": "Dia de Todos os Santos",
-      "2024-05-30": "Dia da Ascensão",
-      "2024-05-20": "Segunda-feira de Pentecostes",
-      "2024-01-06": "Dia de Reis",
-      "2024-08-15": "Assunção de Maria",
-      "2024-02-13": "Carnaval",
-      "2024-12-24": "Véspera de Natal",
-      "2024-06-20": "Corpus Christi",
-      "2024-12-31": "Véspera de Ano Novo",
-      "2024-08-15": "Imaculada Conceição"
-    };
+  const datasTraduzidas = {
+    "2024-01-01": "Ano Novo",
+    "2024-12-25": "Natal",
+    "2024-03-29": "Sexta-feira Santa",
+    "2024-03-31": "Páscoa",
+    "2024-05-01": "Dia do Trabalho",
+    "2024-09-07": "Dia da Independência",
+    "2024-12-26": "Dia de Santo Estêvão",
+    "2024-03-31": "Domingo de Páscoa",
+    "2024-11-01": "Dia de Todos os Santos",
+    "2024-05-30": "Dia da Ascensão",
+    "2024-05-20": "Segunda-feira de Pentecostes",
+    "2024-01-06": "Dia de Reis",
+    "2024-08-15": "Assunção de Maria",
+    "2024-02-13": "Carnaval",
+    "2024-12-24": "Véspera de Natal",
+    "2024-06-20": "Corpus Christi",
+    "2024-12-31": "Véspera de Ano Novo",
+    "2024-08-15": "Imaculada Conceição"
+  };
 
+  resposta.forEach(registro => {
+    const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
+    labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
+    dados.datasets[0].data.push(registro.mediaPercentualCPU);
+  });
 
-
-    resposta.forEach(registro => {
-      const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
-      labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
-      dados.datasets[0].data.push(registro.mediaPercentualCPU);
-    });
-
-    const config = {
-      type: 'bar',
-      data: dados,
-      options: {
-        scales: {
-          y: {
-            title: {
-              display: true,
-              text: 'Uso médio do percentual da CPU'
-            }
-          }
-        },
-        plugins: {
-          legend: {
+  const config = {
+    type: 'bar',
+    data: dados,
+    options: {
+      scales: {
+        y: {
+          title: {
             display: true,
-            displayColors: false,
-            labels: {
-              usePointStyle: true,
-              boxWidth: 0,
-              fontColor: 'transparent'
-            }
+            text: 'Uso médio do percentual da CPU'
+          },
+          suggestedMin: 0, // Adiciona o limite inferior do eixo Y
+          suggestedMax: 100 // Limite superior do eixo Y
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          displayColors: false,
+          labels: {
+            usePointStyle: true,
+            boxWidth: 0,
+            fontColor: 'transparent'
           }
         },
+        annotation: {
+          annotations: {
+            line: {
+              type: 'line',
+              yMin: 75, // Define o valor Y da linha
+              yMax: 75, // Define o valor Y da linha
+              borderColor: 'red', // Cor da linha
+              borderWidth: 2, // Largura da linha
+              label: {
+                content: '75%', // Texto no topo da linha
+                enabled: true,
+                position: 'right'
+              }
+            }
+          }
+        }
       }
-    };
-
-    if (grafico) {
-      grafico.destroy();
     }
+  };
 
-    // Adiciona o gráfico à tela
-    grafico = new Chart(document.getElementById('myChartCanvas'), config);
-
+  if (grafico) {
+    grafico.destroy();
   }
+
+  // Adiciona o gráfico à tela
+  grafico = new Chart(document.getElementById('myChartCanvas'), config);
+}
+
 
   function plotarGrafico2(nomeServ, totalServ) {
     const labels = nomeServ;
@@ -1044,8 +1076,32 @@
   }
 
 
+  function selecionarPrimeiraOpcao() {
+    const servidorSelect = document.getElementById("servidorRelatorio");
+    const periodoSelect = document.getElementById("periodoRelatorio");
+    const componenteSelect = document.getElementById("componenteRelatorio");
 
+    if (servidorSelect.options.length > 0) {
+      for (let i = 0; i < servidorSelect.options.length; i++) {
+        servidorSelect.options[i].selected = true;
+      }
+      servidorSelect.dispatchEvent(new Event('change'));
+    }
 
+    if (periodoSelect.options.length > 0) {
+      for (let i = 0; i < periodoSelect.options.length; i++) {
+        periodoSelect.options[i].selected = true;
+      }
+      periodoSelect.dispatchEvent(new Event('change'));
+    }
+
+    if (componenteSelect.options.length > 0) {
+      for (let i = 0; i < componenteSelect.options.length; i++) {
+        componenteSelect.options[i].selected = true;
+      }
+      componenteSelect.dispatchEvent(new Event('change'));
+    }
+  }
 
   // Chama a função para fazer a requisição inicial e preencher o select
   async function inicializar() {
@@ -1053,10 +1109,14 @@
     await periodo(); // Preenche os períodos
     await exibirPosts(); // Exibe o gráfico
     obterServidorSelecionado();
+    selecionarPrimeiraOpcao();
+    analisar();
   }
 
   // Inicia o processo
   inicializar();
-  
+
+
+
 
 </script>

@@ -816,9 +816,9 @@ input[type="range"] {
   border-radius: 20px;
   font-weight: 600;
   font-family: poppins-bold;
-  border: 1px solid rgb(137, 160, 230);
+  border: 1px solid rgb(143, 169, 218);
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  
 }
 
 
