@@ -1,25 +1,45 @@
 var dashGerente02Model = require("../models/dashGerente02Model.js");
 
-async function calcularDesvioPadrao() {
+async function calcularDesvioPadraoeOscilacao() {
     try {
+        console.log("Iniciando cálculo automático de desvio padrão e oscilação...");
+
         var servidores = await dashGerente02Model.getServidores();
 
         for (var servidor of servidores) {
+            console.log(`Processando servidor: ${servidor.idServidor} - ${servidor.identificacao}`);
 
-            var desvioPadraoCPU = await dashGerente02Model.getDesvioPadraoCPU(servidor.id);
-            if (desvioPadraoCPU !== null) {
-                await dashGerente02Model.guardarResultado(servidor.id, 'cpu', desvioPadraoCPU);
-                console.log(`Servidor: ${servidor.nome}, Componente: CPU, Desvio Padrão: ${desvioPadraoCPU}`);
+            var dados = await dashGerente02Model.getDados(servidor.idServidor);
+
+            console.log("Dados:", JSON.stringify(dados));
+            var desvioPadraoCPU = await dashGerente02Model.getDesvioPadraoCPU(servidor.idServidor);
+            var desvioPadraoRAM = await dashGerente02Model.getDesvioPadraoRAM(servidor.idServidor);
+
+            let cpuOscillation = 0;
+            let ramOscillation = 0;
+
+            for (let i = 1; i < dados.length; i++) {
+                cpuOscillation += Math.abs(dados[i].percent_use_cpu - dados[i - 1].percent_use_cpu);
+                ramOscillation += Math.abs(dados[i].percent_use_ram - dados[i - 1].percent_use_ram);
             }
 
-            var desvioPadraoRAM = await dashGerente02Model.getDesvioPadraoRAM(servidor.id);
-            if (desvioPadraoRAM !== null) {
-                await dashGerente02Model.guardarResultado(servidor.id, 'ram', desvioPadraoRAM);
-                console.log(`Servidor: ${servidor.nome}, Componente: RAM, Desvio Padrão: ${desvioPadraoRAM}`);
+            if (desvioPadraoCPU !== null && !isNaN(desvioPadraoCPU) && typeof desvioPadraoCPU === 'number') {
+                await dashGerente02Model.guardarResultado(servidor.idServidor, 'cpu', desvioPadraoCPU, cpuOscillation);
+                console.log(`Servidor: ${servidor.identificacao}, Componente: CPU, Desvio Padrão: ${desvioPadraoCPU}, Oscilação: ${cpuOscillation}`);
+            } else {
+                console.log(`Desvio padrão da CPU não encontrado ou é inválido para o servidor ${servidor.identificacao}`);
+            }
+
+            if (desvioPadraoRAM !== null && !isNaN(desvioPadraoRAM) && typeof desvioPadraoRAM === 'number') {
+                await dashGerente02Model.guardarResultado(servidor.idServidor, 'ram', desvioPadraoRAM, ramOscillation);
+                console.log(`Servidor: ${servidor.identificacao}, Componente: RAM, Desvio Padrão: ${desvioPadraoRAM}, Oscilação: ${ramOscillation}`);
+            } else {
+                console.log(`Desvio padrão da RAM não encontrado ou é inválido para o servidor ${servidor.identificacao}`);
             }
         }
     } catch (error) {
-        console.error('Erro ao calcular desvio padrão:', error.message);
+        console.error('Erro ao calcular desvio padrão e oscilação:', error.message);
+        console.error(error);
     }
 }
 
@@ -40,13 +60,25 @@ async function dadosGrafico(req, res) {
         var data = await dashGerente02Model.dadosGrafico(serverId, component, date);
         res.json(data);
     } catch (error) {
-        console.error("Erro ao buscar dados do gráfico:", error);
+        console.error("Erro ao buscar dados do gráfico de estabilidade:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados do gráfico.' });
+    }
+}
+
+async function dadosGraficoOscilacao(req, res) {
+    var { serverId, component, date } = req.query;
+    try {
+        var data = await dashGerente02Model.dadosGraficoOscilacao(serverId, component, date);
+        res.json(data);
+    } catch (error) {
+        console.error("Erro ao buscar dados do gráfico de oscilação:", error);
         res.status(500).json({ error: 'Erro ao buscar dados do gráfico.' });
     }
 }
 
 module.exports = {
-    calcularDesvioPadrao,
+    calcularDesvioPadraoeOscilacao,
     datasDisponiveis,
-    dadosGrafico
+    dadosGrafico,
+    dadosGraficoOscilacao
 }

@@ -53,6 +53,7 @@ enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
+/*
 SELECT DISTINCT MONTH(dtHora) AS mes
 FROM registro r
 join servidor s on r.fkServidor = s.idServidor
@@ -61,7 +62,7 @@ WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
 
 select * from registro;
-
+*/
 
 create table alerta (
 idAlerta int primary key auto_increment,
@@ -77,6 +78,7 @@ CREATE TABLE estatisticas_horarias (
     timestamp DATETIME NOT NULL,
     desvio_padrao DECIMAL(4, 2) NOT NULL,
     horaCalculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    oscilacao FLOAT,
     FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
 );
 
@@ -177,15 +179,6 @@ VALUES
 
 CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa FROM funcionario JOIN chaveAcesso ON fkChave = idChave);
 
--- select * from registro;
-
--- select * from empresa;
-
-select * from funcionario;
-
--- truncate regis
-select * from registro;
-
 SELECT 
     a.componente,
     COUNT(a.idAlerta) AS total_alertas,
@@ -219,3 +212,6 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
     JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
+    
+    select dia, mes, ano, alertas, componente, regiao from obterDadosAlerta WHERE fkEmpresa = 1 ORDER BY componente, ano, mes, dia;
+    

@@ -16,4 +16,7 @@ router.get('/datas', dashGerente02Controller.datasDisponiveis);
 
 router.get('/grafico', dashGerente02Controller.dadosGrafico);
 
+router.get('/grafico/osc', dashGerente02Controller.dadosGraficoOscilacao);
+
+
 module.exports = router;

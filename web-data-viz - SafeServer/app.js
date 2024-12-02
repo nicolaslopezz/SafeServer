@@ -22,6 +22,7 @@ var empresasRouter = require("./src/routes/empresas");
 var dashGerenteRouter = require("./src/routes/dashGerente");
 var servidoresRouter = require("./src/routes/servidores");
 var dashGerente02Router = require("./src/routes/dashGerente02.js")
+var dashGerente02Controller = require("./src/controllers/dashGerente02Controller.js")
 
 const getIssueByID = require('./src/routes/get-issues.js');
 
@@ -39,14 +40,14 @@ app.use("/dashGerente", dashGerenteRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/dashGerente02", dashGerente02Router);
 
-// Configurar cron para rodar a cada nova hora
+// configurar cron para rodar a cada nova hora
 cron.schedule('0 * * * *', () => {
-    console.log('Iniciando cálculo automático do desvio padrão...');
-    dashGerente02Controller.calcularDesvioPadrao();
-  });
+  console.log('Iniciando cálculo automático do desvio padrão e oscilação...');
+  dashGerente02Controller.calcularDesvioPadraoeOscilacao();
+});
 
 app.listen(PORTA_APP, function () {
-    console.log(`
+  console.log(`
     ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
     ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
     ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   

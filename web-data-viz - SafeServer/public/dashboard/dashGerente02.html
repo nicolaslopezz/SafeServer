@@ -91,7 +91,7 @@
       <div class="charts">
         <div class="servers">
           <div class="servers">
-            <div class="sv-01 server selected" data-id="1">Server 001</div>
+            <div class="sv-01 server" data-id="1">Server 001</div>
             <div class="sv-02 server" data-id="2">Server 002</div>
             <div class="sv-03 server" data-id="3">Server 003</div>
             <div class="sv-04 server" data-id="4">Server 004</div>
@@ -125,7 +125,7 @@
                   <option value="cpu">CPU</option>
                   <option value="ram">RAM</option>
                 </select>
-                <select name="date" id="select_date" class="select">
+                <select name="date" id="select_date_stab" class="select">
                   <option value="" selected disabled>Data</option>
                 </select>
               </div>
@@ -136,6 +136,7 @@
             </div>
           </div>
         </div>
+
         <div class="oscilation chart">
           <div class="metric">
             <div class="horario-maior-osc metric-box">
@@ -158,12 +159,12 @@
           <div class="chart-oscilation">
             <div class="header">
               <div class="combo-box">
-                <select name="component" id="select_component" class="select">
+                <select name="component" id="select_component_osc" class="select">
                   <option value="" disabled selected>Componente</option>
-                  <option value="">CPU</option>
-                  <option value="">RAM</option>
+                  <option value="cpu">CPU</option>
+                  <option value="ram">RAM</option>
                 </select>
-                <select name="date" id="select_date" class="select">
+                <select name="date" id="select_date_osc" class="select">
                   <option value="" selected disabled>Data</option>
                 </select>
               </div>
@@ -193,7 +194,7 @@
     let meuGrafico;
 
     const selectComponent = document.getElementById("select_component_stab");
-    const selectDate = document.getElementById("select_date");
+    const selectDate = document.getElementById("select_date_stab");
     const serverElements = document.querySelectorAll(".server");
 
     let selectedServerId = null;
@@ -331,6 +332,150 @@
     }
 
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const ctx = document.getElementById('MyChart02').getContext('2d');
+  let meuGrafico;
+
+  const selectComponent = document.getElementById("select_component_osc");
+  const selectDate = document.getElementById("select_date_osc");
+  const serverElements = document.querySelectorAll(".server");
+
+  let selectedServerId = null;
+
+  serverElements.forEach((server) => {
+    server.addEventListener("click", function () {
+      selecionarServidor(server);
+    });
+  });
+
+  function selecionarServidor(server) {
+    serverElements.forEach((el) => el.classList.remove("selected"));
+    server.classList.add("selected");
+    selectedServerId = parseInt(server.getAttribute("data-id"), 10);
+
+    if (isNaN(selectedServerId)) {
+      console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
+      return;
+    }
+
+    console.log("Servidor selecionado:", selectedServerId);
+    obterDatas(selectedServerId);
+  }
+
+  function obterDatas(serverId) {
+    console.log("Buscando datas para o servidor:", serverId);
+
+    fetch(`/dashGerente02/datas?serverId=${serverId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((dates) => {
+            atualizarDatas(dates);
+          });
+        } else {
+          console.error("Erro ao buscar datas.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição obterDatas:", erro);
+      });
+  }
+
+  function atualizarDatas(dates) {
+    console.log("Atualizando dropdown de datas:", dates);
+
+    selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
+    dates.forEach((date) => {
+      const option = document.createElement("option");
+      option.value = date;
+      option.textContent = date;
+      selectDate.appendChild(option);
+    });
+  }
+
+  [selectComponent, selectDate].forEach((select) => {
+    select.addEventListener("change", () => {
+      if (selectedServerId && selectComponent.value && selectDate.value) {
+        obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
+      }
+    });
+  });
+
+  function obterDadosGrafico(serverId, component, date) {
+    console.log("Buscando dados do gráfico para:");
+    console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
+
+    const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+    fetch(`/dashGerente02/grafico/osc?${queryString}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((data) => {
+            atualizarGrafico(data);
+          });
+        } else {
+          console.error("Erro ao buscar dados do gráfico.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição obterDadosGrafico:", erro);
+      });
+  }
+
+  function atualizarGrafico(data) {
+    console.log("Atualizando gráfico com dados:", data);
+
+    if (meuGrafico) {
+      meuGrafico.destroy();
+    }
+
+    const labels = data.map((row) => `${row.hour}`);
+    const values = data.map((row) => parseFloat(row.oscilacao));
+
+    meuGrafico = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Oscilação',
+          data: values,
+          backgroundColor: 'rgb(75, 192, 192)',
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Oscilação'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Hora'
+            }
+          }
+        },
+        devicePixelRatio: 3
+      }
+    });
+  }
+});
+
 
 
 
