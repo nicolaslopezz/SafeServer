@@ -220,27 +220,35 @@
             <div class="divisao2C" id="divisao2C" display="none">
               <div class="DE" id="DE">
                 <div class="DD" id="DD">
-
                   <div class="comp" id="comp">
-  
                   </div>
-  
-  
-  
                 </div>
-                <div id="grafico2"></div>
+
+                <div class="D2" id="D2">
+
+                  <div class="DI" id="DI">
+                    <div class="info" id="info"></div>
+
+                  </div>
+                  <div class="DG" id="DG">
+                    <div id="grafico2"></div>
+                  </div>
+
 
                 </div>
+
 
               </div>
+
             </div>
-
-
-
           </div>
+
+
+
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- jQuery -->
@@ -459,6 +467,7 @@
 
   function comparar() {
     const comparacao = document.getElementById('comp');
+    const info = document.getElementById('info');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
     const queryParams = gerarQueryParams();
@@ -474,7 +483,11 @@
       document.getElementById("divisao2").style.display = 'none';
       document.getElementById("divisao2C").style.display = 'flex';
       document.getElementById("DD").style.display = 'flex';
+      document.getElementById("D2").style.display = 'flex';
       document.getElementById("DE").style.display = 'flex';
+      document.getElementById("DG").style.display = 'flex';
+      document.getElementById("DI").style.display = 'flex';
+      document.getElementById("info").style.display = 'flex';
       document.getElementById("grafico2").style.display = 'flex';
       document.getElementById("comp").style.display = 'flex';
 
@@ -497,22 +510,41 @@
           let nomeServ = [];
           let totalServ = [];
           let somaTotal = 0;
+          let mediaTotal = 0;
+          info.innerHTML = ""
 
           // Limpar a div comparacao2 antes de adicionar os novos dados
-          comparacao.innerHTML = "";
+          info.innerHTML = "";
 
           // Adicionar dados na div comparacao2
           data.forEach(item => {
             nomeServ.push(item.servidor);
             totalServ.push(item.total_alertas);
             somaTotal += item.total_alertas;
-          });
 
-          comparacao.innerHTML += `
-            <p>
-             Total de alertas: ${somaTotal}
-          
-            </p>
+          });
+          mediaTotal = somaTotal / totalServ.length
+          mediaArredondada = Math.round(mediaTotal);
+
+          let nomesAcimaMedia = [];
+          let encontrou = false;
+          // Itera manualmente para encontrar os valores acima da média
+          for (let i = 0; i < totalServ.length; i++) {
+            if (totalServ[i] > mediaTotal) {
+              nomesAcimaMedia.push(nomeServ[i]); // Adiciona o nome correspondente
+              encontrou = true
+            }
+          }
+          if (!encontrou) {
+            nomesAcimaMedia.push("Nenhum");
+          }
+
+          comparacao.innerHTML = `<p>Visão geral dos alertas</p>`
+          info.innerHTML += `
+              <b> Total de alertas: <span>${somaTotal}</span></b> 
+              <b> Média de alertas: <span>${mediaArredondada}</span></b> 
+              <b> Servidores acima da média: <span>${nomesAcimaMedia.join(", ")}</span></b> 
+      
           `;
 
           // plotar o gráfico após adicionar os dados no gráfico
@@ -549,7 +581,11 @@
       document.getElementById("divisao2").style.display = 'flex';
       document.getElementById("divisao2C").style.display = 'none';
       document.getElementById("DD").style.display = 'none';
+      document.getElementById("D2").style.display = 'none';
       document.getElementById("DE").style.display = 'none';
+      document.getElementById("DG").style.display = 'none';
+      document.getElementById("DI").style.display = 'none';
+      document.getElementById("info").style.display = 'none';
       document.getElementById("grafico2").style.display = 'none';
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
@@ -951,7 +987,6 @@
   }
 
   function plotarGrafico2(nomeServ, totalServ) {
-
     const labels = nomeServ;
     const dados = {
       labels: labels,
@@ -977,7 +1012,7 @@
         plugins: {
           legend: {
             display: true,
-            position: 'top',
+            position: 'right', // Posiciona as legendas à direita
             labels: {
               font: {
                 size: 14
@@ -1022,5 +1057,6 @@
 
   // Inicia o processo
   inicializar();
+  
 
 </script>

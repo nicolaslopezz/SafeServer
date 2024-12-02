@@ -490,7 +490,7 @@ input[type="range"] {
   background-color: rgb(255, 255, 255);
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
-  z-index: 1; 
+  z-index: 1;
 
 }
 
@@ -502,13 +502,14 @@ input[type="range"] {
   display: flex;
   z-index: 1;
 }
+
 .supImg2 {
   width: 100%;
   height: 88%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;  
+  z-index: -1;
 }
 
 .supD {
@@ -532,13 +533,14 @@ input[type="range"] {
   height: 85%;
 }
 
-.graficoWord1{
+.graficoWord1 {
   width: 94%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .graficoWord2 {
   display: flex;
   justify-content: center;
@@ -547,6 +549,7 @@ input[type="range"] {
   height: 100%;
 
 }
+
 .intFeriado {
   width: 30%;
   height: 10%;
@@ -564,8 +567,8 @@ input[type="range"] {
 }
 
 #myChartCanvas2 {
-  width: 12vw !important;
-  height: 26vh !important;
+  width: 16vw !important;
+  height: 32vh !important;
   z-index: 2 !important;
 }
 
@@ -690,30 +693,33 @@ input[type="range"] {
 .divisao2C {
   width: 100%;
   height: 67%;
-  display:none;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 
-.comp{
+.comp {
   width: 100%;
-  height: 80%;
-  display:none;
+  height: 100%;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.comp p{
+.comp p {
   color: rgb(16, 46, 118);
   font-size: 21px;
   font-weight: 600;
   font-family: poppins-bold;
+  padding: 0;
+  margin: 0;
 }
 
-#erroCatch{
+#erroCatch {
   font-size: 1.2rem;
   font-weight: 800;
   color: rgb(255, 0, 0);
@@ -735,16 +741,69 @@ input[type="range"] {
 }
 
 
+.D2 {
+  width: 100%;
+  height: 70%;
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .DD {
   width: 100%;
-  height: 13%;
+  height: 20%;
+  display: none;
+  justify-content: end;
+  align-items: end;
+}
+
+.DI {
+  width: 50%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+}
+
+.DG {
+  width: 50%;
+  height: 100%;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
+
 }
 
+
+.info {
+  width: 70%;
+  height: 95%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info b {
+  margin-bottom: 3%;
+  color: rgb(16, 46, 118);
+  font-size: 19px;
+  font-weight: 700;
+  font-family: poppins-bold;
+  text-align: center;
+}
+
+.info span {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 17px;
+}
 
 
 .buttonRelatorioAnalisar,
@@ -757,8 +816,9 @@ input[type="range"] {
   border-radius: 20px;
   font-weight: 600;
   font-family: poppins-bold;
-  border: 1px solid rgb(189, 214, 224);
+  border: 1px solid rgb(137, 160, 230);
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -800,7 +860,7 @@ input[type="range"] {
   position: absolute;
   right: 10px;
   top: 40%;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .wrapper {
@@ -823,9 +883,9 @@ input[type="range"] {
   color: #fff;
   display: none;
   position: absolute;
-  top: 50%;  
-  left: -40%;  
-  transform: translateX(-100%) translateY(-10%);  
+  top: 50%;
+  left: -40%;
+  transform: translateX(-100%) translateY(-10%);
   margin-top: 10px;
   padding: 12px;
   min-width: 180px;
@@ -1232,7 +1292,7 @@ table th {
   cursor: pointer;
 }
 
-#selectComponente{
+#selectComponente {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s, background-color 0.3s;
 }
@@ -1241,15 +1301,15 @@ table th {
   padding: 10px;
   font-size: 16px;
   color: #ffffff;
-  background-color: #202957; 
+  background-color: #202957;
 }
 
- .option{
+.option {
   color: white;
   align-items: center;
- }
+}
 
-.dimensaoGraficoRec{
+.dimensaoGraficoRec {
   display: flex;
   position: relative;
   background-color: white;
@@ -1273,7 +1333,7 @@ table th {
   top: -10px;
 }
 
-.dimensaoGraficoEnv{
+.dimensaoGraficoEnv {
   display: flex;
   position: relative;
   background-color: white;
@@ -1391,7 +1451,7 @@ table th {
   left: 260px;
 }
 
-.qtdAlertas{
+.qtdAlertas {
   display: flex;
   position: relative;
   background-color: #202957;
@@ -1401,7 +1461,7 @@ table th {
   height: 200px;
 }
 
-.qtdAlertasEnv{
+.qtdAlertasEnv {
   display: flex;
   position: relative;
   background-color: #202957;
@@ -1415,7 +1475,7 @@ table th {
   top: 320px;
 }
 
-.qtdAlertasRec{
+.qtdAlertasRec {
   display: flex;
   position: relative;
   background-color: #202957;
@@ -1443,7 +1503,7 @@ table th {
   top: 245px;
 }
 
-.tituloDashRec{
+.tituloDashRec {
   display: flex;
   position: relative;
   left: -477px;
@@ -1479,7 +1539,7 @@ table th {
   top: 245px;
 }
 
-.tituloDashEnv{
+.tituloDashEnv {
   display: flex;
   position: relative;
   left: -477px;
@@ -1521,21 +1581,21 @@ table th {
 
 .ranking::-webkit-scrollbar {
   width: 6px;
-  height: 6px; 
+  height: 6px;
 }
 
 .ranking::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-  border-radius: 10px; 
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .ranking::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 10px;
 }
 
 .ranking::-webkit-scrollbar-thumb:hover {
-  background: #0b2982; 
+  background: #0b2982;
 }
 
 h1 {
