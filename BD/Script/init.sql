@@ -130,46 +130,46 @@ INSERT INTO alerta (componente, fkRegistro)
 VALUES 
 ('cpu', 1),
 ('ram', 1),
-('rede_recebida', 1),
+('rede_recebido', 1),
 ('cpu', 2),
 ('ram', 2),
-('rede_recebida', 2),
+('rede_recebido', 2),
 ('cpu', 3),
 ('ram', 3),
-('rede_recebida', 3),
+('rede_recebido', 3),
 ('cpu', 4),
 ('ram', 4),
-('rede_recebida', 4),
+('rede_recebido', 4),
 ('cpu', 5),
 ('ram', 5),
-('rede_recebida', 5),
+('rede_recebido', 5),
 ('cpu', 6),
 ('ram', 6),
-('rede_recebida', 6),
+('rede_recebido', 6),
 ('cpu', 7),
 ('ram', 7),
-('rede_recebida', 7),
+('rede_recebido', 7),
 ('cpu', 8),
 ('ram', 8),
-('rede_recebida', 8),
+('rede_recebido', 8),
 ('cpu', 9),
 ('ram', 9),
-('rede_recebida', 9),
+('rede_recebido', 9),
 ('cpu', 10),
 ('ram', 10),
-('rede_recebida', 10),
+('rede_recebido', 10),
 ('cpu', 11),
 ('ram', 11),
-('rede_recebida', 11),
+('rede_recebido', 11),
 ('cpu', 12),
 ('ram', 12),
-('rede_recebida', 12),
+('rede_recebido', 12),
 ('cpu', 13),
 ('ram', 13),
-('rede_recebida', 13),
+('rede_recebido', 13),
 ('cpu', 14),
 ('ram', 14),
-('rede_recebida', 14);
+('rede_recebido', 14);
 
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
@@ -184,10 +184,10 @@ SELECT
     COUNT(a.idAlerta) AS total_alertas,
     s.identificacao AS servidor,
     AVG(CASE 
-        WHEN a.componente = 'CPU' THEN r.percent_use_cpu
-        WHEN a.componente = 'RAM' THEN r.percent_use_ram
-        WHEN a.componente = 'REDE (RECEBIDA)' THEN r.recebido_rede
-        WHEN a.componente = 'REDE (ENVIADA)' THEN r.enviado_rede
+        WHEN a.componente = 'cpu' THEN r.percent_use_cpu
+        WHEN a.componente = 'ram' THEN r.percent_use_ram
+        WHEN a.componente = 'rede_recebido' THEN r.recebido_rede
+        WHEN a.componente = 'rede_enviado' THEN r.enviado_rede
         ELSE NULL
     END) AS media_componente,
     MONTH(r.dtHora) AS mes
@@ -200,7 +200,7 @@ JOIN
 WHERE 
     s.identificacao IN ('reader')
     AND MONTH(r.dtHora) IN (12)
-    AND a.componente IN ('CPU')
+    AND a.componente IN ('cpu')
 GROUP BY 
     a.componente, s.identificacao, MONTH(r.dtHora)
 ORDER BY 
@@ -212,6 +212,6 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
     JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
-    
-    select dia, mes, ano, alertas, componente, regiao from obterDadosAlerta WHERE fkEmpresa = 1 ORDER BY componente, ano, mes, dia;
+select * from obterDadosAlerta;    
+select dia, mes, ano, alertas, componente, regiao from obterDadosAlerta WHERE fkEmpresa = 1 ORDER BY componente, ano, mes, dia;
     
