@@ -5,7 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
 
   <!-- bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
@@ -28,12 +31,14 @@
 
   <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
 
   <!-- icone font awesom -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
-  <title>Relatório - Nuvem de Palavras</title>
+  <title>Relatório-Gerente</title>
 </head>
 
 <body>
@@ -44,7 +49,7 @@
       </div>
       <div class="head">
         <div class="user-img">
-          <img src="../assets/imgs/contact.png" alt="User Image" />
+          <img src="../assets/imgs/contact.png" alt="" />
         </div>
         <div class="user-details">
           <p class="title" id="cargoUsuario"></p>
@@ -55,11 +60,18 @@
         <div class="menu">
           <p class="title">Menu</p>
           <ul>
-            <li class="active">
-              <a href="#">
-                <i class="icon ph-bold ph-file-text"></i>
-                <span class="text">Relatório</span>
-              </a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
             </li>
             <li>
               <a href="dashGerente01.html">
@@ -68,24 +80,45 @@
               </a>
             </li>
             <li>
+              <a href="dashGerente02.html">
+                <i class="icon ph-bold ph-gauge"></i>
+                <span class="text">Desempenho</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li>
               <a href="cadastroServidor.html">
                 <i class="icon ph-bold ph-gear"></i>
                 <span class="text">Cadastrar Servidor</span>
               </a>
             </li>
+
           </ul>
         </div>
         <div class="menu">
-          <p class="title">Conta</p>
+          <p class="title"></p>
           <ul>
             <li>
-              <a href="../index.html">
-                <i class="icon ph-bold ph-sign-out"></i>
-                <span class="text">Sair</span>
-              </a>
+
             </li>
           </ul>
         </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -109,7 +142,7 @@
                 </div>
                 <div class="supImg2">
                   <!-- Div para exibir a Word Cloud -->
-                  <div id="word" style="width: 500px; height: 190px;"></div>
+                  <div id="word" style="width: 450px; height: 195px;"></div>
 
                 </div>
 
@@ -129,7 +162,8 @@
                   <div class="wrapper">
                     <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
                     <div class="tooltip">Cada barra do gráfico representa o percentual de uso médio da CPU durante os
-                      feriados, permitindo comparar como o desempenho do servidor variou em diferentes datas festivas,
+                      feriados, a linha vermelha representa o limite em percentual do uso da CPU que é de 75%,
+                      permitindo comparar como o desempenho do servidor variou em diferentes datas festivas,
                       com foco nas mais significativas.</div>
                   </div>
                 </div>
@@ -165,7 +199,7 @@
 
               <div class="divbaixo">
                 <button class="buttonRelatorioAnalisar" onclick="analisar()">Analisar</button>
-                <button class="buttonRelatorioComparar" onclick="comparar()">Comparar</button>
+                <button class="buttonRelatorioComparar" onclick="comparar()">Alertas</button>
               </div>
 
 
@@ -177,10 +211,11 @@
                   <thead>
                     <tr id="trr"> <!-- titulo do cabeçalho, primeira linha -->
                       <th id="thh">Servidor</th> <!-- cabeçalho da primeira coluna -->
-                      <th id="thh">Total de Alertas</th> <!-- cabeçalho da segunda coluna -->
-                      <th id="thh">Componente</th>
-                      <th id="thh">Relação com o Limite</th>
-                      <th id="thh">Mês</th>
+                      <th id="thh">Componente</th> <!-- cabeçalho da segunda coluna -->
+                      <th id="thh">Mínimo</th>
+                      <th id="thh">Máximo</th>
+                      <th id="thh">Média</th>
+
                     </tr>
                   </thead>
                   <tbody id="ranking">
@@ -190,13 +225,65 @@
                   </tbody>
                 </table>
               </div>
-
             </div>
 
+            <div class="divisao2C" id="divisao2C" display="none">
+
+              <div class="DInteira" id="DInteira">
+                <div class="DCIMA" id="DCIMA">
+
+                </div>
+                <div class="DBAIXO" id="DBAIXO">
+
+                  <div class="DE" id="DE">
+                    <div class="DD" id="DD">
+                      <div class="comp" id="comp">
+                      </div>
+                    </div>
+
+                    <div class="D2" id="D2">
+
+                      <div class="DI" id="DI">
+                        <div class="info" id="info"></div>
+
+                      </div>
+                      <div class="DG" id="DG">
+                        <div id="grafico2"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="DE2" id="DE2">
+                    <div class="DD2" id="DD2">
+                      <div class="comp2" id="comp2">
+                      </div>
+                    </div>
+
+                    <div class="D22" id="D22">
+
+                      <div class="DI2" id="DI2">
+                        <div class="info2" id="info2"></div>
+
+                      </div>
+                      <div class="DG2" id="DG2">
+                        <div id="grafico3"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
           </div>
         </div>
+
+
+
       </div>
     </div>
+  </div>
+  </div>
   </div>
 
   <!-- jQuery -->
@@ -382,7 +469,7 @@
   function obterComponenteRelatorio() {
     componenteSelecionado = [];
     const select = document.getElementById("componenteRelatorio");
-  
+
     const componente = {
       "Uso da CPU": "cpu",
       "Uso da RAM": "ram",
@@ -397,31 +484,224 @@
     console.log("componentes selecionados:", componenteSelecionado);
   }
 
+  function gerarQueryParams() {
+    const servidores = obterServidorRelatorio();
+    const periodos = obterPeriodoRelatorio();
+    const componentes = obterComponenteRelatorio();
+
+    const queryParams = new URLSearchParams();
+    queryParams.append('servidores', JSON.stringify(servidores));
+    queryParams.append('periodos', JSON.stringify(periodos));
+    queryParams.append('componentes', JSON.stringify(componentes));
+
+    return queryParams.toString();
+  }
+
 
   cont = 0
 
   function comparar() {
+    const mensagem = document.getElementById('DCIMA');
+    const comparacao = document.getElementById('comp');
+    const comparacao2 = document.getElementById('comp2');
+    const info = document.getElementById('info');
+    const info2 = document.getElementById('info2');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
 
+    // Garantir que o botão de comparação esteja no estado certo
     analisarButton.classList.remove("clicked");
 
     if (cont == 0 || !compararButton.classList.contains("clicked")) {
       compararButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
+      // Mostrar/ocultar elementos da página conforme necessário
+      document.getElementById("divisao2").style.display = 'none';
+      document.getElementById("divisao2C").style.display = 'flex';
+      document.getElementById("DD").style.display = 'flex';
+      document.getElementById("D2").style.display = 'flex';
+      document.getElementById("DE").style.display = 'flex';
+      document.getElementById("DG").style.display = 'flex';
+      document.getElementById("DI").style.display = 'flex';
+      document.getElementById("info").style.display = 'flex';
+      document.getElementById("grafico2").style.display = 'flex';
+      document.getElementById("comp").style.display = 'flex';
+      document.getElementById("DInteira").style.display = 'flex';
+      document.getElementById("DCIMA").style.display = 'flex';
+      document.getElementById("DBAIXO").style.display = 'flex';
 
-      // if (servidores.length > 2) {
-      //   alert("Escolha apenas 2 servidores!", servidores.length)
 
-      // } else if (servidores.length == 1) {
-      //   alert("Escolha apenas mais 1 servidor!")
-      // }
+      document.getElementById("DD2").style.display = 'flex';
+      document.getElementById("D22").style.display = 'flex';
+      document.getElementById("DE2").style.display = 'flex';
+      document.getElementById("DG2").style.display = 'flex';
+      document.getElementById("DI2").style.display = 'flex';
+      document.getElementById("info2").style.display = 'flex';
+      document.getElementById("grafico3").style.display = 'flex';
+      document.getElementById("comp2").style.display = 'flex';
 
-      document.getElementById("divisao2").style.display ='none';
+
+
+      // Requisição para obter dados de comparação
+      fetch(`/dashboard/comparar?${queryParams.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao obter os dados do ranking');
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          console.log("dados GRAFICO2:", data);
+          let nomeServ = [];
+          let totalServ = [];
+          let somaTotal = 0;
+          let mediaTotal = 0;
+          info.innerHTML = ""
+          comparacao.innerHTML = ""
+          mensagem.innerHTML = ""
+
+
+          data.forEach(item => {
+
+            nomeServ.push(item.servidor);
+            totalServ.push(item.total_alertas);
+            somaTotal += item.total_alertas;
+
+          });
+          mediaTotal = somaTotal / totalServ.length
+          mediaArredondada =  Math.floor(mediaTotal);
+
+          let nomesAcimaMedia = [];
+          let encontrou = false;
+
+          for (let i = 0; i < totalServ.length; i++) {
+            if (totalServ[i] > mediaTotal) {
+              nomesAcimaMedia.push(nomeServ[i]);
+              encontrou = true
+            }
+          }
+          if (!encontrou) {
+            nomesAcimaMedia.push("Nenhum");
+          }
+
+          comparacao.innerHTML = `<p>Alertas por servidor</p>`
+          info.innerHTML += `
+              <b> Total de alertas: <span>${somaTotal}</span></b> 
+              <b> Média de alertas: <span>${mediaArredondada}</span></b> 
+              <b> Servidores acima da média: <span>${nomesAcimaMedia.join(", ")}</span></b> 
+      
+          `;
+
+
+          // plotar o gráfico após adicionar os dados no gráfico
+          plotarGrafico2(nomeServ, totalServ);
+        })
+        .catch(error => {
+          console.error('Erro na requisição do ranking para comparar2', error);
+          if (grafico2) {
+            grafico2.destroy();
+          }
+          comparacao.innerHTML = "";
+          info.innerHTML = "";
+          mensagem.innerHTML = "";
+          document.getElementById("DE").style.display = 'none';
+          document.getElementById("DE2").style.display = 'none';
+
+
+          const servidorSelect = document.getElementById("servidorRelatorio");
+          const periodoSelect = document.getElementById("periodoRelatorio");
+          const componenteSelect = document.getElementById("componenteRelatorio");
+
+          if (!servidorSelect.selectedOptions.length || !periodoSelect.selectedOptions.length || !componenteSelect.selectedOptions.length) {
+            mensagem.innerHTML = `<p id="erroCatch" style="color: red !important;">Selecione pelo menos um servidor, um período e um componente</p>`;
+          } else {
+            mensagem.innerHTML = `<p id="erroCatch" style="color: green !important;">Nenhum alerta encontrado para o servidor, período e componente selecionados</p>`;
+          }
+        });
+
+
+      fetch(`/dashboard/comparar2?${queryParams.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao obter os dados do ranking');
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          console.log("dados GRAFICO3:", data);
+          let nomeComp = [];
+          let totalAlert = [];
+          let somaTotal = 0;
+          let mediaTotal = 0;
+          info2.innerHTML = ""
+          comparacao2.innerHTML = ""
+
+          const mapComponentes = {
+            'cpu': 'CPU',
+            'ram': 'RAM',
+            'rede_recebida': 'Rede Env.Dados',
+            'rede_enviada': 'Rede Rec.Dados'
+
+          };
+
+          data.forEach(item => {
+
+            nomeComp.push(mapComponentes[item.componente]);
+            totalAlert.push(item.total_alertas);
+            somaTotal += item.total_alertas;
+
+          });
+          mediaTotal = somaTotal / totalAlert.length
+          mediaArredondada =  Math.floor(mediaTotal);
+
+          let nomesAcimaMedia = [];
+          let encontrou = false;
+
+
+          for (let i = 0; i < totalAlert.length; i++) {
+            if (totalAlert[i] > mediaTotal) {
+              nomesAcimaMedia.push(nomeComp[i]);
+              encontrou = true
+            }
+          }
+          if (!encontrou) {
+            nomesAcimaMedia.push("Nenhum");
+          }
+
+          comparacao2.innerHTML = `<p>Alertas por componente</p>`
+          info2.innerHTML += `
+              <b> Total de alertas: <span>${somaTotal}</span></b> 
+              <b> Média de alertas: <span>${mediaArredondada}</span></b> 
+              <b> Componentes acima da média: <span>${nomesAcimaMedia.join(", ")}</span></b> 
+      
+          `;
+
+          plotarGrafico3(nomeComp, totalAlert);
+        })
+        .catch(error => {
+          console.error('Erro na requisição do ranking para comparar3', error);
+          if (grafico3) {
+            grafico3.destroy();
+          }
+          comparacao2.innerHTML = "";
+          info2.innerHTML = "";
+        });
+
+
 
     } else {
       compararButton.classList.remove("clicked");
@@ -434,6 +714,8 @@
     const tabela = document.getElementById('ranking');
     const compararButton = document.querySelector(".buttonRelatorioComparar");
     const analisarButton = document.querySelector(".buttonRelatorioAnalisar");
+    const queryParams = gerarQueryParams();
+
 
     compararButton.classList.remove("clicked");
 
@@ -441,19 +723,27 @@
       analisarButton.classList.add("clicked");
       cont = 1;
 
-      const servidores = obterServidorRelatorio();
-      const periodos = obterPeriodoRelatorio();
-      const componentes = obterComponenteRelatorio();
-      const queryParams = new URLSearchParams();
 
-      document.getElementById("divisao2").style.display ='flex';
+      document.getElementById("divisao2").style.display = 'flex';
+      document.getElementById("divisao2C").style.display = 'none';
+      document.getElementById("DD").style.display = 'none';
+      document.getElementById("D2").style.display = 'none';
+      document.getElementById("DE").style.display = 'none';
+      document.getElementById("DG").style.display = 'none';
+      document.getElementById("DI").style.display = 'none';
+      document.getElementById("info").style.display = 'none';
+      document.getElementById("grafico2").style.display = 'none';
 
-      queryParams.append('servidores', JSON.stringify(servidores));
-      queryParams.append('periodos', JSON.stringify(periodos));
-      queryParams.append('componentes', JSON.stringify(componentes));
-
-      console.log("URL gerada:", `/dashboard/analisar?${queryParams.toString()}`);
-
+      document.getElementById("DD2").style.display = 'none';
+      document.getElementById("D22").style.display = 'none';
+      document.getElementById("DE2").style.display = 'none';
+      document.getElementById("DG2").style.display = 'none';
+      document.getElementById("DI2").style.display = 'none';
+      document.getElementById("info2").style.display = 'none';
+      document.getElementById("grafico3").style.display = 'none';
+      document.getElementById("DInteira").style.display = 'none';
+      document.getElementById("DCIMA").style.display = 'none';
+      document.getElementById("DBAIXO").style.display = 'none';
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
         method: 'GET',
@@ -462,41 +752,117 @@
         },
       })
         .then(response => {
-          // Verifica
+
           if (!response.ok) {
             throw new Error('Erro ao obter os dados do ranking');
           }
           return response.json();
         })
         .then(data => {
+
           console.log("dados:", data)
-          // Limpa o conteúdo atual do tbody
+          // limpa o conteúdo atual do tbody
           tabela.innerHTML = '';
+          var colorMedia = ""
+          var colorMax = ""
+          var colorMin = ""
+          var percentual = ""
+          var GB = ""
 
           // Loop pelos dados e criar as linhas da tabela
           //o tr define uma linha em uma tabela
           //o td cria uma célula da linha da tabela, ou seja, na horizontal.
 
-          const componentesFormatados = {
-            'cpu': 'CPU',
-            'ram': 'RAM',
-            'rede_enviada': 'Rede dados enviados',
-            'rede_recebida': 'Rede dados recebidos'
-          };
-          data.forEach(item => {
+          const mapComponentes = {
+            'percent_use_cpu': 'CPU',
+            'percent_use_ram': 'RAM',
+            'recebido_rede': 'Rede (dados recebidos)',
+            'enviado_rede': 'Rede (dados enviados)'
 
+          };
+
+
+          let linhas = "";
+
+          data.forEach(item => {
+            let colorMedia = "";
+            let colorMax = "";
+            let colorMin = "";
+            let percentual = "";
+            let GB = "";
+
+            if (item.componente === "percent_use_cpu") {
+              if (item.media > 75) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 75) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 75) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              percentual = "%";
+            }
+
+            if (item.componente === "percent_use_ram") {
+              if (item.media > 85) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 85) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 85) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              percentual = "%";
+            }
+
+            if (item.componente === "recebido_rede" || item.componente === "enviado_rede") {
+              if (item.media > 200) {
+                colorMedia = "red";
+              } else {
+                colorMedia = "green";
+              }
+              if (item.max > 200) {
+                colorMax = "red";
+              } else {
+                colorMax = "green";
+              }
+              if (item.min > 200) {
+                colorMin = "red";
+              } else {
+                colorMin = "green";
+              }
+              GB = " GB";
+            }
             const linha = `<tr> 
-                            <td>${item.servidor}</td>
-                            <td>${componentesFormatados[item.componente]}</td>
-                            <td>${item.total_alertas}</td>
-                            <td>${item.valor_medio}</td>
-                             <td>${item.mes}</td> 
-                        </tr>`;
-            tabela.innerHTML += linha;
+                    <td>${item.servidor}</td>
+                    <td>${mapComponentes[item.componente]}</td>
+                    <td style="color: ${colorMin};">${item.min}${percentual}${GB}</td>
+                    <td style="color: ${colorMax};">${item.max}${percentual}${GB}</td>
+                    <td style="color: ${colorMedia};">${item.media}${percentual}${GB}</td>
+                </tr>`;
+            linhas += linha;
           });
+
+          tabela.innerHTML += linhas;
         })
         .catch(error => {
-          console.error('Erro na requisição do ranking', error);
+          console.error('Erro na requisição', error);
+          tabela.innerHTML = ""
+          tabela.innerHTML = '<tr><td id="erroCatch" colspan="5">Selecione pelo menos um servidor, um período e um componente</td></tr>';
         });
 
       return false;
@@ -591,7 +957,7 @@
     console.log('Iniciando a requisição para /dashboard/periodo');
 
     try {
-      // Verifique se a variável empresa está sendo recuperada corretamente
+
       if (!empresa) {
         throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
       }
@@ -610,7 +976,7 @@
       const data = await response.json();
       console.log('Dados brutos recebidos:', data);
 
-      // Verifique se data é um array e se contém os itens esperados
+
       if (Array.isArray(data) && data.length > 0) {
 
         const meses = {
@@ -659,6 +1025,8 @@
   // Função para exibir o canvas do gráfico e iniciar o processo de obtenção de dados
   async function exibirPosts() {
     document.getElementById("grafico").innerHTML += `<canvas id="myChartCanvas"></canvas>`;
+    document.getElementById("grafico2").innerHTML += `<canvas id="myChartCanvas2"></canvas>`;
+    document.getElementById("grafico3").innerHTML += `<canvas id="myChartCanvas3"></canvas>`;
     await obterDadosGrafico();
   }
 
@@ -683,8 +1051,9 @@
   }
 
   var grafico
+  var grafico2
+  var grafico3
 
-  // Função para plotar o gráfico
   function plotarGrafico(resposta) {
     const labels = [];
     const dados = {
@@ -732,8 +1101,6 @@
       "2024-08-15": "Imaculada Conceição"
     };
 
-
-
     resposta.forEach(registro => {
       const dataFormatada = new Date(registro.dataRegistro).toISOString().split('T')[0];
       labels.push(datasTraduzidas[dataFormatada] || dataFormatada);
@@ -749,7 +1116,9 @@
             title: {
               display: true,
               text: 'Uso médio do percentual da CPU'
-            }
+            },
+            suggestedMin: 0,
+            suggestedMax: 100
           }
         },
         plugins: {
@@ -761,8 +1130,24 @@
               boxWidth: 0,
               fontColor: 'transparent'
             }
+          },
+          annotation: {
+            annotations: {
+              line: {
+                type: 'line',
+                yMin: 75,
+                yMax: 75,
+                borderColor: 'red',
+                borderWidth: 2,
+                label: {
+                  content: '75%',
+                  enabled: true,
+                  position: 'right'
+                }
+              }
+            }
           }
-        },
+        }
       }
     };
 
@@ -770,21 +1155,174 @@
       grafico.destroy();
     }
 
-    // Adiciona o gráfico à tela
-    grafico = new Chart(document.getElementById('myChartCanvas'), config);
 
+    grafico = new Chart(document.getElementById('myChartCanvas'), config);
   }
 
 
-  // Chama a função para fazer a requisição inicial e preencher o select
+  function plotarGrafico2(nomeServ, totalServ) {
+    const labels = nomeServ;
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Comparação da quantidade de alertas por servidor',
+        data: totalServ,
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const config2 = {
+      type: 'doughnut',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              font: {
+                size: 14
+              },
+              color: '#333'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const percentage = ((value / totalServ.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                return `${label}: ${value} alertas (${percentage}%)`;
+              }
+            },
+          }
+        }
+      }
+    };
+
+    // verifica se existe um gráfico anterior e destrói para evitar duplicatas
+    if (grafico2) {
+      grafico2.destroy();
+    }
+
+    // renderiza o novo gráfico no canvas
+    grafico2 = new Chart(document.getElementById('myChartCanvas2'), config2);
+  }
+
+
+  function plotarGrafico3(nomeComp, totalAlert) {
+    const labels = nomeComp
+    const dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Comparação da quantidade de alertas por componente',
+        data: totalAlert,
+        backgroundColor: [
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)',
+          'rgba(255,0,0, 0.7)',
+          'rgba(255,20,147, 0.7)',
+          'rgba(186,85,211, 0.7)'
+        ],
+        borderColor: [
+          'rgba(30,144,255, 1)',
+          'rgba(128,0,128, 1)',
+          'rgba(255,0,0, 1)',
+          'rgba(255,20,147, 1)',
+          'rgba(186,85,211, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const config3 = {
+      type: 'pie',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              font: {
+                size: 14
+              },
+              color: '#333'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const percentage = ((value / totalAlert.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                return `${label}: ${value} alertas (${percentage}%)`;
+              }
+            },
+          }
+        }
+      }
+    };
+
+    // verifica se existe um gráfico anterior e destrói para evitar duplicatas
+    if (grafico3) {
+      grafico3.destroy();
+    }
+
+    grafico3 = new Chart(document.getElementById('myChartCanvas3'), config3);
+  }
+
+
+  function selecionarPrimeiraOpcao() {
+    const servidorSelect = document.getElementById("servidorRelatorio");
+    const periodoSelect = document.getElementById("periodoRelatorio");
+    const componenteSelect = document.getElementById("componenteRelatorio");
+
+    if (servidorSelect.options.length > 0) {
+      for (let i = 0; i < servidorSelect.options.length; i++) {
+        servidorSelect.options[i].selected = true;
+      }
+      servidorSelect.dispatchEvent(new Event('change'));
+    }
+
+    if (periodoSelect.options.length > 0) {
+      for (let i = 0; i < periodoSelect.options.length; i++) {
+        periodoSelect.options[i].selected = true;
+      }
+      periodoSelect.dispatchEvent(new Event('change'));
+    }
+
+    if (componenteSelect.options.length > 0) {
+      for (let i = 0; i < componenteSelect.options.length; i++) {
+        componenteSelect.options[i].selected = true;
+      }
+      componenteSelect.dispatchEvent(new Event('change'));
+    }
+  }
+
+
+
   async function inicializar() {
     await servidor(); // Preenche os servidores
     await periodo(); // Preenche os períodos
     await exibirPosts(); // Exibe o gráfico
     obterServidorSelecionado();
+    selecionarPrimeiraOpcao();
+    analisar();
   }
 
   // Inicia o processo
   inicializar();
+
+
+
 
 </script>

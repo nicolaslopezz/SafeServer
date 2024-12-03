@@ -46,19 +46,22 @@ idRegistro int primary key auto_increment,
 dtHora datetime default current_timestamp,
 percent_use_cpu float, 
 percent_use_ram float, 
-uso_ram_gb float,
-livre_ram_gb float,
 recebido_rede float,
 enviado_rede float,
 fkServidor int,
 constraint fkServidorRegistros foreign key (fkServidor) references servidor (idServidor));
 
-SELECT DISTINCT MONTH(dtHora) AS mes
-FROM registro r
-join servidor s on r.fkServidor = s.idServidor
-Join empresa e on s.fkEmpresa = e.idEmpresa
-WHERE e.idEmpresa = 1
-ORDER BY mes DESC;
+CREATE TABLE estatisticas_horarias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fkServidor INT NOT NULL,
+    componente ENUM('cpu', 'ram') NOT NULL,
+    timestamp DATETIME NOT NULL,
+    desvio_padrao DECIMAL(4, 2) NOT NULL,
+    horaCalculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    oscilacao FLOAT,
+    FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
+);
+
 
 select * from registro;
 
@@ -75,7 +78,7 @@ INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
 
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
-('abcd', 2, 1, 'Analista');
+('abcd', 2, 1, 'Gerente');
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
 ('reader', 1, 'US-EAST-1'),
@@ -83,41 +86,42 @@ INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES
 
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 1),
-('Marta', 'marta@gmail.com', '12345678901', '123456', 1, 1);
+('Roberto', 'roberto@gmail.com', '12345678901', '123456', 1, 1);
 
 
-INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, uso_ram_gb, livre_ram_gb, recebido_rede, enviado_rede, fkServidor)
-VALUES 
-('2024-12-25 10:00:00', 92, 93, 32, 1, 700, 450, 1),  
-('2024-12-25 18:00:00', 89, 91, 30, 2, 720, 400, 1),  
-('2024-12-25 10:00:00', 97, 91, 31, 1, 680, 400, 2),  
-('2024-12-25 18:00:00', 95, 93, 33, 1, 730, 440, 2),  
+INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, recebido_rede, enviado_rede, fkServidor)
+VALUES  
+('2024-12-25 10:00:00', 93, 95, 240, 250, 1),  
+('2024-12-25 18:00:00', 89, 90, 220, 230, 1),  
+('2024-12-25 10:00:00', 97, 91, 260, 240, 2),  
+('2024-12-25 18:00:00', 95, 93, 210, 220, 2),  
 
-('2024-01-01 10:00:00', 88, 90, 28, 3, 500, 300, 1),  
-('2024-01-01 18:00:00', 83, 85, 29, 2, 580, 350, 1),  
-('2024-01-01 10:00:00', 84, 88, 28, 3, 480, 280, 2),  
-('2024-01-01 18:00:00', 87, 89, 31, 1, 530, 340, 2),  
+('2024-01-01 10:00:00', 88, 90, 200, 250, 1),  
+('2024-01-01 18:00:00', 83, 85, 230, 210, 1),  
+('2024-01-01 10:00:00', 84, 88, 240, 200, 2),  
+('2024-01-01 18:00:00', 87, 89, 220, 260, 2),  
 
-('2024-03-29 10:00:00', 60, 80, 27, 5, 560, 330, 1),  
-('2024-03-29 18:00:00', 60, 74, 25, 5, 580, 320, 1),  
-('2024-03-29 10:00:00', 75, 78, 26, 4, 580, 310, 2),  
-('2024-03-29 18:00:00', 76, 77, 27, 4, 590, 350, 2),  
+('2024-03-29 10:00:00', 97, 80, 210, 240, 1),  
+('2024-03-29 18:00:00', 80, 74, 200, 250, 1),  
+('2024-03-29 10:00:00', 98, 78, 230, 260, 2),  
+('2024-03-29 18:00:00', 78, 77, 240, 220, 2),  
 
-('2024-03-31 10:00:00', 68, 70, 25, 5, 490, 300, 1),  
-('2024-03-31 18:00:00', 71, 72, 26, 4, 550, 340, 1),  
-('2024-03-31 10:00:00', 69, 72, 26, 4, 510, 320, 2),  
-('2024-03-31 18:00:00', 70, 73, 26, 4, 550, 350, 2),  
+('2024-03-31 10:00:00', 88, 70, 220, 200, 1),  
+('2024-03-31 18:00:00', 90, 72, 250, 230, 1),  
+('2024-03-31 10:00:00', 93, 72, 240, 210, 2),  
+('2024-03-31 18:00:00', 75, 73, 260, 240, 2),  
 
-('2024-05-01 10:00:00', 76, 78, 28, 3, 600, 350, 1),  
-('2024-05-01 18:00:00', 73, 75, 26, 4, 610, 360, 1),  
-('2024-05-01 10:00:00', 74, 72, 27, 3, 620, 340, 2),  
-('2024-05-01 18:00:00', 75, 77, 28, 2, 630, 330, 2);
+('2024-05-01 10:00:00', 76, 78, 200, 230, 1),  
+('2024-05-01 18:00:00', 79, 75, 240, 220, 1),  
+('2024-05-01 10:00:00', 79, 72, 230, 210, 2),  
+('2024-05-01 18:00:00', 98, 77, 260, 200, 2);
+
+
 
 -- Inserir dados na tabela alerta
 INSERT INTO alerta (componente, fkRegistro) 
 VALUES 
 ('cpu', 1),
-('ram', 1),
 ('rede_recebida', 1),
 ('cpu', 2),
 ('ram', 2),
@@ -176,18 +180,80 @@ select * from funcionario;
 -- truncate regis
 select * from registro;
 
+
 SELECT 
-    a.componente,
-    COUNT(a.idAlerta) AS total_alertas,
+    'percent_use_cpu' AS componente,
+    s.identificacao AS servidor, 
+    MIN(r.percent_use_cpu) AS min, 
+    MAX(r.percent_use_cpu) AS max,
+    AVG(r.percent_use_cpu) AS media
+FROM 
+    registro r
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
+    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
+GROUP BY 
+    s.identificacao
+
+UNION ALL
+
+SELECT 
+    'percent_use_ram' AS componente,
+    s.identificacao AS servidor, 
+    MIN(r.percent_use_ram) AS min, 
+    MAX(r.percent_use_ram) AS max,
+        AVG(r.percent_use_ram) AS media
+FROM 
+    registro r
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
+    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
+GROUP BY 
+    s.identificacao
+
+UNION ALL
+
+SELECT 
+    'recebido_rede' AS componente,
+    s.identificacao AS servidor, 
+    MIN(r.recebido_rede) AS min, 
+    MAX(r.recebido_rede) AS max,
+        AVG(r.recebido_rede) AS media
+FROM 
+    registro r
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
+    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
+GROUP BY 
+    s.identificacao
+
+UNION ALL
+
+SELECT 
+    'enviado_rede' AS componente,
+    s.identificacao AS servidor, 
+    MIN(r.enviado_rede) AS min, 
+    MAX(r.enviado_rede) AS max,
+	AVG(r.recebido_rede) AS media
+FROM 
+    registro r
+JOIN 
+    servidor s ON r.fkServidor = s.idServidor
+WHERE 
+    MONTH(r.dtHora) IN (5)  
+    AND s.identificacao IN ('reader', 'writer')  
+GROUP BY 
+    s.identificacao;
+    
+    SELECT 
     s.identificacao AS servidor,
-    AVG(CASE 
-        WHEN a.componente = 'CPU' THEN r.percent_use_cpu
-        WHEN a.componente = 'RAM' THEN r.percent_use_ram
-        WHEN a.componente = 'REDE (RECEBIDA)' THEN r.recebido_rede
-        WHEN a.componente = 'REDE (ENVIADA)' THEN r.enviado_rede
-        ELSE NULL
-    END) AS media_componente,
-    MONTH(r.dtHora) AS mes
+    COUNT(a.idAlerta) AS total_alertas
 FROM 
     alerta a
 JOIN 
@@ -195,14 +261,24 @@ JOIN
 JOIN 
     servidor s ON r.fkServidor = s.idServidor
 WHERE 
-    s.identificacao IN ('reader')
-    AND MONTH(r.dtHora) IN (12)
-    AND a.componente IN ('CPU')
+    s.identificacao IN ('reader', 'writer') 
+    AND MONTH(r.dtHora) IN (12, 1,2,3,4,5,6,7,8,9,10,11,12) 
+    AND a.componente IN ('cpu', 'ram') 
 GROUP BY 
-    a.componente, s.identificacao, MONTH(r.dtHora)
+    s.identificacao 
 ORDER BY 
-    s.identificacao, a.componente;
-    
+    total_alertas DESC; 
+
+
+SELECT DISTINCT MONTH(dtHora) AS mes
+FROM registro r
+join servidor s on r.fkServidor = s.idServidor
+Join empresa e on s.fkEmpresa = e.idEmpresa
+WHERE e.idEmpresa = 1
+ORDER BY mes DESC;
+            
+            
+            
 CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro

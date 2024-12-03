@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
+  <link rel="stylesheet" href="../css/dashCss/dashGerente01.css">
 
   <title>Dashboard-Gerente</title>
 </head>
@@ -46,16 +47,22 @@
               </li>
             </ul>
             </li>
-            <li>
-              <a href="relatorio.html">
-                <i class="icon ph-bold ph-file-text"></i>
-                <span class="text">Relatório</span>
-              </a>
-            </li>
             <li class="active">
               <a href="">
                 <i class="icon ph-bold ph-chart-bar"></i>
                 <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="dashGerente02.html">
+                <i class="icon ph-bold ph-gauge"></i>
+                <span class="text">Desempenho</span>
+              </a>
+            </li>
+            <li>
+              <a href="relatorio.html">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
               </a>
             </li>
             <li>
@@ -91,23 +98,21 @@
       <div class="sidebar2">
         <div class="regiao discretizacao">
           <h1 class="bold">Regiões a serem mostradas</h1>
-          <div class="">
-            <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
-            <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
-            <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
+          <div id="div_regioes">
           </div>
         </div>
-        <div class="tempo discretizacao" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="tempo discretizacao"
+          style="display: flex; height: 50%; flex-direction: column; align-items: center; justify-content: space-around;">
           <h1 class="bold">Intervalo de tempo</h1>
-          <div style="width: 100%;">
+          <div style="width: 100%; height: 80%; display: flex; flex-direction: column; justify-content: space-around;">
             <div style="display: flex; flex-direction: column;">
               <div style="color: #102e76;">De:</div>
               <div>
                 <input type="range" id="ipt_range_from" style="width: 100%;" onchange="mudarFrom()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_from"></div>
-                  <button onclick="alterarFrom( 1)">mais</button>
-                  <button onclick="alterarFrom(-1)">menos</button>
+                  <button class="button-discretizacao" onclick="alterarFrom( 1)">mais</button>
+                  <button class="button-discretizacao" onclick="alterarFrom(-1)">menos</button>
                 </div>
               </div>
             </div>
@@ -117,13 +122,14 @@
                 <input type="range" id="ipt_range_to" style="width: 100%;" onchange="mudarTo()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_to"></div>
-                  <button onclick="alterarTo( 1)">mais</button>
-                  <button onclick="alterarTo(-1)">menos</button>
+                  <button class="button-discretizacao" onclick="alterarTo( 1)">mais</button>
+                  <button class="button-discretizacao" onclick="alterarTo(-1)">menos</button>
                 </div>
               </div>
             </div>
-            <div>
-              <button onclick="discretizar()">Confirmar</button>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <button style="width: 50%;" onclick="discretizar()">Confirmar</button>
+              <div style="color: red; font-style: italic;" id="div_aviso"></div>
             </div>
           </div>
         </div>
@@ -164,16 +170,44 @@
   crossorigin="anonymous"></script>
 <script src="../js/script.js"></script>
 <script>
+  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+  var cargoUsuario = sessionStorage.getItem("CARGO");
+
+
+  document.getElementById('nomeUsuario').textContent = nomeUsuario;
+  document.getElementById('cargoUsuario').textContent = cargoUsuario;
+
+  function validarRegioes() {
+    for (i = 0; i < regioesDados.length; i++) {
+      if (regioesDados[i].on) {
+        return false
+      }
+    }  
+    return true    
+  }
+
+  function alterarValor(index) {
+    regioesDados[index].on = !regioesDados[index].on
+    var teste = document.getElementById(`div_regiao${index}`); 
+    if (regioesDados[index].on == true) {
+      teste.style.backgroundColor = '#102e76'
+      teste.style.color = 'white'
+    } else {
+      teste.style.backgroundColor = '#d7def0'
+      teste.style.color = 'black'
+    }
+  }
+
 
   function alterarFrom(x) {
-    aux  = Number(range_from.value) + Number(x)
+    aux = Number(range_from.value) + Number(x)
     console.log(aux)
     range_from.value = aux
     mudarFrom()
   }
 
   function alterarTo(x) {
-    aux  = Number(range_to.value) + Number(x)
+    aux = Number(range_to.value) + Number(x)
     console.log(aux)
     range_to.value = aux
     mudarTo()
@@ -184,7 +218,7 @@
   const range_from = document.getElementById("ipt_range_from")
   const range_to = document.getElementById("ipt_range_to")
 
-  
+
 
   function mudarFrom() {
     div_from.innerHTML = labelsDatas[range_from.value]
@@ -200,23 +234,45 @@
     if (auxTo < auxFrom) {
       alert("Insira um intervalo válido")
     } else {
+      auxCont = 1
       auxCpu = []
       auxRam = []
-      auxRede = []
+      auxRedeEnv = []
+      auxRedeRec = []
       auxLabels = []
-      for (i = auxFrom; i <= auxTo; i++) {
-        auxCpu.push(plotCpu[i])
-        auxRam.push(plotRam[i])
-        auxRede.push(plotRede[i])
-        auxLabels.push(labelsDatas[i])
+
+      for(j = 0; j < regioes.length; j++) {
+        if (regioesDados[j].on) {
+          for (i = auxFrom; i <= auxTo; i++) {
+            auxCont++
+            auxCpu.push(plotCpu[i])
+            auxRam.push(plotRam[i])
+            auxRedeEnv.push(plotRedeEnv[i])
+            auxRedeRec.push(plotRedeRec[i])
+            auxLabels.push(labelsDatas[i])
+          }
+        }
       }
+
+      if (auxCont > 150) {
+        div_aviso.innerHTML = `É recomendado um intervalo menor de dados para a melhor visualização`
+      } else if (validarRegioes()) {
+        div_aviso.innerHTML = `Nenhuma região foi selecionada`
+      } else {
+        div_aviso.innerHTML = ``
+      }
+      auxCont = null
 
       dataChartAlertas = {
         labels: auxLabels,
         datasets: [{
-          label: "Alertas Rede",
-          data: auxRede,
+          label: "Alertas Rede Enviados",
+          data: auxRedeEnv,
           backgroundColor: '#485f96'
+        }, {
+          label: "Alertas Rede Recebidos",
+          data: auxRedeRec,
+          backgroundColor: '#161d2e'
         }, {
           label: "Alertas CPU",
           data: auxCpu,
@@ -228,6 +284,11 @@
         },
         ]
       }
+      auxCpu = null
+      auxRam = null
+      auxRedeEnv = null
+      auxRedeRec = null
+      auxLabels = null
 
       chart_alertas.data = dataChartAlertas
       chart_alertas.update()
@@ -270,7 +331,8 @@
   let labelsDatas = []
   let plotCpu = []
   let plotRam = []
-  let plotRede = []
+  let plotRedeEnv = []
+  let plotRedeRec = []
 
   let regioes = [];
   let regioesDados = [];
@@ -278,7 +340,8 @@
   let totalAlertas = {
     cpu: 0,
     ram: 0,
-    rede: 0,
+    rede_env: 0,
+    rede_receb: 0,
   };
 
   // Canvas dos gráficos
@@ -293,18 +356,22 @@
         totalAlertas.cpu += dados[i].alertas;
       } else if (dados[i].componente == "ram") {
         totalAlertas.ram += dados[i].alertas;
+      } else if (dados[i].componente == "rede_enviado") {
+        totalAlertas.rede_env += dados[i].alertas;
       } else if (dados[i].componente == "rede_recebido") {
-        totalAlertas.rede += dados[i].alertas;
+        totalAlertas.rede_receb += dados[i].alertas;
       }
     }
 
     // Mostrando componente com maior número de alertas
-    if (totalAlertas.cpu > totalAlertas.ram && totalAlertas.cpu > totalAlertas.rede) {
+    if (totalAlertas.cpu >= totalAlertas.ram && totalAlertas.cpu >= totalAlertas.rede_env && totalAlertas.cpu >= totalAlertas.rede_receb) {
       div_componenteMaisAlertas.innerHTML = `CPU`;
-    } else if (totalAlertas.ram > totalAlertas.rede) {
+    } else if (totalAlertas.ram >= totalAlertas.rede_receb && totalAlertas.ram >= totalAlertas.rede_receb) {
       div_componenteMaisAlertas.innerHTML = `RAM`;
+    } else if (totalAlertas.rede_receb >= totalAlertas.rede_env) {
+      div_componenteMaisAlertas.innerHTML = `REDE RECEBIDOS`;
     } else {
-      div_componenteMaisAlertas.innerHTML = `REDE`;
+      div_componenteMaisAlertas.innerHTML = `REDE ENVIADOS`;
     }
 
     for (i = 0; i < dados.length; i++) {
@@ -313,20 +380,29 @@
         regioesDados.push({
           regiao: dados[i].regiao,
           alertas: dados[i].alertas,
-          listAlertas: [dados[i]]
+          listAlertas: [dados[i]],
+          on: true
         });
         if (dados[i].componente == 'cpu') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = [dados[i]]
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
-          regioesDados[regioes.indexOf(dados[i].regiao)].listRede = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
         } else if (dados[i].componente == 'ram') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = [dados[i]]
-          regioesDados[regioes.indexOf(dados[i].regiao)].listRede = []
-        } else {
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
+        } else if (dados[i].componente == 'rede_enviado') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
-          regioesDados[regioes.indexOf(dados[i].regiao)].listRede = [dados[i]]
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = [dados[i]]
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
+        } else if (dados[i].componente == "rede_recebido") {
+          regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = [dados[i]]
         }
       } else {
         regioesDados[regioes.indexOf(dados[i].regiao)].alertas += dados[i].alertas;
@@ -335,11 +411,19 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu.push(dados[i])
         } else if (dados[i].componente == 'ram') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam.push(dados[i])
+        } else if (dados[i].componente == 'rede_enviado') {
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv.push(dados[i])
         } else {
-          regioesDados[regioes.indexOf(dados[i].regiao)].listRede.push(dados[i])
+          regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
         }
       }
     }
+
+    for (i = 0; i < regioes.length; i++) {
+      div_regioes.innerHTML += `<button id="div_regiao${i}" class="button-discretizacao" onclick="alterarValor(${i})">${regioes[i]}</button>`
+    }
+
+
     // Verificando e exibindo região com maior número de alertas
     let regiaoMaisAlertas = regioesDados[0]
     for (i = 1; i < regioes.length; i++) {
@@ -356,14 +440,15 @@
     chart_componentes = new Chart(id_chart_componentes, {
       type: 'doughnut',
       data: {
-        labels: ['Ram', 'Cpu', 'Rede'],
+        labels: ['Ram', 'Cpu', 'Rede E', 'Rede R'],
         datasets: [{
           label: 'Dados Alerta Total',
-          data: [totalAlertas.ram, totalAlertas.cpu, totalAlertas.rede],
+          data: [totalAlertas.ram, totalAlertas.cpu, totalAlertas.rede_env, totalAlertas.rede_receb],
           backgroundColor: [
             '#e28743',
             '#c6ccdd',
-            '#485f96'
+            '#485f96',
+            '#161d2e'
           ]
         }]
       }, options: {
@@ -391,6 +476,7 @@
       ano: dados[dados.length - 1].ano,
     };
 
+    console.log(regioesDados[0].listRedeRec)
     for (i = 0; i < regioesDados.length; i++) {
       auxCpu = []
       if (compararData(regioesDados[i].listCpu[0], data_inicial)) {
@@ -455,23 +541,23 @@
       auxRam = null
 
       auxRede = []
-      if (compararData(regioesDados[i].listRede[0], data_inicial)) {
-        auxRede.push(regioesDados[i].listRede[0])
+      if (compararData(regioesDados[i].listRedeEnv[0], data_inicial)) {
+        auxRede.push(regioesDados[i].listRedeEnv[0])
         j = 1;
       } else {
         auxRede.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
         j = 0;
       }
       for (; !compararData(auxRede[auxRede.length - 1], data_final);) {
-        if (j >= regioesDados[i].listRede.length) {
+        if (j >= regioesDados[i].listRedeEnv.length) {
           auxRede.push({
             dia: adicionarUmDia(auxRede[auxRede.length - 1]).dia,
             mes: adicionarUmDia(auxRede[auxRede.length - 1]).mes,
             ano: adicionarUmDia(auxRede[auxRede.length - 1]).ano,
             alertas: 0
           })
-        } else if (compararData(regioesDados[i].listRede[j], adicionarUmDia(auxRede[auxRede.length - 1]))) {
-          auxRede.push(regioesDados[i].listRede[j])
+        } else if (compararData(regioesDados[i].listRedeEnv[j], adicionarUmDia(auxRede[auxRede.length - 1]))) {
+          auxRede.push(regioesDados[i].listRedeEnv[j])
           j++
         } else {
           auxRede.push({
@@ -482,9 +568,42 @@
           })
         }
       }
-      regioesDados[i].listRede = auxRede
+      regioesDados[i].listRedeEnv = auxRede
+
+      auxRede = []
+      if (compararData(regioesDados[i].listRedeRec[0], data_inicial)) {
+        auxRede.push(regioesDados[i].listRedeRec[0])
+        j = 1;
+      } else {
+        auxRede.push({ dia: data_inicial.dia, mes: data_inicial.mes, ano: data_inicial.ano, alertas: 0 })
+        j = 0;
+      }
+      for (; !compararData(auxRede[auxRede.length - 1], data_final);) {
+        if (j >= regioesDados[i].listRedeRec.length) {
+          auxRede.push({
+            dia: adicionarUmDia(auxRede[auxRede.length - 1]).dia,
+            mes: adicionarUmDia(auxRede[auxRede.length - 1]).mes,
+            ano: adicionarUmDia(auxRede[auxRede.length - 1]).ano,
+            alertas: 0
+          })
+        } else if (compararData(regioesDados[i].listRedeRec[j], adicionarUmDia(auxRede[auxRede.length - 1]))) {
+          auxRede.push(regioesDados[i].listRedeRec[j])
+          j++
+        } else {
+          auxRede.push({
+            dia: adicionarUmDia(auxRede[auxRede.length - 1]).dia,
+            mes: adicionarUmDia(auxRede[auxRede.length - 1]).mes,
+            ano: adicionarUmDia(auxRede[auxRede.length - 1]).ano,
+            alertas: 0
+          })
+        }
+      }
+      regioesDados[i].listRedeRec = auxRede
       auxRede = null
     }
+
+    console.log(regioesDados[0].listRedeRec)
+
 
     // Criando os labels com Todas as datas
     for (dataDaVez = data_inicial; dataDaVez.dia != adicionarUmDia(data_final).dia || dataDaVez.mes != adicionarUmDia(data_final).mes || dataDaVez.ano != adicionarUmDia(data_final).ano; dataDaVez = adicionarUmDia(dataDaVez)) {
@@ -495,7 +614,8 @@
       for (j = 0; j < regioesDados[i].listCpu.length; j++) {
         plotCpu.push(regioesDados[i].listCpu[j].alertas)
         plotRam.push(regioesDados[i].listRam[j].alertas)
-        plotRede.push(regioesDados[i].listRede[j].alertas)
+        plotRedeEnv.push(regioesDados[i].listRedeEnv[j].alertas)
+        plotRedeRec.push(regioesDados[i].listRedeRec[j].alertas)
       }
     }
 
@@ -505,17 +625,20 @@
       // Limitando amostra inicial para 60 (caso haja mais de 60)
       auxCpu = []
       auxRam = []
-      auxRede = []
+      auxRedeEnv = []
+      auxRedeRec = []
       auxLabels = []
       for (i = plotCpu.length - 1; i > plotCpu.length - 61; i--) {
         auxCpu.push(plotCpu[i])
         auxRam.push(plotRam[i])
-        auxRede.push(plotRede[i])
+        auxRedeEnv.push(plotRedeEnv[i])
+        auxRedeRec.push(plotRedeRec[i])
         auxLabels.push(labelsDatas[i])
       }
       auxCpu.reverse()
       auxRam.reverse()
-      auxRede.reverse()
+      auxRedeEnv.reverse()
+      auxRedeRec.reverse()
       auxLabels.reverse()
 
       div_from.innerHTML = auxLabels[0]
@@ -532,9 +655,13 @@
       dataChartAlertas = {
         labels: auxLabels,
         datasets: [{
-          label: "Alertas Rede",
-          data: auxRede,
+          label: "Alertas Rede Enviados",
+          data: auxRedeEnv,
           backgroundColor: '#485f96'
+        }, {
+          label: "Alertas Rede Recebidos",
+          data: auxRedeRec,
+          backgroundColor: '#161d2e'
         }, {
           label: "Alertas CPU",
           data: auxCpu,
@@ -560,12 +687,16 @@
           label: "Alertas Ram",
           data: plotRam
         }, {
-          label: "Alertas Rede",
-          data: plotRede
+          label: "Alertas Rede Enviados",
+          data: plotRedeEnv
+        }, {
+          label: "Alertas Rede Recebidos",
+          data: plotRedeRec
         }
         ], backgroundColor: ['#e28743',
           '#c6ccdd',
-          '#485f96']
+          '#485f96',
+          '#161d2e']
       }
     }
 
