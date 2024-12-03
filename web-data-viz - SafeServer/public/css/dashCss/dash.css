@@ -315,7 +315,6 @@ body {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  height: fit-content;
   min-height: 40%;
 }
 
@@ -1157,13 +1156,22 @@ table th {
   background-color: #202957 !important;
   color: white;
   border-radius: 19px;
-  height: 38px;
+  height: 42px;
   width: 265px;
   justify-content: center;
   align-items: center;
   margin-right: 70px;
   font-size: medium;
   cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botaoOp:hover {
+  transform: scale(1.05); 
+  background-color: #283575; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
 }
 
 select{
@@ -1172,9 +1180,11 @@ select{
   font-family: inherit;
   background-image: url(img/seta_processed.png); 
   background-repeat: no-repeat;
+  border: 2px solid #202957;
   background-position: right 10px center; 
   background-size: 11px;
   text-align: center;
+  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
 }
 
 #selectComponente{
@@ -1215,7 +1225,7 @@ select{
   left: -565px;
   height: 397px;
   width: 640px;
-  top: -10px;
+  top: -100px;
 }
 
 .dimensaoGraficoEnv{
@@ -1233,8 +1243,8 @@ select{
 .tituloDashCpuERam {
   display: flex;
   position: relative;
-  left: -477px;
-  top: 48px;
+  left: -480px;
+  top: 60px; 
   font-size: 21px;
   color: #202957;
   font-weight: bold;
@@ -1243,7 +1253,7 @@ select{
 .tituloDashCpuERam p {
   display: flex;
   position: relative;
-  top: 55px;
+  top: 151px;
   left: 30px;
 }
 
@@ -1260,7 +1270,7 @@ select{
 .situacaoComp p {
   display: flex;
   position: relative;
-  top: 33px;
+  top: 140px;
   left: 17px;
   font-weight: bold;
 }
@@ -1305,7 +1315,7 @@ select{
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 160px;
+  top: 240px;
   left: 10px;
 }
 
@@ -1318,8 +1328,15 @@ select{
   justify-content: center;
   font-weight: bold;
   width: 175px;
-  height: 46px;
+  height: 50px;
   left: 260px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.percentCpu:hover{
+  transform: translateY(-5px); 
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
 .percentRam {
@@ -1332,8 +1349,15 @@ select{
   margin-top: 30px;
   font-weight: bold;
   width: 175px;
-  height: 46px;
+  height: 50px;
   left: 260px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.percentRam:hover{
+  transform: translateY(-5px);
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
 .qtdAlertas{
@@ -1341,9 +1365,22 @@ select{
   position: relative;
   background-color: #202957;
   align-items: center;
-  border-radius: 11px;
+  font-weight: bold;
   width: 250px;
+  font-size: 16px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  border: 2px solid #404b8a;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   height: 200px;
+  left: 235px;
+  top: 280px;
+}
+
+.qtdAlertas:hover {
+  transform: translateY(-5px); /* Levanta a div ao passar o mouse */
+  background-color: #202957; /* Fundo muda levemente no hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
 }
 
 .qtdAlertasEnv{
@@ -1351,7 +1388,10 @@ select{
   position: relative;
   background-color: #202957;
   align-items: center;
-  border-radius: 11px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  border: 2px solid #404b8a;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   width: 250px;
   height: 200px;
   font-size: 16px;
@@ -1360,18 +1400,33 @@ select{
   top: 320px;
 }
 
+.qtdAlertasEnv:hover {
+  transform: translateY(-5px); 
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); 
+}
+
 .qtdAlertasRec{
   display: flex;
   position: relative;
   background-color: #202957;
   align-items: center;
-  border-radius: 11px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  border: 2px solid #404b8a;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   width: 250px;
   height: 200px;
   font-size: 16px;
   font-weight: bold;
   left: 235px;
   top: 320px;
+}
+
+.qtdAlertasRec:hover {
+  transform: translateY(-5px);
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); 
 }
 
 .gbRedeRec {
@@ -1386,6 +1441,13 @@ select{
   height: 60px;
   left: 255px;
   top: 245px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.gbRedeRec:hover{
+  transform: translateY(-5px); 
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
 .tituloDashRec{
@@ -1422,6 +1484,13 @@ select{
   height: 60px;
   left: 255px;
   top: 245px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.gbRedeEnv:hover{
+  transform: translateY(-5px); 
+  background-color: #202957; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
 .tituloDashEnv{
