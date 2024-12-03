@@ -572,6 +572,11 @@ input[type="range"] {
   z-index: 2 !important;
 }
 
+#myChartCanvas3 {
+  width: 16vw !important;
+  height: 32vh !important;
+  z-index: 2 !important;
+}
 
 .containerINF {
   border-radius: 8px;
@@ -684,25 +689,51 @@ input[type="range"] {
   width: 100%;
   height: 71%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 12px;
 }
 
+
 .divisao2C {
   width: 100%;
   height: 67%;
   display: none;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-
-.comp {
+.DInteira{
   width: 100%;
   height: 100%;
+  display: none;
+  flex-direction: column;
+}
+
+.DCIMA{
+  width: 100%;
+  height: 14%;
+  display: none;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.DBAIXO{
+  width: 100%;
+  height: 86%;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.comp, .comp2 {
+  width: 100%;
+  height: 10%;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -710,7 +741,7 @@ input[type="range"] {
   text-align: center;
 }
 
-.comp p {
+.comp p, .comp2 p {
   color: rgb(16, 46, 118);
   font-size: 21px;
   font-weight: 600;
@@ -722,16 +753,19 @@ input[type="range"] {
 #erroCatch {
   font-size: 1.2rem;
   font-weight: 800;
-  color: rgb(255, 0, 0);
   text-align: center;
   font-family: poppins-bold;
+  margin-top: 30%;
+  margin: 20%;
+  padding: 0;
 }
 
 
-.DE {
+
+.DE, .DE2 {
   background-color: white;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
-  width: 60%;
+  width: 49%;
   height: 100%;
   display: none;
   flex-direction: column;
@@ -741,9 +775,9 @@ input[type="range"] {
 }
 
 
-.D2 {
+.D2, .D22 {
   width: 100%;
-  height: 70%;
+  height: 90%;
   display: none;
   flex-direction: row;
   justify-content: center;
@@ -751,15 +785,15 @@ input[type="range"] {
 
 }
 
-.DD {
+.DD, .DD2 {
   width: 100%;
-  height: 20%;
+  height: 10%;
   display: none;
   justify-content: end;
   align-items: end;
 }
 
-.DI {
+.DI, .DI2 {
   width: 50%;
   height: 100%;
   display: none;
@@ -769,7 +803,7 @@ input[type="range"] {
 
 }
 
-.DG {
+.DG, .DG2 {
   width: 50%;
   height: 100%;
   display: none;
@@ -780,8 +814,8 @@ input[type="range"] {
 }
 
 
-.info {
-  width: 70%;
+.info, .info2 {
+  width: 85%;
   height: 95%;
   display: none;
   flex-direction: column;
@@ -789,7 +823,7 @@ input[type="range"] {
   align-items: center;
 }
 
-.info b {
+.info b, .info2 b {
   margin-bottom: 3%;
   color: rgb(16, 46, 118);
   font-size: 19px;
@@ -798,7 +832,7 @@ input[type="range"] {
   text-align: center;
 }
 
-.info span {
+.info span, .info2 span {
   margin: 0;
   padding: 0;
   text-align: center;
