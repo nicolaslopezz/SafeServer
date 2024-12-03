@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
+  <link rel="stylesheet" href="../css/dashCss/dashGerente01.css">
 
   <title>Dashboard-Gerente</title>
 </head>
@@ -97,10 +98,7 @@
       <div class="sidebar2">
         <div class="regiao discretizacao">
           <h1 class="bold">Regiões a serem mostradas</h1>
-          <div class="">
-            <button value="1" onclick="selecionar('button_1'), plotar()" id="button_1">US-EAST-1</button>
-            <button value="1" onclick="selecionar('button_2'), plotar()" id="button_2">US-EAST-2</button>
-            <button value="1" onclick="selecionar('button_3'), plotar()" id="button_3">US-EAST-3</button>
+          <div id="div_regioes">
           </div>
         </div>
         <div class="tempo discretizacao"
@@ -113,8 +111,8 @@
                 <input type="range" id="ipt_range_from" style="width: 100%;" onchange="mudarFrom()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_from"></div>
-                  <button onclick="alterarFrom( 1)">mais</button>
-                  <button onclick="alterarFrom(-1)">menos</button>
+                  <button class="button-discretizacao" onclick="alterarFrom( 1)">mais</button>
+                  <button class="button-discretizacao" onclick="alterarFrom(-1)">menos</button>
                 </div>
               </div>
             </div>
@@ -124,8 +122,8 @@
                 <input type="range" id="ipt_range_to" style="width: 100%;" onchange="mudarTo()">
                 <div style="display: flex; justify-content: space-around;">
                   <div style="color: #102e76;" id="div_to"></div>
-                  <button onclick="alterarTo( 1)">mais</button>
-                  <button onclick="alterarTo(-1)">menos</button>
+                  <button class="button-discretizacao" onclick="alterarTo( 1)">mais</button>
+                  <button class="button-discretizacao" onclick="alterarTo(-1)">menos</button>
                 </div>
               </div>
             </div>
@@ -179,6 +177,27 @@
   document.getElementById('nomeUsuario').textContent = nomeUsuario;
   document.getElementById('cargoUsuario').textContent = cargoUsuario;
 
+  function validarRegioes() {
+    for (i = 0; i < regioesDados.length; i++) {
+      if (regioesDados[i].on) {
+        return false
+      }
+    }  
+    return true    
+  }
+
+  function alterarValor(index) {
+    regioesDados[index].on = !regioesDados[index].on
+    var teste = document.getElementById(`div_regiao${index}`); 
+    if (regioesDados[index].on == true) {
+      teste.style.backgroundColor = '#102e76'
+      teste.style.color = 'white'
+    } else {
+      teste.style.backgroundColor = '#d7def0'
+      teste.style.color = 'black'
+    }
+  }
+
 
   function alterarFrom(x) {
     aux = Number(range_from.value) + Number(x)
@@ -221,17 +240,24 @@
       auxRedeEnv = []
       auxRedeRec = []
       auxLabels = []
-      for (i = auxFrom; i <= auxTo; i++) {
-        auxCont++
-        auxCpu.push(plotCpu[i])
-        auxRam.push(plotRam[i])
-        auxRedeEnv.push(plotRedeEnv[i])
-        auxRedeRec.push(plotRedeRec[i])
-        auxLabels.push(labelsDatas[i])
+
+      for(j = 0; j < regioes.length; j++) {
+        if (regioesDados[j].on) {
+          for (i = auxFrom; i <= auxTo; i++) {
+            auxCont++
+            auxCpu.push(plotCpu[i])
+            auxRam.push(plotRam[i])
+            auxRedeEnv.push(plotRedeEnv[i])
+            auxRedeRec.push(plotRedeRec[i])
+            auxLabels.push(labelsDatas[i])
+          }
+        }
       }
 
       if (auxCont > 150) {
         div_aviso.innerHTML = `É recomendado um intervalo menor de dados para a melhor visualização`
+      } else if (validarRegioes()) {
+        div_aviso.innerHTML = `Nenhuma região foi selecionada`
       } else {
         div_aviso.innerHTML = ``
       }
@@ -354,7 +380,8 @@
         regioesDados.push({
           regiao: dados[i].regiao,
           alertas: dados[i].alertas,
-          listAlertas: [dados[i]]
+          listAlertas: [dados[i]],
+          on: true
         });
         if (dados[i].componente == 'cpu') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = [dados[i]]
@@ -390,6 +417,10 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
         }
       }
+    }
+
+    for (i = 0; i < regioes.length; i++) {
+      div_regioes.innerHTML += `<button id="div_regiao${i}" class="button-discretizacao" onclick="alterarValor(${i})">${regioes[i]}</button>`
     }
 
 
