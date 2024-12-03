@@ -92,7 +92,7 @@
         <select id="selectServidor" class="botaoOp" onchange="plotarGrafico()">
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
-          <option value="">Componente: </option>
+          <option value="" class="botaoOp">Componente: </option>
           <option selected id="cpuRam" value="cpuRam" class="option">CPU E RAM %</option>
           <option id="dadosRec" value="dadosRec" class="option">Dados Recebidos</option>
           <option id="dadosEnv" value="dadosEnv" class="option">Dados Enviados</option>
@@ -239,7 +239,7 @@
       }
 
       function exibirGraficoDadosRec(idServidor) {
-
+        var idServidor = selectServidor.value;
         esconderTodosOsGraficos();
         let todosOsGraficos = document.getElementById("graficos");
 
@@ -257,7 +257,8 @@
       }
 
       function exibirGraficoDadosEnv(idServidor) {
-
+        
+        var idServidor = selectServidor.value;
         esconderTodosOsGraficos();
         let todosOsGraficos = document.getElementById("graficos");
 
@@ -392,7 +393,7 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 60;
+        const limite = 20;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosRec = resposta.map((item) => item.recebido_rede).slice(-limite);
         var situacaoRec = `${dadosRec[dadosRec.length - 1]}`;
@@ -429,7 +430,7 @@
         // Contar alertas na última hora
         for (let i = 0; i < dadosUltimaHora.length; i++) {
           const item = dadosUltimaHora[i];
-          if (item.recebido_rede >= 75) {
+          if (item.recebido_rede >= 200) {
             alertasRedeRec++;
           }
         }
@@ -528,7 +529,7 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 60;
+        const limite = 20;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosEnv = resposta.map((item) => item.enviado_rede).slice(-limite);
         var situacaoEnv = `${dadosEnv[dadosEnv.length - 1]}`;
@@ -562,7 +563,7 @@
         // Contar alertas na última hora
         for (let i = 0; i < dadosUltimaHora.length; i++) {
           const item = dadosUltimaHora[i];
-          if (item.enviado_rede >= 75) {
+          if (item.enviado_rede >= 200) {
             alertasRedeEnv++;
           }
         }
@@ -661,7 +662,7 @@
         tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
         situacao.innerHTML = `<p> Situação em Tempo Real: </p>`;
 
-        const limite = 100;
+        const limite = 15;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosCpu = resposta.map((item) => item.percent_use_cpu).slice(-limite);
         const dadosRam = resposta.map((item) => item.percent_use_ram).slice(-limite);
@@ -716,7 +717,7 @@
         }
 
         qtdAlertas.innerHTML = `
-        <p> Quantidade de Alertas na última hora: <br>
+        <p> Quantidade de Alertas na última hora: <br><br>
         CPU: ${alertasCpu} <br>
         RAM: ${alertasRam}</p>
     `;

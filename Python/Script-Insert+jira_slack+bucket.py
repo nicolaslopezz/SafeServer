@@ -46,7 +46,7 @@ def enviar_mensagem(categoria):
 
 # Configurações do Jira
 jira_options = {
-    'server': 'https://safe-server.atlassian.net/'  # Substitua pelo seu domínio
+    'server': ''  # Substitua pelo seu domínio
 }
 
 email_jira = ''  # Substitua pelo seu e-mail
@@ -78,7 +78,6 @@ def create_s3_client():
     )
 
 def abrir_chamado_jira(categoria, tipo, limite_atual, servidor_id):
-   
 
     issue_dict = {
         'project': {'key': 'SUP'},  # Substitua pela chave do seu projeto
@@ -145,7 +144,7 @@ def monitorar_e_enviar_dados(servidor_id):
             return True
 
         # Upload do arquivo
-        upload_file('dadosColetados.json', 'safeserver-s3-raw')
+        upload_file('dadosColetados.json', 'safeserver-s3-raww')
 
         fk_servidor = servidor_id
 
@@ -157,7 +156,7 @@ def monitorar_e_enviar_dados(servidor_id):
             recebido_rede,
             enviado_rede,
             fkServidor
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ) VALUES (%s, %s, %s, %s, %s)
         '''
         values = (Porcentagem_CPU,Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados, fk_servidor)
 
@@ -166,7 +165,7 @@ def monitorar_e_enviar_dados(servidor_id):
 
         print(f"Dados inseridos: CPU: {Porcentagem_CPU:.1f}%, "
               f"Percentual de RAM: {Porcentagem_RAM_uso:.1f}%, "
-              f"Dados de rede recebidos: {GB_rede_recebidos:.1f} GB, Dados de rede enviados: {GB_rede_enviados:.1f} GB")
+              f"Dados de rede recebidos: {GB_rede_recebidos:.2f} GB, Dados de rede enviados: {GB_rede_enviados:.2f} GB")
 
           # Verificação de limites e contagem de capturas seguidas
         if Porcentagem_CPU > limiteCPU:

@@ -868,9 +868,6 @@ input[type="range"] {
   color: white;
 }
 
-
-
-
 .filter-option {
   background-color: white;
   border-radius: 50px;
@@ -1319,6 +1316,7 @@ table th {
   border-radius: 19px;
   height: 42px;
   width: 265px;
+  text-align: center;
   justify-content: center;
   align-items: center;
   margin-right: 70px;
@@ -1333,6 +1331,7 @@ table th {
   transform: scale(1.05); 
   background-color: #283575; 
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #selectComponente {
@@ -1343,13 +1342,25 @@ table th {
 #selectComponente option {
   padding: 10px;
   font-size: 16px;
+  text-align: center;
   color: #ffffff;
   background-color: #202957;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  transform: scale(1.05); 
+}
+
+#selectComponente:hover{
+  transform: scale(1.05); 
+  background-color: #283575; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .option {
   color: white;
   align-items: center;
+  text-align: center;
 }
 
 .dimensaoGraficoRec {
