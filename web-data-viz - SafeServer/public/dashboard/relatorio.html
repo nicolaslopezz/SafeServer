@@ -744,6 +744,8 @@
       document.getElementById("DInteira").style.display = 'none';
       document.getElementById("DCIMA").style.display = 'none';
       document.getElementById("DBAIXO").style.display = 'none';
+      document.getElementById("comp2").style.display = 'none';
+      document.getElementById("comp").style.display = 'none';
 
       fetch(`/dashboard/analisar?${queryParams.toString()}`, {
         method: 'GET',

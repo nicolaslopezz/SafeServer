@@ -1548,7 +1548,6 @@ table th {
   top: 320px;
 }
 
-<<<<<<< HEAD
 .qtdAlertasEnv:hover {
   transform: translateY(-5px); 
   background-color: #202957; 
@@ -1556,9 +1555,6 @@ table th {
 }
 
 .qtdAlertasRec{
-=======
-.qtdAlertasRec {
->>>>>>> d1b1f02db2c1e9e3ff88a34a930dafeb1c13e7ba
   display: flex;
   position: relative;
   background-color: #202957;
