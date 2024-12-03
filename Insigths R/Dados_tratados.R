@@ -1,16 +1,11 @@
-
 install.packages("readr")
 install.packages("dplyr")
 install.packages("RMySQL")
 
-
 library(dplyr)
 library(RMySQL)
 
-# Carregar o arquivo CSV
-dados <- read.csv("/Users/JuuhF/Music/att.csv")
-
-
+dados <- read.csv("/app/feriados.csv")
 
 feriados_frequencia <- dados %>%
   group_by(english_name) %>%
@@ -21,9 +16,9 @@ feriado <- head(feriados_frequencia, 20)
 
 con <- dbConnect(MySQL(), 
                  dbname = "SafeServer",   
-                 host = "localhost",             
+                 host = "imagembanco",             
                  user = "root",            
-                 password = "batatas123")  
+                 password = "urubu100")  
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (
@@ -41,14 +36,4 @@ for (i in 1:nrow(feriado)) {
 }
 
 feriado
-head(feriado,5)
-
-
-dados_agrupados <- group_by(dados, english_name) 
-dados_resumidos <- summarise(dados_agrupados, frequencia = n(), media_CPU = mean(CPU_perc, na.rm = TRUE))
-dados_ordenados <- arrange(dados_resumidos, desc(frequencia)) 
-dados_top <- head(dados_ordenados, 5)
-dados_top
-
-
-
+head(feriado, 5)
