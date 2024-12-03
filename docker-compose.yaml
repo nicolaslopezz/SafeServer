@@ -16,15 +16,11 @@ services:
       - rede-compose
 
   imagemr:
-    build:
-      context: ./InsigthsR
-      dockerfile: Dockerfile
+    image: julianafreires/site:imagemr
     networks:
       - rede-compose
     depends_on:
       - imagembanco
-    volumes:
-      - ./InsigthsR:/app
     command: ["Rscript", "/app/Dados_tratados.R"]
 
 networks:
