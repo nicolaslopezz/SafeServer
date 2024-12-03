@@ -15,14 +15,6 @@ services:
     networks:
       - rede-compose
 
-  imagemr:
-    image: julianafreires/site:imagemr
-    networks:
-      - rede-compose
-    depends_on:
-      - imagembanco
-    command: ["Rscript", "/app/Dados_tratados.R"]
-
 networks:
   rede-compose:
     driver: bridge
