@@ -6,6 +6,11 @@ import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import org.example.dados.Dado;
+import org.example.mappers.Mapper;
+import org.example.writers.CsvWriter;
+import org.example.writers.CsvWriterRegistro;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -35,13 +40,12 @@ public class Main implements RequestHandler<S3Event, String> {
             InputStream s3InputStream = s3Client.getObject(sourceBucket, sourceKey).getObjectContent();
 
             // Função estática do Mapper para validar qual mapper criar (CSV ou JSON)
-            Mapper mapper = Mapper.ObterTipoAqruivo(sourceKey);
+            Mapper mapper = Mapper.ObterTipoArquivo(sourceKey);
             // Mapeia o conteúdo JSON para um objeto
             List<Dado> dados = mapper.map(s3InputStream);
-            System.out.println(dados);
 
             // Escreve os dados em formato CSV
-            CsvWriter csvWriter = new CsvWriter();
+            CsvWriter csvWriter = CsvWriter.escolherWriter(dados.get(0));
             ByteArrayOutputStream csvOutputStream = csvWriter.writeCsv(dados);
 
             // Prepara o InputStream do CSV gerado
