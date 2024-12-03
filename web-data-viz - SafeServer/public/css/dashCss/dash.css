@@ -1335,24 +1335,7 @@ table th {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
 }
 
-<<<<<<< HEAD
-select{
-  appearance: none;
-  -webkit-appearance: none;
-  font-family: inherit;
-  background-image: url(img/seta_processed.png); 
-  background-repeat: no-repeat;
-  border: 2px solid #202957;
-  background-position: right 10px center; 
-  background-size: 11px;
-  text-align: center;
-  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
-}
-
-#selectComponente{
-=======
 #selectComponente {
->>>>>>> d1b1f02db2c1e9e3ff88a34a930dafeb1c13e7ba
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s, background-color 0.3s;
 }
