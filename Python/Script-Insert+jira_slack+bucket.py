@@ -14,7 +14,7 @@ from datetime import datetime
 # Limites dos componentes para usar como parâmetro de chamado
 limiteCPU = 75.0 
 limiteMEM = 85.0
-limiteREDE = 1.0  # GB
+limiteREDE = 200  # GB
 
 # Configurações do banco de dados
 db_config = {
@@ -61,8 +61,6 @@ AWS_REGION = 'us-east-1'  # Defina a região da AWS
 
 #Array para enviar os dados para o bucket
 dados_cpu = []
-dados_uso_ram = []
-dados_livre_ram = []
 dados_ram_perc = []
 dados_rede_recebidos = []
 dados_rede_enviados = []
@@ -111,8 +109,6 @@ def monitorar_e_enviar_dados(servidor_id):
     while True:
         # Coletando dados e arredondando para 2 casas decimais
         Porcentagem_CPU = round(psutil.cpu_percent(interval=1), 2)
-        GB_RAM_uso = round(psutil.virtual_memory().used / (1024 ** 3), 2)
-        GB_RAM_livre = round(psutil.virtual_memory().free / (1024 ** 3), 2)
         Porcentagem_RAM_uso = round(psutil.virtual_memory().percent, 2)
         GB_rede_recebidos = round(psutil.net_io_counters().bytes_recv / (1024 ** 3), 2)
         GB_rede_enviados = round(psutil.net_io_counters().bytes_sent / (1024 ** 3), 2)
@@ -120,8 +116,6 @@ def monitorar_e_enviar_dados(servidor_id):
 
         dados_cpu.append(Porcentagem_CPU)
         data_hora_atual.append(data_hora)
-        dados_livre_ram.append(GB_RAM_livre)
-        dados_uso_ram.append(GB_RAM_uso)
         dados_ram_perc.append(Porcentagem_RAM_uso)
         dados_rede_recebidos.append(GB_rede_recebidos)
         dados_rede_enviados.append(GB_rede_enviados)
@@ -132,8 +126,6 @@ def monitorar_e_enviar_dados(servidor_id):
             'ID_SERVIDOR': dados_id_servidor,
             'CPU%': dados_cpu,
             'DataHora': data_hora_atual,
-            'RAM-GB-Livre': dados_livre_ram,
-            'RAM-GB-USO': dados_uso_ram,
             'RAM%': dados_ram_perc,
             'REDE_REC': dados_rede_recebidos, 
             'REDE_ENV': dados_rede_enviados })
@@ -162,20 +154,18 @@ def monitorar_e_enviar_dados(servidor_id):
         INSERT INTO registro (
             percent_use_cpu, 
             percent_use_ram,
-            uso_ram_gb,
-            livre_ram_gb,
             recebido_rede,
             enviado_rede,
             fkServidor
         ) VALUES (%s, %s, %s, %s, %s, %s, %s)
         '''
-        values = (Porcentagem_CPU,Porcentagem_RAM_uso, GB_RAM_uso, GB_RAM_livre, GB_rede_recebidos, GB_rede_enviados, fk_servidor)
+        values = (Porcentagem_CPU,Porcentagem_RAM_uso, GB_rede_recebidos, GB_rede_enviados, fk_servidor)
 
         meucursor.execute(query, values)
         meusql.commit()
 
-        print(f"Dados inseridos: CPU: {Porcentagem_CPU:.1f}%, RAM Usada: {GB_RAM_uso:.1f} GB, "
-              f"RAM Livre: {GB_RAM_livre:.1f} GB, Percentual de RAM: {Porcentagem_RAM_uso:.1f}%, "
+        print(f"Dados inseridos: CPU: {Porcentagem_CPU:.1f}%, "
+              f"Percentual de RAM: {Porcentagem_RAM_uso:.1f}%, "
               f"Dados de rede recebidos: {GB_rede_recebidos:.1f} GB, Dados de rede enviados: {GB_rede_enviados:.1f} GB")
 
           # Verificação de limites e contagem de capturas seguidas
