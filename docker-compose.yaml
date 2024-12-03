@@ -14,13 +14,13 @@ services:
       - "3306:3306"
     networks:
       - rede-compose
-      
+
   imagemr:
     image: julianafreires/grupo:imagemr
-    depends_on:
-      - imagembanco
     networks:
       - rede-compose
+    depends_on:
+      - imagembanco
 
 networks:
   rede-compose:
