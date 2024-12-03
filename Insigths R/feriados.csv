@@ -1,0 +1,1366 @@
+date,local_name,english_name,country_code,country_name,fixed_date,global_holiday,type,Day,CPU_perc
+2019-01-01,Any nou,NewYearsDay,AD,Andorra,True,True,Public,Tuesday,95.0
+2019-03-14,Dia de la Constitució,ConstitutionDay,AD,Andorra,True,True,Public,Monday,71.0
+2019-03-14,Mare de Déu de Meritxell,NationalHoliday,AD,Andorra,True,True,Public,Tuesday,52.0
+2019-12-25,Nadal,ChristmasDay,AD,Andorra,True,True,Public,Sunday,88.0
+2019-01-01,Viti i Ri,NewYearsDay,AL,Albania,True,True,Public,Thursday,91.0
+2019-01-02,Viti i Ri,NewYearsDay,AL,Albania,True,True,Public,Sunday,87.0
+2019-03-14,Dita e Verës,SummerDay,AL,Albania,True,True,Public,Tuesday,56.0
+2019-03-22,Dita e Sulltan Nevruzit,Nowruz,AL,Albania,True,True,Public,Wednesday,56.0
+2019-04-28,Pashkët Ortodokse,OrthodoxEaster,AL,Albania,False,True,Public,Thursday,70.0
+2019-04-29,Pashkët Ortodokse,OrthodoxEaster,AL,Albania,False,True,Public,Saturday,68.0
+2019-05-01,Dita Ndërkombëtare e Punonjësve,MayDay,AL,Albania,True,True,Public,Sunday,71.0
+2019-10-19,Dita e Nënë Terezës,MotherTeresaDay,AL,Albania,True,True,Public,Monday,62.0
+2019-11-28,Dita e Pavarësisë,IndependenceDay,AL,Albania,True,True,Public,Tuesday,53.0
+2019-11-29,Dita e Çlirimit,LiberationDay,AL,Albania,True,True,Public,Monday,56.0
+2019-12-08,Dita Kombëtare e Rinisë,YouthDay,AL,Albania,True,True,Public,Friday,60.0
+2019-12-25,Krishtlindjet,ChristmasDay,AL,Albania,True,True,Public,Sunday,86.0
+2019-01-01,Año Nuevo,NewYearsDay,AR,Argentina,True,True,Public,Saturday,94.0
+2019-03-04,Carnaval,Carnival,AR,Argentina,False,True,Public,Sunday,68.0
+2019-03-05,Carnaval,Carnival,AR,Argentina,False,True,Public,Monday,64.0
+2019-03-24,Día Nacional de la Memoria por la Verdad y la Justicia,DayofRemembranceforTruthandJustice,AR,Argentina,True,True,Public,Monday,65.0
+2019-04-02,Día del Veterano y de los Caídos en la Guerra de Malvinas,DayoftheVeteransandFallenoftheMalvinasWar,AR,Argentina,True,True,Public,Monday,59.0
+2019-04-19,Viernes Santo,GoodFriday,AR,Argentina,False,True,Public,Sunday,75.0
+2019-05-01,Día del Trabajador,LabourDay,AR,Argentina,True,True,Public,Sunday,71.0
+2019-05-25,Día de la Revolución de Mayo,MayRevolution,AR,Argentina,True,True,Public,Sunday,55.0
+2019-06-17,Paso a la Inmortalidad del General Martín Miguel de Güemes,AnniversaryofthePassingofGeneralMartínMigueldeGüemes,AR,Argentina,True,True,Public,Monday,71.0
+2019-06-20,Paso a la Inmortalidad del General Manuel Belgrano,GeneralManuelBelgranoMemorialDay,AR,Argentina,True,True,Public,Tuesday,58.0
+2019-07-09,Día de la Independencia,IndependenceDay,AR,Argentina,True,True,Public,Sunday,69.0
+2019-08-19,Paso a la Inmortalidad del General José de San Martín,GeneralJosédeSanMartínMemorialDay,AR,Argentina,False,True,Public,Monday,62.0
+2019-10-14,Día del Respeto a la Diversidad Cultural,DayofRespectforCulturalDiversity,AR,Argentina,False,True,Public,Monday,68.0
+2019-11-20,Día de la Soberanía Nacional,NationalSovereigntyDay,AR,Argentina,True,True,Public,Tuesday,62.0
+2019-12-08,Día de la Inmaculada Concepción de María,ImmaculateConceptionDay,AR,Argentina,True,True,Public,Thursday,65.0
+2019-12-25,Navidad,ChristmasDay,AR,Argentina,True,True,Public,Sunday,88.0
+2019-01-01,Neujahr,NewYearsDay,AT,Austria,True,True,Public,Monday,92.0
+2019-01-06,Heilige Drei Könige,Epiphany,AT,Austria,True,True,Public,Saturday,55.0
+2019-04-22,Ostermontag,EasterMonday,AT,Austria,False,True,Public,Wednesday,73.0
+2019-05-01,Staatsfeiertag,NationalHoliday,AT,Austria,True,True,Public,Tuesday,68.0
+2019-05-30,Christi Himmelfahrt,AscensionDay,AT,Austria,False,True,Public,Sunday,55.0
+2019-06-10,Pfingstmontag,WhitMonday,AT,Austria,False,True,Public,Tuesday,54.0
+2019-06-20,Fronleichnam,CorpusChristi,AT,Austria,False,True,Public,Tuesday,56.0
+2019-08-15,Maria Himmelfahrt,AssumptionDay,AT,Austria,True,True,Public,Sunday,68.0
+2019-10-26,Nationalfeiertag,NationalHoliday,AT,Austria,True,True,Public,Saturday,54.0
+2019-11-01,Allerheiligen,AllSaintsDay,AT,Austria,True,True,Public,Sunday,65.0
+2019-12-08,Mariä Empfängnis,ImmaculateConception,AT,Austria,True,True,Public,Sunday,62.0
+2019-12-25,Weihnachten,ChristmasDay,AT,Austria,True,True,Public,Tuesday,87.0
+2019-12-26,Stefanitag,St.StephensDay,AT,Austria,True,True,Public,Saturday,71.0
+2019-01-01,New Years Day,NewYearsDay,AU,Australia,True,True,Public,Monday,93.0
+2019-01-26,Australia Day,AustraliaDay,AU,Australia,True,True,Public,Monday,62.0
+2019-03-04,Labour Day,LabourDay,AU,Australia,False,False,Public,Friday,72.0
+2019-03-11,Canberra Day,CanberraDay,AU,Australia,False,False,Public,Sunday,60.0
+2019-03-11,March Public Holiday,MarchPublicHoliday,AU,Australia,False,False,Public,Monday,60.0
+2019-03-11,Eight Hours Day,EightHoursDay,AU,Australia,False,False,Public,Monday,70.0
+2019-03-11,Labour Day,LabourDay,AU,Australia,False,False,Public,Monday,67.0
+2019-04-19,Good Friday,GoodFriday,AU,Australia,False,True,Public,Monday,74.0
+2019-04-20,Easter Eve,HolySaturday,AU,Australia,False,False,Public,Friday,52.0
+2019-04-21,Easter Sunday,EasterSunday,AU,Australia,False,False,Public,Saturday,66.0
+2019-04-22,Easter Monday,EasterMonday,AU,Australia,False,True,Public,Monday,72.0
+2019-04-25,Anzac Day,AnzacDay,AU,Australia,True,True,Public,Sunday,58.0
+2019-05-06,May Day,MayDay,AU,Australia,False,False,Public,Monday,55.0
+2019-05-06,Labour Day,LabourDay,AU,Australia,False,False,Public,Friday,69.0
+2019-05-27,Reconciliation Day,ReconciliationDay,AU,Australia,False,False,Public,Thursday,62.0
+2019-06-03,Western Australia Day,WesternAustraliaDay,AU,Australia,False,False,Public,Sunday,69.0
+2019-06-10,Queens Birthday,QueensBirthday,AU,Australia,False,False,Public,Monday,69.0
+2019-08-05,Picnic Day,PicnicDay,AU,Australia,False,False,Public,Saturday,68.0
+2019-10-07,Labour Day,LabourDay,AU,Australia,False,False,Public,Thursday,69.0
+2019-12-25,Christmas Day,ChristmasDay,AU,Australia,True,True,Public,Tuesday,88.0
+2019-12-26,Boxing Day,St.StephensDay,AU,Australia,True,True,Public,Monday,65.0
+2019-01-01,Nyårsdagen,NewYearsDay,AX,Åland Islands,True,True,Public,Friday,95.0
+2019-03-30,Ålands demilitariseringsdag,DemilitarizationDay,AX,Åland Islands,True,True,Public,Monday,57.0
+2019-04-19,Långfredag,GoodFriday,AX,Åland Islands,False,True,Public,Sunday,75.0
+2019-04-21,Påskdagen,EasterSunday,AX,Åland Islands,False,True,Public,Monday,59.0
+2019-04-22,Annandag påsk,EasterMonday,AX,Åland Islands,False,True,Public,Monday,71.0
+2019-04-30,Valborgsmässoafton,WalpurgisNight,AX,Åland Islands,True,True,Public,Thursday,68.0
+2019-05-01,Första maj,MayDay,AX,Åland Islands,True,True,Public,Tuesday,60.0
+2019-05-30,Kristi himmelsfärdsdagn,AscensionDay,AX,Åland Islands,False,True,Public,Thursday,71.0
+2019-06-01,Trettondagen,Epiphany,AX,Åland Islands,True,True,Public,Sunday,54.0
+2019-06-09,Pingstdagen,Pentecost,AX,Åland Islands,False,True,Public,Monday,53.0
+2019-06-09,Självstyrelsedagen,AutonomyDay,AX,Åland Islands,True,True,Public,Saturday,52.0
+2019-06-10,Annandag Pingst,WhitMonday,AX,Åland Islands,False,True,Public,Friday,55.0
+2019-06-21,Midsommarafton,MidsummerEve,AX,Åland Islands,False,True,Public,Tuesday,59.0
+2019-06-21,Midsommardagen,MidsummerDay,AX,Åland Islands,False,True,Public,Tuesday,70.0
+2019-11-15,Alla helgons dag,AllSaintsDay,AX,Åland Islands,False,True,Public,Monday,54.0
+2019-12-06,Självständighetsdagen,IndependenceDay,AX,Åland Islands,True,True,Public,Friday,67.0
+2019-12-24,Julafton,ChristmasEve,AX,Åland Islands,True,True,Public,Sunday,53.0
+2019-12-25,Juldagen,ChristmasDay,AX,Åland Islands,True,True,Public,Sunday,86.0
+2019-12-26,Annandag jul,St.StephensDay,AX,Åland Islands,True,True,Public,Saturday,66.0
+2019-01-01,New Years Day,NewYearsDay,BB,Barbados,True,True,Public,Wednesday,85.0
+2019-01-21,Errol Barrow Day,ErrolBarrowDay,BB,Barbados,True,True,Public,Friday,58.0
+2019-04-19,Good Friday,GoodFriday,BB,Barbados,False,True,Public,Sunday,74.0
+2019-04-22,Easter Monday,EasterMonday,BB,Barbados,False,True,Public,Saturday,69.0
+2019-04-28,National Heroes Day,NationalHeroesDay,BB,Barbados,True,True,Public,Wednesday,61.0
+2019-05-01,Labour Day,LabourDay,BB,Barbados,True,True,Public,Friday,72.0
+2019-06-10,Whit Monday,WhitMonday,BB,Barbados,False,True,Public,Monday,63.0
+2019-08-01,Emancipation Day,EmancipationDay,BB,Barbados,True,True,Public,Sunday,57.0
+2019-08-05,Kadooment Day,KadoomentDay,BB,Barbados,False,True,Public,Monday,70.0
+2019-11-30,Independence Day,IndependenceDay,BB,Barbados,True,True,Public,Monday,66.0
+2019-12-25,Christmas Day,ChristmasDay,BB,Barbados,True,True,Public,Monday,87.0
+2019-12-26,Boxing Day,BoxingDay,BB,Barbados,True,True,Public,Monday,57.0
+2019-01-01,Nieuwjaar,NewYearsDay,BE,Belgium,True,True,Public,Monday,86.0
+2019-04-21,Pasen,EasterSunday,BE,Belgium,False,True,Public,Thursday,60.0
+2019-04-22,Paasmaandag,EasterMonday,BE,Belgium,False,True,Public,Friday,70.0
+2019-05-01,Dag van de arbeid,LabourDay,BE,Belgium,True,True,Public,Monday,72.0
+2019-05-30,Onze Lieve Heer hemel,AscensionDay,BE,Belgium,False,True,Public,Sunday,66.0
+2019-06-10,Pinkstermaandag,WhitMonday,BE,Belgium,False,True,Public,Monday,59.0
+2019-07-21,Nationale feestdag,BelgianNationalDay,BE,Belgium,True,True,Public,Tuesday,68.0
+2019-08-15,Onze Lieve Vrouw hemelvaart,AssumptionDay,BE,Belgium,True,True,Public,Saturday,53.0
+2019-11-01,Allerheiligen,AllSaintsDay,BE,Belgium,True,True,Public,Friday,64.0
+2019-11-11,Wapenstilstand,ArmisticeDay,BE,Belgium,True,True,Public,Monday,70.0
+2019-12-25,Kerstdag,ChristmasDay,BE,Belgium,True,True,Public,Monday,84.0
+2019-01-01,Нова година,NewYearsDay,BG,Bulgaria,True,True,Public,Monday,95.0
+2019-03-03,Ден на Освобождението на България от османско робство,LiberationDay,BG,Bulgaria,True,True,Public,Monday,64.0
+2019-04-26,Разпети петък,GoodFriday,BG,Bulgaria,False,True,Public,Tuesday,76.0
+2019-04-28,Великден,EasterSunday,BG,Bulgaria,False,True,Public,Tuesday,62.0
+2019-04-29,Велики понеделник,EasterMonday,BG,Bulgaria,False,True,Public,Friday,71.0
+2019-05-01,Ден на труда и на международната работническа солидарност,InternationalWorkersDay,BG,Bulgaria,True,True,Public,Sunday,70.0
+2019-05-06,"Гергьовден, ден на храбростта и Българската армия",SaintGeorgesDay,BG,Bulgaria,True,True,Public,Monday,63.0
+2019-05-24,Ден на българската просвета и култура и на славянската писменост,SaintsCyrilandMethodiusDay,BG,Bulgaria,True,True,Public,Tuesday,59.0
+2019-09-06,Ден на Съединението,UnificationDay,BG,Bulgaria,True,True,Public,Saturday,69.0
+2019-09-22,Ден на независимостта на България,IndependenceDay,BG,Bulgaria,True,True,Public,Monday,56.0
+2019-11-01,Ден на народните будители,NationalAwakeningDay,BG,Bulgaria,True,True,Public,Tuesday,62.0
+2019-12-24,Бъдни вечер,ChristmasEve,BG,Bulgaria,True,True,Public,Thursday,69.0
+2019-12-25,Рождество Христово,ChristmasDay,BG,Bulgaria,True,True,Public,Friday,82.0
+2019-12-26,Рождество Христово,St.StephensDay,BG,Bulgaria,True,True,Public,Saturday,63.0
+2019-01-01,New Years Day,NewYearsDay,BJ,Benin,True,True,Public,Thursday,87.0
+2019-01-10,Traditional Day,TraditionalDay,BJ,Benin,True,True,Public,Friday,53.0
+2019-04-21,Easter Sunday,EasterSunday,BJ,Benin,False,True,Public,Sunday,54.0
+2019-04-22,Easter Monday,EasterMonday,BJ,Benin,False,True,Public,Wednesday,72.0
+2019-05-01,Labour Day,LabourDay,BJ,Benin,True,True,Public,Wednesday,70.0
+2019-05-25,Ascension Day,AscensionDay,BJ,Benin,True,True,Public,Friday,67.0
+2019-06-10,Whit Monday,WhitMonday,BJ,Benin,False,True,Public,Sunday,58.0
+2019-08-01,Independence Day,IndependenceDay,BJ,Benin,True,True,Public,Monday,66.0
+2019-08-15,Assumption Day,AssumptionDay,BJ,Benin,True,True,Public,Saturday,71.0
+2019-10-26,Armed Forces Day,ArmedForcesDay,BJ,Benin,True,True,Public,Monday,68.0
+2019-11-01,All Saints Day,AllSaintsDay,BJ,Benin,True,True,Public,Friday,68.0
+2019-11-30,National Day,NationalDay,BJ,Benin,True,True,Public,Monday,56.0
+2019-12-25,Christmas Day,ChristmasDay,BJ,Benin,True,True,Public,Sunday,86.0
+2019-12-26,Boxing Day,St.StephensDay,BJ,Benin,True,True,Public,Sunday,66.0
+2019-01-01,Año Nuevo,NewYearsDay,BO,Bolivia,True,True,Public,Monday,88.0
+2019-02-02,Fiesta de la Virgen de Candelaria,FeastoftheVirginofCandelaria,BO,Bolivia,True,True,Public,Thursday,52.0
+2019-03-04,Feriado por Carnaval,Carnival,BO,Bolivia,False,True,Public,Friday,58.0
+2019-03-05,Feriado por Carnaval,Carnival,BO,Bolivia,False,True,Public,Sunday,56.0
+2019-04-19,Viernes Santo,GoodFriday,BO,Bolivia,False,True,Public,Saturday,76.0
+2019-05-01,Dia del trabajo,LabourDay,BO,Bolivia,True,True,Public,Thursday,67.0
+2019-06-20,Corpus Christi,CorpusChristi,BO,Bolivia,False,True,Public,Friday,58.0
+2019-06-21,Año Nuevo Andino,AndeanNewYear,BO,Bolivia,True,True,Public,Tuesday,66.0
+2019-08-02,Día de la Revolución Agraria,AgrarianReformDay,BO,Bolivia,True,True,Public,Monday,60.0
+2019-08-06,Dia de la Patria,IndependenceDay,BO,Bolivia,True,True,Public,Sunday,53.0
+2019-11-02,Todos Santos,AllSaintsDay,BO,Bolivia,True,True,Public,Sunday,67.0
+2019-12-25,Navidad,ChristmasDay,BO,Bolivia,True,True,Public,Monday,85.0
+2019-01-01,Confraternização Universal,NewYearsDay,BR,Brazil,True,True,Public,Saturday,91.0
+2019-03-05,Carnaval,Carnival,BR,Brazil,False,True,Public,Tuesday,58.0
+2019-04-19,Sexta feira Santa,PassionofJesus,BR,Brazil,False,True,Public,Monday,63.0
+2019-04-21,Dia de Tiradentes,Tiradentes,BR,Brazil,True,True,Public,Wednesday,65.0
+2019-04-21,Domingo de Pascoa,EasterDay,BR,Brazil,False,True,Public,Saturday,70.0
+2019-05-01,Dia do Trabalhador,LabourDay,BR,Brazil,True,True,Public,Saturday,67.0
+2019-06-20,Corpus Christi,CorpusChristi,BR,Brazil,False,True,Public,Tuesday,70.0
+2019-09-07,Dia da Independência,IndependenceDay,BR,Brazil,True,True,Public,Monday,53.0
+2019-10-12,Nossa Senhora Aparecida,ChildrensDay,BR,Brazil,True,True,Public,Friday,59.0
+2019-11-02,Dia de Finados,DayoftheDead,BR,Brazil,True,True,Public,Friday,67.0
+2019-11-15,Proclamação da República,RepublicProclamationDay,BR,Brazil,True,True,Public,Monday,67.0
+2019-12-25,Natal,ChristmasDay,BR,Brazil,True,True,Public,Wednesday,86.0
+2019-01-01,New Years Day,NewYearsDay,BS,Bahamas,True,True,Public,Sunday,92.0
+2019-01-10,Majority Rule Day,MajorityRuleDay,BS,Bahamas,True,True,Public,Thursday,68.0
+2019-04-01,Perry Christie Day,PerryChristieDay,BS,Bahamas,True,True,Public,Sunday,57.0
+2019-04-19,Good Friday,GoodFriday,BS,Bahamas,False,True,Public,Monday,74.0
+2019-04-22,Easter Monday,EasterMonday,BS,Bahamas,False,True,Public,Saturday,72.0
+2019-06-10,Whit Monday,WhitMonday,BS,Bahamas,False,True,Public,Monday,62.0
+2019-07-10,Independence Day,IndependenceDay,BS,Bahamas,True,True,Public,Wednesday,65.0
+2019-08-05,Emancipation Day,EmancipationDay,BS,Bahamas,True,True,Public,Monday,68.0
+2019-10-12,National Heroes Day,NationalHeroesDay,BS,Bahamas,True,True,Public,Monday,64.0
+2019-12-25,Christmas Day,ChristmasDay,BS,Bahamas,True,True,Public,Monday,86.0
+2019-12-26,Boxing Day,St.StephensDay,BS,Bahamas,True,True,Public,Monday,66.0
+2019-01-01,New Years Day,NewYearsDay,BW,Botswana,True,True,Public,Friday,93.0
+2019-04-19,Good Friday,GoodFriday,BW,Botswana,False,True,Public,Saturday,76.0
+2019-04-22,Easter Monday,EasterMonday,BW,Botswana,False,True,Public,Sunday,74.0
+2019-05-01,Labour Day,LabourDay,BW,Botswana,True,True,Public,Monday,70.0
+2019-05-30,Ascension Day,AscensionDay,BW,Botswana,False,True,Public,Tuesday,64.0
+2019-07-01,Sir Seretse Khama Day,SirSeretseKhamaDay,BW,Botswana,True,True,Public,Monday,52.0
+2019-07-15,Presidents Day,PresidentsDay,BW,Botswana,False,True,Public,Monday,55.0
+2019-09-30,Independence Day,IndependenceDay,BW,Botswana,True,True,Public,Sunday,68.0
+2019-10-01,Botswana Day holiday,BotswanaDayholiday,BW,Botswana,True,True,Public,Monday,62.0
+2019-12-25,Christmas Day,ChristmasDay,BW,Botswana,True,True,Public,Monday,88.0
+2019-12-26,Boxing Day,St.StephensDay,BW,Botswana,True,True,Public,Monday,56.0
+2019-01-01,Новы год,NewYearsDay,BY,Belarus,True,True,Public,Monday,93.0
+2019-01-07,Каляды праваслаўныя,OrthodoxChristmasDay,BY,Belarus,True,True,Public,Monday,66.0
+2019-03-08,Мiжнародны жаночы дзень,InternationalWomensDay,BY,Belarus,True,True,Public,Wednesday,61.0
+2019-05-01,Дзень працы,LabourDay,BY,Belarus,True,True,Public,Sunday,72.0
+2019-05-07,Радунiца,CommemorationDay,BY,Belarus,False,True,Public,Monday,53.0
+2019-05-09,Дзень Перамогi,VictoryDay,BY,Belarus,True,True,Public,Friday,64.0
+2019-07-03,Дзень Незалежнасцi,IndependenceDay,BY,Belarus,True,True,Public,Monday,56.0
+2019-11-07,Дзень Кастрычніцкай рэвалюцыі,OctoberRevolutionDay,BY,Belarus,True,True,Public,Monday,53.0
+2019-12-25,Каляды каталiцкiя,CatholicChristmasDay,BY,Belarus,True,True,Public,Tuesday,57.0
+2019-01-01,New Years Day,NewYearsDay,BZ,Belize,False,True,Public,Saturday,86.0
+2019-03-09,Baron Bliss Day,BaronBlissDay,BZ,Belize,False,True,Public,Saturday,61.0
+2019-04-19,Good Friday,GoodFriday,BZ,Belize,False,True,Public,Saturday,74.0
+2019-04-20,Holy Saturday,HolySaturday,BZ,Belize,False,True,Public,Sunday,53.0
+2019-04-21,Easter Sunday,EasterSunday,BZ,Belize,False,True,Public,Monday,67.0
+2019-04-22,Easter Monday,EasterMonday,BZ,Belize,False,True,Public,Monday,71.0
+2019-05-01,Labour Day,LabourDay,BZ,Belize,False,True,Public,Tuesday,68.0
+2019-05-24,Commonwealth Day,CommonwealthDay,BZ,Belize,False,True,Public,Saturday,54.0
+2019-09-10,Saint Georges Caye Day,SaintGeorgesCayeDay,BZ,Belize,False,True,Public,Saturday,55.0
+2019-09-23,Independence Day,IndependenceDay,BZ,Belize,False,True,Public,Saturday,69.0
+2019-10-12,Day of the Americas,DayoftheAmericas,BZ,Belize,False,True,Public,Thursday,59.0
+2019-11-19,Garifuna Settlement Day,GarifunaSettlementDay,BZ,Belize,False,True,Public,Monday,69.0
+2019-12-25,Christmas Day,ChristmasDay,BZ,Belize,False,True,Public,Sunday,86.0
+2019-12-26,Boxing Day,BoxingDay,BZ,Belize,False,True,Public,Sunday,67.0
+2019-01-01,New Years Day,NewYearsDay,CA,Canada,True,True,Public,Thursday,88.0
+2019-02-11,Family Day,FamilyDay,CA,Canada,False,False,Public,Monday,62.0
+2019-02-18,Louis Riel Day,LouisRielDay,CA,Canada,False,False,Public,Sunday,64.0
+2019-02-18,Islander Day,IslanderDay,CA,Canada,False,False,Public,Thursday,69.0
+2019-02-18,Family Day,FamilyDay,CA,Canada,False,False,Public,Monday,61.0
+2019-02-18,Heritage Day,HeritageDay,CA,Canada,False,False,Public,Saturday,66.0
+2019-03-17,Saint Patricks Day,SaintPatricksDay,CA,Canada,True,False,Public,Wednesday,62.0
+2019-04-19,Good Friday,GoodFriday,CA,Canada,False,True,Public,Tuesday,74.0
+2019-04-22,Easter Monday,EasterMonday,CA,Canada,False,False,Public,Tuesday,69.0
+2019-04-23,Saint Georges Day,SaintGeorgesDay,CA,Canada,True,False,Public,Thursday,57.0
+2019-05-20,National Patriots Day,NationalPatriotsDay,CA,Canada,False,False,Public,Sunday,69.0
+2019-05-20,Victoria Day,VictoriaDay,CA,Canada,False,False,Public,Monday,54.0
+2019-06-21,National Aboriginal Day,NationalAboriginalDay,CA,Canada,True,False,Public,Saturday,56.0
+2019-06-24,Discovery Day,DiscoveryDay,CA,Canada,True,False,Public,Sunday,70.0
+2019-06-24,Fête nationale du Québec,NationalHoliday,CA,Canada,True,False,Public,Monday,69.0
+2019-07-01,Canada Day,CanadaDay,CA,Canada,True,True,Public,Tuesday,71.0
+2019-07-12,Orangemens Day,OrangemensDay,CA,Canada,True,False,Public,Thursday,60.0
+2019-08-05,Civic Holiday,CivicHoliday,CA,Canada,False,False,Public,Tuesday,64.0
+2019-08-05,Heritage Day,HeritageDay,CA,Canada,False,False,Public,Sunday,58.0
+2019-08-05,New Brunswick Day,NewBrunswickDay,CA,Canada,False,False,Public,Monday,52.0
+2019-08-05,Natal Day,NatalDay,CA,Canada,False,False,Public,Tuesday,58.0
+2019-08-19,Gold Cup Parade Day,GoldCupParadeDay,CA,Canada,False,False,Public,Wednesday,69.0
+2019-08-19,Discovery Day,DiscoveryDay,CA,Canada,False,False,Public,Thursday,67.0
+2019-09-02,Labour Day,LabourDay,CA,Canada,False,True,Public,Friday,72.0
+2019-10-14,Thanksgiving,Thanksgiving,CA,Canada,False,True,Public,Tuesday,53.0
+2019-11-11,Armistice Day,ArmisticeDay,CA,Canada,True,False,Public,Wednesday,70.0
+2019-11-11,Remembrance Day,RemembranceDay,CA,Canada,True,False,Public,Monday,66.0
+2019-12-25,Christmas Day,ChristmasDay,CA,Canada,True,True,Public,Monday,87.0
+2019-12-26,St. Stephens Day,St.StephensDay,CA,Canada,True,False,Public,Wednesday,60.0
+2019-01-01,Neujahr,NewYearsDay,CH,Switzerland,True,True,Public,Monday,95.0
+2019-01-02,Berchtoldstag,St.BerchtoldsDay,CH,Switzerland,True,False,Public,Sunday,70.0
+2019-01-06,Heilige Drei Könige,Epiphany,CH,Switzerland,True,False,Public,Monday,70.0
+2019-03-19,Josefstag,SaintJosephsDay,CH,Switzerland,True,False,Public,Tuesday,71.0
+2019-04-19,Karfreitag,GoodFriday,CH,Switzerland,False,False,Public,Tuesday,75.0
+2019-04-22,Ostermontag,EasterMonday,CH,Switzerland,False,False,Public,Wednesday,69.0
+2019-05-01,Tag der Arbeit,LabourDay,CH,Switzerland,True,False,Public,Saturday,72.0
+2019-05-30,Auffahrt,AscensionDay,CH,Switzerland,False,True,Public,Saturday,57.0
+2019-06-10,Pfingstmontag,WhitMonday,CH,Switzerland,False,False,Public,Monday,55.0
+2019-06-20,Fronleichnam,CorpusChristi,CH,Switzerland,False,False,Public,Monday,66.0
+2019-08-01,Bundesfeier,SwissNationalDay,CH,Switzerland,True,True,Public,Friday,68.0
+2019-08-15,Maria Himmelfahrt,AssumptionoftheVirginMary,CH,Switzerland,True,False,Public,Monday,55.0
+2019-09-05,Jeûne genevois,GenevaPrayday,CH,Switzerland,False,False,Public,Friday,71.0
+2019-09-16,"Eidgenössischer Dank-, Buss- und Bettag",FederalDayofThanksgiving,CH,Switzerland,False,False,Public,Monday,65.0
+2019-11-01,Allerheiligen,AllSaintsDay,CH,Switzerland,True,False,Public,Sunday,60.0
+2019-12-08,Mariä Empfängnis,ImmaculateConception,CH,Switzerland,True,False,Public,Monday,63.0
+2019-12-25,Weihnachten,ChristmasDay,CH,Switzerland,True,True,Public,Monday,87.0
+2019-12-26,Stephanstag,St.StephensDay,CH,Switzerland,True,False,Public,Monday,63.0
+2019-01-01,Año Nuevo,NewYearsDay,CL,Chile,False,True,Public,Sunday,88.0
+2019-04-19,Viernes Santo,GoodFriday,CL,Chile,False,True,Public,Monday,73.0
+2019-04-20,Sábado Santo,HolySaturday,CL,Chile,False,True,Public,Tuesday,55.0
+2019-05-01,Día del Trabajo,LabourDay,CL,Chile,True,True,Public,Saturday,68.0
+2019-05-21,Día de las Glorias Navales,NavyDay,CL,Chile,True,True,Public,Sunday,67.0
+2019-06-07,Asalto y Toma del Morro de Arica,BattleofArica,CL,Chile,True,True,Public,Tuesday,68.0
+2019-06-26,San Pedro y San Pablo,SaintPeterandSaintPaul,CL,Chile,True,True,Public,Wednesday,65.0
+2019-07-16,Virgen del Carmen,OurLadyofMountCarmel,CL,Chile,True,True,Public,Thursday,69.0
+2019-08-10,San Lorenzo de Tarapacá,SaintLawrence,CL,Chile,True,False,Public,Sunday,61.0
+2019-08-10,Día del Minero,NationalMinersDay,CL,Chile,True,False,Public,Monday,60.0
+2019-08-15,Asunción de la Virgen,AssumptionofMary,CL,Chile,True,True,Public,Tuesday,71.0
+2019-09-18,Fiestas Patrias,Nationalholiday,CL,Chile,True,True,Public,Sunday,63.0
+2019-09-19,Día de las Glorias del Ejército,ArmyDay,CL,Chile,True,True,Public,Sunday,67.0
+2019-09-20,Feast of La Pampilla,FiestadeLaPampilla,CL,Chile,True,False,Public,Monday,53.0
+2019-09-21,Toma de posesión del estrecho de Magallanes,NationalPossessionoftheStraitofMagellan,CL,Chile,True,False,Public,Sunday,57.0
+2019-10-02,Aniversario de la Creación de la XIV Región de Los Ríos,LosRíosRegionAnniversary,CL,Chile,True,False,Public,Friday,64.0
+2019-10-09,Día del Descubrimiento de Dos Mundos,ColumbusDay,CL,Chile,True,True,Public,Saturday,61.0
+2019-10-27,Día Nacional de las Iglesias Evangélicas y Protestantes,ReformationDay,CL,Chile,True,True,Public,Sunday,65.0
+2019-11-01,Día de Todos los Santos,AllSaints,CL,Chile,True,True,Public,Monday,67.0
+2019-11-19,"Elecciones presidencial, congresistas y regionales","Presidential,parliamentaryandregionalelections",CL,Chile,True,True,Public,Monday,53.0
+2019-12-08,Inmaculada Concepción,ImmaculateConception,CL,Chile,True,True,Public,Thursday,69.0
+2019-12-25,Navidad / Natividad del Señor,ChristmasDay,CL,Chile,True,True,Public,Friday,88.0
+2019-01-01,元旦,NewYearsDay,CN,China,True,True,Public,Saturday,87.0
+2019-02-05,春节,ChineseNewYear(SpringFestival),CN,China,False,True,Public,Thursday,71.0
+2019-04-05,清明节,QingmingFestival(Tomb-SweepingDay),CN,China,True,True,Public,Friday,62.0
+2019-05-01,劳动节,LabourDay,CN,China,True,True,Public,Friday,72.0
+2019-06-07,端午节,DragonBoatFestival,CN,China,False,True,Public,Sunday,56.0
+2019-09-13,中秋节,Mid-AutumnFestival,CN,China,False,True,Public,Tuesday,64.0
+2019-10-01,国庆节,NationalDay,CN,China,True,True,Public,Wednesday,57.0
+2019-01-01,Año Nuevo,NewYearsDay,CO,Colombia,True,True,Public,Thursday,86.0
+2019-01-06,Día de los Reyes Magos,Epiphany,CO,Colombia,True,True,Public,Monday,61.0
+2019-03-04,Carnival,Carnival,CO,Colombia,False,True,Public,Sunday,70.0
+2019-03-05,Carnival,Carnival,CO,Colombia,False,True,Public,Monday,52.0
+2019-03-19,Día de San José,SaintJosephsDay,CO,Colombia,True,True,Public,Tuesday,59.0
+2019-04-18,Jueves Santo,MaundyThursday,CO,Colombia,False,True,Public,Monday,58.0
+2019-04-19,Viernes Santo,GoodFriday,CO,Colombia,False,True,Public,Monday,74.0
+2019-05-01,Primero de Mayo,LabourDay,CO,Colombia,True,True,Public,Friday,69.0
+2019-05-30,Ascensión del señor,AscensionDay,CO,Colombia,False,True,Public,Tuesday,61.0
+2019-06-20,Corpus Christi,CorpusChristi,CO,Colombia,False,True,Public,Sunday,52.0
+2019-06-28,Sagrado Corazón,SacredHeart,CO,Colombia,False,True,Public,Friday,61.0
+2019-06-29,San Pedro y San Pablo,SaintPeterandSaintPaul,CO,Colombia,True,True,Public,Sunday,58.0
+2019-07-20,Declaracion de la Independencia de Colombia,DeclarationofIndependence,CO,Colombia,True,True,Public,Saturday,67.0
+2019-08-07,Battle of Boyacá,BattleofBoyacá,CO,Colombia,True,True,Public,Friday,55.0
+2019-08-15,La Asunción,AssumptionofMary,CO,Colombia,True,True,Public,Friday,60.0
+2019-10-12,Día de la Raza,ColumbusDay,CO,Colombia,True,True,Public,Monday,53.0
+2019-11-01,Dia de los Santos,AllSaints’Day,CO,Colombia,True,True,Public,Thursday,64.0
+2019-11-11,Independencia de Cartagena,IndependenceofCartagena,CO,Colombia,True,True,Public,Sunday,66.0
+2019-12-08,La Inmaculada Concepción,ImmaculateConception,CO,Colombia,True,True,Public,Monday,60.0
+2019-12-25,Navidad,ChristmasDay,CO,Colombia,True,True,Public,Monday,89.0
+2019-01-01,New Years Day,NewYearsDay,CR,Costa Rica,True,True,Public,Monday,91.0
+2019-04-11,Juan Santa maria Day,JuanSantamariaDay,CR,Costa Rica,True,True,Public,Tuesday,56.0
+2019-04-18,Good Thursday,MaundyThursday,CR,Costa Rica,False,True,Public,Wednesday,71.0
+2019-04-19,Good Friday,GoodFriday,CR,Costa Rica,False,True,Public,Sunday,74.0
+2019-05-01,Labor Day,LaborDay,CR,Costa Rica,True,True,Public,Monday,58.0
+2019-07-25,Guanacaste Day,GuanacasteDay,CR,Costa Rica,True,True,Public,Tuesday,57.0
+2019-08-02,Virgin of Los Angeles Day,VirginofLosAngelesDay,CR,Costa Rica,True,True,Public,Saturday,55.0
+2019-08-15,Mother´s Day,Mother´sDay,CR,Costa Rica,True,True,Public,Sunday,66.0
+2019-09-15,Independence Day,IndependenceDay,CR,Costa Rica,True,True,Public,Friday,58.0
+2019-10-12,Cultures National Day,CulturesNationalDay,CR,Costa Rica,True,True,Public,Monday,55.0
+2019-12-25,Christmas Day,ChristmasDay,CR,Costa Rica,True,True,Public,Tuesday,88.0
+2019-01-01,Triunfo de la Revolución,TriumphoftheRevolution,CU,Cuba,True,True,Public,Sunday,66.0
+2019-01-02,Día de Victoria de las Fuerzas Armadas,VictoryofFidelCastro,CU,Cuba,True,True,Public,Sunday,63.0
+2019-04-19,Good Friday,GoodFriday,CU,Cuba,False,True,Public,Sunday,73.0
+2019-05-01,Día de los trabajadores,LabourDay,CU,Cuba,True,True,Public,Monday,68.0
+2019-07-25,Conmemoración del asalto a Moncada,DaybeforetheCommemorationoftheAssaultoftheMoncadagarrison,CU,Cuba,True,True,Public,Tuesday,60.0
+2019-07-26,Día de la Rebeldía Nacional,CommemorationoftheAssaultoftheMoncadagarrison,CU,Cuba,True,True,Public,Monday,52.0
+2019-07-27,Conmemoración del asalto a Moncada,DayaftertheCommemorationoftheAssaultoftheMoncadagarrison,CU,Cuba,True,True,Public,Sunday,54.0
+2019-10-10,Día de la Independencia,IndependenceDay,CU,Cuba,True,True,Public,Monday,68.0
+2019-12-25,Navidad,ChristmasDay,CU,Cuba,True,True,Public,Sunday,83.0
+2019-01-01,Πρωτοχρονιά,NewYearsDay,CY,Cyprus,True,True,Public,Saturday,90.0
+2019-01-06,Θεοφάνεια,Epiphany,CY,Cyprus,True,True,Public,Thursday,54.0
+2019-03-11,Καθαρή Δευτέρα,GreenMonday,CY,Cyprus,False,True,Public,Sunday,52.0
+2019-03-25,Επέτειος Ελληνικής Ανεξαρτησίας,GreekIndependenceDay,CY,Cyprus,True,True,Public,Monday,60.0
+2019-04-01,Κυπριακή Εθνική Επέτειος,CyprusNationalDay,CY,Cyprus,True,True,Public,Sunday,57.0
+2019-04-26,Μεγάλη Παρασκευή,GoodFriday,CY,Cyprus,False,True,Public,Sunday,74.0
+2019-04-29,Δευτέρα της Διακαινησίμου,EasterMonday,CY,Cyprus,False,True,Public,Thursday,70.0
+2019-04-30,Τρίτη της Διακαινησίμου,EasterTuesday,CY,Cyprus,False,True,Public,Friday,64.0
+2019-05-01,Πρωτομαγιά,LabourDay,CY,Cyprus,True,True,Public,Sunday,68.0
+2019-06-16,Αγίου Πνεύματος,Pentecost,CY,Cyprus,False,True,Public,Monday,58.0
+2019-08-15,Η Κοίμησις της Θεοτόκου,AssumptionoftheVirginMary,CY,Cyprus,True,True,Public,Sunday,68.0
+2019-10-01,Επέτειος Κυπριακής Ανεξαρτησίας,CyprusIndependenceDay,CY,Cyprus,True,True,Public,Monday,53.0
+2019-10-28,Το Όχι,OhiDay,CY,Cyprus,True,True,Public,Thursday,63.0
+2019-12-24,Παραμονή Χριστουγέννων,ChristmasEve,CY,Cyprus,True,True,Public,Monday,57.0
+2019-12-25,Χριστούγεννα,ChristmasDay,CY,Cyprus,True,True,Public,Tuesday,88.0
+2019-12-26,Δεύτερη μέρα των Χριστουγέννων,St.StephensDay,CY,Cyprus,True,True,Public,Tuesday,52.0
+2019-01-01,Den obnovy samostatného českého státu; Nový rok,NewYearsDay,CZ,Czechia,True,True,Public,Wednesday,90.0
+2019-04-19,Velký pátek,GoodFriday,CZ,Czechia,False,True,Public,Friday,74.0
+2019-04-22,Velikonoční pondělí,EasterMonday,CZ,Czechia,False,True,Public,Tuesday,69.0
+2019-05-01,Svátek práce,LabourDay,CZ,Czechia,True,True,Public,Tuesday,71.0
+2019-05-08,Den vítězství,LiberationDay,CZ,Czechia,True,True,Public,Sunday,63.0
+2019-07-05,Den slovanských věrozvěstů Cyrila a Metoděje,SaintsCyrilandMethodiusDay,CZ,Czechia,True,True,Public,Saturday,67.0
+2019-07-06,Den upálení mistra Jana Husa,JanHusDay,CZ,Czechia,True,True,Public,Saturday,59.0
+2019-09-28,Den české státnosti,St.WenceslasDay,CZ,Czechia,True,True,Public,Monday,57.0
+2019-10-28,Den vzniku samostatného československého státu,IndependentCzechoslovakStateDay,CZ,Czechia,True,True,Public,Friday,55.0
+2019-11-17,Den boje za svobodu a demokracii a Mezinárodní den studentstva,StruggleforFreedomandDemocracyDay,CZ,Czechia,True,True,Public,Saturday,66.0
+2019-12-24,Štědrý den,ChristmasEve,CZ,Czechia,True,True,Public,Monday,63.0
+2019-12-25,1. svátek vánoční,ChristmasDay,CZ,Czechia,True,True,Public,Monday,82.0
+2019-12-26,2. svátek vánoční,St.StephensDay,CZ,Czechia,True,True,Public,Monday,67.0
+2019-01-01,Neujahr,NewYearsDay,DE,Germany,True,True,Public,Saturday,90.0
+2019-01-06,Heilige Drei Könige,Epiphany,DE,Germany,True,False,Public,Wednesday,64.0
+2019-03-08,Internationaler Frauentag,InternationalWomensDay,DE,Germany,True,False,Public,Monday,59.0
+2019-04-19,Karfreitag,GoodFriday,DE,Germany,False,True,Public,Saturday,74.0
+2019-04-22,Ostermontag,EasterMonday,DE,Germany,False,True,Public,Sunday,74.0
+2019-05-01,Tag der Arbeit,LabourDay,DE,Germany,True,True,Public,Monday,70.0
+2019-05-30,Christi Himmelfahrt,AscensionDay,DE,Germany,False,True,Public,Saturday,67.0
+2019-06-10,Pfingstmontag,WhitMonday,DE,Germany,False,True,Public,Monday,57.0
+2019-06-20,Fronleichnam,CorpusChristi,DE,Germany,False,False,Public,Monday,53.0
+2019-08-15,Mariä Himmelfahrt,AssumptionDay,DE,Germany,True,False,Public,Sunday,62.0
+2019-09-20,Weltkindertag,WorldChildrensDay,DE,Germany,True,False,Public,Tuesday,52.0
+2019-10-03,Tag der Deutschen Einheit,GermanUnityDay,DE,Germany,True,True,Public,Thursday,68.0
+2019-10-31,Reformationstag,ReformationDay,DE,Germany,True,False,Public,Monday,59.0
+2019-11-01,Allerheiligen,AllSaintsDay,DE,Germany,True,False,Public,Sunday,57.0
+2019-11-20,Buß- und Bettag,RepentanceandPrayerDay,DE,Germany,False,False,Public,Monday,66.0
+2019-12-25,Erster Weihnachtstag,ChristmasDay,DE,Germany,True,True,Public,Monday,82.0
+2019-12-26,Zweiter Weihnachtstag,St.StephensDay,DE,Germany,True,True,Public,Sunday,68.0
+2019-01-01,Nytårsdag,NewYearsDay,DK,Denmark,True,True,Public,Tuesday,87.0
+2019-04-18,Skærtorsdag,MaundyThursday,DK,Denmark,False,True,Public,Sunday,58.0
+2019-04-19,Langfredag,GoodFriday,DK,Denmark,False,True,Public,Monday,76.0
+2019-04-21,Påskedag,EasterSunday,DK,Denmark,False,True,Public,Friday,70.0
+2019-04-22,2. Påskedag,EasterMonday,DK,Denmark,False,True,Public,Friday,74.0
+2019-05-17,Store bededag,GeneralPrayerDay,DK,Denmark,False,True,Public,Monday,57.0
+2019-05-30,Kristi Himmelfartsdag,AscensionDay,DK,Denmark,False,True,Public,Thursday,69.0
+2019-05-31,Banklukkedag,Bankclosingday,DK,Denmark,False,True,"Bank, School, Optional",Friday,67.0
+2019-06-05,Grundlovsdag,ConstitutionDay,DK,Denmark,True,True,"Bank, School, Optional",Monday,52.0
+2019-06-09,Pinsedag,Pentecost,DK,Denmark,False,True,Public,Friday,63.0
+2019-06-10,2. Pinsedag,WhitMonday,DK,Denmark,False,True,Public,Monday,57.0
+2019-12-24,Juleaftensdag,ChristmasEve,DK,Denmark,True,True,"Bank, School, Optional",Tuesday,70.0
+2019-12-25,Juledag / 1. juledag,ChristmasDay,DK,Denmark,True,True,Public,Sunday,86.0
+2019-12-26,2. juledag,St.StephensDay,DK,Denmark,True,True,Public,Monday,70.0
+2019-12-31,Nytårsaftensdag,NewYearsEve,DK,Denmark,True,True,"Bank, School, Optional",Tuesday,69.0
+2019-01-01,New Years Day,NewYearsDay,DO,Dominican Republic,True,True,Public,Wednesday,92.0
+2019-01-06,Dia de Reyes,DayofKings,DO,Dominican Republic,True,True,Public,Monday,70.0
+2019-01-21,Our Lady of Altagracia,OurLadyofAltagracia,DO,Dominican Republic,True,True,Public,Tuesday,56.0
+2019-01-26,Duartes Birthday,DuartesBirthday,DO,Dominican Republic,True,True,Public,Wednesday,70.0
+2019-02-27,Independence Day,IndependenceDay,DO,Dominican Republic,True,True,Public,Monday,54.0
+2019-04-19,Good Friday,GoodFriday,DO,Dominican Republic,False,True,Public,Wednesday,75.0
+2019-05-01,Labour Day,LabourDay,DO,Dominican Republic,True,True,Public,Tuesday,71.0
+2019-05-28,Mothers Day,MothersDay,DO,Dominican Republic,True,True,Public,Saturday,55.0
+2019-06-20,Corpus Christi,CorpusChristi,DO,Dominican Republic,False,True,Public,Monday,55.0
+2019-08-16,Restoration Day,RestorationDay,DO,Dominican Republic,True,True,Public,Friday,54.0
+2019-09-24,Nuestra Senora de las Mercedes,OurLadyofMercy,DO,Dominican Republic,True,True,Public,Saturday,62.0
+2019-11-06,Constitution Day,ConstitutionDay,DO,Dominican Republic,True,True,Public,Wednesday,58.0
+2019-12-25,Christmas Day,ChristmasDay,DO,Dominican Republic,True,True,Public,Thursday,86.0
+2019-01-01,Año Nuevo,NewYearsDay,EC,Ecuador,True,True,Public,Friday,92.0
+2019-03-04,Carnaval,Carnival,EC,Ecuador,False,True,Public,Tuesday,66.0
+2019-03-05,Carnaval,Carnival,EC,Ecuador,False,True,Public,Tuesday,69.0
+2019-04-19,Good Friday,GoodFriday,EC,Ecuador,False,True,Public,Friday,75.0
+2019-05-01,International Workers Day,InternationalWorkersDay,EC,Ecuador,True,True,Public,Tuesday,63.0
+2019-05-24,Batalla de Pichincha,TheBattleofPichincha,EC,Ecuador,True,True,Public,Saturday,67.0
+2019-08-10,Primer Grito de Independencia,DeclarationofIndependenceofQuito,EC,Ecuador,True,True,Public,Saturday,61.0
+2019-10-09,Independencia de Guayaquil,IndependenceofGuayaquil,EC,Ecuador,True,True,Public,Saturday,71.0
+2019-11-02,"Día de los Difuntos, Día de Muertos",AllSoulsDay,EC,Ecuador,True,True,Public,Friday,61.0
+2019-11-03,Independencia de Cuenca,IndependenceofCuenca,EC,Ecuador,True,True,Public,Monday,65.0
+2019-12-25,Día de Navidad,ChristmasDay,EC,Ecuador,True,True,Public,Tuesday,85.0
+2019-01-01,uusaasta,NewYearsDay,EE,Estonia,True,True,Public,Friday,94.0
+2019-02-24,iseseisvuspäev,IndependenceDay,EE,Estonia,True,True,Public,Friday,69.0
+2019-04-19,suur reede,GoodFriday,EE,Estonia,False,True,Public,Sunday,73.0
+2019-04-21,ülestõusmispühade 1. püha,EasterSunday,EE,Estonia,False,True,Public,Wednesday,56.0
+2019-05-01,kevadpüha,SpringDay,EE,Estonia,True,True,Public,Thursday,58.0
+2019-06-09,nelipühade 1. püha,Pentecost,EE,Estonia,False,True,Public,Tuesday,62.0
+2019-06-23,võidupüha and jaanilaupäev,VictoryDay,EE,Estonia,True,True,Public,Saturday,66.0
+2019-06-24,jaanipäev,MidsummerDay,EE,Estonia,True,True,Public,Saturday,58.0
+2019-08-20,taasiseseisvumispäev,DayofRestorationofIndependence,EE,Estonia,True,True,Public,Wednesday,55.0
+2019-12-24,jõululaupäev,ChristmasEve,EE,Estonia,True,True,Public,Saturday,60.0
+2019-12-25,esimene jõulupüha,ChristmasDay,EE,Estonia,True,True,Public,Tuesday,86.0
+2019-12-26,teine jõulupüha,St.StephensDay,EE,Estonia,True,True,Public,Wednesday,67.0
+2019-01-07,عيد الميلاد المجيد,Christmas,EG,Egypt,True,True,Public,Thursday,57.0
+2019-01-25,عيد الثورة 25 يناير,RevolutionDay2011NationalPoliceDay,EG,Egypt,True,True,Public,Friday,61.0
+2019-04-25,عيد تحرير سيناء,SinaiLiberationDay,EG,Egypt,True,True,Public,Sunday,66.0
+2019-05-01,عيد العمال,LabourDay,EG,Egypt,True,True,Public,Saturday,71.0
+2019-07-23,عيد ثورة 23 يوليو,RevolutionDay,EG,Egypt,True,True,Public,Friday,68.0
+2019-10-06,عيد القوات المسلحة,ArmedForcesDay,EG,Egypt,True,True,Public,Sunday,68.0
+2019-01-01,Año Nuevo,NewYearsDay,ES,Spain,True,True,Public,Monday,87.0
+2019-01-06,Día de Reyes / Epifanía del Señor,Epiphany,ES,Spain,True,True,Public,Wednesday,67.0
+2019-02-28,Día de Andalucía,RegionalHoliday,ES,Spain,True,False,Public,Saturday,71.0
+2019-03-01,Dia de les Illes Balears,RegionalHoliday,ES,Spain,True,False,Public,Sunday,57.0
+2019-03-19,San José,St.JosephsDay,ES,Spain,True,False,Public,Thursday,69.0
+2019-04-19,Jueves Santo,MaundyThursday,ES,Spain,False,False,Public,Sunday,55.0
+2019-04-19,Viernes Santo,GoodFriday,ES,Spain,False,True,Public,Friday,76.0
+2019-04-21,Pascua de Resurrección,EasterSunday,ES,Spain,False,True,Public,Friday,70.0
+2019-04-22,Lunes de Pascua,EasterMonday,ES,Spain,False,False,Public,Monday,70.0
+2019-04-23,San Jorge (Día de Aragón),RegionalHoliday,ES,Spain,True,False,Public,Tuesday,64.0
+2019-04-23,Día de Castilla y León,RegionalHoliday,ES,Spain,True,False,Public,Wednesday,63.0
+2019-05-01,Día del Trabajador,LabourDay,ES,Spain,True,True,Public,Friday,71.0
+2019-05-02,Fiesta de la Comunidad de Madrid,RegionalHoliday,ES,Spain,True,False,Public,Thursday,57.0
+2019-05-17,Día das Letras Galegas,RegionalHoliday,ES,Spain,True,False,Public,Sunday,56.0
+2019-05-30,Día de Canarias,RegionalHoliday,ES,Spain,True,False,Public,Monday,56.0
+2019-05-31,Día de la Región Castilla-La Mancha,RegionalHoliday,ES,Spain,True,False,Public,Saturday,62.0
+2019-06-09,Día de la Región de Murcia,RegionalHoliday,ES,Spain,True,False,Public,Sunday,71.0
+2019-06-09,Día de La Rioja,RegionalHoliday,ES,Spain,True,False,Public,Thursday,65.0
+2019-06-24,Sant Joan,St.JohnsDay,ES,Spain,True,False,Public,Friday,56.0
+2019-07-25,Santiago Apóstol,SaintJames,ES,Spain,True,False,Public,Friday,56.0
+2019-08-15,Asunción,Assumption,ES,Spain,True,True,Public,Tuesday,54.0
+2019-09-02,Día de Ceuta,MunicipalHoliday,ES,Spain,True,False,Public,Friday,66.0
+2019-09-08,Día de Asturias,RegionalHoliday,ES,Spain,True,False,Public,Sunday,67.0
+2019-09-08,Día de Extremadura,RegionalHoliday,ES,Spain,True,False,Public,Monday,65.0
+2019-09-11,Diada Nacional de Catalunya,NationalDayofCatalonia,ES,Spain,True,False,Public,Friday,60.0
+2019-09-15,Día de Cantabria,RegionalHoliday,ES,Spain,True,False,Public,Sunday,57.0
+2019-10-09,Dia de la Comunitat Valenciana,RegionalHoliday,ES,Spain,True,False,Public,Monday,67.0
+2019-10-12,Fiesta Nacional de España,FiestaNacionaldeEspaña,ES,Spain,True,True,Public,Sunday,59.0
+2019-10-25,Euskadi Eguna,RegionalHoliday,ES,Spain,True,False,Public,Monday,56.0
+2019-11-01,Día de todos los Santos,AllSaintsDay,ES,Spain,True,True,Public,Tuesday,52.0
+2019-12-06,Día de la Constitución,ConstitutionDay,ES,Spain,True,True,Public,Wednesday,68.0
+2019-12-08,Inmaculada Concepción,ImmaculateConception,ES,Spain,True,True,Public,Monday,56.0
+2019-12-25,Navidad,ChristmasDay,ES,Spain,True,True,Public,Sunday,89.0
+2019-12-26,Sant Esteve,St.StephensDay,ES,Spain,True,False,Public,Tuesday,66.0
+2019-01-01,Uudenvuodenpäivä,NewYearsDay,FI,Finland,True,True,Public,Monday,87.0
+2019-01-06,Loppiainen,Epiphany,FI,Finland,True,True,Public,Friday,65.0
+2019-04-19,Pitkäperjantai,GoodFriday,FI,Finland,False,True,Public,Sunday,73.0
+2019-04-21,Pääsiäispäivä,EasterSunday,FI,Finland,False,True,Public,Saturday,56.0
+2019-04-22,2. pääsiäispäivä,EasterMonday,FI,Finland,False,True,Public,Sunday,72.0
+2019-05-01,Vappu,MayDay,FI,Finland,True,True,Public,Monday,55.0
+2019-05-30,Helatorstai,AscensionDay,FI,Finland,False,True,Public,Friday,61.0
+2019-06-09,Helluntaipäivä,Pentecost,FI,Finland,False,True,Public,Saturday,54.0
+2019-06-21,Juhannusaatto,MidsummerEve,FI,Finland,False,True,Public,Monday,57.0
+2019-06-22,Juhannuspäivä,MidsummerDay,FI,Finland,False,True,Public,Sunday,70.0
+2019-11-02,Pyhäinpäivä,AllSaintsDay,FI,Finland,False,True,Public,Monday,61.0
+2019-12-06,Itsenäisyyspäivä,IndependenceDay,FI,Finland,True,True,Public,Thursday,53.0
+2019-12-24,Jouluaatto,ChristmasEve,FI,Finland,True,True,Public,Friday,54.0
+2019-12-25,Joulupäivä,ChristmasDay,FI,Finland,True,True,Public,Monday,87.0
+2019-12-26,2. joulupäivä,St.StephensDay,FI,Finland,True,True,Public,Tuesday,53.0
+2019-01-01,Nýggjársdagur,NewYearsDay,FO,Faroe Islands,True,True,Public,Friday,95.0
+2019-04-18,Skírhósdagur,MaundyThursday,FO,Faroe Islands,False,True,Public,Saturday,59.0
+2019-04-19,Langifríggjadagur,GoodFriday,FO,Faroe Islands,False,True,Public,Sunday,73.0
+2019-04-21,Páskadagur,EasterSunday,FO,Faroe Islands,False,True,Public,Monday,70.0
+2019-04-22,2. Páskadagur,EasterMonday,FO,Faroe Islands,False,True,Public,Tuesday,73.0
+2019-04-25,Flaggdagur,NationalFlagDay,FO,Faroe Islands,True,True,Public,Saturday,68.0
+2019-05-17,Store bededag,GeneralPrayerDay,FO,Faroe Islands,False,True,Public,Tuesday,57.0
+2019-05-30,Kristi himmalsferðar dagur,AscensionDay,FO,Faroe Islands,False,True,Public,Monday,69.0
+2019-06-05,Grundlógardagur Danmarkar,ConstitutionDay,FO,Faroe Islands,True,True,Public,Tuesday,66.0
+2019-06-09,Hvítasunnudagur,Pentecost,FO,Faroe Islands,False,True,Public,Friday,58.0
+2019-06-10,2. Hvítasunnudagur,WhitMonday,FO,Faroe Islands,False,True,Public,Thursday,68.0
+2019-07-28,Ólavsøkuaftan,SaintOlavsEve,FO,Faroe Islands,True,True,Public,Sunday,64.0
+2019-07-29,Ólavsøkudagur,SaintOlavsDay,FO,Faroe Islands,True,True,Public,Sunday,62.0
+2019-12-24,Jólaaftanskvøld,ChristmasEve,FO,Faroe Islands,True,True,Public,Thursday,68.0
+2019-12-25,Jóladagur,ChristmasDay,FO,Faroe Islands,True,True,Public,Saturday,83.0
+2019-12-26,2. Jóladagur,St.StephensDay,FO,Faroe Islands,True,True,Public,Sunday,60.0
+2019-12-31,Nýggjársaftan,NewYearsEve,FO,Faroe Islands,True,True,Public,Wednesday,54.0
+2019-01-01,Jour de lan,NewYearsDay,FR,France,True,True,Public,Wednesday,86.0
+2019-04-19,Vendredi saint,GoodFriday,FR,France,False,False,Public,Friday,76.0
+2019-04-22,Lundi de Pâques,EasterMonday,FR,France,False,True,Public,Wednesday,72.0
+2019-05-01,Fête du premier mai,LabourDay,FR,France,True,True,Public,Tuesday,68.0
+2019-05-08,Fête de la Victoire,VictoryinEuropeDay,FR,France,True,True,Public,Sunday,55.0
+2019-05-22,Abolition de lesclavage,AbolitionofSlavery,FR,France,True,False,Public,Sunday,66.0
+2019-05-27,Abolition of Slavery,Abolitiondelesclavage,FR,France,True,False,Public,Saturday,57.0
+2019-05-30,Jour de lAscension,AscensionDay,FR,France,False,True,Public,Monday,54.0
+2019-06-10,Lundi de Pentecôte,WhitMonday,FR,France,False,True,Public,Monday,53.0
+2019-07-14,Fête nationale,BastilleDay,FR,France,True,True,Public,Friday,54.0
+2019-08-15,LAssomption de Marie,AssumptionDay,FR,France,True,True,Public,Monday,71.0
+2019-11-01,La Toussaint,AllSaintsDay,FR,France,True,True,Public,Monday,64.0
+2019-11-11,Armistice de 1918,ArmisticeDay,FR,France,True,True,Public,Friday,65.0
+2019-12-25,Noël,ChristmasDay,FR,France,True,True,Public,Friday,87.0
+2019-12-26,Saint-Étienne,St.StephensDay,FR,France,True,False,Public,Monday,58.0
+2019-01-01,New Years Day,NewYearsDay,GA,Gabon,True,True,Public,Tuesday,85.0
+2019-03-12,Renovation Day,RenovationDay,GA,Gabon,True,True,Public,Wednesday,69.0
+2019-04-17,Womens Day,WomensDay,GA,Gabon,True,True,Public,Monday,71.0
+2019-04-22,Easter Monday,EasterMonday,GA,Gabon,False,True,Public,Monday,71.0
+2019-05-01,Labour Day,LabourDay,GA,Gabon,True,True,Public,Sunday,70.0
+2019-05-06,Martyrs Day,MartyrsDay,GA,Gabon,True,True,Public,Monday,70.0
+2019-06-10,Whit Monday,WhitMonday,GA,Gabon,False,True,Public,Tuesday,61.0
+2019-08-15,Assumption Day,AssumptionDay,GA,Gabon,True,True,Public,Saturday,57.0
+2019-08-17,Independence Day,IndependenceDay,GA,Gabon,True,True,Public,Monday,63.0
+2019-11-01,All Saints Day,AllSaintsDay,GA,Gabon,True,True,Public,Tuesday,53.0
+2019-12-25,Božić,ChristmasDay,GA,Gabon,True,True,Public,Wednesday,88.0
+2019-01-01,New Years Day,NewYearsDay,GB,United Kingdom,False,True,Public,Tuesday,93.0
+2019-01-02,New Years Day,NewYearsDay,GB,United Kingdom,False,False,Public,Sunday,92.0
+2019-03-17,Saint Patricks Day,SaintPatricksDay,GB,United Kingdom,True,False,Public,Tuesday,71.0
+2019-04-19,Good Friday,GoodFriday,GB,United Kingdom,False,True,Public,Tuesday,73.0
+2019-04-22,Easter Monday,EasterMonday,GB,United Kingdom,False,False,Public,Wednesday,73.0
+2019-05-06,Early May Bank Holiday,EarlyMayBankHoliday,GB,United Kingdom,False,True,Public,Thursday,61.0
+2019-05-27,Spring Bank Holiday,SpringBankHoliday,GB,United Kingdom,False,True,Public,Friday,68.0
+2019-07-12,Battle of the Boyne,BattleoftheBoyne,GB,United Kingdom,True,False,Public,Tuesday,60.0
+2019-08-05,Summer Bank Holiday,SummerBankHoliday,GB,United Kingdom,False,False,Public,Sunday,64.0
+2019-08-26,Summer Bank Holiday,SummerBankHoliday,GB,United Kingdom,False,False,Public,Saturday,57.0
+2019-11-30,Saint Andrews Day,SaintAndrewsDay,GB,United Kingdom,True,False,Public,Sunday,56.0
+2019-12-25,Christmas Day,ChristmasDay,GB,United Kingdom,False,True,Public,Sunday,83.0
+2019-12-26,Boxing Day,St.StephensDay,GB,United Kingdom,False,True,Public,Monday,66.0
+2019-01-01,New Years Day,NewYearsDay,GD,Grenada,True,True,Public,Saturday,87.0
+2019-02-07,Independence Day,IndependenceDay,GD,Grenada,True,True,Public,Monday,66.0
+2019-04-19,Good Friday,GoodFriday,GD,Grenada,False,True,Public,Thursday,74.0
+2019-04-22,Easter Monday,EasterMonday,GD,Grenada,False,True,Public,Friday,74.0
+2019-05-01,Labour Day,LabourDay,GD,Grenada,True,True,Public,Saturday,68.0
+2019-05-01,Indian Arrival Day,IndianArrivalDay,GD,Grenada,True,True,Public,Sunday,53.0
+2019-06-10,Whit Monday,WhitMonday,GD,Grenada,False,True,Public,Monday,60.0
+2019-06-20,Corpus Christi,CorpusChristi,GD,Grenada,False,True,Public,Sunday,66.0
+2019-08-05,Emancipation Day,EmancipationDay,GD,Grenada,False,True,Public,Monday,69.0
+2019-08-11,Carnival,Carnival,GD,Grenada,True,True,Public,Friday,55.0
+2019-10-25,Thanksgiving Day,ThanksgivingDay,GD,Grenada,True,True,Public,Tuesday,52.0
+2019-12-25,Christmas Day,ChristmasDay,GD,Grenada,True,True,Public,Tuesday,82.0
+2019-12-26,Boxing Day,BoxingDay,GD,Grenada,True,True,Public,Thursday,70.0
+2019-01-01,New Years Day,NewYearsDay,GL,Greenland,True,True,Public,Saturday,95.0
+2019-01-06,Epiphany,Epiphany,GL,Greenland,True,True,Public,Sunday,56.0
+2019-04-18,Maundy Thursday,MaundyThursday,GL,Greenland,False,True,Public,Monday,59.0
+2019-04-19,Vendredi saint,GoodFriday,GL,Greenland,False,True,Public,Tuesday,74.0
+2019-04-21,Easter Sunday,EasterSunday,GL,Greenland,False,True,Public,Wednesday,70.0
+2019-04-22,Lundi de Pâques,EasterMonday,GL,Greenland,False,True,Public,Saturday,71.0
+2019-05-17,Store Bededag,StoreBededag,GL,Greenland,False,True,Public,Monday,67.0
+2019-05-30,Ascension Day,AscensionDay,GL,Greenland,False,True,Public,Tuesday,57.0
+2019-06-10,Whit Monday,WhitMonday,GL,Greenland,False,True,Public,Sunday,70.0
+2019-06-21,Ullortuneq,Ullortuneq,GL,Greenland,True,True,Public,Monday,59.0
+2019-12-24,Christmas Eve,ChristmasEve,GL,Greenland,True,True,Public,Sunday,68.0
+2019-12-25,Christmas Day,ChristmasDay,GL,Greenland,True,True,Public,Monday,88.0
+2019-12-26,St. Stephens Day,St.StephensDay,GL,Greenland,True,True,Public,Tuesday,53.0
+2019-12-31,New Years Eve,NewYearsEve,GL,Greenland,True,True,Public,Thursday,52.0
+2019-01-01,New Years Day,NewYearsDay,GM,Gambia,True,True,Public,Sunday,96.0
+2019-02-18,Independence Day,IndependenceDay,GM,Gambia,True,True,Public,Friday,54.0
+2019-04-19,Good Friday,GoodFriday,GM,Gambia,False,True,Public,Monday,74.0
+2019-04-22,Easter Monday,EasterMonday,GM,Gambia,False,True,Public,Tuesday,69.0
+2019-05-01,Labour Day,LabourDay,GM,Gambia,True,True,Public,Sunday,68.0
+2019-05-25,Africa Day,AfricaDay,GM,Gambia,True,True,Public,Monday,70.0
+2019-07-22,Revolution Day,RevolutionDay,GM,Gambia,True,True,Public,Sunday,70.0
+2019-08-15,Assumption Day,AssumptionDay,GM,Gambia,True,True,Public,Monday,58.0
+2019-12-25,Christmas Day,ChristmasDay,GM,Gambia,True,True,Public,Saturday,85.0
+2019-01-01,Πρωτοχρονιά,NewYearsDay,GR,Greece,True,True,Public,Saturday,93.0
+2019-01-06,Θεοφάνεια,Epiphany,GR,Greece,True,True,Public,Wednesday,57.0
+2019-03-11,Καθαρά Δευτέρα,CleanMonday,GR,Greece,False,True,Public,Sunday,52.0
+2019-03-25,Ευαγγελισμός της Θεοτόκου,Annunciation,GR,Greece,True,True,Public,Monday,67.0
+2019-03-25,Εικοστή Πέμπτη Μαρτίου,IndependenceDay,GR,Greece,True,True,Public,Thursday,71.0
+2019-04-26,Μεγάλη Παρασκευή,GoodFriday,GR,Greece,False,True,Public,Friday,75.0
+2019-04-28,Κυριακή του Πάσχα,EasterSunday,GR,Greece,False,True,Public,Sunday,56.0
+2019-04-29,Δευτέρα του Πάσχα,EasterMonday,GR,Greece,False,True,Public,Monday,71.0
+2019-05-01,Εργατική Πρωτομαγιά,LabourDay,GR,Greece,True,True,Public,Thursday,72.0
+2019-06-16,Πεντηκοστή,Pentecost,GR,Greece,False,True,Public,Friday,62.0
+2019-06-17,Δευτέρα Πεντηκοστής,WhitMonday,GR,Greece,False,True,Public,Tuesday,70.0
+2019-08-15,Κοίμηση της Θεοτόκου,AssumptionDay,GR,Greece,True,True,Public,Sunday,61.0
+2019-10-28,Το Όχι,OchiDay,GR,Greece,True,True,Public,Monday,55.0
+2019-12-25,Χριστούγεννα,ChristmasDay,GR,Greece,True,True,Public,Saturday,89.0
+2019-12-26,Σύναξις Υπεραγίας Θεοτόκου Μαρίας,St.StephensDay,GR,Greece,True,True,Public,Friday,52.0
+2019-01-01,New Years Day,NewYearsDay,GT,Guatemala,True,True,Public,Tuesday,86.0
+2019-04-18,Maundy Thursday,MaundyThursday,GT,Guatemala,False,True,Public,Thursday,68.0
+2019-04-19,Good Friday,GoodFriday,GT,Guatemala,False,True,Public,Friday,75.0
+2019-04-20,Holy Saturday,HolySaturday,GT,Guatemala,False,True,Public,Saturday,58.0
+2019-04-21,Easter Sunday,EasterSunday,GT,Guatemala,False,True,Public,Sunday,61.0
+2019-05-01,International Workers Day,InternationalWorkersDay,GT,Guatemala,True,True,Public,Saturday,62.0
+2019-06-30,Army Day,ArmyDay,GT,Guatemala,True,True,Public,Sunday,56.0
+2019-09-15,Independence Day,IndependenceDay,GT,Guatemala,True,True,Public,Thursday,66.0
+2019-10-20,Revolution Day,RevolutionDay,GT,Guatemala,True,True,Public,Saturday,55.0
+2019-11-01,All Saints Day,AllSaintsDay,GT,Guatemala,True,True,Public,Saturday,53.0
+2019-12-24,Christmas Eve,ChristmasEve,GT,Guatemala,True,True,Public,Saturday,66.0
+2019-12-25,Christmas Day,ChristmasDay,GT,Guatemala,True,True,Public,Sunday,85.0
+2019-12-31,New Years Eve,NewYearsEve,GT,Guatemala,True,True,Public,Monday,69.0
+2019-01-01,New Years Day,NewYearsDay,GY,Guyana,True,True,Public,Saturday,95.0
+2019-02-23,Republic Day,RepublicDay,GY,Guyana,True,True,Public,Saturday,71.0
+2019-04-19,Good Friday,GoodFriday,GY,Guyana,False,True,Public,Monday,73.0
+2019-04-22,Easter Monday,EasterMonday,GY,Guyana,False,True,Public,Tuesday,71.0
+2019-05-01,Labour Day,LabourDay,GY,Guyana,True,True,Public,Wednesday,72.0
+2019-05-05,Arrival Day,ArrivalDay,GY,Guyana,True,True,Public,Wednesday,62.0
+2019-05-26,Independence Day,IndependenceDay,GY,Guyana,True,True,Public,Saturday,54.0
+2019-07-01,Caricom Day,CaricomDay,GY,Guyana,False,True,Public,Friday,65.0
+2019-08-01,Emancipation Day,EmancipationDay,GY,Guyana,True,True,Public,Friday,64.0
+2019-12-25,Christmas Day,ChristmasDay,GY,Guyana,True,True,Public,Sunday,86.0
+2019-12-26,Boxing Day,BoxingDay,GY,Guyana,True,True,Public,Monday,60.0
+2019-01-01,New Years Day,NewYearsDay,HN,Honduras,True,True,Public,Friday,87.0
+2019-04-14,Americas Day,AmericasDay,HN,Honduras,True,True,Public,Thursday,67.0
+2019-04-18,Holy Thursday,HolyThursday,HN,Honduras,False,True,Public,Sunday,67.0
+2019-04-19,Good Friday,GoodFriday,HN,Honduras,False,True,Public,Monday,76.0
+2019-04-20,Holy Saturday,HolySaturday,HN,Honduras,False,True,Public,Sunday,53.0
+2019-05-01,Labour Day,LabourDay,HN,Honduras,True,True,Public,Sunday,67.0
+2019-09-15,Independence Day,IndependenceDay,HN,Honduras,True,True,Public,Monday,66.0
+2019-10-03,Francisco Morazáns Day/Soldiers Day,FranciscoMorazánsDay/SoldiersDay,HN,Honduras,True,True,Public,Saturday,56.0
+2019-10-12,Columbus Day,ColumbusDay,HN,Honduras,True,True,Public,Monday,54.0
+2019-10-21,Army Day,ArmyDay,HN,Honduras,True,True,Public,Monday,56.0
+2019-12-25,Navidad,ChristmasDay,HN,Honduras,True,True,Public,Monday,84.0
+2019-01-01,Nova Godina,NewYearsDay,HR,Croatia,True,True,Public,Monday,94.0
+2019-01-06,"Bogojavljenje, Sveta tri kralja",Epiphany,HR,Croatia,True,True,Public,Monday,70.0
+2019-04-21,Uskrs i uskrsni ponedjeljak,EasterSunday,HR,Croatia,False,True,Public,Monday,64.0
+2019-04-22,Uskrs i uskrsni ponedjeljak,EasterMonday,HR,Croatia,False,True,Public,Friday,69.0
+2019-05-01,Međunarodni praznik rada,InternationalWorkersDay,HR,Croatia,True,True,Public,Monday,60.0
+2019-06-20,Tijelovo,CorpusChristi,HR,Croatia,False,True,Public,Monday,62.0
+2019-06-22,Dan antifašističke borbe,Anti-FascistStruggleDay,HR,Croatia,True,True,Public,Sunday,66.0
+2019-06-25,Dan državnosti,StatehoodDay,HR,Croatia,True,True,Public,Monday,65.0
+2019-08-05,Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja,VictoryandHomelandThanksgivingDayandtheDayofCroatiandefenders,HR,Croatia,True,True,Public,Monday,68.0
+2019-08-15,Velika Gospa,AssumptionDay,HR,Croatia,True,True,Public,Sunday,55.0
+2019-10-08,Dan neovisnosti,IndependenceDay,HR,Croatia,True,True,Public,Tuesday,64.0
+2019-11-01,Dan svih svetih,AllSaintsDay,HR,Croatia,True,True,Public,Friday,67.0
+2019-12-25,Božić,ChristmasDay,HR,Croatia,True,True,Public,Monday,86.0
+2019-12-26,"Prvi dan po Božiću, Sveti Stjepan, Štefanje, Stipanje",St.StephensDay,HR,Croatia,True,True,Public,Friday,61.0
+2019-01-01,Jour de lan,NewYearsDay,HT,Haiti,True,True,Public,Saturday,89.0
+2019-01-02,Jour des Aieux,AncestryDay,HT,Haiti,True,True,Public,Monday,68.0
+2019-01-06,Le Jour des Rois,Epiphany,HT,Haiti,True,True,Public,Monday,53.0
+2019-03-04,Carnaval,Carnival,HT,Haiti,False,True,Public,Monday,58.0
+2019-03-05,Carnaval,Carnival,HT,Haiti,False,True,Public,Monday,59.0
+2019-03-06,Mercredi Des Cendres,AshWednesday,HT,Haiti,False,True,Public,Monday,66.0
+2019-04-18,Jeudi saint,MaundyThursday,HT,Haiti,False,True,Public,Monday,60.0
+2019-04-19,Vendredi saint,GoodFriday,HT,Haiti,False,True,Public,Friday,73.0
+2019-04-21,Pâques,EasterSunday,HT,Haiti,False,True,Public,Friday,53.0
+2019-05-01,Fête du Travail / Fête des Travailleurs,LabourandAgricultureDay,HT,Haiti,True,True,Public,Monday,62.0
+2019-05-18,Jour du Drapeau et de lUniversité,FlagandUniversitiesDay,HT,Haiti,True,True,Public,Monday,55.0
+2019-05-30,Ascension,AscensionDay,HT,Haiti,False,True,Public,Friday,61.0
+2019-06-20,Fête-Dieu,CorpusChristi,HT,Haiti,False,True,Public,Sunday,53.0
+2019-08-15,LAssomption de Marie,AssumptionofMary,HT,Haiti,True,True,Public,Monday,59.0
+2019-10-17,Anniversaire de la mort de Dessalines,DessalinesDay,HT,Haiti,True,True,Public,Monday,70.0
+2019-11-01,La Toussaint,AllSaintsDay,HT,Haiti,True,True,Public,Monday,65.0
+2019-11-02,Jour des Morts,AllSoulsDay,HT,Haiti,True,True,Public,Tuesday,61.0
+2019-11-18,Vertières,BattleofVertièresDay,HT,Haiti,True,True,Public,Saturday,60.0
+2019-12-05,Découverte dHaïti,DiscoveryDay,HT,Haiti,True,True,Public,Thursday,62.0
+2019-12-25,Noël,ChristmasDay,HT,Haiti,True,True,Public,Thursday,88.0
+2019-01-01,Újév,NewYearsDay,HU,Hungary,True,True,Public,Sunday,92.0
+2019-03-15,Nemzeti ünnep,1848RevolutionMemorialDay,HU,Hungary,True,True,Public,Wednesday,64.0
+2019-04-19,Nagypéntek,GoodFriday,HU,Hungary,False,True,Public,Tuesday,74.0
+2019-04-21,Húsvétvasárnap,EasterSunday,HU,Hungary,False,True,Public,Monday,66.0
+2019-04-22,Húsvéthétfő,EasterMonday,HU,Hungary,False,True,Public,Tuesday,73.0
+2019-05-01,A munka ünnepe,Labourday,HU,Hungary,True,True,Public,Sunday,68.0
+2019-06-09,Pünkösdvasárnap,Pentecost,HU,Hungary,False,True,Public,Saturday,54.0
+2019-06-10,Pünkösdhétfő,WhitMonday,HU,Hungary,False,True,Public,Monday,66.0
+2019-08-20,Az államalapítás ünnepe,StateFoundationDay,HU,Hungary,True,True,Public,Monday,56.0
+2019-10-23,Nemzeti ünnep,1956RevolutionMemorialDay,HU,Hungary,True,True,Public,Wednesday,66.0
+2019-11-01,Mindenszentek,AllSaintsDay,HU,Hungary,True,True,Public,Friday,53.0
+2019-12-25,Karácsony,ChristmasDay,HU,Hungary,True,True,Public,Monday,85.0
+2019-12-26,Karácsony másnapja,St.StephensDay,HU,Hungary,True,True,Public,Monday,63.0
+2019-01-01,Tahun Baru Masehi,NewYearsDay,ID,Indonesia,True,True,Public,Friday,88.0
+2019-04-19,Wafat Isa Almasih,GoodFriday,ID,Indonesia,False,True,Public,Monday,73.0
+2019-04-21,Paskah,EasterSunday,ID,Indonesia,False,True,Public,Monday,56.0
+2019-05-01,Hari Buruh Internasional,LabourDay,ID,Indonesia,True,True,Public,Monday,71.0
+2019-05-31,Kenaikan Isa Almasih,AscensionDay,ID,Indonesia,False,True,Public,Sunday,68.0
+2019-06-01,Hari Lahir Pancasila,PancasilaDay,ID,Indonesia,True,True,Public,Monday,58.0
+2019-08-17,Hari Ulang Tahun Kemerdekaan Republik Indonesia,IndependenceDay,ID,Indonesia,True,True,Public,Tuesday,57.0
+2019-12-25,Hari Raya Natal,ChristmasDay,ID,Indonesia,True,True,Public,Saturday,88.0
+2019-01-01,Lá Caille,NewYearsDay,IE,Ireland,True,True,Public,Tuesday,86.0
+2019-03-17,Lá Fhéile Pádraig,SaintPatricksDay,IE,Ireland,True,True,Public,Monday,59.0
+2019-04-19,Aoine an Chéasta,GoodFriday,IE,Ireland,False,True,"Bank, School",Sunday,74.0
+2019-04-22,Luan Cásca,EasterMonday,IE,Ireland,False,True,Public,Tuesday,71.0
+2019-05-06,Lá Bealtaine,MayDay,IE,Ireland,False,True,Public,Thursday,68.0
+2019-06-03,Lá Saoire i mí an Mheithimh,JuneHoliday,IE,Ireland,False,True,Public,Monday,63.0
+2019-08-05,Lá Saoire i mí Lúnasa,AugustHoliday,IE,Ireland,False,True,Public,Thursday,58.0
+2019-10-28,Lá Saoire i mí Dheireadh Fómhair,OctoberHoliday,IE,Ireland,False,True,Public,Sunday,71.0
+2019-12-25,Lá Nollag,ChristmasDay,IE,Ireland,True,True,Public,Saturday,89.0
+2019-12-26,Lá Fhéile Stiofáin,St.StephensDay,IE,Ireland,True,True,Public,Monday,69.0
+2019-01-01,New Years Day,NewYearsDay,IM,Isle of Man,True,True,Public,Tuesday,88.0
+2019-04-19,Good Friday,GoodFriday,IM,Isle of Man,False,True,Public,Thursday,76.0
+2019-04-22,Easter Monday,EasterMonday,IM,Isle of Man,False,True,Public,Sunday,70.0
+2019-05-06,Labour Day,LabourDay,IM,Isle of Man,False,True,Public,Saturday,71.0
+2019-05-27,Spring Bank Holiday,SpringBankHoliday,IM,Isle of Man,False,True,Public,Tuesday,57.0
+2019-06-14,Senior Race Day,SeniorRaceDay,IM,Isle of Man,False,True,Public,Monday,62.0
+2019-07-05,Tynwald Day,TynwaldDay,IM,Isle of Man,True,True,Public,Monday,68.0
+2019-08-26,Late Summer Bank Holiday,LateSummerBankHoliday,IM,Isle of Man,False,True,Public,Tuesday,56.0
+2019-12-25,Christmas Day,ChristmasDay,IM,Isle of Man,True,True,Public,Wednesday,83.0
+2019-12-26,Boxing Day,St.StephensDay,IM,Isle of Man,True,True,Public,Sunday,56.0
+2019-01-01,Nýársdagur,NewYearsDay,IS,Iceland,True,True,Public,Thursday,90.0
+2019-04-18,Skírdagur,MaundyThursday,IS,Iceland,False,True,Public,Sunday,59.0
+2019-04-19,Föstudagurinn langi,GoodFriday,IS,Iceland,False,True,Public,Tuesday,75.0
+2019-04-21,Páskadagur,EasterDay,IS,Iceland,False,True,Public,Monday,67.0
+2019-04-22,Annar í páskum,EasterMonday,IS,Iceland,False,True,Public,Thursday,69.0
+2019-04-25,Sumardagurinn fyrsti,FirstDayofSummer,IS,Iceland,False,True,Public,Sunday,55.0
+2019-05-01,Verkalýðsdagurinn,MayDay,IS,Iceland,True,True,Public,Saturday,65.0
+2019-05-30,Uppstigningardagur,AscensionDay,IS,Iceland,False,True,Public,Friday,55.0
+2019-06-09,Hvítasunnudagur,WhitSunday,IS,Iceland,False,True,Public,Saturday,61.0
+2019-06-10,Annar í hvítasunnu,WhitMonday,IS,Iceland,False,True,Public,Sunday,56.0
+2019-06-17,Þjóðhátíðardagurinn,IcelandicNationalDay,IS,Iceland,True,True,Public,Sunday,66.0
+2019-08-05,Frídagur verslunarmanna,CommerceDay,IS,Iceland,False,True,Public,Saturday,67.0
+2019-12-24,Aðfangadagur,ChristmasEve,IS,Iceland,True,True,Public,Sunday,71.0
+2019-12-25,Jóladagur,ChristmasDay,IS,Iceland,True,True,Public,Monday,87.0
+2019-12-26,Annar í jólum,St.StephensDay,IS,Iceland,True,True,Public,Saturday,70.0
+2019-12-31,Gamlársdagur,NewYearsEve,IS,Iceland,True,True,Public,Monday,53.0
+2019-01-01,Capodanno,NewYearsDay,IT,Italy,True,True,Public,Sunday,94.0
+2019-01-06,Epifania,Epiphany,IT,Italy,True,True,Public,Monday,62.0
+2019-04-21,Pasqua,EasterSunday,IT,Italy,False,True,Public,Wednesday,59.0
+2019-04-22,Lunedì dellAngelo,EasterMonday,IT,Italy,False,True,Public,Monday,69.0
+2019-04-25,Festa della Liberazione,LiberationDay,IT,Italy,True,True,Public,Tuesday,70.0
+2019-05-01,Festa del Lavoro,InternationalWorkersDay,IT,Italy,True,True,Public,Thursday,64.0
+2019-06-02,Festa della Repubblica,RepublicDay,IT,Italy,True,True,Public,Sunday,64.0
+2019-08-15,Ferragosto o Assunzione,AssumptionDay,IT,Italy,True,True,Public,Saturday,56.0
+2019-11-01,Tutti i santi,AllSaintsDay,IT,Italy,True,True,Public,Sunday,63.0
+2019-12-08,Immacolata Concezione,ImmaculateConception,IT,Italy,True,True,Public,Monday,62.0
+2019-12-25,Natale,ChristmasDay,IT,Italy,True,True,Public,Monday,82.0
+2019-12-26,Santo Stefano,St.StephensDay,IT,Italy,True,True,Public,Tuesday,56.0
+2019-01-01,New Years Day,NewYearsDay,JE,Jersey,True,True,Public,Wednesday,95.0
+2019-04-19,Good Friday,GoodFriday,JE,Jersey,False,True,Public,Thursday,73.0
+2019-04-22,Easter Monday,EasterMonday,JE,Jersey,False,True,Public,Friday,70.0
+2019-05-06,Early May Bank Holiday,EarlyMayBankHoliday,JE,Jersey,False,True,Public,Tuesday,66.0
+2019-05-09,Liberation Day,LiberationDay,JE,Jersey,True,True,Public,Sunday,68.0
+2019-05-27,Spring Bank Holiday,SpringBankHoliday,JE,Jersey,False,True,Public,Monday,59.0
+2019-08-26,Summer Bank Holiday,SummerBankHoliday,JE,Jersey,False,True,Public,Tuesday,53.0
+2019-12-25,Christmas Day,ChristmasDay,JE,Jersey,True,True,Public,Sunday,86.0
+2019-12-26,Boxing Day,St.StephensDay,JE,Jersey,True,True,Public,Monday,65.0
+2019-01-01,New Years Day,NewYearsDay,JM,Jamaica,True,True,Public,Tuesday,87.0
+2019-03-06,Ash Wednesday,AshWednesday,JM,Jamaica,False,True,Public,Wednesday,67.0
+2019-04-19,Good Friday,GoodFriday,JM,Jamaica,False,True,Public,Friday,75.0
+2019-04-22,Easter Monday,EasterMonday,JM,Jamaica,False,True,Public,Saturday,70.0
+2019-05-23,Labour Day,LabourDay,JM,Jamaica,True,True,Public,Monday,69.0
+2019-08-01,Emancipation Day,EmancipationDay,JM,Jamaica,True,True,Public,Saturday,55.0
+2019-08-06,Independence Day,IndependenceDay,JM,Jamaica,False,True,Public,Sunday,65.0
+2019-10-16,National Heroes Day,NationalHeroesDay,JM,Jamaica,True,True,Public,Monday,67.0
+2019-12-25,Christmas Day,ChristmasDay,JM,Jamaica,True,True,Public,Tuesday,82.0
+2019-12-26,Boxing Day,St.StephensDay,JM,Jamaica,True,True,Public,Tuesday,64.0
+2019-01-01,元日,NewYearsDay,JP,Japan,False,True,Public,Wednesday,95.0
+2019-01-14,成人の日,ComingofAgeDay,JP,Japan,False,True,Public,Thursday,62.0
+2019-02-11,建国記念の日,FoundationDay,JP,Japan,False,True,Public,Friday,69.0
+2019-04-29,昭和の日,ShōwaDay,JP,Japan,False,True,Public,Saturday,64.0
+2019-05-03,憲法記念日,ConstitutionMemorialDay,JP,Japan,False,True,Public,Monday,71.0
+2019-05-04,みどりの日,GreeneryDay,JP,Japan,False,True,Public,Monday,53.0
+2019-05-06,こどもの日,ChildrensDay,JP,Japan,False,True,Public,Thursday,58.0
+2019-07-15,海の日,MarineDay,JP,Japan,False,True,Public,Friday,71.0
+2019-08-12,山の日,MountainDay,JP,Japan,False,True,Public,Sunday,59.0
+2019-09-16,(敬老の日,RespectfortheAgedDay,JP,Japan,False,True,Public,Sunday,64.0
+2019-10-14,体育の日,HealthandSportsDay,JP,Japan,False,True,Public,Monday,67.0
+2019-11-04,文化の日,CultureDay,JP,Japan,False,True,Public,Sunday,56.0
+2019-11-23,勤労感謝の日,LabourThanksgivingDay,JP,Japan,False,True,Public,Monday,69.0
+2019-12-23,天皇誕生日,TheEmperorsBirthday,JP,Japan,False,True,Public,Monday,52.0
+2019-01-01,Neujahr,NewYearsDay,LI,Liechtenstein,True,True,Public,Monday,86.0
+2019-01-02,Berchtoldstag,St.BerchtoldsDay,LI,Liechtenstein,True,True,Public,Wednesday,56.0
+2019-01-06,Heilige Drei Könige,Epiphany,LI,Liechtenstein,True,True,Public,Sunday,56.0
+2019-02-02,Mariä Lichtmess,Candlemas,LI,Liechtenstein,True,True,Public,Monday,68.0
+2019-03-19,Josefstag,SaintJosephsDay,LI,Liechtenstein,True,True,Public,Monday,55.0
+2019-04-19,Karfreitag,GoodFriday,LI,Liechtenstein,False,True,Public,Monday,74.0
+2019-04-22,Ostermontag,EasterMonday,LI,Liechtenstein,False,True,Public,Monday,71.0
+2019-05-01,Tag der Arbeit,LabourDay,LI,Liechtenstein,True,True,Public,Thursday,70.0
+2019-05-29,Auffahrt,Ascension,LI,Liechtenstein,True,True,Public,Sunday,61.0
+2019-06-10,Pfingstmontag,WhitMonday,LI,Liechtenstein,False,True,Public,Saturday,60.0
+2019-06-20,Fronleichnam,CorpusChristi,LI,Liechtenstein,False,True,Public,Tuesday,58.0
+2019-08-15,Staatsfeiertag,NationalHoliday,LI,Liechtenstein,True,True,Public,Friday,57.0
+2019-09-08,Maria Geburt,NativityofOurLady,LI,Liechtenstein,True,True,Public,Sunday,58.0
+2019-11-01,Allerheiligen,AllSaintsDay,LI,Liechtenstein,True,True,Public,Tuesday,69.0
+2019-12-08,Mariä Empfängnis,ImmaculateConception,LI,Liechtenstein,True,True,Public,Wednesday,56.0
+2019-12-24,Heiliger Abend,ChristmasEve,LI,Liechtenstein,True,True,Public,Thursday,59.0
+2019-12-25,Weihnachten,ChristmasDay,LI,Liechtenstein,True,True,Public,Wednesday,86.0
+2019-12-26,Stephanstag,St.StephensDay,LI,Liechtenstein,True,True,Public,Sunday,52.0
+2019-12-31,Silvester,NewYearsEve,LI,Liechtenstein,True,True,Public,Monday,61.0
+2019-01-01,New Years Day,NewYearsDay,LS,Lesotho,True,True,Public,Sunday,85.0
+2019-03-11,Moshoeshoe Day,MoshoeshoeDay,LS,Lesotho,True,True,Public,Sunday,63.0
+2019-04-19,Good Friday,GoodFriday,LS,Lesotho,False,True,Public,Saturday,73.0
+2019-04-22,Easter Monday,EasterMonday,LS,Lesotho,False,True,Public,Sunday,71.0
+2019-05-01,Workers Day,WorkersDay,LS,Lesotho,True,True,Public,Monday,61.0
+2019-05-09,Ascension Day,AscensionDay,LS,Lesotho,True,True,Public,Sunday,58.0
+2019-05-25,Africa Day/ Heroes Day,AfricaDay/HeroesDay,LS,Lesotho,True,True,Public,Thursday,70.0
+2019-07-17,King Letsie IIIs Birthday,KingLetsieIIIsBirthday,LS,Lesotho,True,True,Public,Monday,60.0
+2019-10-04,Independence Day,IndependenceDay,LS,Lesotho,True,True,Public,Friday,65.0
+2019-12-25,Christmas Day,ChristmasDay,LS,Lesotho,True,True,Public,Monday,82.0
+2019-12-26,Boxing Day,St.StephensDay,LS,Lesotho,True,True,Public,Tuesday,54.0
+2019-01-01,Naujieji metai,NewYearsDay,LT,Lithuania,True,True,Public,Monday,95.0
+2019-02-16,Lietuvos valstybės atkūrimo diena,TheDayofRestorationoftheStateofLithuania,LT,Lithuania,True,True,Public,Sunday,61.0
+2019-03-11,Lietuvos nepriklausomybės atkūrimo diena,DayofRestorationofIndependenceofLithuania,LT,Lithuania,True,True,Public,Monday,59.0
+2019-04-21,Velykos,EasterSunday,LT,Lithuania,False,True,Public,Monday,57.0
+2019-04-22,Antroji Velykų diena,EasterMonday,LT,Lithuania,False,True,Public,Monday,71.0
+2019-05-01,Tarptautinė darbo diena,InternationalWorkingDay,LT,Lithuania,True,True,Public,Tuesday,62.0
+2019-06-24,"Joninės, Rasos",St.JohnsDay,LT,Lithuania,True,True,Public,Wednesday,71.0
+2019-07-06,Valstybės diena,StatehoodDay,LT,Lithuania,True,True,Public,Thursday,71.0
+2019-08-15,Žolinė,AssumptionDay,LT,Lithuania,True,True,Public,Friday,69.0
+2019-11-01,Visų šventųjų diena,AllSaintsDay,LT,Lithuania,True,True,Public,Sunday,58.0
+2019-11-02,Vėlinės,AllSoulsDay,LT,Lithuania,True,True,Public,Monday,57.0
+2019-12-24,Šv. Kūčios,ChristmasEve,LT,Lithuania,True,True,Public,Tuesday,52.0
+2019-12-25,Šv. Kalėdos,ChristmasDay,LT,Lithuania,True,True,Public,Monday,84.0
+2019-12-26,Šv. Kalėdos,St.StephensDay,LT,Lithuania,True,True,Public,Wednesday,61.0
+2019-01-01,Neijoerschdag,NewYearsDay,LU,Luxembourg,True,True,Public,Monday,96.0
+2019-04-19,Karfreideg,GoodFriday,LU,Luxembourg,False,True,Bank,Monday,73.0
+2019-04-22,Ouschterméindeg,EasterMonday,LU,Luxembourg,False,True,Public,Sunday,73.0
+2019-05-01,Dag vun der Aarbecht,LabourDay,LU,Luxembourg,True,True,Public,Saturday,67.0
+2019-05-09,Europadag,EuropeDay,LU,Luxembourg,True,True,Public,Thursday,56.0
+2019-05-30,Christi Himmelfaart,AscensionDay,LU,Luxembourg,False,True,Public,Sunday,67.0
+2019-06-10,Péngschtméindeg,WhitMonday,LU,Luxembourg,False,True,Public,Monday,68.0
+2019-06-23,Groussherzogsgebuertsdag,Sovereignsbirthday,LU,Luxembourg,True,True,Public,Sunday,57.0
+2019-08-15,Léiffrawëschdag,AssumptionDay,LU,Luxembourg,True,True,Public,Monday,57.0
+2019-11-01,Allerhellgen,AllSaintsDay,LU,Luxembourg,True,True,Public,Thursday,71.0
+2019-12-25,Chrëschtdag,ChristmasDay,LU,Luxembourg,True,True,Public,Wednesday,85.0
+2019-12-26,Stiefesdag,St.StephensDay,LU,Luxembourg,True,True,Public,Friday,67.0
+2019-01-01,Jaunais Gads,NewYearsDay,LV,Latvia,True,True,Public,Monday,87.0
+2019-04-19,Lielā Piektdiena,GoodFriday,LV,Latvia,False,True,Public,Tuesday,74.0
+2019-04-21,Lieldienas,EasterSunday,LV,Latvia,False,True,Public,Friday,55.0
+2019-04-22,Otrās Lieldienas,EasterMonday,LV,Latvia,False,True,Public,Sunday,70.0
+2019-05-01,Darba svētki,LabourDay,LV,Latvia,True,True,Public,Monday,68.0
+2019-05-04,Latvijas Republikas Neatkarības atjaunošanas diena,RestorationofIndependenceday,LV,Latvia,True,True,Public,Saturday,69.0
+2019-05-12,Mātes diena,Mothersday,LV,Latvia,False,True,Public,Sunday,55.0
+2019-06-23,Līgo Diena,MidsummerEve,LV,Latvia,True,True,Public,Friday,60.0
+2019-06-24,Jāņi,MidsummerDay,LV,Latvia,True,True,Public,Sunday,66.0
+2019-11-18,Latvijas Republikas proklamēšanas diena,ProclamationDayoftheRepublicofLatvia,LV,Latvia,True,True,Public,Monday,63.0
+2019-12-24,Ziemassvētku vakars,ChristmasEve,LV,Latvia,True,True,Public,Tuesday,64.0
+2019-12-25,Ziemassvētki,ChristmasDay,LV,Latvia,True,True,Public,Wednesday,87.0
+2019-12-26,Otrie Ziemassvētki,St.StephensDay,LV,Latvia,True,True,Public,Monday,70.0
+2019-12-31,Vecgada vakars,NewYearsEve,LV,Latvia,True,True,Public,Sunday,61.0
+2019-01-01,Ras l âm,NewYearsDay,MA,Morocco,True,True,Public,Saturday,95.0
+2019-01-11,Takdim watikat al-istiqlal,ProclamationofIndependence,MA,Morocco,True,True,Public,Saturday,58.0
+2019-05-01,Eid Ash-Shughl,LabourDay,MA,Morocco,True,True,Public,Monday,71.0
+2019-07-30,Eid Al-Ârch,Enthronement,MA,Morocco,True,True,Public,Friday,66.0
+2019-08-14,Oued Ed-Dahab Day,ZikraOuedEd-Dahab,MA,Morocco,True,True,Public,Sunday,58.0
+2019-08-20,Thawrat al malik wa shâab,RevolutionoftheKingandthePeople,MA,Morocco,True,True,Public,Monday,68.0
+2019-08-21,Eid Al Chabab,YouthDay,MA,Morocco,True,True,Public,Wednesday,69.0
+2019-11-06,Eid Al Massira Al Khadra,GreenMarch,MA,Morocco,True,True,Public,Sunday,53.0
+2019-11-18,Eid Al Istiqulal,IndependenceDay,MA,Morocco,True,True,Public,Thursday,63.0
+2019-01-01,Le jour de l’An,NewYearsDay,MC,Monaco,False,True,Public,Saturday,96.0
+2019-01-27,La Sainte Dévote,SaintDevotasDay,MC,Monaco,True,True,Public,Monday,53.0
+2019-04-22,Easter Monday,EasterMonday,MC,Monaco,False,True,Public,Sunday,70.0
+2019-05-01,Le 1er mai,MayDay,MC,Monaco,True,True,Public,Monday,58.0
+2019-05-31,L’Ascension,AscensionDay,MC,Monaco,False,True,Public,Saturday,65.0
+2019-06-10,Le lundi de Pentecôte,WhitMonday,MC,Monaco,False,True,Public,Saturday,56.0
+2019-06-20,La Fête Dieu,CorpusChristi,MC,Monaco,False,True,Public,Thursday,66.0
+2019-08-15,LAssomption de Marie,AssumptionDay,MC,Monaco,True,True,Public,Monday,61.0
+2019-11-01,La Toussaint,AllSaintsDay,MC,Monaco,False,True,Public,Friday,64.0
+2019-11-19,La Fête du Prince,NationalDay,MC,Monaco,False,True,Public,Friday,71.0
+2019-12-08,L’Immaculée Conception,TheImmaculateConception,MC,Monaco,True,True,Public,Friday,65.0
+2019-12-25,Noël​,​ChristmasDay,MC,Monaco,False,True,Public,Monday,54.0
+2019-01-01,New Years Day,NewYearsDay,MD,Moldova,True,True,Public,Tuesday,96.0
+2019-01-07,Craciun pe stil Vechi (Orthodox Christmas),CraciunpestilVechi(OrthodoxChristmas),MD,Moldova,True,True,Public,Sunday,66.0
+2019-01-08,Craciun pe stil Vechi (Orthodox Christmas),CraciunpestilVechi(OrthodoxChristmas),MD,Moldova,True,True,Public,Monday,65.0
+2019-02-23,Day of Veterans of the Armed Forces and Law Enforcement Agencies,DayofVeteransoftheArmedForcesandLawEnforcementAgencies,MD,Moldova,True,True,Public,Monday,67.0
+2019-03-08,International Womens Day,InternationalWomensDay,MD,Moldova,True,True,Public,Saturday,56.0
+2019-04-28,Orthodox Easter,OrthodoxEaster,MD,Moldova,False,True,Public,Friday,56.0
+2019-05-01,Labour Day (Moldova),LabourDay(Moldova),MD,Moldova,True,True,Public,Sunday,62.0
+2019-05-09,Victory and Commemoration Day,VictoryandCommemorationDay,MD,Moldova,True,True,Public,Monday,61.0
+2019-05-22,Bălţi Day,BălţiDay,MD,Moldova,True,True,Public,Saturday,55.0
+2019-08-26,Memorial Day,MemorialDay,MD,Moldova,False,True,Public,Friday,69.0
+2019-08-27,Independence Day (Moldova),IndependenceDay(Moldova),MD,Moldova,True,True,Public,Monday,57.0
+2019-08-31,Limba Noastra (National Language Day (Moldova)),LimbaNoastra(NationalLanguageDay(Moldova)),MD,Moldova,True,True,Public,Sunday,70.0
+2019-09-03,Day of the Moldovan National Army,DayoftheMoldovanNationalArmy,MD,Moldova,True,True,Public,Sunday,68.0
+2019-10-14,Capitals Day,CapitalsDay,MD,Moldova,True,True,Public,Sunday,70.0
+2019-11-21,South Capitals Day Cahul,SouthCapitalsDayCahul,MD,Moldova,True,True,Public,Tuesday,68.0
+2019-12-25,Craciun pe stil Nou (Western Christmas),CraciunpestilNou(WesternChristmas),MD,Moldova,True,True,Public,Wednesday,60.0
+2019-01-01,New Years Day,NewYearsDay,MG,Madagascar,True,True,Public,Sunday,92.0
+2019-03-29,Martyrs Day,MartyrsDay,MG,Madagascar,True,True,Public,Wednesday,56.0
+2019-04-22,Easter Monday,EasterMonday,MG,Madagascar,False,True,Public,Friday,69.0
+2019-05-01,Labour Day,LabourDay,MG,Madagascar,True,True,Public,Thursday,70.0
+2019-05-30,Ascension Day,AscensionDay,MG,Madagascar,False,True,Public,Saturday,67.0
+2019-06-10,Whit Monday,WhitMonday,MG,Madagascar,False,True,Public,Sunday,68.0
+2019-06-26,Independence Day,IndependenceDay,MG,Madagascar,True,True,Public,Monday,69.0
+2019-08-15,Assumption Day,AssumptionDay,MG,Madagascar,True,True,Public,Saturday,64.0
+2019-11-01,All Saints Day,AllSaintsDay,MG,Madagascar,True,True,Public,Thursday,58.0
+2019-12-25,Christmas Day,ChristmasDay,MG,Madagascar,True,True,Public,Friday,84.0
+2019-01-01,"Нова Година, Nova Godina",NewYearsDay,MK,North Macedonia,True,True,Public,Monday,95.0
+2019-01-07,"Прв ден Божик, Prv den Božik",ChristmasDay,MK,North Macedonia,True,True,Public,Sunday,82.0
+2019-04-26,"Велики Петок, Veliki Petok",GoodFriday,MK,North Macedonia,False,True,Public,Sunday,73.0
+2019-04-28,"Прв ден Велигден, Prv den Veligden",EasterSunday,MK,North Macedonia,False,True,Public,Friday,68.0
+2019-04-29,"Втор ден Велигден, Vtor den Veligden",EasterMonday,MK,North Macedonia,False,True,Public,Thursday,74.0
+2019-05-01,"Ден на трудот, Den na trudot",LabourDay,MK,North Macedonia,True,True,Public,Friday,70.0
+2019-05-24,"Св. Кирил и Методиј, Ден на сèсловенските просветители",SaintsCyrilandMethodiusDay,MK,North Macedonia,True,True,Public,Sunday,57.0
+2019-08-02,"Ден на Републиката, Den na Republikata",DayoftheRepublic,MK,North Macedonia,True,True,Public,Sunday,66.0
+2019-09-08,"Ден на независноста, Den na nezavisnosta",IndependenceDay,MK,North Macedonia,True,True,Public,Sunday,70.0
+2019-10-11,"Ден на востанието, Den na vostanieto",RevolutionDay,MK,North Macedonia,True,True,Public,Monday,64.0
+2019-10-23,"Ден на македонската револуционерна борба,Den na makedonskata revolucionarna borba",DayoftheMacedonianRevolutionaryStruggle,MK,North Macedonia,True,True,Public,Saturday,53.0
+2019-12-08,"Св. Климент Охридски, Sv. Kliment Ohridski",SaintClementofOhridDay,MK,North Macedonia,True,True,Public,Sunday,58.0
+2019-01-01,Шинэ жил (Shine jil),NewYearsDay,MN,Mongolia,True,True,Public,Monday,91.0
+2019-03-08,Олон Улсын Эмэгтэйчүүдийн Баяр,InternationalWomensDay,MN,Mongolia,True,True,Public,Saturday,60.0
+2019-06-01,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Saturday,66.0
+2019-07-11,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Tuesday,62.0
+2019-07-12,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Sunday,58.0
+2019-07-13,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Tuesday,71.0
+2019-07-14,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Wednesday,59.0
+2019-07-15,Наадам,NaadamHoliday,MN,Mongolia,True,True,Public,Monday,57.0
+2019-11-26,Улс тунхагласны өдөр,RepublicDay,MN,Mongolia,True,True,Public,Sunday,71.0
+2019-12-29,Тусгаар Тогтнолын Өдөр,IndependenceDay,MN,Mongolia,True,True,Public,Monday,61.0
+2019-01-01,L-Ewwel tas-Sena,NewYearsDay,MT,Malta,True,True,Public,Sunday,86.0
+2019-02-10,In-Nawfraġju ta’ San Pawl,FeastofSt.PaulsShipwreck,MT,Malta,True,True,Public,Sunday,57.0
+2019-03-19,San Ġużepp,FeastofSt.Joseph,MT,Malta,True,True,Public,Sunday,59.0
+2019-03-31,Jum il-Ħelsien,FreedomDay,MT,Malta,True,True,Public,Saturday,60.0
+2019-04-19,Il-Ġimgħa l-Kbira,GoodFriday,MT,Malta,False,True,Public,Monday,75.0
+2019-05-01,Jum il-Ħaddiem,WorkersDay,MT,Malta,True,True,Public,Tuesday,63.0
+2019-06-07,Sette Giugno,​SetteGiugno,MT,Malta,True,True,Public,Friday,64.0
+2019-06-29,L-Imnarja,​​FeastofSt.PeterandSt.Paul,MT,Malta,True,True,Public,Monday,68.0
+2019-08-15,Santa Marija,AssumptionDay,MT,Malta,True,True,Public,Monday,67.0
+2019-09-08,Il-Vittorja,FeastofOurLadyofVictories,MT,Malta,True,True,Public,Monday,59.0
+2019-09-21,L-Indipendenza,IndependenceDay,MT,Malta,True,True,Public,Monday,59.0
+2019-12-08,L-Immakulata Kunċizzjoni,​FeastoftheImmaculateConception,MT,Malta,True,True,Public,Thursday,67.0
+2019-12-13,Jum ir-Repubblika,RepublicDay,MT,Malta,True,True,Public,Friday,68.0
+2019-12-25,Il-Milied​,​ChristmasDay,MT,Malta,True,True,Public,Sunday,69.0
+2019-01-01,Año Nuevo,NewYearsDay,MX,Mexico,False,True,Public,Monday,90.0
+2019-02-04,Día de la Constitución,ConstitutionDay,MX,Mexico,False,True,Public,Tuesday,59.0
+2019-03-18,Natalicio de Benito Juárez,BenitoJuárezsbirthday,MX,Mexico,False,True,Public,Saturday,60.0
+2019-05-01,Día del Trabajo,LaborDay,MX,Mexico,False,True,Public,Monday,59.0
+2019-09-16,Día de la Independencia,IndependenceDay,MX,Mexico,False,True,Public,Friday,70.0
+2019-11-18,Día de la Revolución,RevolutionDay,MX,Mexico,False,True,Public,Monday,64.0
+2019-12-25,Navidad,ChristmasDay,MX,Mexico,True,True,Public,Sunday,83.0
+2019-01-01,Dia de Ano Novo,NewYearsDay,MZ,Mozambique,True,True,Public,Friday,92.0
+2019-02-03,Dia do Heroi Nacional,HeroessDay,MZ,Mozambique,True,True,Public,Sunday,59.0
+2019-04-07,Dia da Mulher,WomensDay,MZ,Mozambique,True,True,Public,Monday,54.0
+2019-05-01,Dia do Trabalhador,workersDay,MZ,Mozambique,True,True,Public,Sunday,55.0
+2019-06-25,Dia da Independência,IndependenceDay,MZ,Mozambique,True,True,Public,Thursday,58.0
+2019-09-07,Dia da Victória,VictoryDay,MZ,Mozambique,True,True,Public,Sunday,68.0
+2019-09-25,Dia da Revolução,RevolutionDay,MZ,Mozambique,True,True,Public,Tuesday,65.0
+2019-10-04,Dia da Paz e da Reconcialição,DayofPeaceandReconciliation,MZ,Mozambique,True,True,Public,Saturday,61.0
+2019-12-25,Natal,ChristmasDay,MZ,Mozambique,True,True,Public,Monday,85.0
+2019-01-01,New Years Day,NewYearsDay,,Namibia,True,True,Public,Sunday,94.0
+2019-03-21,Independence Day,IndependenceDay,,Namibia,True,True,Public,Saturday,59.0
+2019-04-19,Good Friday,GoodFriday,,Namibia,False,True,Public,Tuesday,76.0
+2019-04-22,Easter Monday,EasterMonday,,Namibia,False,True,Public,Sunday,71.0
+2019-05-01,Workers Day,WorkersDay,,Namibia,True,True,Public,Monday,66.0
+2019-05-04,Cassinga Day,CassingaDay,,Namibia,True,True,Public,Sunday,62.0
+2019-05-25,Africa Day,AfricaDay,,Namibia,True,True,Public,Tuesday,62.0
+2019-05-30,Ascension Day,AscensionDay,,Namibia,False,True,Public,Thursday,67.0
+2019-08-26,Heroes Day,HeroesDay,,Namibia,True,True,Public,Monday,57.0
+2019-12-10,Human Rights Day,HumanRightsDay,,Namibia,True,True,Public,Sunday,61.0
+2019-12-25,Christmas Day,ChristmasDay,,Namibia,True,True,Public,Saturday,87.0
+2019-12-26,Day of Goodwill,St.StephensDay,,Namibia,True,True,Public,Monday,61.0
+2019-01-01,New Years Day,NewYearsDay,NE,Niger,True,True,Public,Tuesday,96.0
+2019-04-22,Easter Monday,EasterMonday,NE,Niger,False,True,Public,Wednesday,72.0
+2019-04-24,Concord Day,ConcordDay,NE,Niger,True,True,Public,Thursday,66.0
+2019-05-01,Labour Day,LabourDay,NE,Niger,True,True,Public,Thursday,68.0
+2019-08-03,Nigerien Independence Day,NigerienIndependenceDay,NE,Niger,True,True,Public,Friday,52.0
+2019-12-18,Nigerien Republic Day,NigerienRepublicDay,NE,Niger,True,True,Public,Sunday,66.0
+2019-12-25,Christmas Day,ChristmasDay,NE,Niger,True,True,Public,Tuesday,83.0
+2019-01-01,New Years Day,NewYearsDay,NI,Nicaragua,True,True,Public,Friday,92.0
+2019-02-01,Air Force Day,AirForceDay,NI,Nicaragua,True,True,Public,Thursday,58.0
+2019-04-04,Holy Thursday,HolyThursday,NI,Nicaragua,False,True,Public,Sunday,54.0
+2019-05-01,Labour Day,LabourDay,NI,Nicaragua,True,True,Public,Tuesday,68.0
+2019-05-27,Army Day,ArmyDay,NI,Nicaragua,True,True,Public,Tuesday,57.0
+2019-07-19,Liberation Day,LiberationDay,NI,Nicaragua,True,True,Public,Wednesday,65.0
+2019-09-14,Battle of San Jacinto,BattleofSanJacinto,NI,Nicaragua,True,True,Public,Saturday,71.0
+2019-09-15,Independence Day,IndependenceDay,NI,Nicaragua,True,True,Public,Monday,60.0
+2019-10-12,Indigenous Resistance Day,IndigenousResistanceDay,NI,Nicaragua,True,True,Public,Wednesday,68.0
+2019-12-08,Immaculate Conception,ImmaculateConception,NI,Nicaragua,True,True,Public,Thursday,56.0
+2019-12-25,Christmas Day,ChristmasDay,NI,Nicaragua,True,True,Public,Sunday,84.0
+2019-12-31,New Years Eve,NewYearsEve,NI,Nicaragua,True,True,Public,Saturday,55.0
+2019-01-01,Nieuwjaarsdag,NewYearsDay,NL,Netherlands,True,True,Public,Saturday,95.0
+2019-04-19,Goede Vrijdag,GoodFriday,NL,Netherlands,False,True,"School, Authorities",Monday,76.0
+2019-04-21,Eerste Paasdag,EasterSunday,NL,Netherlands,False,True,Public,Tuesday,58.0
+2019-04-22,Tweede Paasdag,EasterMonday,NL,Netherlands,False,True,Public,Friday,73.0
+2019-04-27,Koningsdag,KingsDay,NL,Netherlands,True,True,Public,Sunday,69.0
+2019-05-05,Bevrijdingsdag,LiberationDay,NL,Netherlands,True,True,"School, Authorities",Sunday,55.0
+2019-05-30,Hemelvaartsdag,AscensionDay,NL,Netherlands,False,True,Public,Monday,68.0
+2019-06-10,Pinksteren,WhitMonday,NL,Netherlands,False,True,Public,Friday,52.0
+2019-12-25,Eerste Kerstdag,ChristmasDay,NL,Netherlands,True,True,Public,Monday,84.0
+2019-12-26,Tweede Kerstdag,St.StephensDay,NL,Netherlands,True,True,Public,Wednesday,58.0
+2019-01-01,Første nyttårsdag,NewYearsDay,NO,Norway,True,True,Public,Sunday,94.0
+2019-04-18,Skjærtorsdag,MaundyThursday,NO,Norway,False,True,Public,Wednesday,59.0
+2019-04-19,Langfredag,GoodFriday,NO,Norway,False,True,Public,Thursday,73.0
+2019-04-21,Første påskedag,EasterSunday,NO,Norway,False,True,Public,Tuesday,57.0
+2019-04-22,Andre påskedag,EasterMonday,NO,Norway,False,True,Public,Sunday,70.0
+2019-05-01,Første mai,LabourDay,NO,Norway,True,True,Public,Monday,67.0
+2019-05-17,Syttende mai,ConstitutionDay,NO,Norway,True,True,Public,Thursday,54.0
+2019-05-30,Kristi himmelfartsdag,AscensionDay,NO,Norway,False,True,Public,Friday,60.0
+2019-06-09,Første pinsedag,Pentecost,NO,Norway,False,True,Public,Thursday,60.0
+2019-06-10,Andre pinsedag,WhitMonday,NO,Norway,False,True,Public,Sunday,58.0
+2019-12-25,Første juledag,ChristmasDay,NO,Norway,True,True,Public,Monday,86.0
+2019-12-26,Andre juledag,St.StephensDay,NO,Norway,True,True,Public,Monday,68.0
+2019-01-01,New Years Day,NewYearsDay,NZ,New Zealand,False,True,Public,Sunday,90.0
+2019-01-02,Day after New Years Day,DayafterNewYearsDay,NZ,New Zealand,False,True,Public,Monday,55.0
+2019-02-06,Waitangi Day,WaitangiDay,NZ,New Zealand,False,True,Public,Tuesday,66.0
+2019-04-19,Good Friday,GoodFriday,NZ,New Zealand,False,True,Public,Wednesday,76.0
+2019-04-22,Easter Monday,EasterMonday,NZ,New Zealand,False,True,Public,Thursday,70.0
+2019-04-25,Anzac Day,AnzacDay,NZ,New Zealand,False,True,Public,Thursday,68.0
+2019-06-03,Queens Birthday,QueensBirthday,NZ,New Zealand,False,True,Public,Saturday,70.0
+2019-10-28,Labour Day,LabourDay,NZ,New Zealand,False,True,Public,Saturday,70.0
+2019-12-25,Christmas Day,ChristmasDay,NZ,New Zealand,False,True,Public,Sunday,86.0
+2019-12-26,Boxing Day,BoxingDay,NZ,New Zealand,False,True,Public,Monday,66.0
+2019-01-01,New Years Day,NewYearsDay,PA,Panama,True,True,Public,Tuesday,95.0
+2019-01-09,Martyrs Day,MartyrsDay,PA,Panama,True,True,Public,Saturday,66.0
+2019-03-04,Carnival,Carnival,PA,Panama,False,True,Public,Saturday,70.0
+2019-03-05,Carnival,Carnival,PA,Panama,False,True,Public,Thursday,66.0
+2019-04-19,Good Friday,GoodFriday,PA,Panama,False,True,Public,Saturday,74.0
+2019-05-01,Labour Day,LabourDay,PA,Panama,True,True,Public,Saturday,69.0
+2019-11-03,Separation Day,SeparationDay,PA,Panama,True,True,Public,Thursday,62.0
+2019-11-04,Flag Day,FlagDay,PA,Panama,True,True,Public,Friday,63.0
+2019-11-05,Colón Day,ColonDay,PA,Panama,True,True,Public,Saturday,62.0
+2019-11-10,Shout in Villa de los Santos,ShoutinVilladelosSantos,PA,Panama,True,True,Public,Sunday,65.0
+2019-11-28,Independence Day,IndependenceDay,PA,Panama,True,True,Public,Sunday,55.0
+2019-12-08,Mothers Day,MothersDay,PA,Panama,True,True,Public,Tuesday,60.0
+2019-12-25,Christmas Day,ChristmasDay,PA,Panama,True,True,Public,Friday,86.0
+2019-01-01,Año Nuevo,NewYearsDay,PE,Peru,True,True,Public,Thursday,94.0
+2019-04-18,Jueves Santo,HolyThursday,PE,Peru,False,True,Public,Friday,52.0
+2019-04-19,Viernes Santo,GoodFriday,PE,Peru,False,True,Public,Saturday,73.0
+2019-04-21,Domingo Santo,EasterDay,PE,Peru,False,True,Public,Thursday,58.0
+2019-05-01,Día del Trabajo,InternationalWorkersDay,PE,Peru,True,True,Public,Wednesday,52.0
+2019-06-29,Día de San Pedro y San Pablo,St.PeterandSt.Paul,PE,Peru,True,True,Public,Saturday,58.0
+2019-07-28,Día de la Independencia,IndependenceDay,PE,Peru,True,True,Public,Sunday,53.0
+2019-07-29,Día de la Independencia,IndependenceDay,PE,Peru,True,True,Public,Saturday,53.0
+2019-08-30,Día de Santa Rosa de Lima,SantaRosadeLima,PE,Peru,True,True,Public,Saturday,54.0
+2019-10-08,Combate de Angamos,BattleofAngamos,PE,Peru,True,True,Public,Monday,66.0
+2019-11-01,Día de Todos los Santos,AllSaintsDay,PE,Peru,True,True,Public,Friday,69.0
+2019-12-08,Inmaculada Concepción,ImmaculateConception,PE,Peru,True,True,Public,Sunday,69.0
+2019-12-25,Navidad,ChristmasDay,PE,Peru,True,True,Public,Monday,84.0
+2019-01-01,Nowy Rok,NewYearsDay,PL,Poland,True,True,Public,Sunday,96.0
+2019-01-06,Święto Trzech Króli,Epiphany,PL,Poland,True,True,Public,Monday,57.0
+2019-04-21,Wielkanoc,EasterDay,PL,Poland,False,True,Public,Thursday,55.0
+2019-04-22,Drugi Dzień Wielkanocy,EasterMonday,PL,Poland,False,True,Public,Wednesday,70.0
+2019-05-01,Święto Pracy,MayDay,PL,Poland,True,True,Public,Monday,55.0
+2019-05-03,Święto Narodowe Trzeciego Maja,ConstitutionDay,PL,Poland,True,True,Public,Wednesday,59.0
+2019-06-09,Zielone Świątki,PentecostSunday,PL,Poland,False,True,Public,Thursday,55.0
+2019-06-20,Boże Ciało,CorpusChristi,PL,Poland,False,True,Public,Sunday,69.0
+2019-08-15,Wniebowzięcie Najświętszej Maryi Panny,AssumptionDay,PL,Poland,True,True,Public,Monday,70.0
+2019-11-01,Wszystkich Świętych,AllSaintsDay,PL,Poland,True,True,Public,Saturday,63.0
+2019-11-11,Narodowe Święto Niepodległości,IndependenceDay,PL,Poland,True,True,Public,Friday,70.0
+2019-12-25,Boże Narodzenie,ChristmasDay,PL,Poland,True,True,Public,Wednesday,83.0
+2019-12-26,Drugi Dzień Bożego Narodzenia,St.StephensDay,PL,Poland,True,True,Public,Tuesday,67.0
+2019-01-01,Día de Año Nuevo,NewYearsDay,PR,Puerto Rico,False,True,Public,Friday,90.0
+2019-01-06,Día de Reyes,ThreeKingsDay/Epiphany,PR,Puerto Rico,True,True,Public,Sunday,62.0
+2019-01-14,Natalicio de Eugenio María de Hostos,BirthdayofEugenioMaríadeHostos,PR,Puerto Rico,False,True,Public,Sunday,61.0
+2019-01-21,"Natalicio de Martin Luther King, Jr.","MartinLutherKing,Jr.Day",PR,Puerto Rico,False,True,Public,Tuesday,59.0
+2019-02-18,Día de los Presidentes,PresidentsDay,PR,Puerto Rico,False,True,Public,Tuesday,70.0
+2019-02-18,Natalicio de Luis Muñoz Marín,BirthdayofLuisMuñozMarín,PR,Puerto Rico,True,True,Public,Monday,52.0
+2019-03-22,Día de la Abolición de Esclavitud,EmancipationDay,PR,Puerto Rico,True,True,Public,Sunday,56.0
+2019-04-15,Natalicio de José de Diego,BirthdayofJosédeDiego,PR,Puerto Rico,False,True,Public,Thursday,65.0
+2019-04-19,Viernes Santo,GoodFriday,PR,Puerto Rico,False,True,Public,Sunday,75.0
+2019-05-27,Recordación de los Muertos de la Guerra,MemorialDay,PR,Puerto Rico,False,True,Public,Tuesday,53.0
+2019-07-04,Día de la Independencia de los Estados Unidos,IndependenceDay,PR,Puerto Rico,False,True,Public,Sunday,66.0
+2019-07-15,Natalicio de Don Luis Muñoz Rivera,BirthdayofDonLuisMuñozRivera,PR,Puerto Rico,False,True,Public,Sunday,65.0
+2019-07-25,Constitución de Puerto Rico,PuertoRicoConstitutionDay,PR,Puerto Rico,True,True,Public,Saturday,68.0
+2019-07-27,Natalicio de Dr. José Celso Barbosa,BirthdayofDr.JoséCelsoBarbosa,PR,Puerto Rico,True,True,Public,Thursday,67.0
+2019-09-02,Día del Trabajo,LabourDay,PR,Puerto Rico,False,True,Public,Friday,69.0
+2019-10-14,Día de la Raza Descubrimiento de América,ColumbusDay,PR,Puerto Rico,False,True,Public,Sunday,71.0
+2019-11-11,Día del Veterano Día del Armisticio,VeteransDay,PR,Puerto Rico,False,True,Public,Sunday,66.0
+2019-11-19,Día del Descubrimiento de Puerto Rico,DiscoveryofPuertoRico,PR,Puerto Rico,True,True,Public,Sunday,60.0
+2019-11-28,Día de Acción de Gracias,ThanksgivingDay,PR,Puerto Rico,False,True,Public,Sunday,71.0
+2019-12-24,Noche Buena,ChristmasEve,PR,Puerto Rico,True,True,Public,Thursday,58.0
+2019-12-25,Navidad,ChristmasDay,PR,Puerto Rico,True,True,Public,Friday,87.0
+2019-01-01,Ano Novo,NewYearsDay,PT,Portugal,True,True,Public,Saturday,89.0
+2019-03-05,Carnaval,Carnival,PT,Portugal,False,True,Optional,Saturday,64.0
+2019-04-19,Sexta-feira Santa,GoodFriday,PT,Portugal,False,True,Public,Sunday,76.0
+2019-04-21,Domingo de Páscoa,EasterDay,PT,Portugal,False,True,Public,Saturday,55.0
+2019-04-25,Dia da Liberdade,FreedomDay,PT,Portugal,True,True,Public,Sunday,59.0
+2019-05-01,Dia do Trabalhador,LabourDay,PT,Portugal,True,True,Public,Monday,67.0
+2019-06-01,Dia dos Açores,AzoresDay,PT,Portugal,True,False,Public,Saturday,58.0
+2019-06-10,"Dia de Portugal, de Camões e das Comunidades Portuguesas",NationalDay,PT,Portugal,True,True,Public,Friday,59.0
+2019-06-20,Corpo de Deus,CorpusChristi,PT,Portugal,False,True,Public,Monday,61.0
+2019-07-01,Dia da Madeira,MadeiraDay,PT,Portugal,True,False,Public,Tuesday,68.0
+2019-08-15,Assunção de Nossa Senhora,AssumptionDay,PT,Portugal,True,True,Public,Monday,71.0
+2019-10-05,Implantação da República,RepublicDay,PT,Portugal,True,True,Public,Sunday,55.0
+2019-11-01,Dia de Todos-os-Santos,AllSaintsDay,PT,Portugal,True,True,Public,Monday,61.0
+2019-12-01,Restauração da Independência,RestorationofIndependence,PT,Portugal,True,True,Public,Thursday,65.0
+2019-12-08,Imaculada Conceição,ImmaculateConception,PT,Portugal,True,True,Public,Friday,53.0
+2019-12-25,Natal,ChristmasDay,PT,Portugal,True,True,Public,Monday,87.0
+2019-12-26,Primeira Oitava,St.StephensDay,PT,Portugal,True,False,Public,Tuesday,70.0
+2019-01-01,New Years Day,NewYearsDay,PY,Paraguay,True,True,Public,Sunday,89.0
+2019-03-01,Dia de los héroes,Heroesday,PY,Paraguay,True,True,Public,Sunday,55.0
+2019-04-18,Jueves Santo,MaundyThursday,PY,Paraguay,False,True,Public,Monday,57.0
+2019-04-19,Viernes Santo,GoodFriday,PY,Paraguay,False,True,Public,Friday,74.0
+2019-05-01,Día de los Trabajadores,LabourDay,PY,Paraguay,True,True,Public,Wednesday,70.0
+2019-05-14,Independencia,ParaguayanIndependence,PY,Paraguay,True,True,Public,Wednesday,58.0
+2019-05-15,Independencia,ParaguayanIndependence,PY,Paraguay,True,True,Public,Friday,58.0
+2019-06-12,Dia de la Paz del Chaco,ChacoArmistice,PY,Paraguay,True,True,Public,Sunday,53.0
+2019-08-15,Fundación de Asunción,FoundingofAsunción,PY,Paraguay,True,True,Public,Sunday,61.0
+2019-09-29,Victoria de Boquerón,BoqueronBattleVictoryDay,PY,Paraguay,True,True,Public,Tuesday,65.0
+2019-12-08,Virgen de Caacupé,VirginofCaacupe,PY,Paraguay,True,True,Public,Thursday,70.0
+2019-12-25,Día de Navidad,ChristmasDay,PY,Paraguay,True,True,Public,Saturday,87.0
+2019-01-01,Anul Nou,NewYearsDay,RO,Romania,True,True,Public,Sunday,94.0
+2019-01-02,Anul Nou,DayafterNewYearsDay,RO,Romania,True,True,Public,Sunday,63.0
+2019-01-24,Unirea Principatelor Române/Mica Unire,UnionDay/SmallUnion,RO,Romania,True,True,Public,Tuesday,69.0
+2019-04-26,Vinerea mare,GoodFriday,RO,Romania,False,True,Public,Sunday,74.0
+2019-04-28,Paștele,EasterSunday,RO,Romania,False,True,Public,Saturday,67.0
+2019-04-29,Paștele,EasterMonday,RO,Romania,False,True,Public,Thursday,74.0
+2019-05-01,Ziua Muncii,LabourDay,RO,Romania,True,True,Public,Friday,68.0
+2019-06-01,Ziua Copilului,ChildrensDay,RO,Romania,True,True,Public,Sunday,59.0
+2019-06-16,Rusaliile,Pentecost,RO,Romania,False,True,Public,Monday,65.0
+2019-06-17,Rusaliile,WhitMonday,RO,Romania,False,True,Public,Monday,67.0
+2019-08-15,Adormirea Maicii Domnului/Sfânta Maria Mare,DormitionoftheTheotokos,RO,Romania,True,True,Public,Friday,54.0
+2019-11-30,Sfântul Andrei,St.AndrewsDay,RO,Romania,True,True,Public,Thursday,53.0
+2019-12-01,Ziua Națională/Marea Unire,NationalDay/GreatUnion,RO,Romania,True,True,Public,Sunday,58.0
+2019-12-25,Crăciunul,ChristmasDay,RO,Romania,True,True,Public,Sunday,82.0
+2019-12-26,Crăciunul,St.StephensDay,RO,Romania,True,True,Public,Monday,52.0
+2019-01-01,Nova Godina,NewYearsDay,RS,Serbia,True,True,Public,Thursday,95.0
+2019-01-02,Nova Godina,NewYearsDay,RS,Serbia,True,True,Public,Friday,88.0
+2019-01-07,Božić,ChristmasDay,RS,Serbia,True,True,Public,Saturday,83.0
+2019-02-15,Dan državnosti Srbije,StatehoodDay,RS,Serbia,True,True,Public,Sunday,64.0
+2019-02-16,Dan državnosti Srbije,StatehoodDay,RS,Serbia,True,True,Public,Monday,70.0
+2019-04-26,Veliki petak,GoodFriday,RS,Serbia,False,True,Public,Saturday,73.0
+2019-04-28,Vaskrs (Uskrs),EasterSunday,RS,Serbia,False,True,Public,Saturday,65.0
+2019-04-29,Vaskrsni (Uskrsni) ponedeljak,EasterMonday,RS,Serbia,False,True,Public,Friday,71.0
+2019-05-01,Praznik rada,MayDay/InternationalWorkersDay,RS,Serbia,True,True,Public,Saturday,53.0
+2019-05-02,Praznik rada,MayDay/InternationalWorkersDay,RS,Serbia,True,True,Public,Monday,60.0
+2019-11-11,Dan primirja,ArmisticeDay,RS,Serbia,True,True,Public,Wednesday,65.0
+2019-01-01,Новый год,NewYearsDay,RU,Russia,True,True,Public,Friday,90.0
+2019-01-02,Новогодние каникулы,NewYearholiday,RU,Russia,True,True,Public,Monday,56.0
+2019-01-03,Новогодние каникулы,NewYearholiday,RU,Russia,True,True,Public,Tuesday,70.0
+2019-01-04,Новогодние каникулы,NewYearholiday,RU,Russia,True,True,Public,Sunday,62.0
+2019-01-05,Новогодние каникулы,NewYearholiday,RU,Russia,True,True,Public,Monday,54.0
+2019-01-06,Новогодние каникулы,NewYearholiday,RU,Russia,True,True,Public,Tuesday,64.0
+2019-01-07,Рождество Христово,OrthodoxChristmasDay,RU,Russia,True,True,Public,Saturday,61.0
+2019-02-23,День защитника Отечества,DefenderoftheFatherlandDay,RU,Russia,True,True,Public,Thursday,56.0
+2019-03-08,Международный женский день,InternationalWomensDay,RU,Russia,True,True,Public,Friday,68.0
+2019-05-01,День труда,LabourDay,RU,Russia,True,True,Public,Monday,67.0
+2019-05-09,День Победы,VictoryDay,RU,Russia,True,True,Public,Sunday,64.0
+2019-06-12,День России,RussiaDay,RU,Russia,True,True,Public,Sunday,65.0
+2019-11-04,День народного единства,UnityDay,RU,Russia,True,True,Public,Thursday,67.0
+2019-01-01,Nyårsdagen,NewYearsDay,SE,Sweden,True,True,Public,Friday,96.0
+2019-01-06,Trettondedag jul,Epiphany,SE,Sweden,True,True,Public,Saturday,59.0
+2019-04-19,Långfredagen,GoodFriday,SE,Sweden,False,True,Public,Saturday,76.0
+2019-04-21,Påskdagen,EasterSunday,SE,Sweden,False,True,Public,Sunday,62.0
+2019-04-22,Annandag påsk,EasterMonday,SE,Sweden,False,True,Public,Tuesday,69.0
+2019-05-01,Första maj,InternationalWorkersDay,SE,Sweden,True,True,Public,Saturday,67.0
+2019-05-30,Kristi himmelsfärds dag,AscensionDay,SE,Sweden,False,True,Public,Sunday,70.0
+2019-06-06,Sveriges nationaldag,NationalDayofSweden,SE,Sweden,True,True,Public,Monday,53.0
+2019-06-09,Pingstdagen,PentecostSunday,SE,Sweden,False,True,Public,Saturday,55.0
+2019-06-21,Midsommarafton,MidsummerEve,SE,Sweden,False,True,Public,Friday,62.0
+2019-06-22,Midsommar,MidsummerDay,SE,Sweden,False,True,Public,Monday,53.0
+2019-11-02,Alla helgons dag,AllSaintsDay,SE,Sweden,False,True,Public,Sunday,62.0
+2019-12-24,Julafton,ChristmasEve,SE,Sweden,True,True,Public,Sunday,64.0
+2019-12-25,Juldagen,ChristmasDay,SE,Sweden,True,True,Public,Thursday,85.0
+2019-12-26,Annandag jul,St.StephensDay,SE,Sweden,True,True,Public,Sunday,63.0
+2019-12-31,Nyårsafton,NewYearsEve,SE,Sweden,True,True,Public,Monday,68.0
+2019-01-01,novo leto,NewYearsDay,SI,Slovenia,True,True,Public,Sunday,92.0
+2019-01-02,novo leto,NewYearsDay,SI,Slovenia,True,True,Public,Thursday,86.0
+2019-02-08,Prešernov dan,PrešerenDay,SI,Slovenia,True,True,Public,Monday,66.0
+2019-04-21,velikonočna nedelja in ponedeljek,EasterSunday,SI,Slovenia,False,True,Public,Tuesday,52.0
+2019-04-22,velikonočna nedelja in ponedeljek,EasterMonday,SI,Slovenia,False,True,Public,Friday,72.0
+2019-04-27,dan upora proti okupatorju,DayofUprisingAgainstOccupation,SI,Slovenia,True,True,Public,Sunday,69.0
+2019-05-01,praznik dela,MayDayHoliday,SI,Slovenia,True,True,Public,Monday,67.0
+2019-05-02,praznik dela,MayDayHoliday,SI,Slovenia,True,True,Public,Saturday,70.0
+2019-06-09,"binkoštna nedelja, binkošti",WhitSunday,SI,Slovenia,False,True,Public,Monday,62.0
+2019-06-25,dan državnosti,StatehoodDay,SI,Slovenia,True,True,Public,Tuesday,54.0
+2019-08-15,Marijino vnebovzetje,AssumptionDay,SI,Slovenia,True,True,Public,Wednesday,54.0
+2019-10-31,dan reformacije,ReformationDay,SI,Slovenia,True,True,Public,Friday,71.0
+2019-11-01,dan spomina na mrtve,DayoftheDead,SI,Slovenia,True,True,Public,Monday,68.0
+2019-12-25,božič,ChristmasDay,SI,Slovenia,True,True,Public,Sunday,88.0
+2019-12-26,dan samostojnosti in enotnosti,IndependenceandUnityDay,SI,Slovenia,True,True,Public,Sunday,67.0
+2019-01-01,Første nyttårsdag,NewYearsDay,SJ,Svalbard and Jan Mayen,True,True,Public,Thursday,87.0
+2019-04-18,Skjærtorsdag,MaundyThursday,SJ,Svalbard and Jan Mayen,False,True,Public,Monday,60.0
+2019-04-19,Langfredag,GoodFriday,SJ,Svalbard and Jan Mayen,False,True,Public,Friday,76.0
+2019-04-21,Første påskedag,EasterSunday,SJ,Svalbard and Jan Mayen,False,True,Public,Thursday,64.0
+2019-04-22,Andre påskedag,EasterMonday,SJ,Svalbard and Jan Mayen,False,True,Public,Monday,70.0
+2019-05-01,Første mai,MayDay,SJ,Svalbard and Jan Mayen,True,True,Public,Tuesday,66.0
+2019-05-17,Syttende mai,ConstitutionDay,SJ,Svalbard and Jan Mayen,True,True,Public,Friday,52.0
+2019-05-30,Kristi himmelfartsdag,AscensionDay,SJ,Svalbard and Jan Mayen,False,True,Public,Sunday,69.0
+2019-06-09,Første pinsedag,WhitSunday,SJ,Svalbard and Jan Mayen,False,True,Public,Saturday,71.0
+2019-06-10,Andre pinsedag,WhitMonday,SJ,Svalbard and Jan Mayen,False,True,Public,Saturday,59.0
+2019-12-25,Første juledag,ChristmasDay,SJ,Svalbard and Jan Mayen,True,True,Public,Friday,85.0
+2019-12-26,Andre juledag,SeconddayofChristmas,SJ,Svalbard and Jan Mayen,True,True,Public,Sunday,53.0
+2019-01-01,Deň vzniku Slovenskej republiky,DayoftheEstablishmentoftheSlovakRepublic,SK,Slovakia,True,True,Public,Monday,66.0
+2019-01-06,Zjavenie Pána,Epiphany,SK,Slovakia,True,True,Public,Sunday,71.0
+2019-04-19,Veľkonočný piatok,GoodFriday,SK,Slovakia,False,True,Public,Sunday,75.0
+2019-04-22,Veľkonočný pondelok,EasterMonday,SK,Slovakia,False,True,Public,Thursday,74.0
+2019-05-01,Sviatok práce,InternationalWorkersDay,SK,Slovakia,True,True,Public,Sunday,58.0
+2019-05-08,Deň víťazstva nad fašizmom,Dayofvictoryoverfascism,SK,Slovakia,True,True,Public,Monday,62.0
+2019-07-05,Sviatok svätého Cyrila a svätého Metoda,St.CyrilandMethodiusDay,SK,Slovakia,True,True,Public,Wednesday,57.0
+2019-08-29,Výročie Slovenského národného povstania,SlovakNationalUprisinganniversary,SK,Slovakia,True,True,Public,Thursday,71.0
+2019-09-01,Deň Ústavy Slovenskej republiky,DayoftheConstitutionoftheSlovakRepublic,SK,Slovakia,True,True,Public,Monday,59.0
+2019-09-15,Sedembolestná Panna Mária,DayofOurLadyoftheSevenSorrows,SK,Slovakia,True,True,Public,Tuesday,67.0
+2019-11-01,Sviatok Všetkých svätých,AllSaints’Day,SK,Slovakia,True,True,Public,Friday,61.0
+2019-11-17,Deň boja za slobodu a demokraciu,StruggleforFreedomandDemocracyDay,SK,Slovakia,True,True,Public,Sunday,66.0
+2019-12-24,Štedrý deň,ChristmasEve,SK,Slovakia,True,True,Public,Saturday,61.0
+2019-12-25,Prvý sviatok vianočný,ChristmasDay,SK,Slovakia,True,True,Public,Sunday,87.0
+2019-12-26,Druhý sviatok vianočný,St.StephensDay,SK,Slovakia,True,True,Public,Monday,66.0
+2019-01-01,New Years Day,NewYearsDay,SM,San Marino,True,True,Public,Sunday,93.0
+2019-01-06,Epiphany,Epiphany,SM,San Marino,True,True,Public,Tuesday,59.0
+2019-02-05,Feast of Saint Agatha,FeastofSaintAgatha,SM,San Marino,True,True,Public,Thursday,65.0
+2019-03-25,Anniversary of the Arengo,AnniversaryoftheArengo,SM,San Marino,True,True,Public,Monday,67.0
+2019-04-21,Easter Sunday,EasterSunday,SM,San Marino,False,True,Public,Sunday,56.0
+2019-04-22,Easter Monday,EasterMonday,SM,San Marino,False,True,Public,Monday,74.0
+2019-05-01,Labour Day,LabourDay,SM,San Marino,True,True,Public,Tuesday,68.0
+2019-06-20,Corpus Christi,CorpusChristi,SM,San Marino,False,True,Public,Wednesday,69.0
+2019-07-28,Liberation from Fascism,LiberationfromFascism,SM,San Marino,True,True,Public,Tuesday,61.0
+2019-08-15,Ferragosto (Assumption),Ferragosto(Assumption),SM,San Marino,True,True,Public,Sunday,59.0
+2019-09-03,The Feast of San Marino and the Republic,TheFeastofSanMarinoandtheRepublic,SM,San Marino,True,True,Public,Saturday,68.0
+2019-11-01,All Saints Day,AllSaintsDay,SM,San Marino,True,True,Public,Monday,68.0
+2019-11-02,Commemoration of all those who died at war,Commemorationofallthosewhodiedatwar,SM,San Marino,True,True,Public,Friday,55.0
+2019-12-08,Immaculate Conception,ImmaculateConception,SM,San Marino,True,True,Public,Friday,52.0
+2019-12-24,Christmas Eve,ChristmasEve,SM,San Marino,True,True,Public,Monday,65.0
+2019-12-25,Christmas Day,ChristmasDay,SM,San Marino,True,True,Public,Sunday,83.0
+2019-12-26,Saint Stephens Day,SaintStephensDay,SM,San Marino,True,True,Public,Tuesday,67.0
+2019-12-31,New Years Eve,NewYearsEve,SM,San Marino,True,True,Public,Wednesday,70.0
+2019-01-01,New Years Day,NewYearsDay,SR,Suriname,True,True,Public,Wednesday,95.0
+2019-01-06,Three Kings Day,ThreeKingsDay,SR,Suriname,True,True,Public,Sunday,67.0
+2019-01-06,World Religion Day,WorldReligionDay,SR,Suriname,False,True,Public,Monday,60.0
+2019-02-05,Chinese New Year,ChineseNewYear,SR,Suriname,False,True,Public,Monday,59.0
+2019-02-25,Day of the Revolution,DayoftheRevolution,SR,Suriname,True,True,Public,Monday,59.0
+2019-04-19,Good Friday,GoodFriday,SR,Suriname,False,True,Public,Sunday,74.0
+2019-04-21,Easter Sunday,EasterSunday,SR,Suriname,False,True,Public,Sunday,60.0
+2019-05-01,Labour Day,LabourDay,SR,Suriname,True,True,Public,Saturday,67.0
+2019-05-30,Ascension Day,AscensionDay,SR,Suriname,False,True,Public,Sunday,59.0
+2019-06-05,Indian Arrival Day,IndianArrivalDay,SR,Suriname,True,True,Public,Monday,66.0
+2019-07-01,Keti Koti,KetiKoti,SR,Suriname,True,True,Public,Tuesday,55.0
+2019-08-08,Javanese Arrival Day,JavaneseArrivalDay,SR,Suriname,True,True,Public,Wednesday,64.0
+2019-08-09,Indigenous Peoples Day,IndigenousPeoplesDay,SR,Suriname,True,True,Public,Thursday,52.0
+2019-10-10,Day of the Maroons,DayoftheMaroons,SR,Suriname,True,True,Public,Friday,53.0
+2019-10-20,Chinese Arrival day,ChineseArrivalday,SR,Suriname,True,True,Public,Wednesday,62.0
+2019-11-25,Independence Day,IndependenceDay,SR,Suriname,True,True,Public,Thursday,57.0
+2019-12-25,Christmas Day,ChristmasDay,SR,Suriname,True,True,Public,Tuesday,85.0
+2019-12-26,Boxing Day,BoxingDay,SR,Suriname,True,True,Public,Saturday,65.0
+2019-05-01,Día del trabajo,LaborDay,SV,El Salvador,True,True,Public,Friday,70.0
+2019-05-03,Día de la Cru,TheDayoftheCross,SV,El Salvador,True,True,Public,Saturday,59.0
+2019-05-07,Día del Soldado,SoldiersDay,SV,El Salvador,True,True,Public,Sunday,64.0
+2019-05-10,Día de las Madres,MothersDay,SV,El Salvador,True,True,Public,Monday,68.0
+2019-05-10,Día del Padre,FathersDay,SV,El Salvador,True,True,Public,Monday,69.0
+2019-08-01,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Thursday,58.0
+2019-08-02,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Thursday,61.0
+2019-08-03,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Sunday,52.0
+2019-08-04,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Friday,63.0
+2019-08-05,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Wednesday,64.0
+2019-08-06,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Saturday,55.0
+2019-08-07,Fiestas de agosto,AugustFestivals,SV,El Salvador,True,True,Public,Thursday,54.0
+2019-09-15,Día de la Independencia,IndependenceDay,SV,El Salvador,True,True,Public,Monday,68.0
+2019-10-01,Día del niño,ChildrensDay,SV,El Salvador,True,True,Public,Tuesday,56.0
+2019-10-12,Día de la raza,EthnicPrideDay,SV,El Salvador,True,True,Public,Friday,63.0
+2019-11-02,El día de los difuntos,DayoftheDead,SV,El Salvador,True,True,Public,Sunday,69.0
+2019-11-07,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Monday,58.0
+2019-11-08,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Sunday,59.0
+2019-11-09,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Sunday,69.0
+2019-11-10,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Thursday,61.0
+2019-11-11,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Thursday,69.0
+2019-11-12,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Monday,66.0
+2019-11-13,Festival Nacional De La Pupusa,NationalPupusaFestival,SV,El Salvador,True,True,Public,Thursday,64.0
+2019-11-21,Dia de la Reina de la Paz,DayoftheQueenofPeace,SV,El Salvador,True,True,Public,Monday,71.0
+2019-12-25,Noche Buena,ChristmasDay,SV,El Salvador,True,True,Public,Tuesday,83.0
+2019-12-31,Fin de año,NewYearsEve,SV,El Salvador,True,True,Public,Monday,59.0
+2019-01-01,New Years Day,NewYearsDay,TN,Tunisia,True,True,Public,Monday,92.0
+2019-01-14,Revolution and Youth Day,RevolutionandYouthDay,TN,Tunisia,True,True,Public,Tuesday,62.0
+2019-03-20,Independence Day,IndependenceDay,TN,Tunisia,True,True,Public,Wednesday,60.0
+2019-04-09,Martyrs Day,MartyrsDay,TN,Tunisia,True,True,Public,Sunday,57.0
+2019-05-01,Labour Day,LabourDay,TN,Tunisia,True,True,Public,Monday,72.0
+2019-06-01,Victory Day,VictoryDay,TN,Tunisia,True,True,Public,Saturday,71.0
+2019-07-25,Republic Day,RepublicDay,TN,Tunisia,True,True,Public,Monday,70.0
+2019-08-13,Womens Day,WomensDay,TN,Tunisia,True,True,Public,Friday,60.0
+2019-10-15,Eid El Jala,EidElJala,TN,Tunisia,True,True,Public,Sunday,70.0
+2019-01-01,Yılbaşı,NewYearsDay,TR,Turkey,True,True,Public,Friday,91.0
+2019-04-23,Ulusal Egemenlik ve Çocuk Bayramı,NationalIndependence&ChildrensDay,TR,Turkey,True,True,Public,Monday,56.0
+2019-05-01,İşçi Bayramı,LabourDay,TR,Turkey,True,True,Public,Sunday,67.0
+2019-05-19,"Atatürkü Anma, Gençlik ve Spor Bayramı",AtatürkCommemoration&YouthDay,TR,Turkey,True,True,Public,Monday,59.0
+2019-07-15,Demokrasi Bayramı,DemocracyDay,TR,Turkey,True,True,Public,Tuesday,66.0
+2019-08-30,Zafer Bayramı,VictoryDay,TR,Turkey,True,True,Public,Wednesday,53.0
+2019-10-29,Cumhuriyet Bayramı,RepublicDay,TR,Turkey,True,True,Public,Sunday,62.0
+2019-01-01,Новий Рік,NewYearsDay,UA,Ukraine,True,True,Public,Thursday,87.0
+2019-01-07,Різдво,(Julian)Christmas,UA,Ukraine,True,True,Public,Wednesday,60.0
+2019-03-08,Міжнародний жіночий день,InternationalWomensDay,UA,Ukraine,True,True,Public,Friday,71.0
+2019-04-28,Великдень,(Julian)EasterSunday,UA,Ukraine,False,True,Public,Sunday,53.0
+2019-05-01,День праці,InternationalWorkersDay,UA,Ukraine,True,True,Public,Monday,71.0
+2019-05-09,День перемоги над нацизмом у Другій світовій війні,VictorydayoverNazisminWorldWarII,UA,Ukraine,True,True,Public,Saturday,54.0
+2019-06-16,Трійця,(Julian)Pentecost,UA,Ukraine,False,True,Public,Monday,57.0
+2019-06-28,День Конституції,ConstitutionDay,UA,Ukraine,True,True,Public,Monday,58.0
+2019-08-24,День Незалежності,IndependenceDay,UA,Ukraine,True,True,Public,Friday,60.0
+2019-10-14,День захисника України,DefenderofUkraineDay,UA,Ukraine,True,True,Public,Monday,57.0
+2019-12-25,Різдво,(GregorianandRevisedJulian)Christmas,UA,Ukraine,True,True,Public,Thursday,71.0
+2019-01-01,New Years Day,NewYearsDay,US,United States,False,True,Public,Monday,87.0
+2019-01-21,"Martin Luther King, Jr. Day","MartinLutherKing,Jr.Day",US,United States,False,True,Public,Thursday,66.0
+2019-02-18,Presidents Day,WashingtonsBirthday,US,United States,False,True,Public,Friday,68.0
+2019-05-27,Memorial Day,MemorialDay,US,United States,False,True,Public,Monday,52.0
+2019-07-04,Independence Day,IndependenceDay,US,United States,False,True,Public,Monday,57.0
+2019-09-02,Labor Day,LabourDay,US,United States,False,True,Public,Monday,71.0
+2019-10-14,Columbus Day,ColumbusDay,US,United States,False,False,Public,Sunday,55.0
+2019-11-11,Veterans Day,VeteransDay,US,United States,False,True,Public,Monday,68.0
+2019-11-28,Thanksgiving Day,ThanksgivingDay,US,United States,False,True,Public,Tuesday,54.0
+2019-12-25,Christmas Day,ChristmasDay,US,United States,False,True,Public,Saturday,86.0
+2019-01-01,Año Nuevo,NewYearsDay,UY,Uruguay,True,True,Public,Thursday,85.0
+2019-01-06,Día de los Niños,ChildrensDay,UY,Uruguay,True,True,Public,Monday,64.0
+2019-03-04,Carnaval,Carnival,UY,Uruguay,False,True,Public,Friday,65.0
+2019-03-05,Carnaval,Carnival,UY,Uruguay,False,True,Public,Friday,68.0
+2019-04-18,Semana de Turismo,MaundyThursday,UY,Uruguay,False,True,Public,Sunday,62.0
+2019-04-19,Semana de Turismo,GoodFriday,UY,Uruguay,False,True,Public,Monday,74.0
+2019-04-19,Desembarco de los 33 Orientales,Landingofthe33PatriotsDay,UY,Uruguay,True,True,Public,Sunday,53.0
+2019-05-01,Día de los Trabajadores,InternationalWorkersDay,UY,Uruguay,True,True,Public,Sunday,66.0
+2019-05-18,Batalla de las Piedras,BattleofLasPiedras,UY,Uruguay,True,True,Public,Monday,67.0
+2019-06-19,Natalicio de Artigas y Día del Nunca Más,BirthdayofJoséGervasioArtigasandNeverAgainDay,UY,Uruguay,True,True,Public,Monday,55.0
+2019-07-18,Jura de la Constitución,ConstitutionDay,UY,Uruguay,True,True,Public,Friday,59.0
+2019-08-25,Día de la Independencia,IndependenceDay,UY,Uruguay,True,True,Public,Sunday,58.0
+2019-10-12,Día de la Raza,Dayoftherace,UY,Uruguay,True,True,Public,Monday,64.0
+2019-11-02,Día de los Difuntos,Deceasedonesday,UY,Uruguay,True,True,Public,Saturday,53.0
+2019-12-25,Día de la Familia,ChristmasDay,UY,Uruguay,True,True,Public,Thursday,88.0
+2019-01-01,Maria Santissima Madre di Dio,"SolemnityofMary,MotherofGod",VA,Vatican City,True,True,Public,Thursday,64.0
+2019-01-06,Epifania del Signore,Epiphany,VA,Vatican City,True,True,Public,Friday,60.0
+2019-02-11,Anniversario della istituzione dello Stato della Città del Vaticano,AnniversaryofthefoundationofVaticanCity,VA,Vatican City,True,True,Public,Monday,65.0
+2019-03-13,Anniversario dellElezione del Santo Padre,AnniversaryoftheelectionofPopeFrancis,VA,Vatican City,True,True,Public,Friday,63.0
+2019-03-19,San Giuseppe,SaintJosephsDay,VA,Vatican City,True,True,Public,Thursday,70.0
+2019-04-22,Lunedì dellAngelo,EasterMonday,VA,Vatican City,False,True,Public,Monday,71.0
+2019-04-23,Onomastico del Santo Padre,SaintGeorge,VA,Vatican City,True,True,Public,Tuesday,52.0
+2019-05-01,San Giuseppe lavoratore,SaintJosephtheWorker,VA,Vatican City,True,True,Public,Saturday,71.0
+2019-06-29,Santi Pietro e Paolo,SaintsPeterandPaul,VA,Vatican City,True,True,Public,Sunday,59.0
+2019-08-15,Assunzione di Maria in Cielo,AssumptionDay,VA,Vatican City,True,True,Public,Monday,62.0
+2019-09-08,Festa della natività della madonna,NativityofMary,VA,Vatican City,True,True,Public,Saturday,54.0
+2019-11-01,"Tutti i santi, Ognissanti",AllSaints,VA,Vatican City,True,True,Public,Saturday,66.0
+2019-12-08,Immacolata Concezione,ImmaculateConception,VA,Vatican City,True,True,Public,Monday,54.0
+2019-12-25,Natale,ChristmasDay,VA,Vatican City,True,True,Public,Friday,82.0
+2019-12-26,Santo Stefano,St.StephensDay,VA,Vatican City,True,True,Public,Monday,55.0
+2019-01-01,Día de Año Nuevo,NewYearsDay,VE,Venezuela,True,True,Public,Sunday,95.0
+2019-01-06,Día de Reyes,Epiphany,VE,Venezuela,True,True,Public,Monday,68.0
+2019-01-14,Día de la Divina Pastora,FeastoftheDivinaPastora,VE,Venezuela,True,True,Public,Monday,70.0
+2019-01-15,Día del Maestro,TeachersDay,VE,Venezuela,True,True,Public,Thursday,69.0
+2019-02-12,Día de la Juventud,YouthDay,VE,Venezuela,True,True,Public,Monday,53.0
+2019-02-20,Dia de la Federacion,FederationDay,VE,Venezuela,True,True,Public,Monday,65.0
+2019-03-04,Carnaval,Carnival,VE,Venezuela,False,True,Public,Tuesday,59.0
+2019-03-05,Carnaval,Carnival,VE,Venezuela,False,True,Public,Tuesday,69.0
+2019-03-08,Dia Internacional de la Mujer,InternationalWomensDay,VE,Venezuela,True,True,Public,Sunday,62.0
+2019-03-19,Día de San José,StJosephsDay,VE,Venezuela,True,True,Public,Monday,57.0
+2019-03-21,Día del abolición de la esclavitud,SlaveryAbolitionAnniversary,VE,Venezuela,True,True,Public,Tuesday,54.0
+2019-03-31,Aniversario del fundacion del San Cristóbal,"FoundationanniversaryDayofSanCristóbal,Táchira",VE,Venezuela,True,True,Public,Saturday,53.0
+2019-04-19,Diez y nueve de abril,BeginningoftheIndependenceMovement,VE,Venezuela,True,True,Public,Monday,69.0
+2019-05-01,Día del Trabajador,LaborDay,VE,Venezuela,True,True,Public,Tuesday,60.0
+2019-05-03,Día del Cruz del Mayo,FiestadelasCruces,VE,Venezuela,True,True,Public,Wednesday,65.0
+2019-05-12,Día de las Madres,MothersDay,VE,Venezuela,False,True,Public,Thursday,55.0
+2019-06-16,Día de los Padres,FathersDay,VE,Venezuela,False,True,Public,Friday,60.0
+2019-06-24,Día de San Juan Bautista y aniversario de la Batalla de Carabobo,ArmyDay,VE,Venezuela,True,True,Public,Monday,57.0
+2019-06-27,Día del Periodista y aniversario de la instauración del Decreto de Instrucción pública gratuita y obligatoria,JournalistsDay,VE,Venezuela,True,True,Public,Sunday,66.0
+2019-07-05,Cinco de julio,IndependenceDay,VE,Venezuela,True,True,Public,Sunday,65.0
+2019-07-21,Dia del niño,ChildrensDay,VE,Venezuela,False,True,Public,Thursday,59.0
+2019-07-24,"Natalicio del Libertador, Dia de la Armada Nacional",NavyDay,VE,Venezuela,True,True,Public,Friday,52.0
+2019-07-25,Aniversario del fundacion del Caracas,CaracasCityFoundationDay,VE,Venezuela,True,True,Public,Monday,71.0
+2019-08-03,Día de la Bandera,FlagDay,VE,Venezuela,True,True,Public,Thursday,60.0
+2019-09-08,"Día del Virgen del Valle, aparicion del Virgen del Coromoto",BirthoftheBlessedVirginMaryandfeastsoftheVirgendelValleandOurLadyofCoromoto,VE,Venezuela,True,True,Public,Monday,67.0
+2019-09-24,Día del Virgen de las Mercedes,FeastoftheOurLadyofMercy,VE,Venezuela,True,True,Public,Tuesday,59.0
+2019-10-12,Día de la Resistencia Indígena,DayofIndigenousResistance,VE,Venezuela,True,True,Public,Friday,52.0
+2019-11-01,Día de Todos los Santos,AllSaintsDay,VE,Venezuela,True,True,Public,Sunday,56.0
+2019-11-02,Día de los fieles difuntos,AllSoulsDay,VE,Venezuela,True,True,Public,Monday,64.0
+2019-11-17,Feria de la Chinita,FeriaofLaChinita,VE,Venezuela,True,True,Public,Saturday,71.0
+2019-11-18,Feria de la Chinita,FeriaofLaChinita,VE,Venezuela,True,True,Public,Monday,70.0
+2019-11-19,Feria de la Chinita,FeriaofLaChinita,VE,Venezuela,True,True,Public,Monday,61.0
+2019-11-21,Día del estudiante universitario,UniversityStudentsDay,VE,Venezuela,True,True,Public,Monday,60.0
+2019-12-08,"Inmaculada Concepción, Dia de la Lealtad","ImmaculateConception,LoyaltyDay",VE,Venezuela,True,True,Public,Monday,64.0
+2019-12-17,Aniversario de la muerte de Libertador Simon Bolivar,SimonBolivarMemorialDay,VE,Venezuela,True,True,Public,Thursday,61.0
+2019-12-24,Nochebuena,ChristmasEve,VE,Venezuela,True,True,Public,Monday,58.0
+2019-12-25,Navidad,ChristmasDay,VE,Venezuela,True,True,Public,Wednesday,84.0
+2019-12-31,Nochevieja,NewYearsEve,VE,Venezuela,True,True,Public,Friday,63.0
+2019-01-01,Tết dương lịch,NewYearsDay,VN,Vietnam,True,True,Public,Thursday,89.0
+2019-04-30,"Ngày Giải phóng miền Nam, thống nhất đất nước",ReunificationDay,VN,Vietnam,True,True,Public,Thursday,70.0
+2019-05-01,Ngày Quốc tế lao động,LabourDay,VN,Vietnam,True,True,Public,Sunday,67.0
+2019-09-02,Quốc khánh,NationalDay,VN,Vietnam,True,True,Public,Monday,60.0
+2019-01-01,New Years Day,NewYearsDay,ZA,South Africa,True,True,Public,Saturday,94.0
+2019-03-21,Human Rights Day,HumanRightsDay,ZA,South Africa,True,True,Public,Thursday,62.0
+2019-04-19,Good Friday,GoodFriday,ZA,South Africa,False,True,Public,Friday,73.0
+2019-04-22,Family Day,FamilyDay,ZA,South Africa,False,True,Public,Saturday,71.0
+2019-04-27,Freedom Day,FreedomDay,ZA,South Africa,True,True,Public,Monday,69.0
+2019-05-01,Workers Day,WorkersDay,ZA,South Africa,True,True,Public,Thursday,69.0
+2019-06-16,Youth Day,YouthDay,ZA,South Africa,True,True,Public,Monday,70.0
+2019-08-09,National Womens Day,NationalWomensDay,ZA,South Africa,True,True,Public,Thursday,61.0
+2019-09-24,Heritage Day,HeritageDay,ZA,South Africa,True,True,Public,Thursday,70.0
+2019-12-16,Day of Reconciliation,DayofReconciliation,ZA,South Africa,True,True,Public,Tuesday,57.0
+2019-12-25,Christmas Day,ChristmasDay,ZA,South Africa,True,True,Public,Saturday,86.0
+2019-12-26,Day of Goodwill,St.StephensDay,ZA,South Africa,True,True,Public,Sunday,52.0
+2019-01-01,New Years Day,NewYearsDay,ZW,Zimbabwe,True,True,Public,Saturday,90.0
+2019-02-21,Robert Mugabe National Youth Day,RobertMugabeNationalYouthDay,ZW,Zimbabwe,True,True,Public,Saturday,69.0
+2019-04-18,Independence Day,IndependenceDay,ZW,Zimbabwe,True,True,Public,Sunday,53.0
+2019-04-19,Good Friday,GoodFriday,ZW,Zimbabwe,False,True,Public,Friday,75.0
+2019-04-20,Easter Saturday,EasterSaturday,ZW,Zimbabwe,False,True,Public,Monday,66.0
+2019-04-22,Easter Monday,EasterMonday,ZW,Zimbabwe,False,True,Public,Monday,74.0
+2019-05-01,Workers Day,WorkersDay,ZW,Zimbabwe,True,True,Public,Monday,64.0
+2019-05-25,Africa Day,AfricaDay,ZW,Zimbabwe,True,True,Public,Monday,54.0
+2019-08-12,Heroes Day,HeroesDay,ZW,Zimbabwe,False,True,Public,Friday,70.0
+2019-08-13,Defence Forces Day,DefenceForcesDay,ZW,Zimbabwe,False,True,Public,Sunday,52.0
+2019-12-22,Unity Day,UnityDay,ZW,Zimbabwe,True,True,Public,Monday,63.0
+2019-12-25,Christmas Day,ChristmasDay,ZW,Zimbabwe,True,True,Public,Sunday,89.0
+2019-12-26,Boxing Day,St.StephensDay,ZW,Zimbabwe,True,True,Public,Monday,60.0
