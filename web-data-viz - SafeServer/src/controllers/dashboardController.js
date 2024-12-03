@@ -321,7 +321,25 @@ function analisar(req, res) {
   }
 
 
+
+  function comparar2(req, res) {
+    const servidores = JSON.parse(req.query.servidores);  
+    const periodos = JSON.parse(req.query.periodos);  
+    const componentes = JSON.parse(req.query.componentes);  
   
+    dashboardModel.comparar2(servidores, periodos, componentes)
+      .then((resultado) => {
+        if (resultado.length > 0) {
+          res.status(200).json(resultado);
+        } else {
+          res.status(204).send("Nenhum resultado encontrado!");
+        }
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar relatório:', erro);
+        res.status(500).send('Erro ao buscar relatório');
+      });
+  }
   
 
 module.exports = {
@@ -337,5 +355,6 @@ module.exports = {
     servidor,
     periodo,
     analisar,
-    comparar
+    comparar,
+    comparar2
 }
