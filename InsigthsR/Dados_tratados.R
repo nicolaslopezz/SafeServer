@@ -1,7 +1,3 @@
-install.packages("readr")
-install.packages("dplyr")
-install.packages("RMySQL")
-
 library(dplyr)
 library(RMySQL)
 
@@ -12,13 +8,16 @@ feriados_frequencia <- dados %>%
   summarise(frequencia = n()) %>%
   arrange(desc(frequencia))
 
+
 feriado <- head(feriados_frequencia, 20)
+
 
 con <- dbConnect(MySQL(), 
                  dbname = "SafeServer",   
                  host = "imagembanco",             
                  user = "root",            
                  password = "urubu100")  
+
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (
@@ -29,11 +28,14 @@ dbExecute(con, "
 ")
 
 for (i in 1:nrow(feriado)) {
-  query <- paste0("INSERT INTO feriado_freq(nomeFeriado, frequencia) 
-                   VALUES ('", feriado$english_name[i], "', ", 
-                  feriado$frequencia[i], ");")
-  dbExecute(con, query)
+  dbExecute(con, "
+    INSERT INTO feriado_freq (nomeFeriado, frequencia)
+    VALUES (?, ?)", 
+    params = list(feriado$english_name[i], feriado$frequencia[i])
+  )
 }
 
-feriado
-head(feriado, 5)
+print(head(feriado, 5))
+
+
+dbDisconnect(con)
