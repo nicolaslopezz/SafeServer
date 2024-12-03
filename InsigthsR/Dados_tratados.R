@@ -1,5 +1,6 @@
 library(dplyr)
 library(RMySQL)
+library(readr)
 
 dados <- read.csv("/app/feriados.csv")
 
