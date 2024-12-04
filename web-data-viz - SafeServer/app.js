@@ -24,7 +24,7 @@ var servidoresRouter = require("./src/routes/servidores");
 var dashGerente02Router = require("./src/routes/dashGerente02.js")
 var dashGerente02Controller = require("./src/controllers/dashGerente02Controller.js")
 
-const getIssueByID = require('./src/routes/get-issues.js');
+const getIssues = require('./src/routes/get-issues.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,6 +39,49 @@ app.use("/empresas", empresasRouter);
 app.use("/dashGerente", dashGerenteRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/dashGerente02", dashGerente02Router);
+
+app.post("/verChamados", async (req, res) => {
+
+
+
+
+
+  
+  try {
+      const resultado = await getIssuesFunc();
+      res.json( { resultado } );
+  } catch (error) {
+      res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+
+});
+
+const getIssuesFunc = async () => {
+  const issues = await getIssues();
+  
+  // Exibir todos os dados retornados, incluindo 'fields'
+
+  try{    
+      
+      console.log(" \n Chamados: ")    
+      // Caso deseje visualizar apenas os campos 'fields' de cada chamado
+      issues.issues.forEach(issue => {
+      
+  
+      chamadoAtual = issue.fields
+
+      descAtual = chamadoAtual.description
+
+      console.log(descAtual)
+      });
+      return issues;
+  }catch(error){
+      console.error(error);
+      throw error;
+  }
+
+  
+};
 
 // configurar cron para rodar a cada nova hora
 cron.schedule('0 * * * *', () => {
@@ -62,3 +105,5 @@ app.listen(PORTA_APP, function () {
     \tSe .:producao:. você está se conectando ao banco remoto. \n\n
     \t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'\n\n`);
 });
+
+console.log(getIssuesFunc())
