@@ -92,42 +92,52 @@
                   <th>Componente</th>
                   <th>Status</th>
                   <th>Servidor</th>
-                  <th>Prioridade</th> 
+                  <th>Prioridade</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>CPU</td>
                   <td id="status-cpu" class="status-alerta">Alerta</td>
-                  <td>1</td>
-                  <td id="prioridade-cpu">Alta</td> 
+                  <td id="servidor-cpu">Servidor 1</td>
+                  <td id="prioridade-cpu">Alta</td>
                 </tr>
                 <tr>
                   <td>RAM</td>
                   <td id="status-ram" class="status-perigo">Perigo</td>
-                  <td>1</td>
-                  <td id="prioridade-ram">Alta</td> 
+                  <td id="servidor-ram">Servidor 2</td>
+                  <td id="prioridade-ram">Alta</td>
                 </tr>
                 <tr>
                   <td>Rede</td>
                   <td id="status-rede" class="status-perigo">Perigo</td>
-                  <td>1</td>
-                  <td id="prioridade-rede">Alta</td> 
+                  <td id="servidor-rede">Servidor 1</td>
+                  <td id="prioridade-rede">Alta</td>
                 </tr>
               </tbody>
-              
             </table>
+            <div class="chart-container">
+              <h2>Gráfico de Alertas por Componente</h2>
+              <canvas id="alertasChart"></canvas>
+            </div>
           </div>
 
           <div class="summary-container">
             <h2>Total de Componentes:</h2>
             <div class="summary-item" id="perigo-count">Perigo: 1</div>
             <div class="summary-item" id="alerta-count">Alerta: 1</div>
+          
+            <!-- KPI: Porcentagem de Alertas Resolvidos -->
+            <div class="kpi-item" id="alerta-mensagem">
+              <h3>Mensagem de Alerta</h3>
+              <p id="mensagem-atual"></p>
+            </div>
+          
+            <!-- KPI: Tempo Médio para Resolução -->
+           
           </div>
-          <div class="chart-container">
-            <h2>Gráfico de Alertas por Componente</h2>
-            <canvas id="alertasChart"></canvas>
-          </div>
+          
+          
         </div>.
       </div>
     </div>
@@ -142,6 +152,16 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+
+///const response = await fetch("/verChamados", {
+  ///    method: "POST",
+    ///  headers: {
+       /// "Content-Type": "application/json",
+     /// },
+    ///});
+
+
   var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
   var nome = sessionStorage.getItem("NOME_USUARIO");
   var cargo = sessionStorage.getItem("CARGO");
@@ -269,6 +289,9 @@ const alertasData = {
     alertasChart.update();
   }
 
+
+  
+
   // Atualizar o gráfico quando a tabela é atualizada
   function updateTable() {
     const cpuStatus = getRandomStatus();
@@ -299,14 +322,97 @@ const alertasData = {
 
     // Atualizar o gráfico com os novos dados
     atualizarGrafico(cpuStatus, ramStatus, redeStatus);
+
+
+
+
+
+
+    function getServidorAleatorio() {
+  const servidores = ['Servidor 1', 'Servidor 2'];
+  return servidores[Math.floor(Math.random() * servidores.length)];
+}
+
+function updateTable() {
+  const cpuStatus = getRandomStatus();
+  const ramStatus = getRandomStatus();
+  const redeStatus = getRandomStatus();
+
+  const cpuComponente = document.getElementById('status-cpu');
+  const ramComponente = document.getElementById('status-ram');
+  const redeComponente = document.getElementById('status-rede');
+
+  const cpuServidor = document.getElementById('servidor-cpu');
+  const ramServidor = document.getElementById('servidor-ram');
+  const redeServidor = document.getElementById('servidor-rede');
+
+  cpuComponente.textContent = cpuStatus;
+  ramComponente.textContent = ramStatus;
+  redeComponente.textContent = redeStatus;
+
+  // Atualiza os servidores
+  cpuServidor.textContent = getServidorAleatorio();
+  ramServidor.textContent = getServidorAleatorio();
+  redeServidor.textContent = getServidorAleatorio();
+
+  mudarCor(cpuComponente, cpuStatus);
+  mudarCor(ramComponente, ramStatus);
+  mudarCor(redeComponente, redeStatus);
+
+  const cpuPrioridade = calcularPrioridade(cpuStatus);
+  const ramPrioridade = calcularPrioridade(ramStatus);
+  const redePrioridade = calcularPrioridade(redeStatus);
+
+  document.getElementById('prioridade-cpu').textContent = cpuPrioridade;
+  document.getElementById('prioridade-ram').textContent = ramPrioridade;
+  document.getElementById('prioridade-rede').textContent = redePrioridade;
+
+  atualizarSumario(cpuStatus, ramStatus, redeStatus);
+
+  // Atualizar o gráfico com os novos dados
+  atualizarGrafico(cpuStatus, ramStatus, redeStatus);
+
+
+
+}
+
+
+const mensagensAlerta = [
+  "O uso de Rede Recebida ultrapassou o limite de GB Recebidos. Utilização atual: 0.41%, no servidor 2.",
+  "O uso de Rede Recebida ultrapassou o limite de GB Recebidos. Utilização atual: 0.26%, no servidor 1.",
+  "O uso de CPU ultrapassou o limite de Percentual de CPU. Utilização atual: 18.90%, no servidor 2.",
+  "O uso de CPU ultrapassou o limite de Percentual de CPU. Utilização atual: 18.80%, no servidor 2."
+];
+
+// Índice atual da mensagem
+let mensagemIndex = 0;
+
+// Função para atualizar a mensagem
+function atualizarMensagem() {
+  const mensagemElement = document.getElementById('mensagem-atual');
+  mensagemElement.textContent = mensagensAlerta[mensagemIndex];
+
+  // Avança para a próxima mensagem no array, reinicia se chegar ao final
+  mensagemIndex = (mensagemIndex + 1) % mensagensAlerta.length;
+}
+
+// Atualizar a mensagem a cada 10 segundos
+setInterval(atualizarMensagem, 10000);
+
+// Inicializar a mensagem ao carregar a página
+atualizarMensagem();
+    
+
+    
   }
+  
 
 
 
 
 
 
-  setInterval(updateTable, 5000);
+  setInterval(updateTable, 10000);
 </script>
 </body>
 
