@@ -31,9 +31,11 @@ services:
       - rede-compose
     depends_on:
       - imagembanco
-    entrypoint: ["./wait-for-it.sh", "imagembanco:3306", "--", "your-start-command"]
-    # Replace 'your-start-command' with the actual command to run your service
-    # Optionally, you can also add the healthcheck for imagemr if needed
+    environment:
+      DB_HOST: imagembanco
+      DB_NAME: SafeSever
+      DB_USER: root
+      DB_PASSWORD: urubu100
 
 networks:
   rede-compose:

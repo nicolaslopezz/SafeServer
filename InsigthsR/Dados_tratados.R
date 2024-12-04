@@ -9,16 +9,13 @@ feriados_frequencia <- dados %>%
   summarise(frequencia = n()) %>%
   arrange(desc(frequencia))
 
-
 feriado <- head(feriados_frequencia, 20)
 
-
 con <- dbConnect(MySQL(), 
-                 dbname = "SafeServer",   
-                 host = "imagembanco",             
-                 user = "root",            
+                 dbname = "SafeSever",   
+                 host = "imagembanco",  #serviço docker-compose
+                 user = "root",          
                  password = "urubu100")  
-
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (
@@ -28,6 +25,7 @@ dbExecute(con, "
   );
 ")
 
+# Inserir dados
 for (i in 1:nrow(feriado)) {
   dbExecute(con, "
     INSERT INTO feriado_freq (nomeFeriado, frequencia)
@@ -37,6 +35,5 @@ for (i in 1:nrow(feriado)) {
 }
 
 print(head(feriado, 5))
-
 
 dbDisconnect(con)
