@@ -2,17 +2,25 @@ body {
     overflow: hidden;
 }
 
-.servers {
+.servers-container {
     height: 10%;
     width: 85%;
     top: 2em;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    overflow: hidden;
+}
+
+.servers-slider {
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .server {
-    width: 150px;
+    min-width: 150px;
     height: 50px;
     margin-top: 10px;
     background-color: rgb(255, 255, 255);
@@ -21,15 +29,23 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+}
 
 .selected {
     border: 3px solid transparent;
     border-radius: 10px;
-    background: 
-        linear-gradient(to right, white, white), 
-        linear-gradient(to right bottom, rgb(44, 71, 190) , rgb(255, 0, 221)); 
+    background:
+        linear-gradient(to right, white, white),
+        linear-gradient(to right bottom, rgb(44, 71, 190), rgb(255, 0, 221));
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
 }
@@ -44,12 +60,12 @@ body {
     justify-content: center;
 }
 
-.chart{
+.chart {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 95%;
-    height: 48%;
+    height: 43%;
     margin: 8px;
 }
 
@@ -90,6 +106,7 @@ body {
     height: 60%;
     width: 80%;
     border-radius: 15px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .chart-stability {
@@ -104,8 +121,16 @@ body {
 .header {
     display: flex;
     flex-direction: row;
-    width: 678px;
+    width: 100%;
     justify-content: space-between;
+    align-items: center;
+}
+
+.header-osc {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -113,11 +138,30 @@ body {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    width: 30%;
+    width: 40%;
 }
 
 .select {
-    width: 48%;
+    width: 45%;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    background-color: white;
+}
+
+.select select {
+    display: none;
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
 }
 
 .chart-title {
@@ -130,17 +174,27 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border-radius: 10px;
 }
 
 .chart-gerente-03 {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border-radius: 10px;
 }
 
 .chart-oscilation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     height: 100%;
     width: 50%;
 }
@@ -149,7 +203,7 @@ body {
     width: 100%;
     height: 100%;
     padding: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
 }
 
@@ -157,7 +211,6 @@ body {
     width: 100%;
     height: 100%;
     padding: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
 }
-
