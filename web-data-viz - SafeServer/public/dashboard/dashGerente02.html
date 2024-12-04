@@ -129,12 +129,12 @@
           <div class="chart-stability">
             <div class="header">
               <div class="combo-box">
-                <select name="component" id="select_component_stab" class="select">
+                <select name="component" id="select_component" class="select">
                   <option value="" disabled selected>Componente</option>
                   <option value="cpu">CPU</option>
                   <option value="ram">RAM</option>
                 </select>
-                <select name="date" id="select_date_stab" class="select">
+                <select name="date" id="select_date" class="select">
                   <option value="" selected disabled>Data</option>
                 </select>
               </div>
@@ -166,17 +166,7 @@
             </div>
           </div>
           <div class="chart-oscilation">
-            <div class="header">
-              <div class="combo-box">
-                <select name="component" id="select_component_osc" class="select">
-                  <option value="" disabled selected>Componente</option>
-                  <option value="cpu">CPU</option>
-                  <option value="ram">RAM</option>
-                </select>
-                <select name="date" id="select_date_osc" class="select">
-                  <option value="" selected disabled>Data</option>
-                </select>
-              </div>
+            <div class="header-osc">
               <div class="chart-title">Taxa de Oscilação</div>
             </div>
             <div class="chart-gerente-03">
@@ -241,11 +231,12 @@
   updateVisibility();
 
   document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById('MyChart01').getContext('2d');
-    let meuGrafico;
+    const ctxStab = document.getElementById('MyChart01').getContext('2d');
+    const ctxOsc = document.getElementById('MyChart02').getContext('2d');
+    let graficoStab, graficoOsc;
 
-    const selectComponent = document.getElementById("select_component_stab");
-    const selectDate = document.getElementById("select_date_stab");
+    const selectComponent = document.getElementById("select_component");
+    const selectDate = document.getElementById("select_date");
     const serverElements = document.querySelectorAll(".server");
 
     let selectedServerId = null;
@@ -308,17 +299,18 @@
     [selectComponent, selectDate].forEach((select) => {
       select.addEventListener("change", () => {
         if (selectedServerId && selectComponent.value && selectDate.value) {
-          obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
+          atualizarGraficos(selectedServerId, selectComponent.value, selectDate.value);
         }
       });
     });
 
-    function obterDadosGrafico(serverId, component, date) {
-      console.log("Buscando dados do gráfico para:");
+    function atualizarGraficos(serverId, component, date) {
+      console.log("Atualizando gráficos para:");
       console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
 
       const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
 
+      // Atualizar gráfico de estabilidade
       fetch(`/dashGerente02/grafico?${queryString}`, {
         method: "GET",
         headers: {
@@ -328,28 +320,48 @@
         .then((resposta) => {
           if (resposta.ok) {
             resposta.json().then((data) => {
-              atualizarGrafico(data);
+              atualizarGraficoStab(data);
             });
           } else {
-            console.error("Erro ao buscar dados do gráfico.");
+            console.error("Erro ao buscar dados do gráfico de estabilidade.");
           }
         })
         .catch((erro) => {
-          console.error("Erro na requisição obterDadosGrafico:", erro);
+          console.error("Erro na requisição atualizarGraficos (estabilidade):", erro);
+        });
+
+      // Atualizar gráfico de oscilação
+      fetch(`/dashGerente02/grafico/osc?${queryString}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((resposta) => {
+          if (resposta.ok) {
+            resposta.json().then((data) => {
+              atualizarGraficoOsc(data);
+            });
+          } else {
+            console.error("Erro ao buscar dados do gráfico de oscilação.");
+          }
+        })
+        .catch((erro) => {
+          console.error("Erro na requisição atualizarGraficos (oscilação):", erro);
         });
     }
 
-    function atualizarGrafico(data) {
-      console.log("Atualizando gráfico com dados:", data);
+    function atualizarGraficoStab(data) {
+      console.log("Atualizando gráfico de estabilidade com dados:", data);
 
-      if (meuGrafico) {
-        meuGrafico.destroy();
+      if (graficoStab) {
+        graficoStab.destroy();
       }
 
       const labels = data.map((row) => `${row.hour}`);
       const values = data.map((row) => parseFloat(row.desvio_padrao));
 
-      meuGrafico = new Chart(ctx, {
+      graficoStab = new Chart(ctxStab, {
         type: 'bar',
         data: {
           labels: labels,
@@ -382,118 +394,17 @@
       });
     }
 
-  });
+    function atualizarGraficoOsc(data) {
+      console.log("Atualizando gráfico de oscilação com dados:", data);
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById('MyChart02').getContext('2d');
-    let meuGrafico;
-
-    const selectComponent = document.getElementById("select_component_osc");
-    const selectDate = document.getElementById("select_date_osc");
-    const serverElements = document.querySelectorAll(".server");
-
-    let selectedServerId = null;
-
-    serverElements.forEach((server) => {
-      server.addEventListener("click", function () {
-        selecionarServidor(server);
-      });
-    });
-
-    function selecionarServidor(server) {
-      serverElements.forEach((el) => el.classList.remove("selected"));
-      server.classList.add("selected");
-      selectedServerId = parseInt(server.getAttribute("data-id"), 10);
-
-      if (isNaN(selectedServerId)) {
-        console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
-        return;
-      }
-
-      console.log("Servidor selecionado:", selectedServerId);
-      obterDatas(selectedServerId);
-    }
-
-    function obterDatas(serverId) {
-      console.log("Buscando datas para o servidor:", serverId);
-
-      fetch(`/dashGerente02/datas?serverId=${serverId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then((resposta) => {
-          if (resposta.ok) {
-            resposta.json().then((dates) => {
-              atualizarDatas(dates);
-            });
-          } else {
-            console.error("Erro ao buscar datas.");
-          }
-        })
-        .catch((erro) => {
-          console.error("Erro na requisição obterDatas:", erro);
-        });
-    }
-
-    function atualizarDatas(dates) {
-      console.log("Atualizando dropdown de datas:", dates);
-
-      selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
-      dates.forEach((date) => {
-        const option = document.createElement("option");
-        option.value = date;
-        option.textContent = date;
-        selectDate.appendChild(option);
-      });
-    }
-
-    [selectComponent, selectDate].forEach((select) => {
-      select.addEventListener("change", () => {
-        if (selectedServerId && selectComponent.value && selectDate.value) {
-          obterDadosGrafico(selectedServerId, selectComponent.value, selectDate.value);
-        }
-      });
-    });
-
-    function obterDadosGrafico(serverId, component, date) {
-      console.log("Buscando dados do gráfico para:");
-      console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
-
-      const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
-
-      fetch(`/dashGerente02/grafico/osc?${queryString}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then((resposta) => {
-          if (resposta.ok) {
-            resposta.json().then((data) => {
-              atualizarGrafico(data);
-            });
-          } else {
-            console.error("Erro ao buscar dados do gráfico.");
-          }
-        })
-        .catch((erro) => {
-          console.error("Erro na requisição obterDadosGrafico:", erro);
-        });
-    }
-
-    function atualizarGrafico(data) {
-      console.log("Atualizando gráfico com dados:", data);
-
-      if (meuGrafico) {
-        meuGrafico.destroy();
+      if (graficoOsc) {
+        graficoOsc.destroy();
       }
 
       const labels = data.map((row) => `${row.hour}`);
       const values = data.map((row) => parseFloat(row.oscilacao));
 
-      meuGrafico = new Chart(ctx, {
+      graficoOsc = new Chart(ctxOsc, {
         type: 'line',
         data: {
           labels: labels,
@@ -526,8 +437,6 @@
       });
     }
   });
-
-
 
 
   // document.addEventListener("DOMContentLoaded", function () {

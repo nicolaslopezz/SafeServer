@@ -126,6 +126,14 @@ body {
     align-items: center;
 }
 
+.header-osc {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .combo-box {
     display: flex;
     justify-content: space-between;
