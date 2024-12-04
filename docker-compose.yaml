@@ -14,6 +14,11 @@ services:
       - "3306:3306"
     networks:
       - rede-compose
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-purubu100"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   imagemr:
     image: julianafreires/grupo:imagemr
@@ -21,6 +26,9 @@ services:
       - rede-compose
     depends_on:
       - imagembanco
+    entrypoint: ["./wait-for-it.sh", "imagembanco:3306", "--", "your-start-command"]
+    # Replace 'your-start-command' with the actual command to run your service
+    # Optionally, you can also add the healthcheck for imagemr if needed
 
 networks:
   rede-compose:
