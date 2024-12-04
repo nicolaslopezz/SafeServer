@@ -36,6 +36,7 @@ services:
       DB_NAME: SafeSever
       DB_USER: root
       DB_PASSWORD: urubu100
+    command: ["./wait-for-it.sh", "imagembanco:3306", "--", "Rscript", "/app/Dados_tratados.R"]
 
 networks:
   rede-compose:
