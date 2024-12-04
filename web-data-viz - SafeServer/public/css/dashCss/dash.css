@@ -620,6 +620,7 @@ input[type="range"] {
   margin: 0;
   font-weight: 500;
   text-align: center;
+  cursor: pointer;
 }
 
 
@@ -675,13 +676,40 @@ input[type="range"] {
 }
 
 .divbaixo {
-  width: 80%;
+  width: 100%;
   height: 50%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
+
+.containerBaixo {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.baixo1 {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.baixo2 {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
 
 .divisao2 {
   background-color: white;
@@ -705,14 +733,14 @@ input[type="range"] {
   align-items: center;
 }
 
-.DInteira{
+.DInteira {
   width: 100%;
   height: 100%;
   display: none;
   flex-direction: column;
 }
 
-.DCIMA{
+.DCIMA {
   width: 100%;
   height: 14%;
   display: none;
@@ -721,7 +749,7 @@ input[type="range"] {
   text-align: center;
 }
 
-.DBAIXO{
+.DBAIXO {
   width: 100%;
   height: 86%;
   display: none;
@@ -731,7 +759,8 @@ input[type="range"] {
 
 
 
-.comp, .comp2 {
+.comp,
+.comp2 {
   width: 100%;
   height: 10%;
   display: none;
@@ -741,7 +770,8 @@ input[type="range"] {
   text-align: center;
 }
 
-.comp p, .comp2 p {
+.comp p,
+.comp2 p {
   color: rgb(16, 46, 118);
   font-size: 21px;
   font-weight: 600;
@@ -763,7 +793,8 @@ input[type="range"] {
 
 
 
-.DE, .DE2 {
+.DE,
+.DE2 {
   background-color: white;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
   width: 49%;
@@ -776,7 +807,8 @@ input[type="range"] {
 }
 
 
-.D2, .D22 {
+.D2,
+.D22 {
   width: 100%;
   height: 90%;
   display: none;
@@ -786,7 +818,8 @@ input[type="range"] {
 
 }
 
-.DD, .DD2 {
+.DD,
+.DD2 {
   width: 100%;
   height: 10%;
   display: none;
@@ -794,7 +827,8 @@ input[type="range"] {
   align-items: end;
 }
 
-.DI, .DI2 {
+.DI,
+.DI2 {
   width: 50%;
   height: 100%;
   display: none;
@@ -804,7 +838,8 @@ input[type="range"] {
 
 }
 
-.DG, .DG2 {
+.DG,
+.DG2 {
   width: 50%;
   height: 100%;
   display: none;
@@ -815,7 +850,8 @@ input[type="range"] {
 }
 
 
-.info, .info2 {
+.info,
+.info2 {
   width: 85%;
   height: 95%;
   display: none;
@@ -824,7 +860,8 @@ input[type="range"] {
   align-items: center;
 }
 
-.info b, .info2 b {
+.info b,
+.info2 b {
   margin-bottom: 3%;
   color: rgb(16, 46, 118);
   font-size: 19px;
@@ -833,7 +870,8 @@ input[type="range"] {
   text-align: center;
 }
 
-.info span, .info2 span {
+.info span,
+.info2 span {
   margin: 0;
   padding: 0;
   text-align: center;
@@ -843,9 +881,9 @@ input[type="range"] {
 
 .buttonRelatorioAnalisar,
 .buttonRelatorioComparar {
-  width: 15%;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  width: 26%;
+  padding-top: 8px;
+  padding-bottom: 8px;
   color: rgb(16, 46, 118);
   background-color: white;
   border-radius: 20px;
@@ -1329,9 +1367,9 @@ table th {
 }
 
 .botaoOp:hover {
-  transform: scale(1.05); 
-  background-color: #283575; 
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+  transform: scale(1.05);
+  background-color: #283575;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1348,12 +1386,12 @@ table th {
   background-color: #202957;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
-#selectComponente:hover{
-  transform: scale(1.05); 
-  background-color: #283575; 
+#selectComponente:hover {
+  transform: scale(1.05);
+  background-color: #283575;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1404,7 +1442,7 @@ table th {
   display: flex;
   position: relative;
   left: -480px;
-  top: 60px; 
+  top: 60px;
   font-size: 21px;
   color: #202957;
   font-weight: bold;
@@ -1493,9 +1531,9 @@ table th {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.percentCpu:hover{
-  transform: translateY(-5px); 
-  background-color: #202957; 
+.percentCpu:hover {
+  transform: translateY(-5px);
+  background-color: #202957;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -1514,9 +1552,9 @@ table th {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.percentRam:hover{
+.percentRam:hover {
   transform: translateY(-5px);
-  background-color: #202957; 
+  background-color: #202957;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -1529,7 +1567,7 @@ table th {
   width: 250px;
   font-size: 16px;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border: 2px solid #404b8a;
   transition: transform 0.3s ease, background-color 0.3s ease;
   height: 200px;
@@ -1538,9 +1576,12 @@ table th {
 }
 
 .qtdAlertas:hover {
-  transform: translateY(-5px); /* Levanta a div ao passar o mouse */
-  background-color: #202957; /* Fundo muda levemente no hover */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
+  transform: translateY(-5px);
+  /* Levanta a div ao passar o mouse */
+  background-color: #202957;
+  /* Fundo muda levemente no hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+  /* Sombra mais intensa */
 }
 
 .qtdAlertasEnv {
@@ -1549,7 +1590,7 @@ table th {
   background-color: #202957;
   align-items: center;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border: 2px solid #404b8a;
   transition: transform 0.3s ease, background-color 0.3s ease;
   width: 250px;
@@ -1561,18 +1602,18 @@ table th {
 }
 
 .qtdAlertasEnv:hover {
-  transform: translateY(-5px); 
-  background-color: #202957; 
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); 
+  transform: translateY(-5px);
+  background-color: #202957;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
-.qtdAlertasRec{
+.qtdAlertasRec {
   display: flex;
   position: relative;
   background-color: #202957;
   align-items: center;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border: 2px solid #404b8a;
   transition: transform 0.3s ease, background-color 0.3s ease;
   width: 250px;
@@ -1585,8 +1626,8 @@ table th {
 
 .qtdAlertasRec:hover {
   transform: translateY(-5px);
-  background-color: #202957; 
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); 
+  background-color: #202957;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
 .gbRedeRec {
@@ -1604,9 +1645,9 @@ table th {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.gbRedeRec:hover{
-  transform: translateY(-5px); 
-  background-color: #202957; 
+.gbRedeRec:hover {
+  transform: translateY(-5px);
+  background-color: #202957;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -1647,9 +1688,9 @@ table th {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.gbRedeEnv:hover{
-  transform: translateY(-5px); 
-  background-color: #202957; 
+.gbRedeEnv:hover {
+  transform: translateY(-5px);
+  background-color: #202957;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
