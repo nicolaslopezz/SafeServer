@@ -1,19 +1,21 @@
-package org.example;
+package org.example.mappers;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.example.dados.Dado;
+import org.example.dados.DadoRegistro;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class MapperCsv implements Mapper {
+public class MapperCsvRegistro implements Mapper {
 
     public List<Dado> map(InputStream inputStream) throws IOException {
         CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
         CsvMapper mapper = new CsvMapper();
-        MappingIterator<Dado> dados = mapper.readerFor(Dado.class).with(csvSchema).readValues(inputStream);
+        MappingIterator<Dado> dados = mapper.readerFor(DadoRegistro.class).with(csvSchema).readValues(inputStream);
         return dados.readAll();
     }
 

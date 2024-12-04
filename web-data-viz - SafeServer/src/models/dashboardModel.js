@@ -38,15 +38,15 @@ function buscarCpueRam(idServidor) {
     return database.executar(instrucaoSql);
 }
 
-function buscarDadosRec(idServidor){
-    var instrucaoSql= `SELECT idServidor, recebido_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
+function buscarDadosRec(idServidor) {
+    var instrucaoSql = `SELECT idServidor, recebido_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
      WHERE fkServidor = ${idServidor};`
 
     console.log("Executando instrução SQL: " + instrucaoSql)
     return database.executar(instrucaoSql);
 }
 
-function buscarDadosEnv(idServidor){
+function buscarDadosEnv(idServidor) {
     var instrucaoSql = `SELECT idServidor, enviado_rede, time(dtHora) as hora from registro JOIN servidor ON idServidor = fkServidor 
      WHERE fkServidor = ${idServidor};`
 
@@ -117,7 +117,7 @@ ORDER BY mes DESC;
     return database.executar(instrucaoSql);
 }
 
-function analisar(servidores, periodos, componentes) { 
+function analisar(servidores, periodos, componentes) {
     const mapComponentes = {
         'cpu': 'percent_use_cpu',
         'ram': 'percent_use_ram',
@@ -132,7 +132,7 @@ function analisar(servidores, periodos, componentes) {
             s.identificacao AS servidor, 
             MIN(r.componenteDaVez) AS min, 
             MAX(r.componenteDaVez) AS max,
-            AVG(r.componenteDaVez) AS media 
+            ROUND(AVG(r.componenteDaVez), 2) AS media
         FROM 
             registro r
         JOIN 
@@ -147,44 +147,130 @@ function analisar(servidores, periodos, componentes) {
     //consultas dinâmicas para cada componente
     let unionQueries = componentes.map(componente => {
         let queryComponente = queryBase.replace(/'componenteDaVez'/g, `'${mapComponentes[componente]}'`)
-                                       .replace(/componenteDaVez/g, mapComponentes[componente]);
+            .replace(/componenteDaVez/g, mapComponentes[componente]);
         return queryComponente;
     }).join(' UNION ALL ');
-    
+
 
     return database.executar(unionQueries);
 }
 
+function analisar(servidores, periodos, componentes) {
+    const nomeBanco = {
+        'cpu': 'percent_use_cpu',
+        'ram': 'percent_use_ram',
+        'rede_recebida': 'recebido_rede',
+        'rede_enviada': 'enviado_rede'
+    };
 
-
-function comparar(servidores,periodos,componentes) { 
-
-
-    const instrucaoSql = `
+    // consulta base
+    let queryBase = `
         SELECT 
-    s.identificacao AS servidor,
-    COUNT(a.idAlerta) AS total_alertas
-FROM 
-    alerta a
-JOIN 
-    registro r ON a.fkRegistro = r.idRegistro
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
-    AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
-    AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')}) 
-GROUP BY 
-    s.identificacao 
-ORDER BY 
-    total_alertas DESC; 
-
+            'componenteDaVez' AS componente,
+            s.identificacao AS servidor, 
+            MIN(r.componenteDaVez) AS min, 
+            MAX(r.componenteDaVez) AS max,
+            ROUND(AVG(r.componenteDaVez), 2) AS media
+        FROM 
+            registro r
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(s => `'${s}'`).join(', ')})
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+        GROUP BY 
+            s.identificacao
     `;
 
-    console.log(instrucaoSql)
+    
+    let uniaoQuerys = componentes.map(componente => {
+        return queryBase.replace(/'componenteDaVez'/g, `'${nomeBanco[componente]}'`)
+                         .replace(/componenteDaVez/g, nomeBanco[componente]);
+    }).join(' UNION ALL ');
+
+    return database.executar(uniaoQuerys);
+}
+
+
+
+
+function comparar(servidores, periodos, componentes) {
+    const instrucaoSql = `
+        SELECT 
+            s.identificacao AS servidor,
+            COUNT(a.idAlerta) AS total_alertas
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            s.identificacao
+        ORDER BY 
+            total_alertas DESC;
+    `;
+
+    console.log(instrucaoSql);
 
     return database.executar(instrucaoSql);
 }
+
+
+function comparar2(servidores, periodos, componentes) {
+    const instrucaoSql = `
+        SELECT 
+            a.componente AS componente,
+            COUNT(a.idAlerta) AS total_alertas
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            a.componente
+        ORDER BY 
+            total_alertas DESC;
+    `;
+
+    console.log(instrucaoSql);
+
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -203,5 +289,6 @@ module.exports = {
     servidor,
     periodo,
     analisar,
-    comparar
+    comparar,
+    comparar2
 };

@@ -92,8 +92,8 @@
         <select id="selectServidor" class="botaoOp" onchange="plotarGrafico()">
         </select>
         <select id="selectComponente" class="botaoOp" onchange="plotarGrafico()">
-          <option value="">Componente: </option>
-          <option id="cpuRam" value="cpuRam" class="option">CPU E RAM %</option>
+          <option value="" class="botaoOp">Componente: </option>
+          <option selected id="cpuRam" value="cpuRam" class="option">CPU E RAM %</option>
           <option id="dadosRec" value="dadosRec" class="option">Dados Recebidos</option>
           <option id="dadosEnv" value="dadosEnv" class="option">Dados Enviados</option>
         </select>
@@ -239,7 +239,7 @@
       }
 
       function exibirGraficoDadosRec(idServidor) {
-
+        var idServidor = selectServidor.value;
         esconderTodosOsGraficos();
         let todosOsGraficos = document.getElementById("graficos");
 
@@ -257,7 +257,8 @@
       }
 
       function exibirGraficoDadosEnv(idServidor) {
-
+        
+        var idServidor = selectServidor.value;
         esconderTodosOsGraficos();
         let todosOsGraficos = document.getElementById("graficos");
 
@@ -332,7 +333,7 @@
           fetch(`/dashboard/buscarDadosRec/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
               response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 plotarGraficoRec(resposta, idServidor);
 
@@ -392,7 +393,7 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 60;
+        const limite = 20;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosRec = resposta.map((item) => item.recebido_rede).slice(-limite);
         var situacaoRec = `${dadosRec[dadosRec.length - 1]}`;
@@ -404,28 +405,35 @@
 
         redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${situacaoRec} GB`;
 
-          const agora = new Date();
-        const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+        let alertasRedeRec = +0;
 
+        const agora = new Date();
+        const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+        console.log("Data Atual:", agora);
+        console.log("Data de uma hora atrás:", umaHoraAtras);
+
+        // Filtrar dados da última hora
         const dadosUltimaHora = [];
         for (let i = 0; i < resposta.length; i++) {
-          const horaRegistro = new Date(resposta[i].hora);
+          const item = resposta[i];
+          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
+
+          const horaRegistro = new Date(dataCompleta);
+
+          // Adicionar apenas os registros dentro da última hora
           if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(resposta[i]);
+            dadosUltimaHora.push(item);
           }
         }
 
-        let alertasRedeRec = 0;
-
+        // Contar alertas na última hora
         for (let i = 0; i < dadosUltimaHora.length; i++) {
           const item = dadosUltimaHora[i];
-          labels.push(item.hora);
-          dadosRec.push(item.recebido_rede);
-
-          if (item.recebido_rede >= 75) {
+          if (item.recebido_rede >= 200) {
             alertasRedeRec++;
           }
-        }  
+        }
 
         if (situacaoRec >= 1.0) {
           redeRecebida.innerHTML = `<p style="color: red";> REDE RECEBIDA: ${situacaoRec} GB</p>`;
@@ -521,7 +529,7 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        const limite = 60;
+        const limite = 20;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosEnv = resposta.map((item) => item.enviado_rede).slice(-limite);
         var situacaoEnv = `${dadosEnv[dadosEnv.length - 1]}`;
@@ -530,28 +538,35 @@
         situacaoRedeEnv.innerHTML = `<p> Situação em Tempo Real: </p>`;
         redeEnviada.innerHTML = `<p> REDE ENVIADA: ${situacaoEnv} GB`;
 
+        let alertasRedeEnv = +0;
+
         const agora = new Date();
         const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+        console.log("Data Atual:", agora);
+        console.log("Data de uma hora atrás:", umaHoraAtras);
 
+        // Filtrar dados da última hora
         const dadosUltimaHora = [];
         for (let i = 0; i < resposta.length; i++) {
-          const horaRegistro = new Date(resposta[i].hora);
+          const item = resposta[i];
+          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
+
+          const horaRegistro = new Date(dataCompleta);
+
+          // Adicionar apenas os registros dentro da última hora
           if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(resposta[i]);
+            dadosUltimaHora.push(item);
           }
         }
 
-        let alertasRedeEnv = 0;
-
+        // Contar alertas na última hora
         for (let i = 0; i < dadosUltimaHora.length; i++) {
           const item = dadosUltimaHora[i];
-          labels.push(item.hora);
-          dadosEnv.push(item.enviado_rede);
-
-          if (item.enviado_rede >= 75) {
+          if (item.enviado_rede >= 200) {
             alertasRedeEnv++;
           }
-        }  
+        }
 
         if (situacaoEnv >= 1.0) {
           redeEnviada.innerHTML = `<p style="color: red";> REDE ENVIADA: ${situacaoEnv} GB</p>`;
@@ -647,10 +662,11 @@
         tituloDashCpuERam.innerHTML = `<p> Relação da porcentagem de CPU e RAM</p>`;
         situacao.innerHTML = `<p> Situação em Tempo Real: </p>`;
 
-        const limite = 100;
+        const limite = 15;
         const labels = resposta.map((item) => item.hora).slice(-limite);
         const dadosCpu = resposta.map((item) => item.percent_use_cpu).slice(-limite);
         const dadosRam = resposta.map((item) => item.percent_use_ram).slice(-limite);
+        let todosOsDados = resposta;
 
         var situacaoCpu = `${dadosCpu[dadosCpu.length - 1]}`;
         var situacaoRam = `${dadosRam[dadosRam.length - 1]}`;
@@ -658,26 +674,32 @@
         percentCpu.innerHTML = `<p>CPU: ${situacaoCpu} %</p>`;
         percentRam.innerHTML = `<p>RAM: ${situacaoRam} %</p>`;
 
+        let alertasCpu = +0;
+        let alertasRam = +0;
+
         const agora = new Date();
         const umaHoraAtras = new Date(agora.getTime() - 60 * 60 * 1000);
+        console.log("Data Atual:", agora);
+        console.log("Data de uma hora atrás:", umaHoraAtras);
 
+        // Filtrar dados da última hora
         const dadosUltimaHora = [];
         for (let i = 0; i < resposta.length; i++) {
-          const horaRegistro = new Date(resposta[i].hora);
+          const item = resposta[i];
+          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
+
+          const horaRegistro = new Date(dataCompleta);
+
+          // Adicionar apenas os registros dentro da última hora
           if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(resposta[i]);
+            dadosUltimaHora.push(item);
           }
         }
 
-        let alertasCpu = 0;
-        let alertasRam = 0;
-
+        // Contar alertas na última hora
         for (let i = 0; i < dadosUltimaHora.length; i++) {
           const item = dadosUltimaHora[i];
-          labels.push(item.hora);
-          dadosCpu.push(item.percent_use_cpu);
-          dadosRam.push(item.percent_use_ram);
-
           if (item.percent_use_cpu >= 75) {
             alertasCpu++;
           }
@@ -686,16 +708,19 @@
           }
         }
 
+        // Atualizar cores para CPU e RAM
         if (situacaoCpu >= 75) {
-          percentCpu.innerHTML = `<p style="color: red";> CPU:: ${situacaoCpu} %</p>`;
-        } if (situacaoRam >= 85) {
-          percentRam.innerHTML = `<p style="color: red";>RAM: ${situacaoRam} %</p>`
+          percentCpu.innerHTML = `<p style="color: red;">CPU: ${situacaoCpu} %</p>`;
+        }
+        if (situacaoRam >= 85) {
+          percentRam.innerHTML = `<p style="color: red;">RAM: ${situacaoRam} %</p>`;
         }
 
-        qtdAlertas.innerHTML = `<p> Quantidade de Alertas na última hora: <br>
-                                    CPU: ${alertasCpu} <br>
-                                    RAM: ${alertasRam} </p>`;
-
+        qtdAlertas.innerHTML = `
+        <p> Quantidade de Alertas na última hora: <br><br>
+        CPU: ${alertasCpu} <br>
+        RAM: ${alertasRam}</p>
+    `;
         // console.log('Labels:', labelsRecentes);
         // console.log('Dados CPU:', dadosCpuRecentes);
         // console.log('Dados RAM :', dadosRamRecentes);

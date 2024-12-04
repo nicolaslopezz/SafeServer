@@ -57,6 +57,11 @@ router.get("/comparar", function (req, res) {
     dashboardController.comparar(req, res);
 });
 
+router.get("/comparar2", function (req, res) {
+    dashboardController.comparar2(req, res);
+});
+
+
 
 
 
