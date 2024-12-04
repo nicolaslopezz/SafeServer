@@ -95,13 +95,17 @@
     </div>
     <div class="content-dash-gerente flex main">
       <div class="charts">
-        <div class="servers">
-          <div class="servers">
+        <div class="servers-container">
+          <button class="arrow left" id="prev">❮</button>
+          <div class="servers-slider">
             <div class="sv-01 server" data-id="1">Server 001</div>
             <div class="sv-02 server" data-id="2">Server 002</div>
             <div class="sv-03 server" data-id="3">Server 003</div>
             <div class="sv-04 server" data-id="4">Server 004</div>
+            <div class="sv-05 server" data-id="5">Server 005</div>
+            <div class="sv-05 server" data-id="5">Server 006</div>
           </div>
+          <button class="arrow right" id="next">❯</button>
         </div>
         <div class="stability chart">
           <div class="metric">
@@ -123,7 +127,6 @@
             </div>
           </div>
           <div class="chart-stability">
-
             <div class="header">
               <div class="combo-box">
                 <select name="component" id="select_component_stab" class="select">
@@ -201,6 +204,41 @@
 
 <script>
 
+  const slider = document.querySelector('.servers-slider');
+  const servers = document.querySelectorAll('.server');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+  let startIndex = 0;
+  const visibleServers = 5;
+
+  function updateVisibility() {
+    servers.forEach((server, index) => {
+      if (index >= startIndex && index < startIndex + visibleServers) {
+        server.style.display = 'flex';
+      } else {
+        server.style.display = 'none';
+      }
+    });
+  }
+
+  function slideNext() {
+    if (startIndex + visibleServers < servers.length) {
+      startIndex += visibleServers;
+      updateVisibility();
+    }
+  }
+
+  function slidePrev() {
+    if (startIndex - visibleServers >= 0) {
+      startIndex -= visibleServers;
+      updateVisibility();
+    }
+  }
+
+  nextButton.addEventListener('click', slideNext);
+  prevButton.addEventListener('click', slidePrev);
+
+  updateVisibility();
 
   document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('MyChart01').getContext('2d');
