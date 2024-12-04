@@ -10,6 +10,11 @@ services:
 
   imagembanco:
     image: julianafreires/grupo:imagembanco
+    environment:
+      MYSQL_ROOT_PASSWORD: urubu100
+      MYSQL_DATABASE: SafeSever
+      MYSQL_USER: root
+      MYSQL_PASSWORD: urubu100
     ports:
       - "3306:3306"
     networks:
