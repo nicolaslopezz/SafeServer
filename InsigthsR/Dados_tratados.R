@@ -1,8 +1,11 @@
+install.packages("readr")
+install.packages("dplyr")
+install.packages("RMySQL")
+
 library(dplyr)
 library(RMySQL)
-library(readr)
 
-dados <- read.csv("/app/feriados.csv")
+dados <- read.csv("/Users/JuuhF/Music/att.csv")
 
 feriados_frequencia <- dados %>%
   group_by(english_name) %>%
@@ -12,10 +15,10 @@ feriados_frequencia <- dados %>%
 feriado <- head(feriados_frequencia, 20)
 
 con <- dbConnect(MySQL(), 
-                 dbname = "SafeSever",   
-                 host = "imagembanco",  #serviço docker-compose
-                 user = "root",          
-                 password = "urubu100")  
+                 dbname = "SafeServer",   
+                 host = "localhost",             
+                 user = "root",            
+                 password = "batatas123")  
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (
@@ -25,15 +28,12 @@ dbExecute(con, "
   );
 ")
 
-# Inserir dados
 for (i in 1:nrow(feriado)) {
-  dbExecute(con, "
-    INSERT INTO feriado_freq (nomeFeriado, frequencia)
-    VALUES (?, ?)", 
-    params = list(feriado$english_name[i], feriado$frequencia[i])
-  )
+  query <- paste0("INSERT INTO feriado_freq(nomeFeriado, frequencia) 
+                   VALUES ('", feriado$english_name[i], "', ", 
+                  feriado$frequencia[i], ");")
+  dbExecute(con, query)
 }
 
-print(head(feriado, 5))
-
-dbDisconnect(con)
+feriado
+head(feriado, 5)
