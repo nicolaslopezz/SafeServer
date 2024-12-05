@@ -14,7 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-  
+
   <title>Dashboard-Gerente</title>
 </head>
 
@@ -192,6 +192,37 @@
 
     <script>
 
+      function selecionarPrimeiroServidor() {
+        const primeiroServidor = document.querySelector('.server');
+        if (primeiroServidor) {
+          selecionarServidor(primeiroServidor);
+        }
+      }
+
+      function selecionarPrimeiroComponente() {
+        const primeiroComponente = selectComponent.querySelector('option:not([disabled])');
+        if (primeiroComponente) {
+          selectComponent.value = primeiroComponente.value;
+          selectComponent.dispatchEvent(new Event('change'));
+        }
+      }
+
+      function selecionarUltimaData() {
+        const todasAsDatas = Array.from(selectDate.querySelectorAll('option:not([disabled])'));
+
+        if (todasAsDatas.length > 0) {
+          const ultimaData = todasAsDatas[todasAsDatas.length - 1];
+          selectDate.value = ultimaData.value;
+          selectDate.dispatchEvent(new Event('change'));
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        selecionarPrimeiroServidor();
+        selecionarPrimeiroComponente();
+        selecionarUltimaData();
+      });
+
       const slider = document.querySelector('.servers-slider');
       const servers = document.querySelectorAll('.server');
       const prevButton = document.getElementById('prev');
@@ -245,10 +276,10 @@
       });
 
       function selecionarServidor(server) {
-        const serverElements = document.querySelectorAll(".server"); // Atualizar dinamicamente a lista
+        const serverElements = document.querySelectorAll(".server");
 
-        serverElements.forEach((el) => el.classList.remove("selected")); // Remover a classe "selected"
-        server.classList.add("selected"); // Adicionar "selected" ao elemento clicado
+        serverElements.forEach((el) => el.classList.remove("selected"));
+        server.classList.add("selected");
 
         selectedServerId = parseInt(server.getAttribute("data-id"), 10);
 
@@ -294,6 +325,8 @@
           option.textContent = date;
           selectDate.appendChild(option);
         });
+
+        selecionarUltimaData();
       }
 
       [selectComponent, selectDate].forEach((select) => {
@@ -542,6 +575,8 @@
 
             sliderContainer.appendChild(serverDiv);
           });
+
+          selecionarPrimeiroServidor();
         } catch (error) {
           console.error('Erro ao carregar servidores:', error);
           sliderContainer.innerHTML = '<p>Erro ao carregar servidores.</p>'; // Mostra uma mensagem de erro
