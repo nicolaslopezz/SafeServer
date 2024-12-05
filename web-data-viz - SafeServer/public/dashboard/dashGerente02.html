@@ -111,9 +111,9 @@
           <div class="metric">
             <div class="horario-maior-stab metric-box">
               <div class="text-box">
-                Horário de Maior Estabilidade
+                Quantidade de vezes acima do limite
               </div>
-              <div class="values">
+              <div class="values" id="maiorEstabilidade">
 
               </div>
             </div>
@@ -121,7 +121,7 @@
               <div class="text-box">
                 Horário de Menor Estabilidade
               </div>
-              <div class="values">
+              <div class="values" id="menorEstabilidade">
 
               </div>
             </div>
@@ -148,19 +148,20 @@
 
         <div class="oscilation chart">
           <div class="metric">
+            
+            <div class="horario-menor-osc metric-box">
+              <div class="text-box">
+                Quantidade de vezes acima do limite
+              </div>
+              <div class="values" id="menorOscilacao">
+
+              </div>
+            </div>
             <div class="horario-maior-osc metric-box">
               <div class="text-box">
                 Horário de Maior Oscilação
               </div>
-              <div class="values">
-
-              </div>
-            </div>
-            <div class="horario-menor-osc metric-box">
-              <div class="text-box">
-                Horário de Menor Oscilação
-              </div>
-              <div class="values">
+              <div class="values" id="maiorOscilacao">
 
               </div>
             </div>
@@ -182,7 +183,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
   integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-qF3T5CaMgSRNrxzu69V3ZrYGnrbRMIqrkE+OrE01DDsYDNo8R1VrtYL8pk+fqhKxUBXQ2z+yV/irk+AbbHtBAg==" ></script>
 
 <script src="../js/script.js"></script>
 <script>
@@ -231,6 +232,8 @@
   updateVisibility();
 
   document.addEventListener("DOMContentLoaded", function () {
+
+    
     const ctxStab = document.getElementById('MyChart01').getContext('2d');
     const ctxOsc = document.getElementById('MyChart02').getContext('2d');
     let graficoStab, graficoOsc;
@@ -300,6 +303,7 @@
       select.addEventListener("change", () => {
         if (selectedServerId && selectComponent.value && selectDate.value) {
           atualizarGraficos(selectedServerId, selectComponent.value, selectDate.value);
+          atualizarMetricas(selectedServerId, selectComponent.value, selectDate.value)
         }
       });
     });
@@ -320,7 +324,7 @@
         .then((resposta) => {
           if (resposta.ok) {
             resposta.json().then((data) => {
-              atualizarGraficoStab(data);
+              atualizarGraficoStab(data, component);
             });
           } else {
             console.error("Erro ao buscar dados do gráfico de estabilidade.");
@@ -340,7 +344,7 @@
         .then((resposta) => {
           if (resposta.ok) {
             resposta.json().then((data) => {
-              atualizarGraficoOsc(data);
+              atualizarGraficoOsc(data, component);
             });
           } else {
             console.error("Erro ao buscar dados do gráfico de oscilação.");
@@ -351,7 +355,7 @@
         });
     }
 
-    function atualizarGraficoStab(data) {
+    function atualizarGraficoStab(data, component) {
       console.log("Atualizando gráfico de estabilidade com dados:", data);
 
       if (graficoStab) {
@@ -360,6 +364,38 @@
 
       const labels = data.map((row) => `${row.hour}`);
       const values = data.map((row) => parseFloat(row.desvio_padrao));
+
+      // Condicional para a linha de anotação com base no componente
+      let annotation = {};
+      if (component === 'ram') {
+        annotation = {
+          type: 'line',
+          yMin: 8,  // Exemplo de valor para RAM, modifique conforme necessário
+          yMax: 8,  // A linha horizontal será no valor 10
+          borderColor: 'red',
+          borderWidth: 2,
+          label: {
+            content: 'Limite RAM',
+            enabled: true,
+            position: 'center',
+            font: { weight: 'bold', size: 14 }
+          }
+        };
+      } else if (component === 'cpu') {
+        annotation = {
+          type: 'line',
+          yMin: 25,  // Exemplo de valor para CPU, modifique conforme necessário
+          yMax: 25,  // A linha horizontal será no valor 5
+          borderColor: 'blue',
+          borderWidth: 2,
+          label: {
+            content: 'Limite CPU',
+            enabled: true,
+            position: 'center',
+            font: { weight: 'bold', size: 14 }
+          }
+        };
+      }
 
       graficoStab = new Chart(ctxStab, {
         type: 'bar',
@@ -377,15 +413,16 @@
           scales: {
             y: {
               beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Desvio Padrão'
-              }
+              title: { display: true, text: 'Desvio Padrão' }
             },
             x: {
-              title: {
-                display: true,
-                text: 'Hora'
+              title: { display: true, text: 'Hora' }
+            }
+          },
+          plugins: {
+            annotation: {
+              annotations: {
+                linhaLimite: annotation // Anotação condicional com base no componente
               }
             }
           },
@@ -394,7 +431,7 @@
       });
     }
 
-    function atualizarGraficoOsc(data) {
+    function atualizarGraficoOsc(data, component) {
       console.log("Atualizando gráfico de oscilação com dados:", data);
 
       if (graficoOsc) {
@@ -403,6 +440,38 @@
 
       const labels = data.map((row) => `${row.hour}`);
       const values = data.map((row) => parseFloat(row.oscilacao));
+
+      // Condicional para a linha de anotação com base no componente
+      let annotation = {};
+      if (component === 'ram') {
+        annotation = {
+          type: 'line',
+          yMin: 130,  // Exemplo de valor para RAM, modifique conforme necessário
+          yMax: 130,  // A linha horizontal será no valor 15
+          borderColor: 'green',
+          borderWidth: 2,
+          label: {
+            content: 'Limite RAM',
+            enabled: true,
+            position: 'center',
+            font: { weight: 'bold', size: 14 }
+          }
+        };
+      } else if (component === 'cpu') {
+        annotation = {
+          type: 'line',
+          yMin: 7500,  // Exemplo de valor para CPU, modifique conforme necessário
+          yMax: 7500,  // A linha horizontal será no valor 20
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            content: 'Limite CPU',
+            enabled: true,
+            position: 'center',
+            font: { weight: 'bold', size: 14 }
+          }
+        };
+      }
 
       graficoOsc = new Chart(ctxOsc, {
         type: 'line',
@@ -419,16 +488,17 @@
         options: {
           scales: {
             y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Oscilação'
-              }
+              beginAtZero: false,
+              title: { display: true, text: 'Oscilação (%)' }
             },
             x: {
-              title: {
-                display: true,
-                text: 'Hora'
+              title: { display: true, text: 'Hora' }
+            }
+          },
+          plugins: {
+            annotation: {
+              annotations: {
+                linhaLimite: annotation // Anotação condicional com base no componente
               }
             }
           },
@@ -436,7 +506,139 @@
         }
       });
     }
+
   });
+
+  function atualizarMetricas(serverId, component, date) {
+    console.log("Atualizando métricas para:", serverId, component, date);
+
+    const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+    var limiteStab;
+    var limiteOsc;
+    
+    if (component === 'ram') {
+      limiteStab = 8;
+      limiteOsc = 130;
+    } else if (component === 'cpu') {
+      limiteStab = 25
+      limiteOsc = 7500;
+    }
+
+    fetch(`/dashGerente02/metricas/stab?${queryString}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((data) => {
+            console.log("Métricas recebidas:", data);
+            atualizarMetricaEstabilidade(data);
+          });
+        } else {
+          console.error("Erro ao buscar métricas.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição atualizarMetricas:", erro);
+      });
+
+    fetch(`/dashGerente02/metricas/osc?${queryString}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((data) => {
+            console.log("Métricas recebidas:", data);
+            atualizarMetricaOscilacao(data);
+          });
+        } else {
+          console.error("Erro ao buscar métricas.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição atualizarMetricas:", erro);
+      });
+
+      const queryString2 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteStab}`;
+
+    fetch(`/dashGerente02/metricas/stab/exc?${queryString2}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((data) => {
+            console.log("Métricas recebidas:", data);
+            atualizarMetricaExcedentesEstabilidade(data);
+          });
+        } else {
+          console.error("Erro ao buscar métricas.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição atualizarMetricas:", erro);
+      });
+
+      const queryString3 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteOsc}`;
+
+      fetch(`/dashGerente02/metricas/osc/exc?${queryString3}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((data) => {
+            console.log("Métricas recebidas:", data);
+            atualizarMetricaExcedentesOscilacao(data);
+          });
+        } else {
+          console.error("Erro ao buscar métricas.");
+        }
+      })
+      .catch((erro) => {
+        console.error("Erro na requisição atualizarMetricas:", erro);
+      });
+  }
+
+  function atualizarMetricaEstabilidade(data) {
+    const maiorEstabilidade = data.maiorEstabilidade;
+    const menorEstabilidade = data.menorEstabilidade;
+
+    // document.getElementById("maiorEstabilidade").textContent =
+    //   `${maiorEstabilidade.hour}h`;
+    document.getElementById("menorEstabilidade").textContent =
+      `${menorEstabilidade.hour}h`;
+  }
+
+  function atualizarMetricaOscilacao(data) {
+    const maiorOscilacao = data.maiorOscilacao;
+    const menorOscilacao = data.menorOscilacao;
+
+    document.getElementById("maiorOscilacao").textContent =
+      `${maiorOscilacao.hour}h`;
+  }
+
+  function atualizarMetricaExcedentesEstabilidade(data) {
+    const contagemExcedentes = data.contagemExcedentes;
+
+    document.getElementById("maiorEstabilidade").textContent = `${contagemExcedentes.quantidade_excedente}`;
+  }
+
+  function atualizarMetricaExcedentesOscilacao(data) {
+    const contagemExcedentes = data.contagemExcedentes;
+
+    document.getElementById("menorOscilacao").textContent = `${contagemExcedentes.quantidade_excedente}`;
+  }
 
 
   // document.addEventListener("DOMContentLoaded", function () {

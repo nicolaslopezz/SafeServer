@@ -171,6 +171,104 @@ async function dadosGraficoOscilacao(serverId, component, date) {
   }
 }
 
+async function getMaiorEstabilidade(serverId, component, date) {
+  var instrucaoSql = `
+  SELECT HOUR(timestamp) AS hour, MIN(desvio_padrao) AS min_stability
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+    GROUP BY HOUR(timestamp)
+    ORDER BY min_stability ASC
+    LIMIT 1;
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  return await database.executar(instrucaoSql, [serverId, component, date]);
+}
+
+async function getMenorEstabilidade(serverId, component, date) {
+  var instrucaoSql = `
+  SELECT HOUR(timestamp) AS hour, MAX(desvio_padrao) AS max_stability
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+    GROUP BY HOUR(timestamp)
+    ORDER BY max_stability DESC
+    LIMIT 1;
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  return await database.executar(instrucaoSql, [serverId, component, date]);
+}
+
+async function getMaiorOscilacao(serverId, component, date) {
+  var instrucaoSql = `
+  SELECT HOUR(timestamp) AS hour, MAX(oscilacao) AS max_oscillation
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+    GROUP BY HOUR(timestamp)
+    ORDER BY max_oscillation DESC
+    LIMIT 1;
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  return await database.executar(instrucaoSql, [serverId, component, date]);
+}
+
+async function getMenorOscilacao(serverId, component, date) {
+  var instrucaoSql = `
+  SELECT HOUR(timestamp) AS hour, MIN(oscilacao) AS min_oscillation
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+    GROUP BY HOUR(timestamp)
+    ORDER BY min_oscillation ASC
+    LIMIT 1;
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  return await database.executar(instrucaoSql, [serverId, component, date]);
+}
+
+async function contarExcedentesDesvioPadrao(serverId, component, date, limite) {
+  var instrucaoSql = `
+    SELECT COUNT(*) AS quantidade_excedente
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+      AND desvio_padrao >= ${limite};
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+
+  return await database.executar(instrucaoSql, [serverId, component, date, limite])
+}
+
+async function contarExcedentesOscilacao(serverId, component, date, limite) {
+  var instrucaoSql = `
+    SELECT COUNT(*) AS quantidade_excedente
+    FROM estatisticas_horarias
+    WHERE fkServidor = ${serverId}
+      AND componente = "${component}"
+      AND DATE(timestamp) = "${date}"
+      AND oscilacao >= ${limite};
+  `;
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", [serverId, component, date]);
+  
+  return await database.executar(instrucaoSql, [serverId, component, date, limite])
+}
+
 module.exports = {
   getServidores,
   getDesvioPadraoCPU,
@@ -179,5 +277,11 @@ module.exports = {
   datasDisponiveis,
   dadosGrafico,
   getDados,
-  dadosGraficoOscilacao
+  dadosGraficoOscilacao,
+  getMaiorEstabilidade,
+  getMenorEstabilidade,
+  getMaiorOscilacao,
+  getMenorOscilacao,
+  contarExcedentesDesvioPadrao,
+  contarExcedentesOscilacao
 };

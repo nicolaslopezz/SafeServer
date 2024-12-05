@@ -89,7 +89,7 @@ body {
 .metric-box {
     display: flex;
     height: 70%;
-    width: 40%;
+    width: 50%;
     align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
@@ -104,7 +104,7 @@ body {
 .values {
     background-color: white;
     height: 60%;
-    width: 80%;
+    width: 70%;
     border-radius: 15px;
     box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
 }
@@ -167,6 +167,14 @@ body {
 .chart-title {
     width: fit-content;
     font-size: 1.2em;
+    font-weight: bold;
+}
+
+.values {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
     font-weight: bold;
 }
 
