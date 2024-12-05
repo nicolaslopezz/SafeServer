@@ -370,7 +370,7 @@
         totalAlertas.ram += dados[i].alertas;
       } else if (dados[i].componente == "rede_enviado") {
         totalAlertas.rede_env += dados[i].alertas;
-      } else if (dados[i].componente == "rede_recebido") {
+      } else if (dados[i].componente == "rede_recebida") {
         totalAlertas.rede_receb += dados[i].alertas;
       }
     }
@@ -410,7 +410,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = [dados[i]]
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
-        } else if (dados[i].componente == "rede_recebido") {
+        } else if (dados[i].componente == "rede_recebida") {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
@@ -425,7 +425,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam.push(dados[i])
         } else if (dados[i].componente == 'rede_enviado') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv.push(dados[i])
-        } else {
+        } else if (dados[i].componente == 'rede_recebida'){
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
         }
       }
@@ -488,7 +488,8 @@
       ano: dados[dados.length - 1].ano,
     };
 
-    console.log(regioesDados[0].listRedeRec)
+
+    console.log(regioesDados)
     for (i = 0; i < regioesDados.length; i++) {
       auxCpu = []
       if (compararData(regioesDados[i].listCpu[0], data_inicial)) {
