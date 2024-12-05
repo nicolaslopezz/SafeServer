@@ -368,7 +368,7 @@
         totalAlertas.cpu += dados[i].alertas;
       } else if (dados[i].componente == "ram") {
         totalAlertas.ram += dados[i].alertas;
-      } else if (dados[i].componente == "rede_enviado") {
+      } else if (dados[i].componente == "rede_enviada") {
         totalAlertas.rede_env += dados[i].alertas;
       } else if (dados[i].componente == "rede_recebida") {
         totalAlertas.rede_receb += dados[i].alertas;
@@ -405,7 +405,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = [dados[i]]
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
-        } else if (dados[i].componente == 'rede_enviado') {
+        } else if (dados[i].componente == 'rede_enviada') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = [dados[i]]
@@ -423,7 +423,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu.push(dados[i])
         } else if (dados[i].componente == 'ram') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam.push(dados[i])
-        } else if (dados[i].componente == 'rede_enviado') {
+        } else if (dados[i].componente == 'rede_enviada') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv.push(dados[i])
         } else if (dados[i].componente == 'rede_recebida'){
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
