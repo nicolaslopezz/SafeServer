@@ -5,7 +5,7 @@ install.packages("RMySQL")
 library(dplyr)
 library(RMySQL)
 
-dados <- read.csv("/app/feriados.csv")
+dados <- read.csv("/Users/JuuhF/Music/att.csv")
 
 feriados_frequencia <- dados %>%
   group_by(english_name) %>%
@@ -16,9 +16,9 @@ feriado <- head(feriados_frequencia, 20)
 
 con <- dbConnect(MySQL(), 
                  dbname = "SafeServer",   
-                 host = "imagembanco",             
+                 host = "localhost",             
                  user = "root",            
-                 password = "urubu100")  
+                 password = "batatas123")  
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (

@@ -76,9 +76,85 @@ async function dadosGraficoOscilacao(req, res) {
     }
 }
 
+async function getMaiorMenorEstabilidade(req, res) {
+    var { serverId, component, date } = req.query;
+    try {
+        var maiorEstabilidade = await dashGerente02Model.getMaiorEstabilidade(serverId, component, date);
+        var menorEstabilidade = await dashGerente02Model.getMenorEstabilidade(serverId, component, date);
+
+        res.json({
+            maiorEstabilidade: maiorEstabilidade[0],
+            menorEstabilidade: menorEstabilidade[0]
+        });
+    } catch (error) {
+        console.error("Erro ao buscar dados do gráfico de estabilidade:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados do gráfico de estabilidade.' });
+    }
+}
+
+async function getMaiorMenorOscilacao(req, res) {
+    var { serverId, component, date } = req.query;
+    try {
+        var maiorOscilacao = await dashGerente02Model.getMaiorOscilacao(serverId, component, date);
+        var menorOscilacao = await dashGerente02Model.getMenorOscilacao(serverId, component, date);
+
+        res.json({
+            maiorOscilacao: maiorOscilacao[0],
+            menorOscilacao: menorOscilacao[0]
+        });
+    } catch (error) {
+        console.error("Erro ao buscar dados do gráfico de oscilação:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados do gráfico de oscilação.' });
+    }
+}
+
+async function contarExcedentesDesvioPadrao(req, res) {
+    var { serverId, component, date, limite } = req.query;
+    try {
+        var contagemExcedentes = await dashGerente02Model.contarExcedentesDesvioPadrao(serverId, component, date, limite);
+
+        res.json({
+            contagemExcedentes: contagemExcedentes[0]
+        });
+    } catch (error) {
+        console.error("Erro ao buscar dados de excedentes de desvio padrão:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados de excedentes de desvio padrão' });
+    }
+}
+
+async function contarExcedentesOscilacao(req, res) {
+    var { serverId, component, date, limite } = req.query;
+    try {
+        var contagemExcedentes = await dashGerente02Model.contarExcedentesOscilacao(serverId, component, date, limite);
+
+        res.json({
+            contagemExcedentes: contagemExcedentes[0]
+        });
+    } catch (error) {
+        console.error("Erro ao buscar dados de excedentes de oscilação:", error);
+        res.status(500).json({ error: 'Erro ao buscar dados de excedentes de oscilação' });
+    }
+}
+
+async function obterServidores(req, res) {
+    var empresa = req.params.empresa;
+    try {
+        var servers = await dashGerente02Model.obterServidores(empresa);
+        res.json(servers);
+    } catch (error) {
+        console.error("Erro ao buscar servidores cadastrados:", error);
+        res.status(500).json({ error: 'Erro ao buscar servidores cadastrados.' });
+    }
+}
+
 module.exports = {
     calcularDesvioPadraoeOscilacao,
     datasDisponiveis,
     dadosGrafico,
-    dadosGraficoOscilacao
+    dadosGraficoOscilacao,
+    getMaiorMenorEstabilidade,
+    getMaiorMenorOscilacao,
+    contarExcedentesDesvioPadrao,
+    contarExcedentesOscilacao,
+    obterServidores
 }

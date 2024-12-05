@@ -1,6 +1,6 @@
 services:
   imagemsite:
-    image: julianafreires/site:imagemsite
+    image: julianafreires/grupo:imagemsite
     ports:
       - "3333:3333"
     networks:
@@ -9,19 +9,11 @@ services:
       - imagembanco
 
   imagembanco:
-    image: julianafreires/site:imagembanco
+    image: julianafreires/grupo:imagembanco
     ports:
       - "3306:3306"
     networks:
       - rede-compose
-
-  imagemr:
-    image: julianafreires/site:imagemr
-    networks:
-      - rede-compose
-    depends_on:
-      - imagembanco
-    command: ["Rscript", "/app/Dados_tratados.R"]
 
 networks:
   rede-compose:

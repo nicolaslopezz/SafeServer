@@ -241,15 +241,27 @@
       auxRedeRec = []
       auxLabels = []
 
+      aux = true
       for(j = 0; j < regioes.length; j++) {
         if (regioesDados[j].on) {
-          for (i = auxFrom; i <= auxTo; i++) {
-            auxCont++
-            auxCpu.push(plotCpu[i])
-            auxRam.push(plotRam[i])
-            auxRedeEnv.push(plotRedeEnv[i])
-            auxRedeRec.push(plotRedeRec[i])
-            auxLabels.push(labelsDatas[i])
+          if (aux) {
+            for (i = auxFrom; i <= auxTo; i++) {
+              auxCont++
+              auxCpu.push(plotCpu[i])
+              auxRam.push(plotRam[i])
+              auxRedeEnv.push(plotRedeEnv[i])
+              auxRedeRec.push(plotRedeRec[i])
+              auxLabels.push(labelsDatas[i])
+            }
+            aux = false
+          } else {
+            for (i = auxFrom; i <= auxTo; i++) {
+              auxCont++
+              auxCpu[i] += plotCpu[i]
+              auxRam[i] += plotRam[i]
+              auxRedeEnv[i] += plotRedeEnv[i]
+              auxRedeRec[i] += plotRedeRec[i]
+            }
           }
         }
       }
@@ -268,19 +280,19 @@
         datasets: [{
           label: "Alertas Rede Enviados",
           data: auxRedeEnv,
-          backgroundColor: '#485f96'
+          backgroundColor: 'rgba(30,144,255, 0.7)'
         }, {
           label: "Alertas Rede Recebidos",
           data: auxRedeRec,
-          backgroundColor: '#161d2e'
+          backgroundColor: 'rgba(128,0,128, 0.7)'
         }, {
           label: "Alertas CPU",
           data: auxCpu,
-          backgroundColor: '#e28743'
+          backgroundColor: 'rgba(255,0,0, 0.7)'
         }, {
           label: "Alertas Ram",
           data: auxRam,
-          backgroundColor: '#c6ccdd'
+          backgroundColor: 'rgba(255,20,147, 0.7)'
         },
         ]
       }
@@ -358,7 +370,7 @@
         totalAlertas.ram += dados[i].alertas;
       } else if (dados[i].componente == "rede_enviado") {
         totalAlertas.rede_env += dados[i].alertas;
-      } else if (dados[i].componente == "rede_recebido") {
+      } else if (dados[i].componente == "rede_recebida") {
         totalAlertas.rede_receb += dados[i].alertas;
       }
     }
@@ -398,7 +410,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = [dados[i]]
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec = []
-        } else if (dados[i].componente == "rede_recebido") {
+        } else if (dados[i].componente == "rede_recebida") {
           regioesDados[regioes.indexOf(dados[i].regiao)].listCpu = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam = []
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv = []
@@ -413,7 +425,7 @@
           regioesDados[regioes.indexOf(dados[i].regiao)].listRam.push(dados[i])
         } else if (dados[i].componente == 'rede_enviado') {
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeEnv.push(dados[i])
-        } else {
+        } else if (dados[i].componente == 'rede_recebida'){
           regioesDados[regioes.indexOf(dados[i].regiao)].listRedeRec.push(dados[i])
         }
       }
@@ -445,10 +457,10 @@
           label: 'Dados Alerta Total',
           data: [totalAlertas.ram, totalAlertas.cpu, totalAlertas.rede_env, totalAlertas.rede_receb],
           backgroundColor: [
-            '#e28743',
-            '#c6ccdd',
-            '#485f96',
-            '#161d2e'
+          'rgba(30,144,255, 0.7)',
+          'rgba(128,0,128, 0.7)',
+          'rgba(255,0,0, 0.7)',
+          'rgba(255,20,147, 0.7)'
           ]
         }]
       }, options: {
@@ -476,7 +488,8 @@
       ano: dados[dados.length - 1].ano,
     };
 
-    console.log(regioesDados[0].listRedeRec)
+
+    console.log(regioesDados)
     for (i = 0; i < regioesDados.length; i++) {
       auxCpu = []
       if (compararData(regioesDados[i].listCpu[0], data_inicial)) {
@@ -602,9 +615,6 @@
       auxRede = null
     }
 
-    console.log(regioesDados[0].listRedeRec)
-
-
     // Criando os labels com Todas as datas
     for (dataDaVez = data_inicial; dataDaVez.dia != adicionarUmDia(data_final).dia || dataDaVez.mes != adicionarUmDia(data_final).mes || dataDaVez.ano != adicionarUmDia(data_final).ano; dataDaVez = adicionarUmDia(dataDaVez)) {
       labelsDatas.push(`${dataDaVez.dia}/${dataDaVez.mes}/${(dataDaVez.ano).toString()[2]}${(dataDaVez.ano).toString()[3]}`)
@@ -633,8 +643,12 @@
         auxRam.push(plotRam[i])
         auxRedeEnv.push(plotRedeEnv[i])
         auxRedeRec.push(plotRedeRec[i])
+      }
+
+      for (i = labelsDatas.length - 1; i > labelsDatas.length - 61; i--) {
         auxLabels.push(labelsDatas[i])
       }
+
       auxCpu.reverse()
       auxRam.reverse()
       auxRedeEnv.reverse()
@@ -657,19 +671,19 @@
         datasets: [{
           label: "Alertas Rede Enviados",
           data: auxRedeEnv,
-          backgroundColor: '#485f96'
+          backgroundColor: 'rgba(30,144,255, 0.7)'
         }, {
           label: "Alertas Rede Recebidos",
           data: auxRedeRec,
-          backgroundColor: '#161d2e'
+          backgroundColor: 'rgba(128,0,128, 0.7)'
         }, {
           label: "Alertas CPU",
           data: auxCpu,
-          backgroundColor: '#e28743'
+          backgroundColor: 'rgba(255,0,0, 0.7)'
         }, {
           label: "Alertas Ram",
           data: auxRam,
-          backgroundColor: '#c6ccdd'
+          backgroundColor: 'rgba(255,20,147, 0.7)'
         },
         ]
       }

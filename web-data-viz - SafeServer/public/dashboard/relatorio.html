@@ -32,6 +32,8 @@
   <!-- scripts do Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 
 
   <!-- icone font awesom -->
@@ -183,7 +185,6 @@
                 </select>
                 <select class="selectpicker" data-none-selected-text="Período" id="periodoRelatorio"
                   onchange="obterPeriodoRelatorio()" multiple data-live-search="true">
-
                 </select>
 
                 <select class="selectpicker" data-none-selected-text="Componente" id="componenteRelatorio"
@@ -193,13 +194,26 @@
                   <option>Dados enviados da rede</option>
                   <option>Dados recebidos da rede</option>
 
+
+
                 </select>
 
               </div>
 
               <div class="divbaixo">
-                <button class="buttonRelatorioAnalisar" onclick="analisar()">Analisar</button>
-                <button class="buttonRelatorioComparar" onclick="comparar()">Alertas</button>
+                <div class="containerBaixo">
+                  <div class="baixo1">
+                    <button class="buttonRelatorioAnalisar" onclick="analisar()">Analisar</button>
+                  </div>
+                  <div class="baixo2">
+                    <button class="buttonRelatorioComparar" onclick="comparar()"> Ver Alertas</button>
+                    <div class="wrapper">
+                      <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
+                      <div class="tooltip">Selecione ao menos um servidor, um período e um componente para analisar ou visualizar os alertas. Os períodos são acumulativos. Por exemplo, para dados anuais, selecione de janeiro a dezembro. Ajuste sua análise para visualizar os dados de forma semanal, mensal, semestral ou anual, conforme a sua necessidade.
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
@@ -439,32 +453,34 @@
   }
 
   function obterPeriodoRelatorio() {
-    peridoSelecionado = [];
-    const select = document.getElementById("periodoRelatorio");
+  let periodoSelecionado = [];
+  const select = document.getElementById("periodoRelatorio");
 
-    const mes = {
-      "Janeiro": 1,
-      "Fevereiro": 2,
-      "Março": 3,
-      "Abril": 4,
-      "Maio": 5,
-      "Junho": 6,
-      "Julho": 7,
-      "Agosto": 8,
-      "Setembro": 9,
-      "Outubro": 10,
-      "Novembro": 11,
-      "Dezembro": 12
-    }
-
-    for (let i = 0; i < select.selectedOptions.length; i++) {
-      const nomeMes = select.selectedOptions[i].value;
-      peridoSelecionado.push(mes[nomeMes]);
-    }
-    return peridoSelecionado
-    console.log("periodos selecionados:", peridoSelecionado);
-
+  const mes = {
+    "Janeiro": 1,
+    "Fevereiro": 2,
+    "Março": 3,
+    "Abril": 4,
+    "Maio": 5,
+    "Junho": 6,
+    "Julho": 7,
+    "Agosto": 8,
+    "Setembro": 9,
+    "Outubro": 10,
+    "Novembro": 11,
+    "Dezembro": 12,
+    "Última semana": "ultimaSemana"
   }
+
+  for (let i = 0; i < select.selectedOptions.length; i++) {
+    const nomeMes = select.selectedOptions[i].value;
+    periodoSelecionado.push(mes[nomeMes]);
+  }
+
+  console.log("periodos selecionados:", periodoSelecionado);
+  return periodoSelecionado;
+}
+
 
   function obterComponenteRelatorio() {
     componenteSelecionado = [];
@@ -577,7 +593,7 @@
 
           });
           mediaTotal = somaTotal / totalServ.length
-          mediaArredondada =  Math.floor(mediaTotal);
+          mediaArredondada = Math.floor(mediaTotal);
 
           let nomesAcimaMedia = [];
           let encontrou = false;
@@ -653,8 +669,8 @@
           const mapComponentes = {
             'cpu': 'CPU',
             'ram': 'RAM',
-            'rede_recebida': 'Rede Env.Dados',
-            'rede_enviada': 'Rede Rec.Dados'
+            'rede_recebida': 'Rede D.Recebidos',
+            'rede_enviada': 'Rede D.Enviados'
 
           };
 
@@ -666,7 +682,7 @@
 
           });
           mediaTotal = somaTotal / totalAlert.length
-          mediaArredondada =  Math.floor(mediaTotal);
+          mediaArredondada = Math.floor(mediaTotal);
 
           let nomesAcimaMedia = [];
           let encontrou = false;
@@ -953,74 +969,86 @@
 
 
 
-  // Função para obter os dados de períodos
   async function periodo() {
-    const empresa = sessionStorage.ID_EMPRESA;
-    console.log('Iniciando a requisição para /dashboard/periodo');
+  const empresa = sessionStorage.ID_EMPRESA;
+  console.log('Iniciando a requisição para /dashboard/periodo');
 
-    try {
+  try {
 
-      if (!empresa) {
-        throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
-      }
+    if (!empresa) {
+      throw new Error('ID_EMPRESA não encontrado em sessionStorage.');
+    }
 
-      const response = await fetch(`/dashboard/periodo/${empresa}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+    const response = await fetch(`/dashboard/periodo/${empresa}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    console.log('Resposta recebida sobre os períodos:', response);
+
+    if (!response.ok) {
+      throw new Error('Erro ao obter os dados: ' + response.statusText);
+    }
+
+    const data = await response.json();
+    console.log('Dados brutos recebidos:', data);
+
+    if (Array.isArray(data) && data.length > 0) {
+
+      const meses = {
+        "1": "Janeiro",
+        "2": "Fevereiro",
+        "3": "Março",
+        "4": "Abril",
+        "5": "Maio",
+        "6": "Junho",
+        "7": "Julho",
+        "8": "Agosto",
+        "9": "Setembro",
+        "10": "Outubro",
+        "11": "Novembro",
+        "12": "Dezembro"
+      };
+      const periodos = [];
+
+      // Criação da opção "Última semana"
+      const ultimaSemanaOption = document.createElement('option');
+      ultimaSemanaOption.value = "Última semana"; // valor que será enviado ao servidor
+      ultimaSemanaOption.textContent = "Última semana"; // Texto visível no select
+
+      const selectElement = document.getElementById("periodoRelatorio");
+
+      // Limpa o conteúdo existente antes de adicionar as opções
+      selectElement.innerHTML = ''; // Limpa o conteúdo do select
+
+      // Adiciona a opção "Última semana" antes dos meses
+      selectElement.appendChild(ultimaSemanaOption);
+
+      // Preenche o array periodos com os meses
+      data.forEach(item => {
+        periodos.push(meses[item.mes]);
       });
 
-      console.log('Resposta recebida sobre os períodos:', response);
+      // Adiciona as opções de meses
+      periodos.forEach(periodo => {
+        const option = document.createElement('option');
+        option.value = periodo;
+        option.textContent = periodo;
+        selectElement.appendChild(option);
+      });
 
-      if (!response.ok) {
-        throw new Error('Erro ao obter os dados: ' + response.statusText);
-      }
+      // Atualiza o selectpicker (se você estiver usando o Bootstrap Select)
+      $('#periodoRelatorio').selectpicker('refresh');
+      console.log('Select de períodos preenchido com sucesso.');
 
-      const data = await response.json();
-      console.log('Dados brutos recebidos:', data);
-
-
-      if (Array.isArray(data) && data.length > 0) {
-
-        const meses = {
-          "1": "Janeiro",
-          "2": "Fevereiro",
-          "3": "Março",
-          "4": "Abril",
-          "5": "Maio",
-          "6": "Junho",
-          "7": "Julho",
-          "8": "Agosto",
-          "9": "Setembro",
-          "10": "Outubro",
-          "11": "Novembro",
-          "12": "Dezembro"
-        };
-        const periodos = [];
-        data.forEach(item => {
-          mes: periodos.push(meses[item.mes]);
-        });
-        const selectElement = document.getElementById("periodoRelatorio");
-        selectElement.innerHTML = ''; // Limpa o conteúdo existente
-
-        periodos.forEach(periodo => {
-          const option = document.createElement('option');
-          option.value = periodo;
-          option.textContent = periodo;
-          selectElement.appendChild(option);
-        });
-
-        // Atualiza o selectpicker
-        $('#periodoRelatorio').selectpicker('refresh'); // Atualiza o selectpicker
-        console.log('Select de períodos preenchido com sucesso.');
-
-      } else {
-        console.error('Erro: A resposta não contém um array de períodos válidos.');
-      }
-
-    } catch (error) {
-      console.error('Erro na requisição de períodos', error);
+    } else {
+      console.error('Erro: A resposta não contém um array de períodos válidos.');
     }
+
+  } catch (error) {
+    console.error('Erro na requisição de períodos', error);
   }
+}
 
 
 
@@ -1117,7 +1145,7 @@
           y: {
             title: {
               display: true,
-              text: 'Uso médio do percentual da CPU'
+              text: 'Uso médio da CPU (%)'
             },
             suggestedMin: 0,
             suggestedMax: 100
@@ -1191,9 +1219,12 @@
             position: 'right',
             labels: {
               font: {
-                size: 14
+                size: 14,
+                weight: 600
               },
-              color: '#333'
+              color: '#333',
+              boxWidth: 14,
+              padding: 12
             }
           },
           tooltip: {
@@ -1205,23 +1236,33 @@
                 return `${label}: ${value} alertas (${percentage}%)`;
               }
             },
+          },
+          datalabels: {
+            formatter: (value) => {
+              return value;
+            },
+            color: 'black',
+            font: {
+              weight: 'bold',
+              size: 17
+            },
+            textAlign: 'center'
           }
         }
-      }
+      },
+      plugins: [ChartDataLabels]
     };
 
-    // verifica se existe um gráfico anterior e destrói para evitar duplicatas
+
     if (grafico2) {
       grafico2.destroy();
     }
 
-    // renderiza o novo gráfico no canvas
     grafico2 = new Chart(document.getElementById('myChartCanvas2'), config2);
   }
 
-
   function plotarGrafico3(nomeComp, totalAlert) {
-    const labels = nomeComp
+    const labels = nomeComp;
     const dados = {
       labels: labels,
       datasets: [{
@@ -1255,9 +1296,12 @@
             position: 'right',
             labels: {
               font: {
-                size: 14
+                size: 14,
+                weight: 600
               },
-              color: '#333'
+              color: '#333',
+              boxWidth: 14,
+              padding: 12
             }
           },
           tooltip: {
@@ -1269,12 +1313,22 @@
                 return `${label}: ${value} alertas (${percentage}%)`;
               }
             },
+          },
+          datalabels: {
+            formatter: (value) => {
+              return value;
+            },
+            color: 'black',
+            font: {
+              weight: 'bold',
+              size: 17
+            },
+            textAlign: 'center'
           }
         }
-      }
+      },
+      plugins: [ChartDataLabels]
     };
-
-    // verifica se existe um gráfico anterior e destrói para evitar duplicatas
     if (grafico3) {
       grafico3.destroy();
     }
@@ -1296,9 +1350,8 @@
     }
 
     if (periodoSelect.options.length > 0) {
-      for (let i = 0; i < periodoSelect.options.length; i++) {
-        periodoSelect.options[i].selected = true;
-      }
+        periodoSelect.options[0].selected = true;
+      
       periodoSelect.dispatchEvent(new Event('change'));
     }
 

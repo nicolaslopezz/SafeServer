@@ -155,65 +155,122 @@ function analisar(servidores, periodos, componentes) {
     return database.executar(unionQueries);
 }
 
+function analisar(servidores, periodos, componentes) {
+    const nomeBanco = {
+        'cpu': 'percent_use_cpu',
+        'ram': 'percent_use_ram',
+        'rede_recebida': 'recebido_rede',
+        'rede_enviada': 'enviado_rede'
+    };
+
+    // consulta base
+    let queryBase = `
+        SELECT 
+            'componenteDaVez' AS componente,
+            s.identificacao AS servidor, 
+            MIN(r.componenteDaVez) AS min, 
+            MAX(r.componenteDaVez) AS max,
+            ROUND(AVG(r.componenteDaVez), 2) AS media
+        FROM 
+            registro r
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(s => `'${s}'`).join(', ')})
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+        GROUP BY 
+            s.identificacao
+    `;
+
+    
+    let uniaoQuerys = componentes.map(componente => {
+        return queryBase.replace(/'componenteDaVez'/g, `'${nomeBanco[componente]}'`)
+                         .replace(/componenteDaVez/g, nomeBanco[componente]);
+    }).join(' UNION ALL ');
+
+    return database.executar(uniaoQuerys);
+}
+
+
 
 
 function comparar(servidores, periodos, componentes) {
-
-
     const instrucaoSql = `
         SELECT 
-    s.identificacao AS servidor,
-    COUNT(a.idAlerta) AS total_alertas
-FROM 
-    alerta a
-JOIN 
-    registro r ON a.fkRegistro = r.idRegistro
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
-    AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
-    AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')}) 
-GROUP BY 
-    s.identificacao 
-ORDER BY 
-    total_alertas DESC; 
-
+            s.identificacao AS servidor,
+            COUNT(a.idAlerta) AS total_alertas
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            s.identificacao
+        ORDER BY 
+            total_alertas DESC;
     `;
 
-    console.log(instrucaoSql)
+    console.log(instrucaoSql);
 
     return database.executar(instrucaoSql);
 }
+
 
 function comparar2(servidores, periodos, componentes) {
-
-
     const instrucaoSql = `
-      SELECT 
-    a.componente AS componente,
-    COUNT(a.idAlerta) AS total_alertas
-FROM 
-    alerta a
-JOIN 
-    registro r ON a.fkRegistro = r.idRegistro
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
-    AND MONTH(r.dtHora) IN (${periodos.join(', ')}) 
-    AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')}) 
-GROUP BY 
-    a.componente
-ORDER BY 
-    total_alertas DESC;
-
+        SELECT 
+            a.componente AS componente,
+            COUNT(a.idAlerta) AS total_alertas
+        FROM 
+            alerta a
+        JOIN 
+            registro r ON a.fkRegistro = r.idRegistro
+        JOIN 
+            servidor s ON r.fkServidor = s.idServidor
+        WHERE 
+            s.identificacao IN (${servidores.map(servidor => `'${servidor}'`).join(', ')}) 
+            AND (
+                ${periodos.map(periodo => {
+                    if (periodo === 'ultimaSemana') {
+                        return `r.dtHora BETWEEN NOW() - INTERVAL 7 DAY AND NOW()`;
+                    } else {
+                        return `MONTH(r.dtHora) = ${periodo}`;
+                    }
+                }).join(' OR ')}
+            )
+            AND a.componente IN (${componentes.map(componente => `'${componente}'`).join(', ')})
+        GROUP BY 
+            a.componente
+        ORDER BY 
+            total_alertas DESC;
     `;
 
-    console.log(instrucaoSql)
+    console.log(instrucaoSql);
 
     return database.executar(instrucaoSql);
 }
+
 
 
 
