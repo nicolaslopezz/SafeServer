@@ -1001,7 +1001,12 @@ input[type="range"] {
   padding: 20px;
   color: rgb(16, 46, 118);
   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
 }
+
 
 table {
   width: 100%;
@@ -1788,4 +1793,9 @@ h1 {
 
 #trr:hover {
   background-color: #dadada67;
+}
+
+#alertasChart{
+  width: 30vw !important;
+  height: 35vh !important;
 }
