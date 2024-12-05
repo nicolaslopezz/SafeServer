@@ -10,11 +10,14 @@
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="../css/dashCss/dash.css" />
   <link rel="stylesheet" href="../css/dashCss/dashGerente02.css" />
-
+  <!-- CHART.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <title>Dashboard-Gerente</title>
 </head>
 
-<body>
+<body onload="obterServidores()">
   <div class="container">
     <div class="sidebar">
       <div class="menu-btn">
@@ -98,12 +101,7 @@
         <div class="servers-container">
           <button class="arrow left" id="prev">❮</button>
           <div class="servers-slider">
-            <div class="sv-01 server" data-id="1">Server 001</div>
-            <div class="sv-02 server" data-id="2">Server 002</div>
-            <div class="sv-03 server" data-id="3">Server 003</div>
-            <div class="sv-04 server" data-id="4">Server 004</div>
-            <div class="sv-05 server" data-id="5">Server 005</div>
-            <div class="sv-05 server" data-id="5">Server 006</div>
+            <!-- servidores adicionados pela função obterServidores() -->
           </div>
           <button class="arrow right" id="next">❯</button>
         </div>
@@ -148,7 +146,7 @@
 
         <div class="oscilation chart">
           <div class="metric">
-            
+
             <div class="horario-menor-osc metric-box">
               <div class="text-box">
                 Quantidade de vezes acima do limite
@@ -177,551 +175,510 @@
         </div>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+      crossorigin="anonymous"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+      var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+      var cargoUsuario = sessionStorage.getItem("CARGO");
+
+      document.getElementById('nomeUsuario').textContent = nomeUsuario;
+      document.getElementById('cargoUsuario').textContent = cargoUsuario;
+    </script>
+
+    <script>
+
+      const slider = document.querySelector('.servers-slider');
+      const servers = document.querySelectorAll('.server');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+      let startIndex = 0;
+      const visibleServers = 5;
+
+      function updateVisibility() {
+        servers.forEach((server, index) => {
+          if (index >= startIndex && index < startIndex + visibleServers) {
+            server.style.display = 'flex';
+          } else {
+            server.style.display = 'none';
+          }
+        });
+      }
+
+      function slideNext() {
+        if (startIndex + visibleServers < servers.length) {
+          startIndex += visibleServers;
+          updateVisibility();
+        }
+      }
+
+      function slidePrev() {
+        if (startIndex - visibleServers >= 0) {
+          startIndex -= visibleServers;
+          updateVisibility();
+        }
+      }
+
+      nextButton.addEventListener('click', slideNext);
+      prevButton.addEventListener('click', slidePrev);
+
+      updateVisibility();
+
+      const selectComponent = document.getElementById("select_component");
+      const selectDate = document.getElementById("select_date");
+      const serverElements = document.querySelectorAll(".server");
+
+      let selectedServerId = null;
+
+      const ctxStab = document.getElementById('MyChart01').getContext('2d');
+      const ctxOsc = document.getElementById('MyChart02').getContext('2d');
+      let graficoStab, graficoOsc;
+
+      serverElements.forEach((server) => {
+        server.addEventListener("click", function () {
+          selecionarServidor(server);
+        });
+      });
+
+      function selecionarServidor(server) {
+        const serverElements = document.querySelectorAll(".server"); // Atualizar dinamicamente a lista
+
+        serverElements.forEach((el) => el.classList.remove("selected")); // Remover a classe "selected"
+        server.classList.add("selected"); // Adicionar "selected" ao elemento clicado
+
+        selectedServerId = parseInt(server.getAttribute("data-id"), 10);
+
+        if (isNaN(selectedServerId)) {
+          console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
+          return;
+        }
+
+        console.log("Servidor selecionado:", selectedServerId);
+        obterDatas(selectedServerId);
+      }
+
+      function obterDatas(serverId) {
+        console.log("Buscando datas para o servidor:", serverId);
+
+        fetch(`/dashGerente02/datas?serverId=${serverId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((dates) => {
+                atualizarDatas(dates);
+              });
+            } else {
+              console.error("Erro ao buscar datas.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição obterDatas:", erro);
+          });
+      }
+
+      function atualizarDatas(dates) {
+        console.log("Atualizando dropdown de datas:", dates);
+
+        selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
+        dates.forEach((date) => {
+          const option = document.createElement("option");
+          option.value = date;
+          option.textContent = date;
+          selectDate.appendChild(option);
+        });
+      }
+
+      [selectComponent, selectDate].forEach((select) => {
+        select.addEventListener("change", () => {
+          if (selectedServerId && selectComponent.value && selectDate.value) {
+            atualizarGraficos(selectedServerId, selectComponent.value, selectDate.value);
+            atualizarMetricas(selectedServerId, selectComponent.value, selectDate.value)
+          }
+        });
+      });
+
+      function atualizarGraficos(serverId, component, date) {
+        console.log("Atualizando gráficos para:");
+        console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
+
+        const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+        // Atualizar gráfico de estabilidade
+        fetch(`/dashGerente02/grafico?${queryString}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                atualizarGraficoStab(data, component);
+              });
+            } else {
+              console.error("Erro ao buscar dados do gráfico de estabilidade.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarGraficos (estabilidade):", erro);
+          });
+
+        // Atualizar gráfico de oscilação
+        fetch(`/dashGerente02/grafico/osc?${queryString}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                atualizarGraficoOsc(data, component);
+              });
+            } else {
+              console.error("Erro ao buscar dados do gráfico de oscilação.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarGraficos (oscilação):", erro);
+          });
+      }
+
+      function atualizarGraficoStab(data, component) {
+        console.log("Atualizando gráfico de estabilidade com dados:", data);
+
+        if (graficoStab) {
+          graficoStab.destroy();
+        }
+
+        const labels = data.map((row) => `${row.hour}`);
+        const values = data.map((row) => parseFloat(row.desvio_padrao));
+
+        let annotation = {};
+        if (component === 'ram') {
+          annotation = {
+            type: 'line',
+            yMin: 8,
+            yMax: 8,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              content: 'Limite RAM',
+              enabled: true,
+              position: 'center',
+              font: { weight: 'bold', size: 14 }
+            }
+          };
+        } else if (component === 'cpu') {
+          annotation = {
+            type: 'line',
+            yMin: 25,
+            yMax: 25,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              content: 'Limite CPU',
+              enabled: true,
+              position: 'center',
+              font: { weight: 'bold', size: 14 }
+            }
+          };
+        }
+
+        graficoStab = new Chart(ctxStab, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Desvio padrão',
+              data: values,
+              backgroundColor: 'rgb(212, 214, 84)',
+              borderColor: 'rgb(180, 182, 69)',
+              borderWidth: 3
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Desvio Padrão' }
+              },
+              x: {
+                title: { display: true, text: 'Hora' }
+              }
+            },
+            plugins: {
+              annotation: {
+                annotations: {
+                  lineStab: annotation
+                }
+              }
+            },
+            devicePixelRatio: 3
+          }
+        });
+      }
+
+      function atualizarGraficoOsc(data, component) {
+        console.log("Atualizando gráfico de oscilação com dados:", data);
+
+        if (graficoOsc) {
+          graficoOsc.destroy();
+        }
+
+        const labels = data.map((row) => `${row.hour}`);
+        const values = data.map((row) => parseFloat(row.oscilacao));
+
+        let annotation = {};
+        if (component === 'ram') {
+          annotation = {
+            type: 'line',
+            yMin: 130,
+            yMax: 130,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              content: 'Limite RAM',
+              enabled: true,
+              position: 'center',
+              font: { weight: 'bold', size: 14 }
+            }
+          };
+        } else if (component === 'cpu') {
+          annotation = {
+            type: 'line',
+            yMin: 7500,
+            yMax: 7500,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              content: 'Limite CPU',
+              enabled: true,
+              position: 'center',
+              font: { weight: 'bold', size: 14 }
+            }
+          };
+        }
+
+        graficoOsc = new Chart(ctxOsc, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Oscilação',
+              data: values,
+              backgroundColor: 'rgb(75, 192, 192)',
+              borderColor: 'rgb(54, 162, 235)',
+              borderWidth: 3
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: false,
+                title: { display: true, text: 'Oscilação (%)' }
+              },
+              x: {
+                title: { display: true, text: 'Hora' }
+              }
+            },
+            plugins: {
+              annotation: {
+                annotations: {
+                  lineOsc: annotation
+                }
+              }
+            },
+            devicePixelRatio: 3
+          }
+        });
+      }
+
+      async function obterServidores() {
+        console.log("Função obterServidores foi chamada!");
+        var empresa = sessionStorage.ID_EMPRESA; // Certifique-se de que isso tenha um valor válido
+
+        if (!empresa) {
+          console.error("ID da empresa não encontrado no sessionStorage.");
+          return;
+        }
+        const sliderContainer = document.querySelector('.servers-slider');
+
+        try {
+          // Faz a requisição GET ao servidor
+          const response = await fetch(`/dashGerente02/servidor/${empresa}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+          });
+
+          console.log('Resposta recebida do servidor:', response);
+
+          if (!response.ok) {
+            throw new Error('Erro ao obter dados dos servidores');
+          }
+
+          const servidores = await response.json(); // Obtém os dados do servidor como JSON
+          console.log('Dados recebidos:', servidores);
+
+          // Limpa o container antes de adicionar os novos elementos
+          sliderContainer.innerHTML = '';
+
+          // Itera sobre os servidores e cria os elementos dinamicamente
+          servidores.forEach((server, index) => {
+            const serverDiv = document.createElement('div');
+            serverDiv.className = `sv-${String(index + 1).padStart(2, '0')} server`;
+            serverDiv.setAttribute('data-id', server.idServidor); // Atribui o ID do servidor
+            serverDiv.textContent = `Server ${String(index + 1).padStart(3, '0')}`; // Nome ou um fallback
+            serverDiv.setAttribute("onclick", "selecionarServidor(this)");
+
+            sliderContainer.appendChild(serverDiv);
+          });
+        } catch (error) {
+          console.error('Erro ao carregar servidores:', error);
+          sliderContainer.innerHTML = '<p>Erro ao carregar servidores.</p>'; // Mostra uma mensagem de erro
+        }
+      }
+
+      function atualizarMetricas(serverId, component, date) {
+        console.log("Atualizando métricas para:", serverId, component, date);
+
+        const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
+
+        var limiteStab;
+        var limiteOsc;
+
+        if (component === 'ram') {
+          limiteStab = 8;
+          limiteOsc = 130;
+        } else if (component === 'cpu') {
+          limiteStab = 25
+          limiteOsc = 7500;
+        }
+
+        fetch(`/dashGerente02/metricas/stab?${queryString}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                console.log("Métricas recebidas:", data);
+                atualizarMetricaEstabilidade(data);
+              });
+            } else {
+              console.error("Erro ao buscar métricas.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarMetricas:", erro);
+          });
+
+        fetch(`/dashGerente02/metricas/osc?${queryString}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                console.log("Métricas recebidas:", data);
+                atualizarMetricaOscilacao(data);
+              });
+            } else {
+              console.error("Erro ao buscar métricas.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarMetricas:", erro);
+          });
+
+        const queryString2 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteStab}`;
+
+        fetch(`/dashGerente02/metricas/stab/exc?${queryString2}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                console.log("Métricas recebidas:", data);
+                atualizarMetricaExcedentesEstabilidade(data);
+              });
+            } else {
+              console.error("Erro ao buscar métricas.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarMetricas:", erro);
+          });
+
+        const queryString3 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteOsc}`;
+
+        fetch(`/dashGerente02/metricas/osc/exc?${queryString3}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then((resposta) => {
+            if (resposta.ok) {
+              resposta.json().then((data) => {
+                console.log("Métricas recebidas:", data);
+                atualizarMetricaExcedentesOscilacao(data);
+              });
+            } else {
+              console.error("Erro ao buscar métricas.");
+            }
+          })
+          .catch((erro) => {
+            console.error("Erro na requisição atualizarMetricas:", erro);
+          });
+      }
+
+      function atualizarMetricaEstabilidade(data) {
+        const maiorEstabilidade = data.maiorEstabilidade;
+        const menorEstabilidade = data.menorEstabilidade;
+
+        // document.getElementById("maiorEstabilidade").textContent =
+        //   `${maiorEstabilidade.hour}h`;
+        document.getElementById("menorEstabilidade").textContent =
+          `${menorEstabilidade.hour}h`;
+      }
+
+      function atualizarMetricaOscilacao(data) {
+        const maiorOscilacao = data.maiorOscilacao;
+        const menorOscilacao = data.menorOscilacao;
+
+        document.getElementById("maiorOscilacao").textContent =
+          `${maiorOscilacao.hour}h`;
+      }
+
+      function atualizarMetricaExcedentesEstabilidade(data) {
+        const contagemExcedentes = data.contagemExcedentes;
+
+        document.getElementById("maiorEstabilidade").textContent = `${contagemExcedentes.quantidade_excedente}`;
+      }
+
+      function atualizarMetricaExcedentesOscilacao(data) {
+        const contagemExcedentes = data.contagemExcedentes;
+
+        document.getElementById("menorOscilacao").textContent = `${contagemExcedentes.quantidade_excedente}`;
+      }
+    </script>
 </body>
 
 </html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-  integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-  crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-qF3T5CaMgSRNrxzu69V3ZrYGnrbRMIqrkE+OrE01DDsYDNo8R1VrtYL8pk+fqhKxUBXQ2z+yV/irk+AbbHtBAg==" ></script>
-
-<script src="../js/script.js"></script>
-<script>
-  var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-  var cargoUsuario = sessionStorage.getItem("CARGO");
-
-  document.getElementById('nomeUsuario').textContent = nomeUsuario;
-  document.getElementById('cargoUsuario').textContent = cargoUsuario;</script>
-
-<script>
-
-  const slider = document.querySelector('.servers-slider');
-  const servers = document.querySelectorAll('.server');
-  const prevButton = document.getElementById('prev');
-  const nextButton = document.getElementById('next');
-  let startIndex = 0;
-  const visibleServers = 5;
-
-  function updateVisibility() {
-    servers.forEach((server, index) => {
-      if (index >= startIndex && index < startIndex + visibleServers) {
-        server.style.display = 'flex';
-      } else {
-        server.style.display = 'none';
-      }
-    });
-  }
-
-  function slideNext() {
-    if (startIndex + visibleServers < servers.length) {
-      startIndex += visibleServers;
-      updateVisibility();
-    }
-  }
-
-  function slidePrev() {
-    if (startIndex - visibleServers >= 0) {
-      startIndex -= visibleServers;
-      updateVisibility();
-    }
-  }
-
-  nextButton.addEventListener('click', slideNext);
-  prevButton.addEventListener('click', slidePrev);
-
-  updateVisibility();
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-    
-    const ctxStab = document.getElementById('MyChart01').getContext('2d');
-    const ctxOsc = document.getElementById('MyChart02').getContext('2d');
-    let graficoStab, graficoOsc;
-
-    const selectComponent = document.getElementById("select_component");
-    const selectDate = document.getElementById("select_date");
-    const serverElements = document.querySelectorAll(".server");
-
-    let selectedServerId = null;
-
-    serverElements.forEach((server) => {
-      server.addEventListener("click", function () {
-        selecionarServidor(server);
-      });
-    });
-
-    function selecionarServidor(server) {
-      serverElements.forEach((el) => el.classList.remove("selected"));
-      server.classList.add("selected");
-      selectedServerId = parseInt(server.getAttribute("data-id"), 10);
-
-      if (isNaN(selectedServerId)) {
-        console.error("O serverId não é um número válido:", server.getAttribute("data-id"));
-        return;
-      }
-
-      console.log("Servidor selecionado:", selectedServerId);
-      obterDatas(selectedServerId);
-    }
-
-    function obterDatas(serverId) {
-      console.log("Buscando datas para o servidor:", serverId);
-
-      fetch(`/dashGerente02/datas?serverId=${serverId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then((resposta) => {
-          if (resposta.ok) {
-            resposta.json().then((dates) => {
-              atualizarDatas(dates);
-            });
-          } else {
-            console.error("Erro ao buscar datas.");
-          }
-        })
-        .catch((erro) => {
-          console.error("Erro na requisição obterDatas:", erro);
-        });
-    }
-
-    function atualizarDatas(dates) {
-      console.log("Atualizando dropdown de datas:", dates);
-
-      selectDate.innerHTML = `<option value="" selected disabled>Data</option>`;
-      dates.forEach((date) => {
-        const option = document.createElement("option");
-        option.value = date;
-        option.textContent = date;
-        selectDate.appendChild(option);
-      });
-    }
-
-    [selectComponent, selectDate].forEach((select) => {
-      select.addEventListener("change", () => {
-        if (selectedServerId && selectComponent.value && selectDate.value) {
-          atualizarGraficos(selectedServerId, selectComponent.value, selectDate.value);
-          atualizarMetricas(selectedServerId, selectComponent.value, selectDate.value)
-        }
-      });
-    });
-
-    function atualizarGraficos(serverId, component, date) {
-      console.log("Atualizando gráficos para:");
-      console.log("Servidor:", serverId, "| Componente:", component, "| Data:", date);
-
-      const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
-
-      // Atualizar gráfico de estabilidade
-      fetch(`/dashGerente02/grafico?${queryString}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then((resposta) => {
-          if (resposta.ok) {
-            resposta.json().then((data) => {
-              atualizarGraficoStab(data, component);
-            });
-          } else {
-            console.error("Erro ao buscar dados do gráfico de estabilidade.");
-          }
-        })
-        .catch((erro) => {
-          console.error("Erro na requisição atualizarGraficos (estabilidade):", erro);
-        });
-
-      // Atualizar gráfico de oscilação
-      fetch(`/dashGerente02/grafico/osc?${queryString}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then((resposta) => {
-          if (resposta.ok) {
-            resposta.json().then((data) => {
-              atualizarGraficoOsc(data, component);
-            });
-          } else {
-            console.error("Erro ao buscar dados do gráfico de oscilação.");
-          }
-        })
-        .catch((erro) => {
-          console.error("Erro na requisição atualizarGraficos (oscilação):", erro);
-        });
-    }
-
-    function atualizarGraficoStab(data, component) {
-      console.log("Atualizando gráfico de estabilidade com dados:", data);
-
-      if (graficoStab) {
-        graficoStab.destroy();
-      }
-
-      const labels = data.map((row) => `${row.hour}`);
-      const values = data.map((row) => parseFloat(row.desvio_padrao));
-
-      // Condicional para a linha de anotação com base no componente
-      let annotation = {};
-      if (component === 'ram') {
-        annotation = {
-          type: 'line',
-          yMin: 8,  // Exemplo de valor para RAM, modifique conforme necessário
-          yMax: 8,  // A linha horizontal será no valor 10
-          borderColor: 'red',
-          borderWidth: 2,
-          label: {
-            content: 'Limite RAM',
-            enabled: true,
-            position: 'center',
-            font: { weight: 'bold', size: 14 }
-          }
-        };
-      } else if (component === 'cpu') {
-        annotation = {
-          type: 'line',
-          yMin: 25,  // Exemplo de valor para CPU, modifique conforme necessário
-          yMax: 25,  // A linha horizontal será no valor 5
-          borderColor: 'blue',
-          borderWidth: 2,
-          label: {
-            content: 'Limite CPU',
-            enabled: true,
-            position: 'center',
-            font: { weight: 'bold', size: 14 }
-          }
-        };
-      }
-
-      graficoStab = new Chart(ctxStab, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Desvio padrão',
-            data: values,
-            backgroundColor: 'rgb(212, 214, 84)',
-            borderColor: 'rgb(180, 182, 69)',
-            borderWidth: 3
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: { display: true, text: 'Desvio Padrão' }
-            },
-            x: {
-              title: { display: true, text: 'Hora' }
-            }
-          },
-          plugins: {
-            annotation: {
-              annotations: {
-                linhaLimite: annotation // Anotação condicional com base no componente
-              }
-            }
-          },
-          devicePixelRatio: 3
-        }
-      });
-    }
-
-    function atualizarGraficoOsc(data, component) {
-      console.log("Atualizando gráfico de oscilação com dados:", data);
-
-      if (graficoOsc) {
-        graficoOsc.destroy();
-      }
-
-      const labels = data.map((row) => `${row.hour}`);
-      const values = data.map((row) => parseFloat(row.oscilacao));
-
-      // Condicional para a linha de anotação com base no componente
-      let annotation = {};
-      if (component === 'ram') {
-        annotation = {
-          type: 'line',
-          yMin: 130,  // Exemplo de valor para RAM, modifique conforme necessário
-          yMax: 130,  // A linha horizontal será no valor 15
-          borderColor: 'green',
-          borderWidth: 2,
-          label: {
-            content: 'Limite RAM',
-            enabled: true,
-            position: 'center',
-            font: { weight: 'bold', size: 14 }
-          }
-        };
-      } else if (component === 'cpu') {
-        annotation = {
-          type: 'line',
-          yMin: 7500,  // Exemplo de valor para CPU, modifique conforme necessário
-          yMax: 7500,  // A linha horizontal será no valor 20
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            content: 'Limite CPU',
-            enabled: true,
-            position: 'center',
-            font: { weight: 'bold', size: 14 }
-          }
-        };
-      }
-
-      graficoOsc = new Chart(ctxOsc, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Oscilação',
-            data: values,
-            backgroundColor: 'rgb(75, 192, 192)',
-            borderColor: 'rgb(54, 162, 235)',
-            borderWidth: 3
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: false,
-              title: { display: true, text: 'Oscilação (%)' }
-            },
-            x: {
-              title: { display: true, text: 'Hora' }
-            }
-          },
-          plugins: {
-            annotation: {
-              annotations: {
-                linhaLimite: annotation // Anotação condicional com base no componente
-              }
-            }
-          },
-          devicePixelRatio: 3
-        }
-      });
-    }
-
-  });
-
-  function atualizarMetricas(serverId, component, date) {
-    console.log("Atualizando métricas para:", serverId, component, date);
-
-    const queryString = `serverId=${serverId}&component=${component}&date=${date}`;
-
-    var limiteStab;
-    var limiteOsc;
-    
-    if (component === 'ram') {
-      limiteStab = 8;
-      limiteOsc = 130;
-    } else if (component === 'cpu') {
-      limiteStab = 25
-      limiteOsc = 7500;
-    }
-
-    fetch(`/dashGerente02/metricas/stab?${queryString}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((data) => {
-            console.log("Métricas recebidas:", data);
-            atualizarMetricaEstabilidade(data);
-          });
-        } else {
-          console.error("Erro ao buscar métricas.");
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro na requisição atualizarMetricas:", erro);
-      });
-
-    fetch(`/dashGerente02/metricas/osc?${queryString}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((data) => {
-            console.log("Métricas recebidas:", data);
-            atualizarMetricaOscilacao(data);
-          });
-        } else {
-          console.error("Erro ao buscar métricas.");
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro na requisição atualizarMetricas:", erro);
-      });
-
-      const queryString2 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteStab}`;
-
-    fetch(`/dashGerente02/metricas/stab/exc?${queryString2}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((data) => {
-            console.log("Métricas recebidas:", data);
-            atualizarMetricaExcedentesEstabilidade(data);
-          });
-        } else {
-          console.error("Erro ao buscar métricas.");
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro na requisição atualizarMetricas:", erro);
-      });
-
-      const queryString3 = `serverId=${serverId}&component=${component}&date=${date}&limite=${limiteOsc}`;
-
-      fetch(`/dashGerente02/metricas/osc/exc?${queryString3}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((resposta) => {
-        if (resposta.ok) {
-          resposta.json().then((data) => {
-            console.log("Métricas recebidas:", data);
-            atualizarMetricaExcedentesOscilacao(data);
-          });
-        } else {
-          console.error("Erro ao buscar métricas.");
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro na requisição atualizarMetricas:", erro);
-      });
-  }
-
-  function atualizarMetricaEstabilidade(data) {
-    const maiorEstabilidade = data.maiorEstabilidade;
-    const menorEstabilidade = data.menorEstabilidade;
-
-    // document.getElementById("maiorEstabilidade").textContent =
-    //   `${maiorEstabilidade.hour}h`;
-    document.getElementById("menorEstabilidade").textContent =
-      `${menorEstabilidade.hour}h`;
-  }
-
-  function atualizarMetricaOscilacao(data) {
-    const maiorOscilacao = data.maiorOscilacao;
-    const menorOscilacao = data.menorOscilacao;
-
-    document.getElementById("maiorOscilacao").textContent =
-      `${maiorOscilacao.hour}h`;
-  }
-
-  function atualizarMetricaExcedentesEstabilidade(data) {
-    const contagemExcedentes = data.contagemExcedentes;
-
-    document.getElementById("maiorEstabilidade").textContent = `${contagemExcedentes.quantidade_excedente}`;
-  }
-
-  function atualizarMetricaExcedentesOscilacao(data) {
-    const contagemExcedentes = data.contagemExcedentes;
-
-    document.getElementById("menorOscilacao").textContent = `${contagemExcedentes.quantidade_excedente}`;
-  }
-
-
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   const ctx = document.getElementById('MyChart01').getContext('2d');
-
-  //   const meuGrafico = new Chart(ctx, {
-  //       type: 'bar',
-  //       data: {
-  //           labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-  //           datasets: [{
-  //               label: 'Desvio padrão',
-  //               data: [8, 12, 16, 17, 12, 5, 9, 8, 7, 15, 8, 7, 9, 9, 11, 8, 9, 8, 10, 10, 11, 7, 10, 11, 11],
-  //               backgroundColor: 'rgb(212, 214, 84)',
-  //               borderColor: 'rgb(180, 182, 69)',
-  //               borderWidth: 3
-  //           }]
-  //       },
-  //       options: {
-  //           scales: {
-  //               y: {
-  //                   beginAtZero: true
-  //               }
-  //           },
-  //           devicePixelRatio: 3
-  //       }
-  //   });
-  // });
-
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   const ctx = document.getElementById('MyChart02').getContext('2d');
-
-  //   const meuGrafico = new Chart(ctx, {
-  //       type: 'line',
-  //       data: {
-  //           labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', "25", "26", "27", "28", "29", "30"],
-  //           datasets: [{
-  //               label: 'Taxa de Oscilação',
-  //               data: [18, 26, 23, 35, 36, 51, 48, 37, 89, 125, 45, 32, 43, 12, 56, 67, 54, 34, 54, 93, 23, 54, 22, 34, 20, 23, 23, 40, 99, 75],
-  //               backgroundColor: 'rgb(70,130,180',
-  //               borderColor: 'rgb(65,105,225)',
-  //               borderWidth: 3
-  //           }]
-  //       },
-  //       options: {
-  //           scales: {
-  //               y: {
-  //                   beginAtZero: true
-  //               }
-  //           },
-  //           devicePixelRatio: 3
-  //       }
-  //   });
-  // });
-
-  // obterDados()
-  // function obterDados() {''
-
-  //   var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
-  //   console.log(idEmpresa)
-
-  //   fetch("/dashGerente02/obterDados", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       idEmpresaServer: idEmpresa
-  //     })
-  //   }).then(function (resposta) {
-  //     if (resposta.ok) {
-  //       console.log("DADOS RECEBIDOS:", resposta)
-  //       teste = resposta.json().then(json => {
-  //         console.log(json)
-  //         plotar(json)
-  //       })
-  //     } else {
-  //       // console.log("Houve um erro ao receber os dados no cards.html")
-  //     }
-  //   }).catch(function (erro) {
-  //     console.log("CATCH DO FETCH")
-  //     console.log(erro)
-  //   })
-  // }
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

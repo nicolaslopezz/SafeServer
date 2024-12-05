@@ -136,6 +136,17 @@ async function contarExcedentesOscilacao(req, res) {
     }
 }
 
+async function obterServidores(req, res) {
+    var empresa = req.params.empresa;
+    try {
+        var servers = await dashGerente02Model.obterServidores(empresa);
+        res.json(servers);
+    } catch (error) {
+        console.error("Erro ao buscar servidores cadastrados:", error);
+        res.status(500).json({ error: 'Erro ao buscar servidores cadastrados.' });
+    }
+}
+
 module.exports = {
     calcularDesvioPadraoeOscilacao,
     datasDisponiveis,
@@ -144,5 +155,6 @@ module.exports = {
     getMaiorMenorEstabilidade,
     getMaiorMenorOscilacao,
     contarExcedentesDesvioPadrao,
-    contarExcedentesOscilacao
+    contarExcedentesOscilacao,
+    obterServidores
 }

@@ -19,5 +19,6 @@ router.get('/metricas/stab', dashGerente02Controller.getMaiorMenorEstabilidade);
 router.get('/metricas/osc', dashGerente02Controller.getMaiorMenorOscilacao);
 router.get('/metricas/stab/exc', dashGerente02Controller.contarExcedentesDesvioPadrao);
 router.get('/metricas/osc/exc', dashGerente02Controller.contarExcedentesOscilacao);
+router.get('/servidor/:empresa', dashGerente02Controller.obterServidores);
 
 module.exports = router;
