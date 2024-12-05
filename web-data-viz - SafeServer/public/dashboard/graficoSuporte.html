@@ -106,7 +106,8 @@
             <div id="percentCpu" class="percentCpu"></div>
             <div id="percentRam" class="percentRam"></div>
           </div>
-          <div id="qtdAlertas" class="qtdAlertas"></div>
+          <div id="qtdAlertas" class="qtdAlertas">
+          </div>
           <div id="dimensaoGraficoCpu" class="dimensaoGraficoCpu">
             <div class="corFundoGrafico">
               <div id="graficoCpuERam" width="400" height="200"></div>
@@ -136,6 +137,10 @@
       </div>
     </div>
     <script>
+      var nome = sessionStorage.getItem("NOME_USUARIO");
+      var cargo = sessionStorage.getItem("CARGO");
+      nomeUsuario.innerHTML = nome
+      cargoUsuario.innerHTML = cargo
       let proximaAtualizacao;
       var selectServidor = document.getElementById("selectServidor");
 
@@ -285,6 +290,7 @@
           clearTimeout(intervaloGraficoCpu);
         }
 
+
         console.log('ID do Servidor:', idServidor);
 
         if (!idServidor) {
@@ -297,7 +303,7 @@
             if (response.ok) {
               response.json().then(function (resposta) {
 
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 plotarGraficoCpueRam(resposta, idServidor);
 
@@ -329,7 +335,6 @@
         }
 
         intervaloGraficoRec = setInterval(() => {
-          //Faz uma requisição para obter os dados do Quiz
           fetch(`/dashboard/buscarDadosRec/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
               response.json().then(function (resposta) {
@@ -355,8 +360,8 @@
         var idServidor = selectServidor.value;
         console.log('idServidor: ' + idServidor);
 
-        if (proximaAtualizacao != undefined) {
-          clearTimeout(proximaAtualizacao);
+        if (intervaloGraficoEnv != undefined) {
+          clearTimeout(intervaloGraficoEnv);
         }
 
         if (!idServidor) {
@@ -369,7 +374,7 @@
           fetch(`/dashboard/buscarDadosEnv/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
               response.json().then(function (resposta) {
-                console.log(`Dados enviados: ${JSON.stringify(resposta)}`);
+                // console.log(`Dados enviados: ${JSON.stringify(resposta)}`);
 
                 plotarGraficoEnv(resposta, idServidor);
 
@@ -400,7 +405,7 @@
 
         console.log('Rede recebida' + dadosRec);
 
-        tituloDashRec.innerHTML = `<p> Desempenho da Rede - Dados Recebidos </p>`;
+        tituloDashRec.innerHTML = `<p> Desempenho da Rede - Bytes Recebidos </p>`;
         situacaoRedeRec.innerHTML = `<p> Situação em Tempo Real: </p>`;
 
         redeRecebida.innerHTML = `<p>REDE RECEBIDA: ${situacaoRec} GB`;
@@ -717,7 +722,7 @@
         }
 
         qtdAlertas.innerHTML = `
-        <p> Quantidade de Alertas na última hora: <br><br>
+        <p> Quantidade de Alertas na última hora: <br></p>
         CPU: ${alertasCpu} <br>
         RAM: ${alertasRam}</p>
     `;
