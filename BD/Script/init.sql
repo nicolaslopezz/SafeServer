@@ -78,7 +78,9 @@ INSERT INTO empresa (nomeFantasia, razaoSocial, CNPJ) VALUES
 ('INSTAGRAM', 'INSTAGRAM LTDA', '98765432000196');
 
 INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
-('abcd', 2, 1, 'Gerente');
+('abcd', 2, 1, 'Gerente'),
+('abcd2', 1, 1, 'Suporte'),
+('abcd3', 3, 1, 'Marta');
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
 ('reader', 1, 'US-EAST-1'),
@@ -86,9 +88,9 @@ INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES
 ('readerBR', 1, 'BR-WEST-1');
 
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
-('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 1),
-('Roberto', 'roberto@gmail.com', '12345678901', '123456', 1, 1);
-
+('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 3),
+('Roberto', 'roberto@gmail.com', '12345678901', '123456', 1, 1),
+('Ewerton', 'ewerton@gmail.com', '12345678901', '123456', 1, 1);
 
 INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, recebido_rede, enviado_rede, fkServidor)
 VALUES  
@@ -284,7 +286,6 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-    WHERE componente = 'cpu' OR componente = 'ram' OR componente = 'rede_recebido' OR componente = 'rede_enviado'
+    WHERE componente = 'cpu' OR componente = 'ram' OR componente = 'rede_recebida' OR componente = 'rede_enviado'
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
-SELECT * FROM obterDadosAlerta;
