@@ -269,6 +269,19 @@ async function contarExcedentesOscilacao(serverId, component, date, limite) {
   return await database.executar(instrucaoSql, [serverId, component, date, limite])
 }
 
+async function obterServidores(fkEmpresa) {
+  var instrucaoSql = `
+    SELECT idServidor, identificacao
+    FROM servidor
+    WHERE fkEmpresa = ${fkEmpresa};
+  `;
+
+  console.log("Consulta SQL a ser executada: \n", instrucaoSql);
+  console.log("Parâmetros para consulta:", fkEmpresa);
+
+  return await database.executar(instrucaoSql, [fkEmpresa]);
+}
+
 module.exports = {
   getServidores,
   getDesvioPadraoCPU,
@@ -283,5 +296,6 @@ module.exports = {
   getMaiorOscilacao,
   getMenorOscilacao,
   contarExcedentesDesvioPadrao,
-  contarExcedentesOscilacao
+  contarExcedentesOscilacao,
+  obterServidores
 };
