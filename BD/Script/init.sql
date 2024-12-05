@@ -63,7 +63,7 @@ CREATE TABLE estatisticas_horarias (
 );
 
 
-select * from registro;
+-- select * from registro;
 
 
 create table alerta (
@@ -82,7 +82,8 @@ INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
 ('reader', 1, 'US-EAST-1'),
-('writer', 1, 'US-EAST-1');
+('writer', 1, 'US-EAST-1'),
+('readerBR', 1, 'BR-WEST-1');
 
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 1),
@@ -175,12 +176,12 @@ CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa 
 
 -- select * from empresa;
 
-select * from funcionario;
+-- select * from funcionario;
 
 -- truncate regis
-select * from registro;
+-- select * from registro;
 
-
+/*
 SELECT 
     'percent_use_cpu' AS componente,
     s.identificacao AS servidor, 
@@ -250,7 +251,8 @@ WHERE
     AND s.identificacao IN ('reader', 'writer')  
 GROUP BY 
     s.identificacao;
-    
+*/
+/*
     SELECT 
     s.identificacao AS servidor,
     COUNT(a.idAlerta) AS total_alertas
@@ -268,20 +270,21 @@ GROUP BY
     s.identificacao 
 ORDER BY 
     total_alertas DESC; 
-
-
+*/
+/*
 SELECT DISTINCT MONTH(dtHora) AS mes
 FROM registro r
 join servidor s on r.fkServidor = s.idServidor
 Join empresa e on s.fkEmpresa = e.idEmpresa
 WHERE e.idEmpresa = 1
 ORDER BY mes DESC;
-            
-            
+*/          
             
 CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
+    WHERE componente = 'cpu' OR componente = 'ram' OR componente = 'rede_recebido' OR componente = 'rede_enviado'
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
+SELECT * FROM obterDadosAlerta;

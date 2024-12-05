@@ -241,15 +241,27 @@
       auxRedeRec = []
       auxLabels = []
 
+      aux = true
       for(j = 0; j < regioes.length; j++) {
         if (regioesDados[j].on) {
-          for (i = auxFrom; i <= auxTo; i++) {
-            auxCont++
-            auxCpu.push(plotCpu[i])
-            auxRam.push(plotRam[i])
-            auxRedeEnv.push(plotRedeEnv[i])
-            auxRedeRec.push(plotRedeRec[i])
-            auxLabels.push(labelsDatas[i])
+          if (aux) {
+            for (i = auxFrom; i <= auxTo; i++) {
+              auxCont++
+              auxCpu.push(plotCpu[i])
+              auxRam.push(plotRam[i])
+              auxRedeEnv.push(plotRedeEnv[i])
+              auxRedeRec.push(plotRedeRec[i])
+              auxLabels.push(labelsDatas[i])
+            }
+            aux = false
+          } else {
+            for (i = auxFrom; i <= auxTo; i++) {
+              auxCont++
+              auxCpu[i] += plotCpu[i]
+              auxRam[i] += plotRam[i]
+              auxRedeEnv[i] += plotRedeEnv[i]
+              auxRedeRec[i] += plotRedeRec[i]
+            }
           }
         }
       }
@@ -602,9 +614,6 @@
       auxRede = null
     }
 
-    console.log(regioesDados[0].listRedeRec)
-
-
     // Criando os labels com Todas as datas
     for (dataDaVez = data_inicial; dataDaVez.dia != adicionarUmDia(data_final).dia || dataDaVez.mes != adicionarUmDia(data_final).mes || dataDaVez.ano != adicionarUmDia(data_final).ano; dataDaVez = adicionarUmDia(dataDaVez)) {
       labelsDatas.push(`${dataDaVez.dia}/${dataDaVez.mes}/${(dataDaVez.ano).toString()[2]}${(dataDaVez.ano).toString()[3]}`)
@@ -633,8 +642,12 @@
         auxRam.push(plotRam[i])
         auxRedeEnv.push(plotRedeEnv[i])
         auxRedeRec.push(plotRedeRec[i])
+      }
+
+      for (i = labelsDatas.length - 1; i > labelsDatas.length - 61; i--) {
         auxLabels.push(labelsDatas[i])
       }
+
       auxCpu.reverse()
       auxRam.reverse()
       auxRedeEnv.reverse()
