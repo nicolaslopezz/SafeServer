@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS SafeServer;
 
+
 -- CREATE USER 'SafeServerUser'@'localhost' IDENTIFIED BY 'safeserver123';
 -- GRANT ALL PRIVILEGES ON SafeServer.* TO 'SafeServerUser'@'localhost';
 
@@ -63,7 +64,7 @@ CREATE TABLE estatisticas_horarias (
 );
 
 
--- select * from registro;
+select * from registro;
 
 
 create table alerta (
@@ -84,8 +85,7 @@ INSERT INTO chaveAcesso (chave, nivelPermissao, fkEmpresa, cargo) VALUES
 
 INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES 
 ('reader', 1, 'US-EAST-1'),
-('writer', 1, 'US-EAST-1'),
-('readerBR', 1, 'BR-WEST-1');
+('writer', 1, 'US-EAST-1');
 
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 3),
@@ -117,54 +117,66 @@ VALUES
 ('2024-05-01 10:00:00', 76, 78, 200, 230, 1),  
 ('2024-05-01 18:00:00', 79, 75, 240, 220, 1),  
 ('2024-05-01 10:00:00', 79, 72, 230, 210, 2),  
-('2024-05-01 18:00:00', 98, 77, 260, 200, 2);
+('2024-05-01 18:00:00', 98, 77, 260, 200, 2),
+('2024-12-03 10:00:00', 45, 30, 98, 85, 2),
+('2024-12-03 10:00:00', 50, 45, 100, 100, 2);
 
-
-
--- Inserir dados na tabela alerta
 INSERT INTO alerta (componente, fkRegistro) 
-VALUES 
+VALUES  
+-- Alertas para CPU > 75
 ('cpu', 1),
-('rede_recebida', 1),
 ('cpu', 2),
-('ram', 2),
-('rede_recebida', 2),
 ('cpu', 3),
-('ram', 3),
-('rede_recebida', 3),
 ('cpu', 4),
-('ram', 4),
-('rede_recebida', 4),
 ('cpu', 5),
-('ram', 5),
-('rede_recebida', 5),
-('cpu', 6),
-('ram', 6),
-('rede_recebida', 6),
-('cpu', 7),
-('ram', 7),
-('rede_recebida', 7),
-('cpu', 8),
-('ram', 8),
-('rede_recebida', 8),
 ('cpu', 9),
-('ram', 9),
-('rede_recebida', 9),
-('cpu', 10),
-('ram', 10),
-('rede_recebida', 10),
-('cpu', 11),
-('ram', 11),
-('rede_recebida', 11),
-('cpu', 12),
-('ram', 12),
-('rede_recebida', 12),
 ('cpu', 13),
-('ram', 13),
-('rede_recebida', 13),
 ('cpu', 14),
-('ram', 14),
-('rede_recebida', 14);
+('cpu', 15),
+('cpu', 16),
+('cpu', 17),
+('cpu', 20),
+
+-- Alertas para RAM > 85
+('ram', 1),
+('ram', 2),
+('ram', 3),
+('ram', 4),
+('ram', 5),
+('ram', 7),
+('ram', 8),
+
+-- Alertas para rede_recebida > 200 GB
+('rede_recebida', 1),
+('rede_recebida', 2),
+('rede_recebida', 3),
+('rede_recebida', 4),
+('rede_recebida', 6),
+('rede_recebida', 7),
+('rede_recebida', 8),
+('rede_recebida', 9),
+('rede_recebida', 11),
+('rede_recebida', 13),
+('rede_recebida', 15),
+('rede_recebida', 16),
+('rede_recebida', 17),
+
+-- Alertas para rede_enviada > 200 GB
+('rede_enviada', 1),
+('rede_enviada', 2),
+('rede_enviada', 3),
+('rede_enviada', 4),
+('rede_enviada', 5),
+('rede_enviada', 7),
+('rede_enviada', 8),
+('rede_enviada', 9),
+('rede_enviada', 10),
+('rede_enviada', 11),
+('rede_enviada', 13),
+('rede_enviada', 15),
+('rede_enviada', 16),
+('rede_enviada', 17),
+('rede_enviada', 16);
 
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
@@ -178,114 +190,15 @@ CREATE VIEW obterFunc as (SELECT nome, email, cpf, cargo, chaveAcesso.fkEmpresa 
 
 -- select * from empresa;
 
--- select * from funcionario;
+select * from funcionario;
 
 -- truncate regis
--- select * from registro;
-
-/*
-SELECT 
-    'percent_use_cpu' AS componente,
-    s.identificacao AS servidor, 
-    MIN(r.percent_use_cpu) AS min, 
-    MAX(r.percent_use_cpu) AS max,
-    AVG(r.percent_use_cpu) AS media
-FROM 
-    registro r
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
-    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
-GROUP BY 
-    s.identificacao
-
-UNION ALL
-
-SELECT 
-    'percent_use_ram' AS componente,
-    s.identificacao AS servidor, 
-    MIN(r.percent_use_ram) AS min, 
-    MAX(r.percent_use_ram) AS max,
-        AVG(r.percent_use_ram) AS media
-FROM 
-    registro r
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
-    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
-GROUP BY 
-    s.identificacao
-
-UNION ALL
-
-SELECT 
-    'recebido_rede' AS componente,
-    s.identificacao AS servidor, 
-    MIN(r.recebido_rede) AS min, 
-    MAX(r.recebido_rede) AS max,
-        AVG(r.recebido_rede) AS media
-FROM 
-    registro r
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    MONTH(r.dtHora) IN (5)  -- Filtra os meses 1 e 12
-    AND s.identificacao IN ('reader', 'writer')  -- Filtra os servidores 'reader' e 'writer'
-GROUP BY 
-    s.identificacao
-
-UNION ALL
-
-SELECT 
-    'enviado_rede' AS componente,
-    s.identificacao AS servidor, 
-    MIN(r.enviado_rede) AS min, 
-    MAX(r.enviado_rede) AS max,
-	AVG(r.recebido_rede) AS media
-FROM 
-    registro r
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    MONTH(r.dtHora) IN (5)  
-    AND s.identificacao IN ('reader', 'writer')  
-GROUP BY 
-    s.identificacao;
-*/
-/*
-    SELECT 
-    s.identificacao AS servidor,
-    COUNT(a.idAlerta) AS total_alertas
-FROM 
-    alerta a
-JOIN 
-    registro r ON a.fkRegistro = r.idRegistro
-JOIN 
-    servidor s ON r.fkServidor = s.idServidor
-WHERE 
-    s.identificacao IN ('reader', 'writer') 
-    AND MONTH(r.dtHora) IN (12, 1,2,3,4,5,6,7,8,9,10,11,12) 
-    AND a.componente IN ('cpu', 'ram') 
-GROUP BY 
-    s.identificacao 
-ORDER BY 
-    total_alertas DESC; 
-*/
-/*
-SELECT DISTINCT MONTH(dtHora) AS mes
-FROM registro r
-join servidor s on r.fkServidor = s.idServidor
-Join empresa e on s.fkEmpresa = e.idEmpresa
-WHERE e.idEmpresa = 1
-ORDER BY mes DESC;
-*/          
+select * from registro;
+  
             
 CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, year(dtHora) as ano, month(dtHora) as mes, day(dtHora) as dia, fkEmpresa, regiao
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-    WHERE componente = 'cpu' OR componente = 'ram' OR componente = 'rede_recebida' OR componente = 'rede_enviado'
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	

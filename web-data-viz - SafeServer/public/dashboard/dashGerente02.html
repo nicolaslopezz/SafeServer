@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  
   <title>Dashboard-Gerente</title>
 </head>
 
@@ -362,7 +363,7 @@
         const values = data.map((row) => parseFloat(row.desvio_padrao));
 
         let annotation = {};
-        if (component === 'ram') {
+        if (component == 'ram') {
           annotation = {
             type: 'line',
             yMin: 8,
@@ -372,11 +373,10 @@
             label: {
               content: 'Limite RAM',
               enabled: true,
-              position: 'center',
-              font: { weight: 'bold', size: 14 }
+              position: 'center'
             }
           };
-        } else if (component === 'cpu') {
+        } else if (component == 'cpu') {
           annotation = {
             type: 'line',
             yMin: 25,
@@ -386,11 +386,12 @@
             label: {
               content: 'Limite CPU',
               enabled: true,
-              position: 'center',
-              font: { weight: 'bold', size: 14 }
+              position: 'center'
             }
           };
         }
+
+
 
         graficoStab = new Chart(ctxStab, {
           type: 'bar',
@@ -437,7 +438,7 @@
         const values = data.map((row) => parseFloat(row.oscilacao));
 
         let annotation = {};
-        if (component === 'ram') {
+        if (component == 'ram') {
           annotation = {
             type: 'line',
             yMin: 130,
@@ -447,11 +448,10 @@
             label: {
               content: 'Limite RAM',
               enabled: true,
-              position: 'center',
-              font: { weight: 'bold', size: 14 }
+              position: 'center'
             }
           };
-        } else if (component === 'cpu') {
+        } else if (component == 'cpu') {
           annotation = {
             type: 'line',
             yMin: 7500,
@@ -461,11 +461,13 @@
             label: {
               content: 'Limite CPU',
               enabled: true,
-              position: 'center',
-              font: { weight: 'bold', size: 14 }
+              position: 'center'
             }
           };
         }
+
+        console.log(Chart.version);
+
 
         graficoOsc = new Chart(ctxOsc, {
           type: 'line',
@@ -680,5 +682,3 @@
 </body>
 
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
