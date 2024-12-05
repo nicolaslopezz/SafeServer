@@ -1450,6 +1450,7 @@ table th {
 
 .tituloDashCpuERam p {
   display: flex;
+  font-size: 22px;
   position: relative;
   top: 151px;
   left: 30px;
@@ -1467,6 +1468,8 @@ table th {
 
 .situacaoComp p {
   display: flex;
+  font-size: 22px;
+  text-shadow: 2px 2px 3px rgb(206, 209, 212);
   position: relative;
   top: 140px;
   left: 17px;
@@ -1486,6 +1489,8 @@ table th {
 .situacaoCompRec p {
   display: flex;
   position: relative;
+  font-size: 22px;
+  text-shadow: 2px 2px 3px rgb(206, 209, 212);
   top: 5px;
   left: 3px;
   font-weight: bold;
@@ -1504,6 +1509,8 @@ table th {
 .situacaoCompEnv p {
   display: flex;
   position: relative;
+  font-size: 22px;
+  text-shadow: 2px 2px 3px rgb(206, 209, 212);
   top: -20px;
   left: 9px;
   font-weight: bold;
@@ -1563,16 +1570,20 @@ table th {
   position: relative;
   background-color: #202957;
   align-items: center;
+  justify-content: center;
   font-weight: bold;
-  width: 250px;
-  font-size: 16px;
+  width: 270px;
+  font-size: 18px;
+  line-height: 1.6;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border: 2px solid #404b8a;
   transition: transform 0.3s ease, background-color 0.3s ease;
   height: 200px;
-  left: 235px;
+  flex-direction: column;
+  left: 225px;
   top: 280px;
+  overflow: hidden;
 }
 
 .qtdAlertas:hover {
@@ -1663,6 +1674,7 @@ table th {
 
 .tituloDashRec p {
   display: flex;
+  font-size: 22px;
   position: relative;
   top: 23px;
   left: 20px;
@@ -1706,6 +1718,7 @@ table th {
 
 .tituloDashEnv p {
   display: flex;
+  font-size: 22px;
   position: relative;
   top: 23px;
   left: 20px;
