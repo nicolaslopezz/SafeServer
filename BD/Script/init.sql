@@ -202,3 +202,5 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
     JOIN servidor ON fkServidor = idServidor
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
+    
+SELECT componente FROM alerta GROUP BY componente;
