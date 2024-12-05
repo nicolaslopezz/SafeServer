@@ -90,7 +90,7 @@ INSERT INTO servidor (identificacao, fkEmpresa, regiao) VALUES
 INSERT INTO funcionario (nome, email, cpf, senha, fkEmpresa, fkChave) VALUES
 ('Marta', 'marta1@gmail.com', '12345678900', '123456', 1, 3),
 ('Roberto', 'roberto@gmail.com', '12345678901', '123456', 1, 1),
-('Ewerton', 'ewerton@gmail.com', '12345678901', '123456', 1, 1);
+('Ewerton', 'ewerton@gmail.com', '12345678901', '123456', 1, 2);
 
 INSERT INTO registro (dtHora, percent_use_cpu, percent_use_ram, recebido_rede, enviado_rede, fkServidor)
 VALUES  
