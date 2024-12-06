@@ -63,11 +63,13 @@ CREATE TABLE estatisticas_horarias (
     FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
 );
 
+
 CREATE TABLE regressao_linear (
-    id INT AUTO_INCREMENT PRIMARY KEY,    
+    id INT AUTO_INCREMENT PRIMARY KEY,   
+    percent_use_cpu FLOAT,
     recebido_rede FLOAT,           
     predicted_value FLOAT,
-    R FLOAT,              
+    R FLOAT
 );
 
 

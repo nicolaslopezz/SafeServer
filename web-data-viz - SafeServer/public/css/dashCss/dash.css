@@ -1841,7 +1841,7 @@ h1 {
 }
 
 .Tesquerda{
-  width: 85%;
+  width: 95%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -1859,7 +1859,7 @@ h1 {
 }
 
 .Tdireita{
-  width: 10%;
+  width: 9%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -1908,7 +1908,7 @@ h1 {
 }
 .texto p{
   font-family: poppins-bold;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 17px;
   text-align: justify;
 }
