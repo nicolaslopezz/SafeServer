@@ -271,6 +271,13 @@ function comparar2(servidores, periodos, componentes) {
     return database.executar(instrucaoSql);
 }
 
+function regressao() {
+    var instrucaoSql = `select * from regressao_linear`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -290,5 +297,6 @@ module.exports = {
     periodo,
     analisar,
     comparar,
-    comparar2
+    comparar2,
+    regressao
 };

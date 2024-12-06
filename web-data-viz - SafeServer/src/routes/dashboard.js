@@ -61,6 +61,10 @@ router.get("/comparar2", function (req, res) {
     dashboardController.comparar2(req, res);
 });
 
+router.get("/regressao", function (req, res) {
+    dashboardController.regressao(req, res);
+});
+
 
 
 

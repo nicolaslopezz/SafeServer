@@ -958,7 +958,7 @@ input[type="range"] {
   transform: translateX(-100%) translateY(-10%);
   margin-top: 10px;
   padding: 12px;
-  min-width: 180px;
+  min-width: 250px;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   font-size: 14px;
@@ -1798,4 +1798,116 @@ h1 {
 #alertasChart{
   width: 30vw !important;
   height: 35vh !important;
+}
+
+.intRegressao{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+.Regressao{
+  width: 70%;
+  height: 90%;
+  background-color: white;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 12px;
+  
+
+}
+.cimaRegressao{
+  width: 100%;
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.tituloR{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.Tesquerda{
+  width: 85%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: row;
+}
+
+.Tesquerda h1 {
+  font-family: poppins-bold;
+  color: rgb(16, 46, 118);
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+  padding: 0;
+}
+
+.Tdireita{
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.corpoR{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.baixoRegressao{
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+#myChartCanvas4{
+  width: 44vw !important;
+  height: 46vh !important;
+}
+
+.grafico4{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.texto{
+  height: 70%;
+  width: 75%;
+  color:rgb(16, 46, 118) ;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+}
+.texto p{
+  font-family: poppins-bold;
+  font-weight: 500;
+  font-size: 17px;
+  text-align: justify;
 }

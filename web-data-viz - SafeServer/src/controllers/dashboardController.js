@@ -341,6 +341,24 @@ function analisar(req, res) {
       });
   }
   
+  function regressao(req, res) { 
+
+    dashboardModel.regressao()
+        .then(
+         
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+             
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 module.exports = {
     obterCargos,
@@ -356,5 +374,6 @@ module.exports = {
     periodo,
     analisar,
     comparar,
-    comparar2
+    comparar2,
+    regressao
 }

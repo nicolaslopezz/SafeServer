@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ICONS -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+  <!-- icone nav bar -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+
+  <link rel="stylesheet" href="../css/dashCss/dash.css" />
+
+
+  <!-- scripts do Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
+
+  <!-- icone font awesom -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+  <title>Relatório-Gerente</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="../assets/imgs/contact.png" alt="" />
+        </div>
+        <div class="user-details">
+          <p class="title" id="cargoUsuario"></p>
+          <p class="name" id="nomeUsuario"></p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Menu</p>
+          <ul>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">
+                  <span class="text">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="text">Subscribers</span>
+                </a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              <a href="dashGerente01.html">
+                <i class="icon ph-bold ph-chart-bar"></i>
+                <span class="text">Gráfico</span>
+              </a>
+            </li>
+            <li>
+              <a href="dashGerente02.html">
+                <i class="icon ph-bold ph-gauge"></i>
+                <span class="text">Desempenho</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="relatorio.html">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Relatório</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span class="text">Tendência</span>
+              </a>
+            </li>
+            <li>
+              <a href="cadastroServidor.html">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Cadastrar Servidor</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <div class="menu">
+          <p class="title"></p>
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="../index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="creditsG">
+      <div class="relatorioG">
+        <div class="intRegressao">
+          <div class="Regressao">
+            <div class="cimaRegressao">
+              <div class="tituloR">
+                <div class="Tesquerda">
+                  <h1>Previsão do tráfego de rede com o uso da CPU</h1>
+
+                </div>
+                <div class="Tdireita">
+                  <div class="wrapper">
+                    <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
+                    <div class="tooltip">O modelo foi treinado por uma machine learning e se trata de uma regressão
+                      linear simples, onde preve os dados recebidos pela rede (em GB) com base no percentual de uso da
+                      CPU. A linha vermelha no mostra como a quantidade de dados recebidos pela rede pode influenciar o
+                      uso da CPU.</div>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="corpoR">
+                <div class="grafico4" id="grafico4"></div>
+              </div>
+
+            </div>
+            <div class="baixoRegressao">
+              <div class="texto">
+                <p>
+                  A regressão linear demonstra que, à medida que os dados recebidos da rede aumenta, o uso da CPU tende
+                  a aumentar também. Com base nessa relação, é essencial ajustar a capacidade da rede conforme o tráfego
+                  de dados para evitar sobrecargas dos componentes e melhorar o desempenho do sistema.
+                  O coeficiente de determinação (R²) é de 0.933, o que indica que o modelo tem alta precisão e é
+                  confiável.</p>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="../js/script.js"></script>
+
+  <script>
+    var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+    var cargoUsuario = sessionStorage.getItem("CARGO");
+
+    document.getElementById('nomeUsuario').textContent = nomeUsuario;
+    document.getElementById('cargoUsuario').textContent = cargoUsuario;
+
+    const recebidoRede = [];
+    const percentUseCpu = [];
+    const predictedValue = [];
+
+    // Função para obter os dados do gráfico
+    async function obterDadosGrafico() {
+      try {
+        const response = await fetch(`/dashboard/regressao`, { cache: 'no-store' });
+
+        if (response.ok) {
+          const resposta = await response.json();
+          console.log(`Regressao Dados recebidos: ${JSON.stringify(resposta)}`);
+
+
+          recebidoRede.length = 0;
+          percentUseCpu.length = 0;
+          predictedValue.length = 0;
+
+          for (let i = 0; i < resposta.length; i++) {
+            recebidoRede.push(resposta[i].recebido_rede);
+            percentUseCpu.push(resposta[i].percent_use_cpu);
+            predictedValue.push(resposta[i].predicted_value);
+          }
+
+
+          plotarGrafico(recebidoRede, percentUseCpu, predictedValue);
+        } else {
+          console.error('Nenhum dado encontrado');
+        }
+      } catch (error) {
+        console.error('Erro na obtenção dos dados para o gráfico:', error.message);
+      }
+    }
+
+    function plotarGrafico(recebidoRede, percentUseCpu, predictedValue) {
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'myChartCanvas4';
+      document.getElementById('grafico4').appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+
+      const dadosReais = [];
+      const dadosPreditos = [];
+
+      // Preencher os dados dos gráficos sem usar o map
+      for (let i = 0; i < recebidoRede.length; i++) {
+        dadosReais.push({ x: recebidoRede[i], y: percentUseCpu[i] });
+        dadosPreditos.push({ x: recebidoRede[i], y: predictedValue[i] });
+      }
+
+      const grafico4 = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [
+            {
+              label: 'Dados reais',
+              data: dadosReais,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Linha de Regressão (Predição)',
+              data: dadosPreditos,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              backgroundColor: 'rgba(255, 99, 132, 0)',
+              borderWidth: 2,
+              fill: false,
+              tension: 0,
+              pointRadius: 0,
+              showLine: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'REDE RECEBIDA (GB)'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'USO DE CPU (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+
+    // Chama a função para obter e exibir os dados ao carregar a página
+    document.addEventListener('DOMContentLoaded', obterDadosGrafico);
+
+  </script>
