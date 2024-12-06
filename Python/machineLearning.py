@@ -44,9 +44,9 @@ plt.show()
 import pymysql
 
 conn = pymysql.connect(
-    host='localhost',        
+    host='3.210.133.0',        
     user='root',               
-    password='batatas123',    
+    password='urubu100',    
     database='SafeServer'      
 )
 
@@ -55,9 +55,9 @@ cursor = conn.cursor()
 
 for i in range(len(X_test)):
     cursor.execute("""
-        INSERT INTO regressao_linear (percent_use_cpu, recebido_rede, predicted_value)
-        VALUES (%s, %s, %s)
-    """, (y_test[i], X_test[i][0], y_pred[i]))  
+        INSERT INTO regressao_linear (percent_use_cpu, recebido_rede, predicted_value,R)
+        VALUES (%s, %s, %s,%s)
+    """, (y_test[i], X_test[i][0], y_pred[i],r2_score))  
 
 
 conn.commit()

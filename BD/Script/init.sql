@@ -66,7 +66,8 @@ CREATE TABLE estatisticas_horarias (
 CREATE TABLE regressao_linear (
     id INT AUTO_INCREMENT PRIMARY KEY,    
     recebido_rede FLOAT,           
-    predicted_value FLOAT              
+    predicted_value FLOAT,
+    R FLOAT,              
 );
 
 
