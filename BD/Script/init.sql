@@ -63,10 +63,13 @@ CREATE TABLE estatisticas_horarias (
     FOREIGN KEY (fkServidor) REFERENCES servidor(idServidor) 
 );
 
+
 CREATE TABLE regressao_linear (
-    id INT AUTO_INCREMENT PRIMARY KEY,    
+    id INT AUTO_INCREMENT PRIMARY KEY,   
+    percent_use_cpu FLOAT,
     recebido_rede FLOAT,           
-    predicted_value FLOAT              
+    predicted_value FLOAT,
+    R FLOAT
 );
 
 
@@ -206,7 +209,6 @@ CREATE VIEW obterDadosAlerta AS (SELECT count(idAlerta) as alertas, componente, 
 	FROM alerta
     JOIN registro ON idRegistro = fkRegistro
     JOIN servidor ON fkServidor = idServidor
-    WHERE componente = 'cpu' OR componente = 'ram' OR componente = 'rede_enviado' OR componente = 'rede_recebida'
     GROUP BY componente, dia, mes, ano, fkEmpresa, regiao
     ORDER BY regiao, ano, mes, dia);	
 

@@ -204,7 +204,7 @@ def monitorar_e_enviar_dados(servidor_id):
         # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado para rede enviada
         if contador_rede_enviados >= 10:
             query = '''
-            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede-enviada", %s)
+            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede_enviada", %s)
             '''
             values = [idUltimoRegistro]
             meucursor.execute(query, values)
@@ -220,7 +220,7 @@ def monitorar_e_enviar_dados(servidor_id):
 # Verifica se chegou a 10 capturas seguidas acima do limite e abre chamado para rede recebida
         if contador_rede_recebidos >= 10:
             query = '''
-            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede-recebida", %s)
+            INSERT INTO alerta (componente, fkRegistro) VALUES ("rede_recebida", %s)
             '''
             values = [idUltimoRegistro]
             meucursor.execute(query, values)

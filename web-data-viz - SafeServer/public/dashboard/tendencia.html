@@ -126,14 +126,15 @@
             <div class="cimaRegressao">
               <div class="tituloR">
                 <div class="Tesquerda">
-                  <h1>Previsão do tráfego de rede com o uso da CPU</h1>
+                  <h1>Predição dos dados recebidos da rede com o uso da CPU</h1>
 
                 </div>
                 <div class="Tdireita">
                   <div class="wrapper">
                     <i class="fa-solid fa-circle-question" style="font-size: 23px;"></i>
                     <div class="tooltip">O modelo foi treinado por uma machine learning e se trata de uma regressão
-                      linear simples, onde preve os dados recebidos pela rede (em GB) com base no percentual de uso da
+                      linear simples, onde relaciona os dados recebidos pela rede (em GB) com base no percentual de uso
+                      da
                       CPU. A linha vermelha no mostra como a quantidade de dados recebidos pela rede pode influenciar o
                       uso da CPU.</div>
                   </div>
@@ -147,13 +148,8 @@
 
             </div>
             <div class="baixoRegressao">
-              <div class="texto">
-                <p>
-                  A regressão linear demonstra que, à medida que os dados recebidos da rede aumenta, o uso da CPU tende
-                  a aumentar também. Com base nessa relação, é essencial ajustar a capacidade da rede conforme o tráfego
-                  de dados para evitar sobrecargas dos componentes e melhorar o desempenho do sistema.
-                  O coeficiente de determinação (R²) é de 0.933, o que indica que o modelo tem alta precisão e é
-                  confiável.</p>
+              <div class="texto" id="texto">
+
               </div>
 
             </div>
@@ -187,6 +183,10 @@
 
     // Função para obter os dados do gráfico
     async function obterDadosGrafico() {
+
+      div = document.getElementById('texto')
+
+
       try {
         const response = await fetch(`/dashboard/regressao`, { cache: 'no-store' });
 
@@ -198,6 +198,25 @@
           recebidoRede.length = 0;
           percentUseCpu.length = 0;
           predictedValue.length = 0;
+
+          const r = parseFloat(resposta[0].R).toFixed(3); 
+
+          var texto;
+
+          // Define os textos com base no valor de R²
+          if (r > 0.8) {
+            texto = `<p>A regressão linear demonstra que, à medida que os dados recebidos da rede aumenta, o uso da CPU tende a aumentar também. Com base nessa relação, é essencial ajustar a capacidade da rede conforme o tráfego de dados para evitar sobrecargas dos componentes e melhorar o desempenho do sistema. O coeficiente de determinação (R²) é de ${r}, o que indica que o modelo tem alta precisão e é confiável.`
+
+          } else if (r > 0.5) {
+            texto = `<p>A regressão linear indica uma correlação moderada entre os dados recebidos pela rede e o uso da CPU. O coeficiente de determinação (R²) é de ${r}, o que sugere que o modelo possui uma precisão razoável. Contudo, deve-se considerar que outros fatores, como variáveis não observadas que também podem impactar o uso da CPU.</p>`;
+          } else {
+            texto = `<p>A regressão linear demonstra uma correlação fraca entre os dados recebidos pela rede e o uso da CPU. O coeficiente de determinação (R²) é de ${r}, indicando que o modelo não é totalmente confiável e precisa de ajustes para maior precisão. É essencial observar que a relação entre as variáveis pode ser influenciada por outros fatores externos.</p>`;
+          }
+
+  
+          div.innerHTML += texto;
+
+
 
           for (let i = 0; i < resposta.length; i++) {
             recebidoRede.push(resposta[i].recebido_rede);
