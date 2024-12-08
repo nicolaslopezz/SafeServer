@@ -44,9 +44,9 @@ plt.show()
 import pymysql
 
 conn = pymysql.connect(
-    host='localhost',        
+    host='3.210.133.0',        
     user='root',               
-    password='batatas123',    
+    password='urubu100',    
     database='SafeServer'      
 )
 

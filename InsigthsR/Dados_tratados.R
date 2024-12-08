@@ -16,9 +16,9 @@ feriado <- head(feriados_frequencia, 20)
 
 con <- dbConnect(MySQL(), 
                  dbname = "SafeServer",   
-                 host = "localhost",             
+                 host = "3.210.133.0",             
                  user = "root",            
-                 password = "batatas123")  
+                 password = "urubu100")  
 
 dbExecute(con, "
   CREATE TABLE IF NOT EXISTS feriado_freq (
