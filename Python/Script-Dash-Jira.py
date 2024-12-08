@@ -31,11 +31,11 @@ def enviar_mensagem(categoria, servidor_id, data_hora):
 
 # Configurações do Jira
 jira_options = {
-    'server': 'https://safe-server.atlassian.net'  # Substitua pelo seu domínio
+    'server': ''  # Substitua pelo seu domínio
 }
 
 email_jira = ''  # Substitua pelo seu e-mail
-api_token = ''  # Substitua pelo seu token de API
+api_token =''  # Substitua pelo seu token de API
 jira = JIRA(options=jira_options, basic_auth=(email_jira, api_token))
 
 # Função para abrir um chamado no Jira

@@ -161,7 +161,7 @@
             resposta.json().then((servidores) => {
               selectServidor.innerHTML = "";
               servidores.forEach((servidor) => {
-                selectServidor.innerHTML += `<option value='${servidor.idServidor}'> Servidor ${servidor.idServidor}</option>`;
+                selectServidor.innerHTML += `<option value='${servidor.idServidor}'> Servidor ${servidor.identificacao}</option>`;
 
               });
               plotarGrafico();
@@ -264,7 +264,7 @@
       }
 
       function exibirGraficoDadosEnv(idServidor) {
-        
+
         var idServidor = selectServidor.value;
         esconderTodosOsGraficos();
         let todosOsGraficos = document.getElementById("graficos");
@@ -420,27 +420,21 @@
         console.log("Data de uma hora atrás:", umaHoraAtras);
 
         // Filtrar dados da última hora
-        const dadosUltimaHora = [];
-        for (let i = 0; i < resposta.length; i++) {
-          const item = resposta[i];
-          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
-          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
-
+        const dadosUltimaHora = resposta.filter((item) => {
+          const dataHoje = agora.toISOString().split('T')[0]; // Obtém a data atual no formato YYYY-MM-DD
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário do item
           const horaRegistro = new Date(dataCompleta);
 
-          // Adicionar apenas os registros dentro da última hora
-          if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(item);
-          }
-        }
+          // Inclui registros que estão dentro da última hora
+          return horaRegistro >= umaHoraAtras && horaRegistro <= agora;
+        });
 
         // Contar alertas na última hora
-        for (let i = 0; i < dadosUltimaHora.length; i++) {
-          const item = dadosUltimaHora[i];
+        dadosUltimaHora.forEach((item) => {
           if (item.recebido_rede >= 200) {
             alertasRedeRec++;
           }
-        }
+        });
 
         if (situacaoRec >= 1.0) {
           redeRecebida.innerHTML = `<p style="color: red";> REDE RECEBIDA: ${situacaoRec} GB</p>`;
@@ -553,27 +547,21 @@
         console.log("Data de uma hora atrás:", umaHoraAtras);
 
         // Filtrar dados da última hora
-        const dadosUltimaHora = [];
-        for (let i = 0; i < resposta.length; i++) {
-          const item = resposta[i];
-          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
-          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
-
+        const dadosUltimaHora = resposta.filter((item) => {
+          const dataHoje = agora.toISOString().split('T')[0]; // Obtém a data atual no formato YYYY-MM-DD
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário do item
           const horaRegistro = new Date(dataCompleta);
 
-          // Adicionar apenas os registros dentro da última hora
-          if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(item);
-          }
-        }
+          // Inclui registros que estão dentro da última hora
+          return horaRegistro >= umaHoraAtras && horaRegistro <= agora;
+        });
 
         // Contar alertas na última hora
-        for (let i = 0; i < dadosUltimaHora.length; i++) {
-          const item = dadosUltimaHora[i];
+        dadosUltimaHora.forEach((item) => {
           if (item.enviado_rede >= 200) {
             alertasRedeEnv++;
           }
-        }
+        });
 
         if (situacaoEnv >= 1.0) {
           redeEnviada.innerHTML = `<p style="color: red";> REDE ENVIADA: ${situacaoEnv} GB</p>`;
@@ -690,30 +678,26 @@
         console.log("Data de uma hora atrás:", umaHoraAtras);
 
         // Filtrar dados da última hora
-        const dadosUltimaHora = [];
-        for (let i = 0; i < resposta.length; i++) {
-          const item = resposta[i];
-          const dataHoje = agora.toISOString().split('T')[0]; // Pega apenas a data atual no formato correto
-          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário
-
+        const dadosUltimaHora = resposta.filter((item) => {
+          const dataHoje = agora.toISOString().split('T')[0]; // Pega a data atual no formato correto (YYYY-MM-DD)
+          const dataCompleta = `${dataHoje}T${item.hora}`; // Combina com o horário do item
           const horaRegistro = new Date(dataCompleta);
 
-          // Adicionar apenas os registros dentro da última hora
-          if (horaRegistro >= umaHoraAtras) {
-            dadosUltimaHora.push(item);
-          }
-        }
+          // Adiciona apenas os registros dentro da última hora
+          return horaRegistro >= umaHoraAtras && horaRegistro <= agora;
+        });
+
+        console.log("Dados filtrados da última hora:", dadosUltimaHora);
 
         // Contar alertas na última hora
-        for (let i = 0; i < dadosUltimaHora.length; i++) {
-          const item = dadosUltimaHora[i];
+        dadosUltimaHora.forEach((item) => {
           if (item.percent_use_cpu >= 75) {
             alertasCpu++;
           }
           if (item.percent_use_ram >= 85) {
             alertasRam++;
           }
-        }
+        });
 
         // Atualizar cores para CPU e RAM
         if (situacaoCpu >= 75) {

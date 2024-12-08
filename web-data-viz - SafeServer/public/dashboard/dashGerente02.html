@@ -580,7 +580,7 @@
             const serverDiv = document.createElement('div');
             serverDiv.className = `sv-${String(index + 1).padStart(2, '0')} server`;
             serverDiv.setAttribute('data-id', server.idServidor); // Atribui o ID do servidor
-            serverDiv.textContent = `Server ${String(index + 1).padStart(3, '0')}`; // Nome ou um fallback
+            serverDiv.textContent = server.identificacao; // Nome ou um fallback
             serverDiv.setAttribute("onclick", "selecionarServidor(this)");
 
             sliderContainer.appendChild(serverDiv);
