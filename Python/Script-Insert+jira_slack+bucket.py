@@ -19,8 +19,8 @@ limiteREDE = 200  # GB
 # Configurações do banco de dados
 db_config = {
     'host': 'localhost',
-    'user': 'SafeServerUser',
-    'password': 'safeserver123',
+    'user': 'root',
+    'password': '#Gf49053476881',
     'database': 'SafeServer'
 }
 
