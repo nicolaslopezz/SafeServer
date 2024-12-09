@@ -127,8 +127,11 @@ VALUES
 ('2024-05-01 18:00:00', 79, 75, 240, 220, 1),  
 ('2024-05-01 10:00:00', 79, 72, 230, 210, 2),  
 ('2024-05-01 18:00:00', 98, 77, 260, 200, 2),
-('2024-12-03 10:00:00', 45, 30, 98, 85, 2),
-('2024-12-03 10:00:00', 50, 45, 100, 100, 2);
+
+('2024-12-03 10:00:00', 85, 85, 102, 100, 2),
+('2024-12-03 10:00:00', 90, 30, 230, 205, 1),
+('2024-12-03 10:00:00', 45, 60, 98, 215, 1),
+('2024-12-03 10:00:00', 94, 89, 220, 210, 2);
 
 INSERT INTO alerta (componente, fkRegistro) 
 VALUES  
@@ -145,6 +148,9 @@ VALUES
 ('cpu', 16),
 ('cpu', 17),
 ('cpu', 20),
+('cpu', 21),
+('cpu', 22),
+('cpu', 24),
 
 -- Alertas para RAM > 85
 ('ram', 1),
@@ -154,6 +160,10 @@ VALUES
 ('ram', 5),
 ('ram', 7),
 ('ram', 8),
+('ram', 21),
+('ram', 24),
+
+
 
 -- Alertas para rede_recebida > 200 GB
 ('rede_recebida', 1),
@@ -169,6 +179,9 @@ VALUES
 ('rede_recebida', 15),
 ('rede_recebida', 16),
 ('rede_recebida', 17),
+('rede_recebida', 22),
+('rede_recebida', 24),
+
 
 -- Alertas para rede_enviada > 200 GB
 ('rede_enviada', 1),
@@ -185,8 +198,10 @@ VALUES
 ('rede_enviada', 15),
 ('rede_enviada', 16),
 ('rede_enviada', 17),
-('rede_enviada', 16);
-
+('rede_enviada', 22),
+('rede_enviada', 16),
+('rede_enviada', 23),
+('rede_enviada', 24);
 -- select*from chaveAcesso;
 -- SELECT DATE(dtHora) AS data, AVG(percent_use_cpu) AS mediaDeUsoCPU
 -- FROM registro GROUP BY DATE(dtHora) ORDER BY mediaDeUsoCPU DESC;
