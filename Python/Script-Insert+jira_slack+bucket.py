@@ -18,12 +18,11 @@ limiteREDE = 200  # GB
 
 # Configurações do banco de dados
 db_config = {
-    'host': 'localhost',
+    'host': '3.210.133.0',
     'user': 'root',
-    'password': '#Gf49053476881',
+    'password': 'urubu100',
     'database': 'SafeServer'
 }
-
 servidor_id = 1
 
 # Crie o cliente usando o token de autenticação do Slack
@@ -144,7 +143,7 @@ def monitorar_e_enviar_dados(servidor_id):
             return True
 
         # Upload do arquivo
-        upload_file('dadosColetados.json', 'safeserver-s3-raww')
+        upload_file('dadosColetados.json', 's3safeserver-raw')
 
         fk_servidor = servidor_id
 

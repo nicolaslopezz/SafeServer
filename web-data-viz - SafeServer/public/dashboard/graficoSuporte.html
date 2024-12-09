@@ -691,10 +691,10 @@
 
         // Contar alertas na última hora
         dadosUltimaHora.forEach((item) => {
-          if (item.percent_use_cpu >= 75) {
+          if (situacaoCpu >= 75) {
             alertasCpu++;
           }
-          if (item.percent_use_ram >= 85) {
+          if (situacaoRam >= 85) {
             alertasRam++;
           }
         });
